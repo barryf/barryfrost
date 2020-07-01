@@ -15,17 +15,17 @@ async function renderIndex () {
   return html
 }
 
-async function renderKind (kind) {
+async function renderPostType (postType) {
   const css = arc.static('/main.css')
   const data = await arc.tables()
-  const result = await data.posts.scan({
+  const result = await data.posts.scan({ // should be a query?
     TableName: 'posts',
-    FilterExpression: 'kind = :kind',
+    FilterExpression: 'post-type = :postType',
     ExpressionAttributeValues: {
-      ':kind': kind
+      ':postType': postType
     }
   })
-  const posts = result.Items.map(item => JSON.parse(item.properties))
+  const posts = result.Items.map(item => item.properties)
   const html = nunjucks.render('homepage.njk', { posts, css })
   return html
 }
@@ -62,13 +62,13 @@ function send404 () {
 }
 
 exports.handler = async function http (req) {
-  const slug = req.path.substr(1).replace('staging/', '')
+  const slug = req.path.substr(1).replace(/^staging\//, '')
   let body
   switch (slug) {
     case 'favicon.ico':
       return
     case 'articles':
-      body = await renderKind('article')
+      body = await renderPostType('article')
       return send200(body)
     case '':
       body = await renderIndex()
