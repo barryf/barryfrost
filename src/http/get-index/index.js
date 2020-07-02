@@ -1,4 +1,5 @@
 const arc = require('@architect/functions')
+const fetch = require('node-fetch')
 const nunjucks = require('nunjucks')
 const markdown = require('nunjucks-markdown')
 const marked = require('marked')
@@ -6,7 +7,17 @@ const marked = require('marked')
 const njkEnv = nunjucks.configure('views')
 markdown.register(njkEnv, marked)
 
-async function renderIndex () {
+const micropubSourceUrl = 'http://localhost:9394/micropub?q=source'
+
+function flattenProperties (properties) {
+  for (const prop in properties) {
+    if (Array.isArray(properties[prop]) && properties[prop].length === 1) {
+      properties[prop] = properties[prop][0]
+    }
+  }
+}
+
+async function getIndex () {
   const css = arc.static('/main.css')
   const data = await arc.tables()
   const result = await data.posts.scan({ TableName: 'posts' })
@@ -15,70 +26,71 @@ async function renderIndex () {
   return html
 }
 
-async function renderPostType (postType) {
+async function getPostType (postType) {
   const css = arc.static('/main.css')
-  const data = await arc.tables()
-  const result = await data.posts.scan({ // should be a query?
-    TableName: 'posts',
-    FilterExpression: 'post-type = :postType',
-    ExpressionAttributeValues: {
-      ':postType': postType
-    }
+  // const data = await arc.tables()
+  // const result = await data.posts.scan({ // should be a query?
+  //   TableName: 'posts',
+  //   FilterExpression: 'post-type = :postType',
+  //   ExpressionAttributeValues: {
+  //     ':postType': postType
+  //   }
+  // })
+  // const posts = result.Items.map(item => item.properties)
+  const response = await fetch(`${micropubSourceUrl}&post-type=${postType}`)
+  if (!response.ok) return
+  const json = await response.json()
+  console.log(json)
+  const posts = json.items.map(item => {
+    const post = { ...item.properties }
+    flattenProperties(post)
+    return post
   })
-  const posts = result.Items.map(item => item.properties)
   const html = nunjucks.render('homepage.njk', { posts, css })
   return html
 }
 
-async function renderPost (slug) {
+async function getPost (slug) {
   const css = arc.static('/main.css')
-  const data = await arc.tables()
-  const postData = await data.posts.get({ slug })
-  if (postData === undefined) return
-  const post = { properties: JSON.parse(postData.properties) }
+  // const data = await arc.tables()
+  // const postData = await data.posts.get({ slug })
+  const response = await fetch(`${micropubSourceUrl}&url=${slug}`)
+  if (!response.ok) return
+  const json = await response.json()
+  const post = { ...json.properties }
+  flattenProperties(post)
   const html = nunjucks.render('post.njk', { post, css })
   return html
 }
 
-function send200 (body) {
-  return {
-    headers: {
-      'cache-control': 'no-cache, no-store, must-revalidate, max-age=0, s-maxage=0',
-      'content-type': 'text/html; charset=utf8'
-    },
-    body: body
-  }
-}
-
-function send404 () {
-  return {
-    statusCode: 404,
-    headers: {
-      'cache-control': 'no-cache, no-store, must-revalidate, max-age=0, s-maxage=0',
-      'content-type': 'text/html; charset=utf8'
-    },
-    body: '404 Not Found'
-  }
-}
-
 exports.handler = async function http (req) {
-  const slug = req.path.substr(1).replace(/^staging\//, '')
-  let body
-  switch (slug) {
-    case 'favicon.ico':
-      return
-    case 'articles':
-      body = await renderPostType('article')
-      return send200(body)
-    case '':
-      body = await renderIndex()
-      return send200(body)
-    default:
-      body = await renderPost(slug)
-      if (body === undefined) {
-        return send404()
-      } else {
-        return send200(body)
-      }
+  // accepted post types from server
+  const postTypes = ['notes', 'articles', 'bookmarks', 'photos', 'checkins',
+    'reposts', 'likes', 'replies']
+  // strip initial slash, remove any api gateway stage, clean characters
+  const url = req.path.substr(1).replace(/^staging\//, '')
+    .replace(/[^a-z0-9/-]/, '')
+  const res = {
+    headers: { 'content-type': 'text/html; charset=utf8' }
+  }
+  // temp reject favicon
+  if (url === 'favicon.ico') {
+    return { statusCode: 404 }
+  // post types e.g. notes (no trailing slash)
+  } else if (postTypes.includes(url)) {
+    let postType = url.substr(0, url.length - 1)
+    if (postType === 'replie') postType = 'reply'
+    return { ...res, body: await getPostType(postType) }
+  // root is homepage
+  } else if (url === '') {
+    return { ...res, body: await getIndex() }
+  // default, assume a post
+  } else {
+    const body = await getPost(url)
+    if (body) {
+      return { ...res, body }
+    } else {
+      return { statusCode: 404 }
+    }
   }
 }
