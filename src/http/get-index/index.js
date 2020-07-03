@@ -7,7 +7,7 @@ const marked = require('marked')
 const njkEnv = nunjucks.configure('views')
 markdown.register(njkEnv, marked)
 
-const micropubSourceUrl = 'http://localhost:9394/micropub?q=source'
+const micropubSourceUrl = 'http://localhost:3333/micropub?q=source'
 
 function flattenProperties (properties) {
   for (const prop in properties) {
@@ -58,8 +58,10 @@ async function getPost (slug) {
   if (!response.ok) return
   const json = await response.json()
   const post = { ...json.properties }
+  console.log(json)
   flattenProperties(post)
-  const html = nunjucks.render('post.njk', { post, css })
+  const postJSON = JSON.stringify(post, null, 2)
+  const html = nunjucks.render('post.njk', { post, css, postJSON })
   return html
 }
 
