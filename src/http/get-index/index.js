@@ -7,7 +7,7 @@ const marked = require('marked')
 const njkEnv = nunjucks.configure('views')
 markdown.register(njkEnv, marked)
 
-const micropubSourceUrl = 'http://localhost:3333/micropub?q=source'
+const micropubSourceUrl = `${process.env.MICROPUB_URL}?q=source`
 
 function flattenProperties (properties) {
   for (const prop in properties) {
@@ -54,7 +54,10 @@ async function getPost (slug) {
   const css = arc.static('/main.css')
   // const data = await arc.tables()
   // const postData = await data.posts.get({ slug })
-  const response = await fetch(`${micropubSourceUrl}&url=${slug}`)
+  const response = await fetch(
+    `${micropubSourceUrl}&url=${slug}`,
+    { headers: { Authorization: `Bearer ${process.env.MICROPUB_TOKEN}` } }
+  )
   if (!response.ok) return
   const json = await response.json()
   const post = { ...json.properties }
@@ -75,8 +78,9 @@ exports.handler = async function http (req) {
   const res = {
     headers: { 'content-type': 'text/html; charset=utf8' }
   }
+  console.log(`url=${url}`)
   // temp reject favicon
-  if (url === 'favicon.ico') {
+  if (url === 'faviconico') {
     return { statusCode: 404 }
   // post types e.g. notes (no trailing slash)
   } else if (postTypes.includes(url)) {
