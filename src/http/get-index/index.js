@@ -9,10 +9,10 @@ markdown.register(njkEnv, marked)
 
 const micropubSourceUrl = `${process.env.MICROPUB_URL}?q=source`
 
-function flattenProperties (properties) {
-  for (const prop in properties) {
-    if (Array.isArray(properties[prop]) && properties[prop].length === 1) {
-      properties[prop] = properties[prop][0]
+function flatten (post) {
+  for (const key in post) {
+    if (Array.isArray(post[key]) && post[key].length === 1) {
+      post[key] = post[key][0]
     }
   }
 }
@@ -21,7 +21,7 @@ async function getIndex () {
   const css = arc.static('/main.css')
   const data = await arc.tables()
   const result = await data.posts.scan({ TableName: 'posts' })
-  const posts = result.Items.map(item => JSON.parse(item.properties))
+  const posts = result.Items.map(item => JSON.parse(item))
   const html = nunjucks.render('homepage.njk', { posts, css })
   return html
 }
@@ -43,7 +43,7 @@ async function getPostType (postType) {
   console.log(json)
   const posts = json.items.map(item => {
     const post = { ...item.properties }
-    flattenProperties(post)
+    flatten(post)
     return post
   })
   const html = nunjucks.render('homepage.njk', { posts, css })
@@ -61,7 +61,8 @@ async function getPost (slug) {
   const json = await response.json()
   const post = { ...json.properties }
   console.log(json)
-  flattenProperties(post)
+  flatten(post)
+  if ('post-status' in post && post['post-status'] === 'draft') return
   const postJSON = JSON.stringify(post, null, 2)
   const html = nunjucks.render('post.njk', { post, css, postJSON })
   return html
