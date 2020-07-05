@@ -52,12 +52,11 @@ async function getPostType (postType) {
 
 async function getPost (slug) {
   const css = arc.static('/main.css')
-  // const data = await arc.tables()
-  // const postData = await data.posts.get({ slug })
   const response = await fetch(
-    `${micropubSourceUrl}&url=${slug}`,
+    `${micropubSourceUrl}&url=${process.env.ROOT_URL}${slug}`,
     { headers: { Authorization: `Bearer ${process.env.MICROPUB_TOKEN}` } }
   )
+  console.log(JSON.stringify(response))
   if (!response.ok) return
   const json = await response.json()
   const post = { ...json.properties }
