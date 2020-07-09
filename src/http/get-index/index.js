@@ -37,16 +37,20 @@ async function getPostType (postType) {
   //   }
   // })
   // const posts = result.Items.map(item => item.properties)
-  const response = await fetch(`${micropubSourceUrl}&post-type=${postType}`)
+  const response = await fetch(
+    `${micropubSourceUrl}&post-type=${postType}`,
+    { headers: { Authorization: `Bearer ${process.env.MICROPUB_TOKEN}` } }
+  )
+  console.log(JSON.stringify(response))
   if (!response.ok) return
   const json = await response.json()
   console.log(json)
-  const posts = json.items.map(item => {
-    const post = { ...item.properties }
+  const posts = json.map(item => {
+    const post = { ...item }
     flatten(post)
     return post
   })
-  const html = nunjucks.render('homepage.njk', { posts, css })
+  const html = nunjucks.render('notes.njk', { posts, css })
   return html
 }
 
@@ -62,7 +66,9 @@ async function getPost (slug) {
   const post = { ...json.properties }
   console.log(json)
   flatten(post)
-  if ('post-status' in post && post['post-status'] === 'draft') return
+  // if ('post-status' in post && post['post-status'] === 'draft') return
+  // don't show private posts
+  if ('visibility' in post && post.visibility === 'private') return
   const postJSON = JSON.stringify(post, null, 2)
   const html = nunjucks.render('post.njk', { post, css, postJSON })
   return html
