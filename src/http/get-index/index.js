@@ -28,15 +28,6 @@ async function getIndex () {
 
 async function getPostType (postType) {
   const css = arc.static('/main.css')
-  // const data = await arc.tables()
-  // const result = await data.posts.scan({ // should be a query?
-  //   TableName: 'posts',
-  //   FilterExpression: 'post-type = :postType',
-  //   ExpressionAttributeValues: {
-  //     ':postType': postType
-  //   }
-  // })
-  // const posts = result.Items.map(item => item.properties)
   const response = await fetch(
     `${micropubSourceUrl}&post-type=${postType}`,
     { headers: { Authorization: `Bearer ${process.env.MICROPUB_TOKEN}` } }
