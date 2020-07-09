@@ -1,10 +1,10 @@
 @app
 barryfrost
 
-@aws
-region eu-west-2
-
 @http
 get /
 
-@static
+# @aws
+# profile default
+# region us-west-1
+  
