@@ -9,6 +9,8 @@ markdown.register(njkEnv, marked)
 
 const micropubSourceUrl = `${process.env.MICROPUB_URL}?q=source`
 
+const css = arc.static('/minima.css')
+
 function flatten (post) {
   for (const key in post) {
     if (Array.isArray(post[key]) && post[key].length === 1) {
@@ -18,7 +20,6 @@ function flatten (post) {
 }
 
 async function getIndex () {
-  const css = arc.static('/main.css')
   const data = await arc.tables()
   const result = await data.posts.scan({ TableName: 'posts' })
   const posts = result.Items.map(item => JSON.parse(item))
@@ -27,7 +28,6 @@ async function getIndex () {
 }
 
 async function getPostType (postType) {
-  const css = arc.static('/main.css')
   const response = await fetch(
     `${micropubSourceUrl}&post-type=${postType}`,
     { headers: { Authorization: `Bearer ${process.env.MICROPUB_TOKEN}` } }
@@ -46,7 +46,6 @@ async function getPostType (postType) {
 }
 
 async function getPost (slug) {
-  const css = arc.static('/main.css')
   const response = await fetch(
     `${micropubSourceUrl}&url=${process.env.ROOT_URL}${slug}`,
     { headers: { Authorization: `Bearer ${process.env.MICROPUB_TOKEN}` } }
@@ -61,7 +60,7 @@ async function getPost (slug) {
   // don't show private posts
   if ('visibility' in post && post.visibility === 'private') return
   const postJSON = JSON.stringify(post, null, 2)
-  const html = nunjucks.render('post.njk', { post, css, postJSON })
+  const html = nunjucks.render('note.njk', { post, css, postJSON })
   return html
 }
 

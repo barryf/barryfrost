@@ -1,0 +1,35 @@
+{%- extends 'layout.njk' %}
+{%- block content %}
+
+<main class="page-content">
+  <div class="wrapper">
+    <article class="post h-entry">
+
+      <header class="post-header">
+        <p class="post-meta">
+          <time class="dt-published datetime="{{ post.published }}">
+            {{ post.published }}
+          </time>
+        </p>
+      </header>
+
+      <div class="post-content e-content">
+        {% markdown %}
+        {{ post.content }}
+        {% endmarkdown %}
+
+        <ul>
+        {%- for cat in post.category %}
+          <li>{{ cat }}</li>
+        {%- endfor %}
+        </ul>
+
+        <br>
+        <pre>{{ postJSON }}</pre>
+      </div>
+
+    </article>
+  </div>
+</main>
+
+{%- endblock %}
