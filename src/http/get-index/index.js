@@ -9,7 +9,7 @@ markdown.register(njkEnv, marked)
 
 const micropubSourceUrl = `${process.env.MICROPUB_URL}?q=source`
 
-const css = arc.static('/minima.css')
+const css = arc.static('/minima/style.css')
 
 function flatten (post) {
   for (const key in post) {
