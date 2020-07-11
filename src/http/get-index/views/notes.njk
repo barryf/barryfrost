@@ -1,13 +1,26 @@
-{% extends 'layout.njk' %}
-{% block content %}
+{%- extends 'layout.njk' %}
+{%- block content %}
 
 <main class="page-content">
   <div class="wrapper">
     <div class="home">
 
-      <ul class="post-list">
+      <ul class="post-list h-feed">
       {%- for post in posts %}
-        <li><a href="/{{ post.slug }}">{{ post.published }}</a></li>
+        <li class="post h-entry">
+          <header class="post-header">
+            <p class="post-meta">
+              <a href="/{{ post.slug }}">
+                <time class="dt-published datetime="{{ post.published }}">
+                  {{ post.published }}
+                </time>
+              </a>
+            </p>
+          </header>
+          <div class="post-content e-content">
+            {% markdown %}{{ post.content }}{% endmarkdown %}
+          </div>
+        </li>
       {%- endfor %}
       </ul>
 
@@ -15,4 +28,4 @@
   </div>
 </main>
 
-{% endblock %}
+{%- endblock %}
