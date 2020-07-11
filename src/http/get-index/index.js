@@ -9,7 +9,7 @@ markdown.register(njkEnv, marked)
 
 const micropubSourceUrl = `${process.env.MICROPUB_URL}?q=source`
 
-const css = arc.static('/minima/style.css')
+const staticPath = arc.static('/')
 
 function flatten (post) {
   for (const key in post) {
@@ -23,7 +23,7 @@ async function getIndex () {
   const data = await arc.tables()
   const result = await data.posts.scan({ TableName: 'posts' })
   const posts = result.Items.map(item => JSON.parse(item))
-  const html = nunjucks.render('homepage.njk', { posts, css })
+  const html = nunjucks.render('homepage.njk', { posts, staticPath })
   return html
 }
 
@@ -41,7 +41,7 @@ async function getPostType (postType) {
     flatten(post)
     return post
   })
-  const html = nunjucks.render('notes.njk', { posts, css })
+  const html = nunjucks.render('notes.njk', { posts, staticPath })
   return html
 }
 
@@ -60,7 +60,7 @@ async function getPost (slug) {
   // don't show private posts
   if ('visibility' in post && post.visibility === 'private') return
   const postJSON = JSON.stringify(post, null, 2)
-  const html = nunjucks.render('note.njk', { post, css, postJSON })
+  const html = nunjucks.render('note.njk', { post, staticPath, postJSON })
   return html
 }
 
