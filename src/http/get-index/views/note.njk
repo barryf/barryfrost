@@ -14,9 +14,7 @@
       </header>
 
       <div class="post-content e-content">
-        {% markdown %}
-        {{ post.content }}
-        {% endmarkdown %}
+        {{ post.content | safe }}
 
         <ul>
         {%- for cat in post.category %}
@@ -31,6 +29,8 @@
         <svg class="svg-icon orange">
           <use xlink:href="{{ staticPath }}minima/minima-social-icons.svg#rss"></use>
         </svg>
+        <a href="#"><img src="/_static/twitter-brands.svg" class="svg-icon"></a>
+        hello
       </p>
 
     </article>

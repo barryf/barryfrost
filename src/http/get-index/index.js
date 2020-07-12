@@ -1,11 +1,13 @@
 const arc = require('@architect/functions')
 const fetch = require('node-fetch')
 const nunjucks = require('nunjucks')
-const markdown = require('nunjucks-markdown')
-const marked = require('marked')
 
-const njkEnv = nunjucks.configure('views')
-markdown.register(njkEnv, marked)
+const md = require('markdown-it')({
+  linkify: true,
+  html: true
+})
+
+nunjucks.configure('views')
 
 const micropubSourceUrl = `${process.env.MICROPUB_URL}?q=source`
 
@@ -20,11 +22,6 @@ function flatten (post) {
 }
 
 async function getIndex () {
-  const data = await arc.tables()
-  const result = await data.posts.scan({ TableName: 'posts' })
-  const posts = result.Items.map(item => JSON.parse(item))
-  const html = nunjucks.render('homepage.njk', { posts, staticPath })
-  return html
 }
 
 async function getPostType (postType) {
@@ -38,6 +35,7 @@ async function getPostType (postType) {
   console.log(json)
   const posts = json.map(item => {
     const post = { ...item }
+    post.content = md.render(post.content)
     flatten(post)
     return post
   })
@@ -53,9 +51,11 @@ async function getPost (slug) {
   console.log(JSON.stringify(response))
   if (!response.ok) return
   const json = await response.json()
+  // console.log(json)
   const post = { ...json.properties }
-  console.log(json)
   flatten(post)
+  post.content = md.render(post.content)
+  console.log(JSON.stringify(post))
   // if ('post-status' in post && post['post-status'] === 'draft') return
   // don't show private posts
   if ('visibility' in post && post.visibility === 'private') return
