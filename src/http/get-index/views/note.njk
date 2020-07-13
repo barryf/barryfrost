@@ -8,32 +8,27 @@
       <header class="post-header">
         <p class="post-meta">
           <time class="dt-published datetime="{{ post.published }}">
-            {{ post.published }}
+            {{ post.publishedHuman | upper }}
           </time>
         </p>
       </header>
 
       <div class="post-content e-content">
-        {{ post.content | safe }}
+        {{ post.contentHtml | safe }}
 
         <ul>
         {%- for cat in post.category %}
           <li>{{ cat }}</li>
         {%- endfor %}
         </ul>
-
-        <br>
-        <pre>{{ postJSON }}</pre>
       </div>
-      <p>
-        <svg class="svg-icon orange">
-          <use xlink:href="{{ staticPath }}minima/minima-social-icons.svg#rss"></use>
-        </svg>
-        <a href="#"><img src="/_static/twitter-brands.svg" class="svg-icon"></a>
-        hello
-      </p>
 
     </article>
+
+    <details>
+      <summary>JSON</summary>
+      <pre>{{ postJSON }}</pre>
+    </details>
   </div>
 </main>
 

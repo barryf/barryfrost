@@ -21,6 +21,12 @@ function flatten (post) {
   }
 }
 
+function humanDate (dateString) {
+  return new Date(dateString).toLocaleString('default', { 
+    day: 'numeric', month: 'short', year: 'numeric'
+  })
+}
+
 async function getIndex () {
 }
 
@@ -35,8 +41,9 @@ async function getPostType (postType) {
   console.log(json)
   const posts = json.map(item => {
     const post = { ...item }
-    post.content = md.render(post.content)
     flatten(post)
+    post.contentHtml = md.render(post.content)
+    post.publishedHuman = humanDate(post.published)
     return post
   })
   const html = nunjucks.render('notes.njk', { posts, staticPath })
@@ -54,7 +61,8 @@ async function getPost (slug) {
   // console.log(json)
   const post = { ...json.properties }
   flatten(post)
-  post.content = md.render(post.content)
+  post.contentHtml = md.render(post.content)
+  post.publishedHuman = humanDate(post.published)
   console.log(JSON.stringify(post))
   // if ('post-status' in post && post['post-status'] === 'draft') return
   // don't show private posts

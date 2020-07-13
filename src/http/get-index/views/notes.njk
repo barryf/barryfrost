@@ -12,13 +12,13 @@
             <p class="post-meta">
               <a href="/{{ post.slug }}">
                 <time class="dt-published datetime="{{ post.published }}">
-                  {{ post.published }}
+                  {{ post.publishedHuman | upper }}
                 </time>
               </a>
             </p>
           </header>
           <div class="post-content e-content">
-            {{ post.content | safe }}
+            {{ post.contentHtml | safe }}
           </div>
         </li>
       {%- endfor %}
