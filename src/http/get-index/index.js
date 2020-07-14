@@ -22,7 +22,7 @@ function flatten (post) {
 }
 
 function humanDate (dateString) {
-  return new Date(dateString).toLocaleString('default', { 
+  return new Date(dateString).toLocaleString('en-gb', {
     day: 'numeric', month: 'short', year: 'numeric'
   })
 }
