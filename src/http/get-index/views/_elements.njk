@@ -1,0 +1,7 @@
+{% macro categories(cats) %}
+<ul>
+  {%- for cat in cats %}
+    <li>{{ cat }}s</li>
+  {%- endfor %}
+</ul>
+{% endmacro %}

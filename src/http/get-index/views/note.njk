@@ -1,4 +1,5 @@
-{%- extends 'layout.njk' %}
+{%- extends '_layout.njk' %}
+{%- import '_elements.njk' as elements %}
 {%- block content %}
 
 <main class="page-content">
@@ -16,11 +17,7 @@
       <div class="post-content e-content">
         {{ post.contentHtml | safe }}
 
-        <ul>
-        {%- for cat in post.category %}
-          <li>{{ cat }}</li>
-        {%- endfor %}
-        </ul>
+        {{ elements.categories(post.category) }}
       </div>
 
     </article>
