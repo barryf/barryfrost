@@ -9,13 +9,13 @@
       <header class="post-header">
         <p class="post-meta">
           <time class="dt-published datetime="{{ post.published }}">
-            {{ post.publishedHuman | upper }}
+            {{ post._publishedHuman | upper }}
           </time>
         </p>
       </header>
 
       <div class="post-content e-content">
-        {{ post.contentHtml | safe }}
+        {{ post._contentHtml | safe }}
 
         {{ elements.categories(post.category) }}
       </div>

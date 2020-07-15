@@ -1,21 +1,37 @@
 const arc = require('@architect/functions')
 const fetch = require('node-fetch')
-const nunjucks = require('nunjucks')
-
 const md = require('markdown-it')({
   linkify: true,
   html: true
 })
-
+const nunjucks = require('nunjucks')
 nunjucks.configure('views')
 
-const micropubSourceUrl = `${process.env.MICROPUB_URL}?q=source`
+const postTypes = [
+  'notes',
+  'articles',
+  'bookmarks',
+  'photos',
+  'checkins',
+  'reposts',
+  'likes',
+  'replies'
+]
 
-const staticPath = arc.static('/')
+const micropubSourceUrl = `${process.env.MICROPUB_URL}?q=source`
+const cssPath = arc.static('/minima/style.css')
 
 function flatten (post) {
+  const arrayKeys = [
+    'category',
+    'syndication',
+    'in-reply-to',
+    'repost-of',
+    'like-of',
+    'bookmark-of'
+  ]
   for (const key in post) {
-    if (Array.isArray(post[key]) && post[key].length === 1) {
+    if (post[key].length === 1 && !arrayKeys.includes(key)) {
       post[key] = post[key][0]
     }
   }
@@ -28,6 +44,7 @@ function humanDate (dateString) {
 }
 
 async function getIndex () {
+  return 'Index'
 }
 
 async function getPostType (postType) {
@@ -42,11 +59,11 @@ async function getPostType (postType) {
   const posts = json.map(item => {
     const post = { ...item }
     flatten(post)
-    post.contentHtml = md.render(post.content)
+    post.contentHtml = ('content' in post) ? md.render(post.content) : ''
     post.publishedHuman = humanDate(post.published)
     return post
   })
-  const html = nunjucks.render('notes.njk', { posts, staticPath })
+  const html = nunjucks.render('notes.njk', { posts, cssPath })
   return html
 }
 
@@ -61,21 +78,18 @@ async function getPost (slug) {
   // console.log(json)
   const post = { ...json.properties }
   flatten(post)
-  post.contentHtml = md.render(post.content)
-  post.publishedHuman = humanDate(post.published)
+  post._contentHtml = md.render(post.content)
+  post._publishedHuman = humanDate(post.published)
   console.log(JSON.stringify(post))
   // if ('post-status' in post && post['post-status'] === 'draft') return
   // don't show private posts
   if ('visibility' in post && post.visibility === 'private') return
   const postJSON = JSON.stringify(post, null, 2)
-  const html = nunjucks.render('note.njk', { post, staticPath, postJSON })
+  const html = nunjucks.render('note.njk', { post, postJSON, cssPath })
   return html
 }
 
 exports.handler = async function http (req) {
-  // accepted post types from server
-  const postTypes = ['notes', 'articles', 'bookmarks', 'photos', 'checkins',
-    'reposts', 'likes', 'replies']
   // strip initial slash, remove any api gateway stage, clean characters
   const url = req.path.substr(1).replace(/^staging\//, '')
     .replace(/[^a-z0-9/-]/, '')
