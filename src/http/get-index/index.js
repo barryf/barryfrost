@@ -31,7 +31,8 @@ function flatten (post) {
     'bookmark-of'
   ]
   for (const key in post) {
-    if (post[key].length === 1 && !arrayKeys.includes(key)) {
+    if (Array.isArray(post[key]) && post[key].length === 1 &&
+      !arrayKeys.includes(key)) {
       post[key] = post[key][0]
     }
   }
@@ -52,15 +53,21 @@ async function getPostType (postType) {
     `${micropubSourceUrl}&post-type=${postType}`,
     { headers: { Authorization: `Bearer ${process.env.MICROPUB_TOKEN}` } }
   )
-  console.log(JSON.stringify(response))
+  // console.log(JSON.stringify(response))
   if (!response.ok) return
   const json = await response.json()
   console.log(json)
   const posts = json.map(item => {
     const post = { ...item }
     flatten(post)
-    post.contentHtml = ('content' in post) ? md.render(post.content) : ''
-    post.publishedHuman = humanDate(post.published)
+    if ('content' in post) {
+      if (typeof post.content === 'string') {
+        post._contentHtml = md.render(post.content)
+      } else {
+        post._contentHtml = post.content.html
+      }
+    }
+    post._publishedHuman = humanDate(post.published)
     return post
   })
   const html = nunjucks.render('notes.njk', { posts, cssPath })
