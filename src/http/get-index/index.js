@@ -1,8 +1,17 @@
 const arc = require('@architect/functions')
 const fetch = require('node-fetch')
+const hljs = require('highlight.js')
 const md = require('markdown-it')({
   linkify: true,
-  html: true
+  html: true,
+  highlight: function (str, lang) {
+    if (lang && hljs.getLanguage(lang)) {
+      try {
+        return hljs.highlight(lang, str).value
+      } catch (__) {}
+    }
+    return ''
+  }
 })
 const nunjucks = require('nunjucks')
 nunjucks.configure('views')
