@@ -28,7 +28,7 @@ const postTypes = [
 ]
 
 const micropubSourceUrl = `${process.env.MICROPUB_URL}?q=source`
-const cssPath = arc.static('/minima/style.css')
+const cssPath = arc.static('/style.css')
 
 function flatten (post) {
   const arrayKeys = [
@@ -66,8 +66,8 @@ async function getPostType (postType) {
   if (!response.ok) return
   const json = await response.json()
   console.log(json)
-  const posts = json.map(item => {
-    const post = { ...item }
+  const posts = json.items.map(item => {
+    const post = { ...item.properties }
     flatten(post)
     if ('content' in post) {
       if (typeof post.content === 'string') {
@@ -97,9 +97,6 @@ async function getPost (slug) {
   post._contentHtml = md.render(post.content)
   post._publishedHuman = humanDate(post.published)
   console.log(JSON.stringify(post))
-  // if ('post-status' in post && post['post-status'] === 'draft') return
-  // don't show private posts
-  if ('visibility' in post && post.visibility === 'private') return
   const postJSON = JSON.stringify(post, null, 2)
   const html = nunjucks.render('note.njk', { post, postJSON, cssPath })
   return html
