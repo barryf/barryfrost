@@ -27,21 +27,28 @@ const postTypes = [
   'replies'
 ]
 
+// Properties that should always remain as arrays
+const arrayProperties = [
+  'category',
+  'syndication',
+  'in-reply-to',
+  'repost-of',
+  'like-of',
+  'bookmark-of',
+  'comment',
+  'like',
+  'repost',
+  'rsvp',
+  'bookmark'
+]
+
 const micropubSourceUrl = `${process.env.MICROPUB_URL}?q=source`
 const cssPath = arc.static('/style.css')
 
 function flatten (post) {
-  const arrayKeys = [
-    'category',
-    'syndication',
-    'in-reply-to',
-    'repost-of',
-    'like-of',
-    'bookmark-of'
-  ]
   for (const key in post) {
     if (Array.isArray(post[key]) && post[key].length === 1 &&
-      !arrayKeys.includes(key)) {
+      !arrayProperties.includes(key)) {
       post[key] = post[key][0]
     }
   }
@@ -54,7 +61,8 @@ function humanDate (dateString) {
 }
 
 async function getIndex () {
-  return 'Index'
+  const html = nunjucks.render('index.njk', { cssPath })
+  return html
 }
 
 async function getPostType (postType) {
@@ -65,7 +73,7 @@ async function getPostType (postType) {
   // console.log(JSON.stringify(response))
   if (!response.ok) return
   const json = await response.json()
-  console.log(json)
+  // console.log(json)
   const posts = json.items.map(item => {
     const post = { ...item.properties }
     flatten(post)
@@ -90,11 +98,16 @@ async function getPost (slug) {
   )
   console.log(JSON.stringify(response))
   if (!response.ok) return
-  const json = await response.json()
-  // console.log(json)
-  const post = { ...json.properties }
+  const body = await response.json()
+  const post = { ...body.properties }
   flatten(post)
-  post._contentHtml = md.render(post.content)
+  if ('content' in post) {
+    if (typeof post.content === 'string') {
+      post._contentHtml = md.render(post.content)
+    } else {
+      post._contentHtml = post.content.html
+    }
+  }
   post._publishedHuman = humanDate(post.published)
   console.log(JSON.stringify(post))
   const postJSON = JSON.stringify(post, null, 2)
@@ -124,10 +137,10 @@ exports.handler = async function http (req) {
   // default, assume a post
   } else {
     const body = await getPost(url)
-    if (body) {
-      return { ...res, body }
+    if (body === undefined) {
+      return { ...res, statusCode: 404, body: 'Not found' }
     } else {
-      return { statusCode: 404 }
+      return { ...res, body }
     }
   }
 }
