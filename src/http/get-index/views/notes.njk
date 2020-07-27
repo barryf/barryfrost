@@ -10,8 +10,8 @@
         <li class="post h-entry">
           <header class="post-header">
             <p class="post-meta">
-              <a href="/{{ post.slug }}">
-                <time class="dt-published datetime="{{ post.published }}">
+              <a href="{{ post.url }}">
+                <time class="dt-published" datetime="{{ post.published }}">
                   {{ post._publishedHuman | upper }}
                 </time>
               </a>
