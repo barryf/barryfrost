@@ -65,9 +65,10 @@ async function getIndex () {
   return html
 }
 
-async function getPostType (postType) {
-  const response = await fetch(
-    `${micropubSourceUrl}&post-type=${postType}`,
+async function getPostType (postType, before = null) {
+  let url = `${micropubSourceUrl}&post-type=${postType}`
+  if (before) url = url + '&before=' + parseInt(before, 10)
+  const response = await fetch(url,
     { headers: { Authorization: `Bearer ${process.env.MICROPUB_TOKEN}` } }
   )
   // console.log(JSON.stringify(response))
@@ -116,6 +117,7 @@ async function getPost (slug) {
 }
 
 exports.handler = async function http (req) {
+  const query = req.queryStringParameters || {}
   // strip initial slash, remove any api gateway stage, clean characters
   const url = req.path.substr(1).replace(/^staging\//, '')
     .replace(/[^a-z0-9/-]/, '')
@@ -130,7 +132,7 @@ exports.handler = async function http (req) {
   } else if (postTypes.includes(url)) {
     let postType = url.substr(0, url.length - 1)
     if (postType === 'replie') postType = 'reply'
-    return { ...res, body: await getPostType(postType) }
+    return { ...res, body: await getPostType(postType, query.before) }
   // root is homepage
   } else if (url === '') {
     return { ...res, body: await getIndex() }
