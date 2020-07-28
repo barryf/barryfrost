@@ -24,6 +24,10 @@
       {%- endfor %}
       </ul>
 
+      {%- if (lastPublishedInt) %}
+        <p><a href="?before={{ lastPublishedInt }}">Previous</a></p>
+      {%- endif %}
+
     </div>
   </div>
 </main>
