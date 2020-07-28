@@ -65,7 +65,7 @@ async function getIndex () {
   return html
 }
 
-async function getPostType (postType, before = null) {
+async function getPostType (postType, before) {
   let url = `${micropubSourceUrl}&post-type=${postType}`
   if (before) url = url + '&before=' + parseInt(before, 10)
   const response = await fetch(url,
@@ -88,8 +88,10 @@ async function getPostType (postType, before = null) {
     post._publishedHuman = humanDate(post.published)
     return post
   })
-  const html = nunjucks.render('notes.njk', { posts, cssPath })
-  return html
+  const lastPublishedInt = (posts.length === 20)
+    ? new Date(posts.slice(-1)[0].published).valueOf()
+    : null
+  return nunjucks.render('notes.njk', { posts, cssPath, lastPublishedInt })
 }
 
 async function getPost (slug) {
@@ -117,7 +119,7 @@ async function getPost (slug) {
 }
 
 exports.handler = async function http (req) {
-  const query = req.queryStringParameters || {}
+  const { before } = req.queryStringParameters || {}
   // strip initial slash, remove any api gateway stage, clean characters
   const url = req.path.substr(1).replace(/^staging\//, '')
     .replace(/[^a-z0-9/-]/, '')
@@ -132,7 +134,7 @@ exports.handler = async function http (req) {
   } else if (postTypes.includes(url)) {
     let postType = url.substr(0, url.length - 1)
     if (postType === 'replie') postType = 'reply'
-    return { ...res, body: await getPostType(postType, query.before) }
+    return { ...res, body: await getPostType(postType, before) }
   // root is homepage
   } else if (url === '') {
     return { ...res, body: await getIndex() }
