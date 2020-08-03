@@ -16,7 +16,7 @@ const md = require('markdown-it')({
 const nunjucks = require('nunjucks')
 nunjucks.configure('views')
 
-const postTypes = [
+const postTypePlurals = [
   'notes',
   'articles',
   'bookmarks',
@@ -24,7 +24,8 @@ const postTypes = [
   'checkins',
   'reposts',
   'likes',
-  'replies'
+  'replies',
+  'rsvps'
 ]
 
 // Properties that should always remain as arrays
@@ -94,12 +95,41 @@ async function getPostType (postType, before) {
   return nunjucks.render('notes.njk', { posts, cssPath, lastPublishedInt })
 }
 
-async function getPost (slug) {
-  const response = await fetch(
-    `${micropubSourceUrl}&url=${process.env.ROOT_URL}${slug}`,
+async function getCategory (category, before) {
+  let url = `${micropubSourceUrl}&category=${category}`
+  if (before) url = url + '&before=' + parseInt(before, 10)
+  const response = await fetch(url,
     { headers: { Authorization: `Bearer ${process.env.MICROPUB_TOKEN}` } }
   )
-  console.log(JSON.stringify(response))
+  // console.log(JSON.stringify(response))
+  if (!response.ok) return
+  const json = await response.json()
+  // console.log(json)
+  const posts = json.items.map(item => {
+    const post = { ...item.properties }
+    flatten(post)
+    if ('content' in post) {
+      if (typeof post.content === 'string') {
+        post._contentHtml = md.render(post.content)
+      } else {
+        post._contentHtml = post.content.html
+      }
+    }
+    post._publishedHuman = humanDate(post.published)
+    return post
+  })
+  const lastPublishedInt = (posts.length === 20)
+    ? new Date(posts.slice(-1)[0].published).valueOf()
+    : null
+  return nunjucks.render('notes.njk', { posts, cssPath, lastPublishedInt })
+}
+
+async function getPost (url) {
+  const response = await fetch(
+    `${micropubSourceUrl}&url=${process.env.ROOT_URL}${url}`,
+    { headers: { Authorization: `Bearer ${process.env.MICROPUB_TOKEN}` } }
+  )
+  // console.log(JSON.stringify(response))
   if (!response.ok) return
   const body = await response.json()
   const post = { ...body.properties }
@@ -112,7 +142,7 @@ async function getPost (slug) {
     }
   }
   post._publishedHuman = humanDate(post.published)
-  console.log(JSON.stringify(post))
+  // console.log(JSON.stringify(post))
   const postJSON = JSON.stringify(post, null, 2)
   const html = nunjucks.render('note.njk', { post, postJSON, cssPath })
   return html
@@ -126,12 +156,15 @@ exports.handler = async function http (req) {
   const res = {
     headers: { 'content-type': 'text/html; charset=utf8' }
   }
-  console.log(`url=${url}`)
+  // console.log(`url=${url}`)
   // temp reject favicon
   if (url === 'faviconico') {
     return { statusCode: 404 }
+  } else if (url.substr(0, 9) === 'category/') {
+    const category = url.substr(9, url.length - 9)
+    return { ...res, body: await getCategory(category, before) }
   // post types e.g. notes (no trailing slash)
-  } else if (postTypes.includes(url)) {
+  } else if (postTypePlurals.includes(url)) {
     let postType = url.substr(0, url.length - 1)
     if (postType === 'replie') postType = 'reply'
     return { ...res, body: await getPostType(postType, before) }
