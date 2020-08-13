@@ -44,7 +44,10 @@ const arrayProperties = [
 ]
 
 const micropubSourceUrl = `${process.env.MICROPUB_URL}?q=source`
-const cssPath = arc.static('/style.css')
+const paths = {
+  cssPath: arc.static('/style.css'),
+  faviconPath: arc.static('/barryfrost-favicon.png')
+}
 
 function flatten (post) {
   for (const key in post) {
@@ -62,7 +65,7 @@ function humanDate (dateString) {
 }
 
 async function getIndex () {
-  const html = nunjucks.render('index.njk', { cssPath })
+  const html = nunjucks.render('index.njk', { ...paths })
   return html
 }
 
@@ -92,7 +95,7 @@ async function getPostType (postType, before) {
   const lastPublishedInt = (posts.length === 20)
     ? new Date(posts.slice(-1)[0].published).valueOf()
     : null
-  return nunjucks.render('notes.njk', { posts, cssPath, lastPublishedInt })
+  return nunjucks.render('notes.njk', { posts, lastPublishedInt, ...paths })
 }
 
 async function getCategory (category, before) {
@@ -122,7 +125,7 @@ async function getCategory (category, before) {
   const lastPublishedInt = (posts.length === 20)
     ? new Date(posts.slice(-1)[0].published).valueOf()
     : null
-  return nunjucks.render('notes.njk', { posts, cssPath, lastPublishedInt })
+  return nunjucks.render('notes.njk', { posts, lastPublishedInt, ...paths })
 }
 
 async function getPost (url) {
@@ -145,7 +148,7 @@ async function getPost (url) {
   post._publishedHuman = humanDate(post.published)
   // console.log(JSON.stringify(post))
   const postJSON = JSON.stringify(post, null, 2)
-  const html = nunjucks.render('note.njk', { post, postJSON, cssPath })
+  const html = nunjucks.render('note.njk', { post, postJSON, ...paths })
   return {
     statusCode: 200,
     body: html
@@ -158,7 +161,11 @@ exports.handler = async function http (req) {
   const url = req.path.substr(1).replace(/^staging\//, '')
     .replace(/[^a-z0-9/-]/, '')
   const httpHeaders = {
-    headers: { 'content-type': 'text/html; charset=utf8' }
+    headers: {
+      'Content-Type': 'text/html; charset=utf8',
+      'Referrer-Policy': 'no-referrer',
+      'Content-Security-Policy': "script-src 'self'"
+    }
   }
   if (url === 'faviconico') {
     // temp reject favicon
