@@ -118,6 +118,7 @@ async function getCategory (category, before) {
     post._publishedHuman = humanDate(post.published)
     return post
   })
+  // console.log('posts', posts)
   const lastPublishedInt = (posts.length === 20)
     ? new Date(posts.slice(-1)[0].published).valueOf()
     : null
@@ -129,9 +130,12 @@ async function getPost (url) {
     `${micropubSourceUrl}&url=${process.env.ROOT_URL}${url}`,
     { headers: { Authorization: `Bearer ${process.env.MICROPUB_TOKEN}` } }
   )
-  // console.log(JSON.stringify(response))
-  if (!response.ok) return
+  // console.log('micropub response', response)
   const body = await response.json()
+  if (!response.ok) { return {
+    statusCode: response.status,
+    body
+  }}
   const post = { ...body.properties }
   flatten(post)
   if ('content' in post) {
@@ -145,7 +149,10 @@ async function getPost (url) {
   // console.log(JSON.stringify(post))
   const postJSON = JSON.stringify(post, null, 2)
   const html = nunjucks.render('note.njk', { post, postJSON, cssPath })
-  return html
+  return {
+    statusCode: 200,
+    body: html
+  }
 }
 
 exports.handler = async function http (req) {
@@ -153,31 +160,36 @@ exports.handler = async function http (req) {
   // strip initial slash, remove any api gateway stage, clean characters
   const url = req.path.substr(1).replace(/^staging\//, '')
     .replace(/[^a-z0-9/-]/, '')
-  const res = {
+  const htmlHeaders = {
     headers: { 'content-type': 'text/html; charset=utf8' }
   }
-  // console.log(`url=${url}`)
+  // console.log('url', url)
   // temp reject favicon
   if (url === 'faviconico') {
     return { statusCode: 404 }
   } else if (url.substr(0, 9) === 'category/') {
     const category = url.substr(9, url.length - 9)
-    return { ...res, body: await getCategory(category, before) }
+    return { ...htmlHeaders, body: await getCategory(category, before) }
   // post types e.g. notes (no trailing slash)
   } else if (postTypePlurals.includes(url)) {
     let postType = url.substr(0, url.length - 1)
     if (postType === 'replie') postType = 'reply'
-    return { ...res, body: await getPostType(postType, before) }
+    return { ...htmlHeaders, body: await getPostType(postType, before) }
   // root is homepage
   } else if (url === '') {
-    return { ...res, body: await getIndex() }
+    return { ...htmlHeaders, body: await getIndex() }
   // default, assume a post
-  } else {
-    const body = await getPost(url)
-    if (body === undefined) {
-      return { ...res, statusCode: 404, body: 'Not found' }
-    } else {
-      return { ...res, body }
+  }
+  const response = await getPost(url)
+  if (response.statusCode !== 200) {
+    return {
+      ...htmlHeaders,
+      statusCode: response.statusCode,
+      body: response.body.error_description
     }
+  }
+  return {
+    ...htmlHeaders,
+    body: response.body
   }
 }
