@@ -132,10 +132,7 @@ async function getPost (url) {
   )
   // console.log('micropub response', response)
   const body = await response.json()
-  if (!response.ok) { return {
-    statusCode: response.status,
-    body
-  }}
+  if (!response.ok) return { statusCode: response.status, body }
   const post = { ...body.properties }
   flatten(post)
   if ('content' in post) {
@@ -160,36 +157,41 @@ exports.handler = async function http (req) {
   // strip initial slash, remove any api gateway stage, clean characters
   const url = req.path.substr(1).replace(/^staging\//, '')
     .replace(/[^a-z0-9/-]/, '')
-  const htmlHeaders = {
+  const httpHeaders = {
     headers: { 'content-type': 'text/html; charset=utf8' }
   }
-  // console.log('url', url)
-  // temp reject favicon
   if (url === 'faviconico') {
+    // temp reject favicon
     return { statusCode: 404 }
+    //
   } else if (url.substr(0, 9) === 'category/') {
     const category = url.substr(9, url.length - 9)
-    return { ...htmlHeaders, body: await getCategory(category, before) }
-  // post types e.g. notes (no trailing slash)
+    return { ...httpHeaders, body: await getCategory(category, before) }
+    //
   } else if (postTypePlurals.includes(url)) {
+    // post types e.g. notes (no trailing slash)
     let postType = url.substr(0, url.length - 1)
     if (postType === 'replie') postType = 'reply'
-    return { ...htmlHeaders, body: await getPostType(postType, before) }
-  // root is homepage
+    return { ...httpHeaders, body: await getPostType(postType, before) }
+    //
   } else if (url === '') {
-    return { ...htmlHeaders, body: await getIndex() }
-  // default, assume a post
+    // root is homepage
+    return { ...httpHeaders, body: await getIndex() }
+    //
   }
+  // default, assume a post
   const response = await getPost(url)
+  // if response wasn't successful it could be gone/not found
   if (response.statusCode !== 200) {
+    // assume we have a well-formed error
     return {
-      ...htmlHeaders,
+      ...httpHeaders,
       statusCode: response.statusCode,
       body: response.body.error_description
     }
   }
   return {
-    ...htmlHeaders,
+    ...httpHeaders,
     body: response.body
   }
 }
