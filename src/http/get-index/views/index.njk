@@ -1,6 +1,16 @@
 {%- extends '_layout.njk' %}
-{%- block content %}
+{%- import '_elements.njk' as elements %}
 
+{%- block head %}
+  <title>Barry Frost</title>
+  <link rel="me" href="mailto:auth@barryfrost.com">
+  <link rel="authorization_endpoint" href="https://indieauth.com/auth">
+  <link rel="token_endpoint" href="https://tokens.indieauth.com/token">
+  <link rel="micropub" href="https://api.barryf.co.uk/micropub">
+  <link rel="webmention" href="https://webmention.io/barryf/webmention">
+{%- endblock %}
+
+{%- block content %}
 <main class="page-content">
   <div class="wrapper">
     <div class="index">
@@ -10,5 +20,4 @@
     </div>
   </div>
 </main>
-
 {%- endblock %}

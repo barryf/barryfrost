@@ -1,7 +1,11 @@
 {% macro categories(cats) %}
 <ul>
   {%- for cat in cats %}
-    <li>{{ cat }}</li>
+    <li>
+      <a href="/category/{{ cat }}" rel="nofollow">
+        {{ cat }}
+      </a>
+    </li>
   {%- endfor %}
 </ul>
 {% endmacro %}
