@@ -139,7 +139,7 @@ async function getPost (url) {
       post._contentHtml = post.content.html
     }
   }
-  template = post['post-type'] + '.njk'
+  if (!template) template = post['post-type'] + '.njk'
   post._publishedHuman = humanDate(post.published)
   const postJSON = JSON.stringify(post, null, 2)
   const html = nunjucks.render(template, { post, postJSON, ...paths })
@@ -165,8 +165,8 @@ exports.handler = async function http (req) {
     // temp reject favicon
     return { statusCode: 404 }
     //
-  } else if (url.substr(0, 9) === 'categories/') {
-    const category = url.substr(9, url.length - 9)
+  } else if (url.substr(0, 11) === 'categories/') {
+    const category = url.substr(11, url.length - 11)
     return { ...httpHeaders, body: await getCategory(category, before) }
     //
   } else if (postTypePlurals.includes(url)) {
