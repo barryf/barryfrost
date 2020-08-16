@@ -1,4 +1,4 @@
-{% macro categories(cats) %}
+{%- macro categories(cats) %}
 <ul>
   {%- for cat in cats %}
     <li>
@@ -8,4 +8,26 @@
     </li>
   {%- endfor %}
 </ul>
-{% endmacro %}
+{%- endmacro %}
+
+{%- macro published(post) %}
+<time class="dt-published" datetime="{{ post.published }}">
+  {{ post._publishedHuman | upper }}
+</time>
+{%- endmacro %}
+
+{%- macro updated(post) %}
+<time class="dt-updated" datetime="{{ post.updated }}"></time>
+{%- endmacro %}
+
+{%- macro link_webmention() %}
+<link rel="webmention" href="https://webmention.io/barryf/webmention">
+{%- endmacro %}
+
+{%- macro details(postJSON) %}
+<br>
+<details>
+  <summary>Raw</summary>
+  <pre>{{ postJSON }}</pre>
+</details>
+{%- endmacro %}

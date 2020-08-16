@@ -111,11 +111,10 @@ async function getPost (url) {
     { headers: { Authorization: `Bearer ${process.env.MICROPUB_TOKEN}` } }
   )
   const body = await response.json()
-  console.log('micropub response', body)
+  // console.log('micropub response', body)
   let template
   switch (response.status) {
     case 200:
-      template = 'post.njk'
       break
     case 410:
       template = 'gone.njk'
@@ -140,6 +139,7 @@ async function getPost (url) {
       post._contentHtml = post.content.html
     }
   }
+  template = post['post-type'] + '.njk'
   post._publishedHuman = humanDate(post.published)
   const postJSON = JSON.stringify(post, null, 2)
   const html = nunjucks.render(template, { post, postJSON, ...paths })
