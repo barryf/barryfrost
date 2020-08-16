@@ -25,7 +25,8 @@ const postTypePlurals = [
   'reposts',
   'likes',
   'replies',
-  'rsvps'
+  'rsvps',
+  'events'
 ]
 
 // Properties that should always remain as arrays
@@ -65,41 +66,18 @@ function humanDate (dateString) {
 }
 
 async function getIndex () {
-  const html = nunjucks.render('index.njk', { ...paths })
-  return html
+  return nunjucks.render('index.njk', { ...paths })
 }
 
 async function getPostType (postType, before) {
-  let url = `${micropubSourceUrl}&post-type=${postType}`
-  if (before) url = url + '&before=' + parseInt(before, 10)
-  const response = await fetch(url,
-    { headers: { Authorization: `Bearer ${process.env.MICROPUB_TOKEN}` } }
-  )
-  // console.log(JSON.stringify(response))
-  if (!response.ok) return
-  const json = await response.json()
-  // console.log(json)
-  const posts = json.items.map(item => {
-    const post = { ...item.properties }
-    flatten(post)
-    if ('content' in post) {
-      if (typeof post.content === 'string') {
-        post._contentHtml = md.render(post.content)
-      } else {
-        post._contentHtml = post.content.html
-      }
-    }
-    post._publishedHuman = humanDate(post.published)
-    return post
-  })
-  const lastPublishedInt = (posts.length === 20)
-    ? new Date(posts.slice(-1)[0].published).valueOf()
-    : null
-  return nunjucks.render('notes.njk', { posts, lastPublishedInt, ...paths })
+  return getList(`${micropubSourceUrl}&post-type=${postType}`, before)
 }
 
 async function getCategory (category, before) {
-  let url = `${micropubSourceUrl}&category=${category}`
+  return getList(`${micropubSourceUrl}&category=${category}`, before)
+}
+
+async function getList (url, before) {
   if (before) url = url + '&before=' + parseInt(before, 10)
   const response = await fetch(url,
     { headers: { Authorization: `Bearer ${process.env.MICROPUB_TOKEN}` } }
@@ -107,7 +85,6 @@ async function getCategory (category, before) {
   // console.log(JSON.stringify(response))
   if (!response.ok) return
   const json = await response.json()
-  // console.log(json)
   const posts = json.items.map(item => {
     const post = { ...item.properties }
     flatten(post)
@@ -125,7 +102,7 @@ async function getCategory (category, before) {
   const lastPublishedInt = (posts.length === 20)
     ? new Date(posts.slice(-1)[0].published).valueOf()
     : null
-  return nunjucks.render('notes.njk', { posts, lastPublishedInt, ...paths })
+  return nunjucks.render('list.njk', { posts, lastPublishedInt, ...paths })
 }
 
 async function getPost (url) {
@@ -133,9 +110,27 @@ async function getPost (url) {
     `${micropubSourceUrl}&url=${process.env.ROOT_URL}${url}`,
     { headers: { Authorization: `Bearer ${process.env.MICROPUB_TOKEN}` } }
   )
-  // console.log('micropub response', response)
   const body = await response.json()
-  if (!response.ok) return { statusCode: response.status, body }
+  console.log('micropub response', body)
+  let template
+  switch (response.status) {
+    case 200:
+      template = 'post.njk'
+      break
+    case 410:
+      template = 'gone.njk'
+      break
+    case 404:
+      return {
+        statusCode: 404,
+        body: nunjucks.render('not-found.njk', paths)
+      }
+    default:
+      return {
+        statusCode: response.status,
+        body: body.error_description
+      }
+  }
   const post = { ...body.properties }
   flatten(post)
   if ('content' in post) {
@@ -146,11 +141,10 @@ async function getPost (url) {
     }
   }
   post._publishedHuman = humanDate(post.published)
-  // console.log(JSON.stringify(post))
   const postJSON = JSON.stringify(post, null, 2)
-  const html = nunjucks.render('note.njk', { post, postJSON, ...paths })
+  const html = nunjucks.render(template, { post, postJSON, ...paths })
   return {
-    statusCode: 200,
+    statusCode: response.status,
     body: html
   }
 }
@@ -171,7 +165,7 @@ exports.handler = async function http (req) {
     // temp reject favicon
     return { statusCode: 404 }
     //
-  } else if (url.substr(0, 9) === 'category/') {
+  } else if (url.substr(0, 9) === 'categories/') {
     const category = url.substr(9, url.length - 9)
     return { ...httpHeaders, body: await getCategory(category, before) }
     //
@@ -186,19 +180,11 @@ exports.handler = async function http (req) {
     return { ...httpHeaders, body: await getIndex() }
     //
   }
-  // default, assume a post
+  // default, assume a 200 post (or 404, 410)
   const response = await getPost(url)
-  // if response wasn't successful it could be gone/not found
-  if (response.statusCode !== 200) {
-    // assume we have a well-formed error
-    return {
-      ...httpHeaders,
-      statusCode: response.statusCode,
-      body: response.body.error_description
-    }
-  }
   return {
     ...httpHeaders,
+    statusCode: response.statusCode,
     body: response.body
   }
 }
