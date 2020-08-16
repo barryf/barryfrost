@@ -1,0 +1,23 @@
+{%- extends 'layout.njk' %}
+
+{%- block head %}
+  <title>410 Gone</title>
+{%- endblock %}
+
+{%- block content %}
+<main class="page-content">
+  <div class="wrapper">
+    <article class="post h-entry">
+
+      <h1 class="p-name">410 Gone</h1>
+
+      <div class="post-content e-content">
+        <p>This post has been deleted and is no longer available.</p>
+      </div>
+
+      <time class="dt-deleted" datetime="{{ post.deleted }}" hidden>
+
+    </article>
+  </div>
+</main>
+{%- endblock %}
