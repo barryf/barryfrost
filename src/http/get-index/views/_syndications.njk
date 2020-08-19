@@ -1,0 +1,15 @@
+{%- if post.syndication %}
+  <ul>
+    {%- for syndication in post.syndication %}
+    <li>
+      <a class="u-syndication" rel="syndication" href="{{ syndication }}">
+        {%- if syndication.slice(0, 20) === 'https://twitter.com/' %}
+          <img src="/_static/twitter-brands.svg" width="16" alt="Twitter">
+        {%- else %}
+          {{ syndication }}
+        {%- endif %}
+      </a>
+    </li>
+    {%- endfor %}
+  </ul>
+{%- endif %}
