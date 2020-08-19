@@ -3,7 +3,8 @@
 
 {%- block head %}
 <title>
-  {{ post.name }}
+  Bookmark of
+  {{ post.name | striptags | truncate(60, false) | escape }}
   &middot; Barry Frost
 </title>
 {{ elements.link_webmention() }}
@@ -15,13 +16,16 @@
     <article class="post h-entry">
 
       <header class="post-header">
-        <h1 class="post-title p-name">{{ post.name | escape }}</h1>
+        <h1 class="post-title p-name">
+          <a href="{{ post['bookmark-of'] }}">
+            {{ post.name | escape }}
+          </a>
+        </h1>
         <p class="post-meta">
           {% include '_published.njk' %}
         </p>
       </header>
 
-      {% include '_photos.njk' %}
       {% include '_content.njk' %}
       {% include '_categories.njk' %}
 

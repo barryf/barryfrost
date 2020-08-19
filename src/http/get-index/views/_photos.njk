@@ -1,0 +1,14 @@
+{%- if post.photo %}
+  {%- set photo = post.photo[0] %}
+  <figure>
+    {%- if photo.value %}
+      <a href="{{ photo.value }}">
+        <img class="u-photo" src="{{ photo.value }}" alt="{{ photo.alt }}">
+      </a>
+    {%- else %}
+      <a href="{{ photo }}">
+        <img class="u-photo" src="{{ photo }}">
+      </a>
+    {%- endif %}
+  </figure>
+{%- endif%}

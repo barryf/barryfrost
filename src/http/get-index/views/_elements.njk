@@ -1,0 +1,11 @@
+{%- macro link_webmention() %}
+<link rel="webmention" href="https://webmention.io/barryf/webmention">
+{%- endmacro %}
+
+{%- macro details(postJSON) %}
+<br>
+<details>
+  <summary>Raw</summary>
+  <pre>{{ postJSON }}</pre>
+</details>
+{%- endmacro %}

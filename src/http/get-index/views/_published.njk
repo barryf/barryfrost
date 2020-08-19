@@ -1,0 +1,7 @@
+<time class="dt-published" datetime="{{ post.published }}" pubdate>
+  {{ post._publishedHuman | upper }}
+</time>
+
+{% if post.updated %}
+  <time class="dt-updated" datetime="{{ post.updated }}"></time>
+{% endif %}

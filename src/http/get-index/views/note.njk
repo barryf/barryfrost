@@ -1,4 +1,4 @@
-{%- import 'elements.njk' as elements %}
+{%- import '_elements.njk' as elements %}
 {%- extends 'layout.njk' %}
 
 {%- block head %}
@@ -16,19 +16,15 @@
 
       <header class="post-header">
         <p class="post-meta">
-          {{ elements.published(post) }}
-          {{ elements.updated(post) }}
+          {% include '_published.njk' %}
         </p>
       </header>
 
-      <div class="post-content e-content">
-        {{ post._contentHtml | safe }}
-      </div>
-
-      {{ elements.categories(post.category) }}
+      {% include '_photos.njk' %}
+      {% include '_content.njk' %}
+      {% include '_categories.njk' %}
 
     </article>
-
     {{ elements.details(postJSON) }}
   </div>
 </main>

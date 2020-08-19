@@ -161,26 +161,21 @@ exports.handler = async function http (req) {
       'Content-Security-Policy': "script-src 'self'"
     }
   }
-  if (url === 'faviconico') {
-    // temp reject favicon
-    return { statusCode: 404 }
-    //
-  } else if (url.substr(0, 11) === 'categories/') {
+  // category pages, e.g. /categories/indieweb
+  if (url.substr(0, 11) === 'categories/') {
     const category = url.substr(11, url.length - 11)
     return { ...httpHeaders, body: await getCategory(category, before) }
-    //
+  // index pages, e.g. /articles
   } else if (postTypePlurals.includes(url)) {
     // post types e.g. notes (no trailing slash)
     let postType = url.substr(0, url.length - 1)
     if (postType === 'replie') postType = 'reply'
     return { ...httpHeaders, body: await getPostType(postType, before) }
-    //
+  // root index page at /
   } else if (url === '') {
-    // root is homepage
     return { ...httpHeaders, body: await getIndex() }
-    //
   }
-  // default, assume a 200 post (or 404, 410)
+  // catch all - assume this is a post
   const response = await getPost(url)
   return {
     ...httpHeaders,
