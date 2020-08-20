@@ -20,10 +20,11 @@
         </p>
       </header>
 
-      {% include '_photos.njk' %}
-      {% include '_content.njk' %}
-      {% include '_categories.njk' %}
-      {% include '_syndications.njk' %}
+      {%- include '_photos.njk' %}
+      {%- include '_content.njk' %}
+      {%- include '_categories.njk' %}
+      {%- include '_location.njk' %}
+      {%- include '_syndications.njk' %}
 
     </article>
     {{ elements.details(postJSON) }}

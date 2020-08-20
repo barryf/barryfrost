@@ -45,9 +45,17 @@ const arrayProperties = [
 ]
 
 const micropubSourceUrl = `${process.env.MICROPUB_URL}?q=source`
+
 const paths = {
   cssPath: arc.static('/style.css'),
   faviconPath: arc.static('/barryfrost-favicon.png')
+}
+
+const helpers = {
+  urlHost: function (u) {
+    const url = new URL(u)
+    return url.host
+  }
 }
 
 function flatten (post) {
@@ -66,7 +74,10 @@ function humanDate (dateString) {
 }
 
 async function getIndex () {
-  return nunjucks.render('index.njk', { ...paths })
+  return nunjucks.render('index.njk', {
+    ...helpers,
+    ...paths
+  })
 }
 
 async function getPostType (postType, before) {
@@ -102,7 +113,12 @@ async function getList (url, before) {
   const lastPublishedInt = (posts.length === 20)
     ? new Date(posts.slice(-1)[0].published).valueOf()
     : null
-  return nunjucks.render('list.njk', { posts, lastPublishedInt, ...paths })
+  return nunjucks.render('list.njk', {
+    posts,
+    lastPublishedInt,
+    ...helpers,
+    ...paths
+  })
 }
 
 async function getPost (url) {
@@ -142,7 +158,12 @@ async function getPost (url) {
   if (!template) template = post['post-type'] + '.njk'
   post._publishedHuman = humanDate(post.published)
   const postJSON = JSON.stringify(post, null, 2)
-  const html = nunjucks.render(template, { post, postJSON, ...paths })
+  const html = nunjucks.render(template, {
+    post,
+    postJSON,
+    ...helpers,
+    ...paths
+  })
   return {
     statusCode: response.status,
     body: html
