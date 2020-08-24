@@ -92,6 +92,10 @@ async function getPublished (published, before) {
   return getList(`${micropubSourceUrl}&published=${published}`, before)
 }
 
+async function getAll (published, before) {
+  return getList(micropubSourceUrl, before)
+}
+
 async function getList (url, before = null) {
   if (before) url = url + '&before=' + parseInt(before, 10)
   const response = await fetch(url,
@@ -200,6 +204,9 @@ exports.handler = async function http (req) {
   } else if (url.match(/^[0-9]{4}(\/[0-9]{2})?(\/[0-9]{2})?$/)) {
     const published = url.replace(/\//g, '-')
     return { ...httpHeaders, body: await getPublished(published, before) }
+  // all posts
+  } else if (url === 'all') {
+    return { ...httpHeaders, body: await getAll(before) }
   // root index page at /
   } else if (url === '') {
     return { ...httpHeaders, body: await getIndex() }
