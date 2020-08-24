@@ -92,7 +92,7 @@ async function getPublished (published, before) {
   return getList(`${micropubSourceUrl}&published=${published}`, before)
 }
 
-async function getAll (published, before) {
+async function getAll (before) {
   return getList(micropubSourceUrl, before)
 }
 
