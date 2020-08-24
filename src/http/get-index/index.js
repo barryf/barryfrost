@@ -88,7 +88,11 @@ async function getCategory (category, before) {
   return getList(`${micropubSourceUrl}&category=${category}`, before)
 }
 
-async function getList (url, before) {
+async function getPublished (published) {
+  return getList(`${micropubSourceUrl}&published=${published}`)
+}
+
+async function getList (url, before = null) {
   if (before) url = url + '&before=' + parseInt(before, 10)
   const response = await fetch(url,
     { headers: { Authorization: `Bearer ${process.env.MICROPUB_TOKEN}` } }
@@ -192,15 +196,20 @@ exports.handler = async function http (req) {
     let postType = url.substr(0, url.length - 1)
     if (postType === 'replie') postType = 'reply'
     return { ...httpHeaders, body: await getPostType(postType, before) }
+  // date archive: year, month or day
+  } else if (url.match(/^[0-9]{4}(\/[0-9]{2})?(\/[0-9]{2})?$/)) {
+    const published = url.replace(/\//g, '-')
+    return { ...httpHeaders, body: await getPublished(published) }
   // root index page at /
   } else if (url === '') {
     return { ...httpHeaders, body: await getIndex() }
-  }
   // catch all - assume this is a post
-  const response = await getPost(url)
-  return {
-    ...httpHeaders,
-    statusCode: response.statusCode,
-    body: response.body
+  } else {
+    const response = await getPost(url)
+    return {
+      ...httpHeaders,
+      statusCode: response.statusCode,
+      body: response.body
+    }
   }
 }
