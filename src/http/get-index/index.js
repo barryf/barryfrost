@@ -88,8 +88,8 @@ async function getCategory (category, before) {
   return getList(`${micropubSourceUrl}&category=${category}`, before)
 }
 
-async function getPublished (published) {
-  return getList(`${micropubSourceUrl}&published=${published}`)
+async function getPublished (published, before) {
+  return getList(`${micropubSourceUrl}&published=${published}`, before)
 }
 
 async function getList (url, before = null) {
@@ -199,7 +199,7 @@ exports.handler = async function http (req) {
   // date archive: year, month or day
   } else if (url.match(/^[0-9]{4}(\/[0-9]{2})?(\/[0-9]{2})?$/)) {
     const published = url.replace(/\//g, '-')
-    return { ...httpHeaders, body: await getPublished(published) }
+    return { ...httpHeaders, body: await getPublished(published, before) }
   // root index page at /
   } else if (url === '') {
     return { ...httpHeaders, body: await getIndex() }
