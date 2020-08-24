@@ -4,9 +4,9 @@
 {%- block head %}
 <title>
   {{ post._contentHtml | striptags | truncate(60, false) | escape }}
-  &middot; Barry Frost
+  &mdash; Barry Frost
 </title>
-{{ elements.link_webmention() }}
+{{ elements.linkWebmention() }}
 {%- endblock %}
 
 {%- block content %}
