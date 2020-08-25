@@ -48,7 +48,8 @@ const micropubSourceUrl = `${process.env.MICROPUB_URL}?q=source`
 
 const paths = {
   cssPath: arc.static('/style.css'),
-  faviconPath: arc.static('/barryfrost-favicon.png')
+  faviconPath: arc.static('/barryfrost-favicon.png'),
+  micropubUrl: process.env.MICROPUB_URL
 }
 
 const helpers = {
