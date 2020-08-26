@@ -1,3 +1,4 @@
+// TODO: mf2
 const RSS = require('rss')
 const fetch = require('node-fetch')
 const md = require('markdown-it')({
