@@ -1,5 +1,5 @@
-{%- if post.photo %}
-  {%- set photo = post.photo[0] %}
+{%- if post.properties.photo %}
+  {%- set photo = post.properties.photo[0] %}
   <figure>
     {%- if photo.value %}
       <a href="{{ photo.value }}">

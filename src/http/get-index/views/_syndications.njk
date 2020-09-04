@@ -1,6 +1,6 @@
-{%- if post.syndication %}
+{%- if post.properties.syndication %}
 <ul>
-  {%- for syndication in post.syndication %}
+  {%- for syndication in post.properties.syndication %}
     {%- set host = urlHost(syndication) %}
     <li>
       <a class="u-syndication" rel="syndication" href="{{ syndication }}">

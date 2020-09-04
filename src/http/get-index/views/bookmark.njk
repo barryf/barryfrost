@@ -4,7 +4,7 @@
 {%- block head %}
 <title>
   Bookmark of
-  {{ post.name | striptags | truncate(60, false) | escape }}
+  {{ post.properties.name[0] | striptags | truncate(60, false) | escape }}
   &mdash; Barry Frost
 </title>
 {{ elements.linkWebmention() }}
@@ -17,8 +17,8 @@
 
       <header class="post-header">
         <h1 class="post-title p-name">
-          <a href="{{ post['bookmark-of'] }}">
-            {{ post.name | escape }}
+          <a href="{{ post.properties['bookmark-of'][0] }}">
+            {{ post.properties.name[0] | escape }}
           </a>
         </h1>
         <p class="post-meta">

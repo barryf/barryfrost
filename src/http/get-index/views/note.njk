@@ -3,7 +3,7 @@
 
 {%- block head %}
 <title>
-  {{ post._contentHtml | striptags | truncate(60, false) | escape }}
+  {{ content(post) | striptags | truncate(60, false) | escape }}
   &mdash; Barry Frost
 </title>
 {{ elements.linkWebmention() }}
