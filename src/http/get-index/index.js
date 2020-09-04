@@ -32,8 +32,9 @@ const postTypePlurals = [
 const micropubSourceUrl = `${process.env.MICROPUB_URL}?q=source`
 
 const paths = {
-  cssPath: arc.static('/style.css'),
-  faviconPath: arc.static('/barryfrost-favicon.png'),
+  rootPath: process.env.ROOT_URL,
+  cssUrl: arc.static('/style.css'),
+  faviconUrl: arc.static('/barryfrost-favicon.png'),
   micropubUrl: process.env.MICROPUB_URL
 }
 
@@ -126,7 +127,7 @@ async function getPost (url) {
         body: body.error_description
       }
   }
-  const post = { ...body }
+  const post = { ...body, url }
   if (!template) template = post['post-type'][0] + '.njk'
   const postJSON = JSON.stringify(post, null, 2)
   const html = nunjucks.render(template, {
@@ -143,9 +144,9 @@ async function getPost (url) {
 
 exports.handler = async function http (req) {
   const { before } = req.queryStringParameters || {}
-  // strip initial slash, remove any api gateway stage, clean characters
+  // strip initial/ending slash, remove any api gateway stage, clean characters
   const url = req.path.substr(1).replace(/^staging\//, '')
-    .replace(/[^a-z0-9/-]/, '')
+    .replace(/[^a-z0-9/-]/, '').replace(/\/$/, '')
   const httpHeaders = {
     headers: {
       'Content-Type': 'text/html; charset=utf8',

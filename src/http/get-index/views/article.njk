@@ -17,14 +17,21 @@
       <header class="post-header">
         <h1 class="post-title p-name">{{ post.properties.name[0] | escape }}</h1>
         <p class="post-meta">
-          {% include '_published.njk' %}
+          {%- include '_published.njk' %}
         </p>
       </header>
 
       {%- include '_photos.njk' %}
       {%- include '_content.njk' %}
-      {%- include '_categories.njk' %}
-      {%- include '_syndications.njk' %}
+
+      <footer class="post-footer">
+        <div class="post-meta">
+          {%- include '_categories.njk' %}
+          {%- include '_location.njk' %}
+          {%- include '_syndications.njk' %}
+          {%- include '_author.njk' %}
+        </div>
+      </footer>
 
     </article>
     {{ elements.details(postJSON) }}

@@ -3,10 +3,12 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="{{ cssPath }}">
-  <link rel="feed" type="text/html" href="/">
+  <link rel="stylesheet" href="{{ cssUrl }}">
+  <link rel="feed" type="text/html" href="/all">
   <link rel="feed alternate" type="application/rss+xml" href="/rss">
-  <link rel="icon" href="{{ faviconPath }}">
+  <link rel="icon" href="{{ faviconUrl }}">
+  <link rel="apple-touch-icon" href="{{ faviconUrl }}">
+  {% if post %}<link rel="canonical" href="{{ rootPath }}{{ post.url }}">{% endif %}
   {%- block head %}
   <title>Barry Frost</title>
   {%- endblock %}
@@ -19,10 +21,7 @@
 <footer class="site-footer">
   <div class="wrapper">
   <p>
-    <a href="/notes">
-      <!--<img src="/_static/twitter-brands.svg" class="svg-icon">-->
-      Notes
-    </a>
+    <a href="/all">All</a>
   </p>
   </div>
 </footer>
