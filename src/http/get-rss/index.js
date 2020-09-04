@@ -1,4 +1,3 @@
-// TODO: mf2
 const RSS = require('rss')
 const fetch = require('node-fetch')
 const md = require('markdown-it')({
@@ -31,7 +30,7 @@ exports.handler = async function http (req) {
         typeof post.properties.content[0] === 'string')
         ? md.render(post.properties.content[0])
         : post.properties.content[0].html,
-      url: post.properties.url[0],
+      url: post.url[0],
       date: post.properties.published[0]
     })
   })
