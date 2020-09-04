@@ -1,5 +1,5 @@
 <time class="dt-published" datetime="{{ post.properties.published[0] }}" pubdate>
-  {{ post._publishedHuman | upper }}
+  {{ humanDate(post.properties.published[0]) | upper }}
 </time>
 {%- if post.properties.updated %}
   <time class="dt-updated" datetime="{{ post.properties.updated[0] }}"></time>

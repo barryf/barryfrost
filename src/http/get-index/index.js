@@ -41,13 +41,23 @@ const helpers = {
   urlHost: function (u) {
     const url = new URL(u)
     return url.host
+  },
+  content: function (post) {
+    if ('content' in post.properties) {
+      if (typeof post.properties.content[0] === 'string') {
+        return md.render(post.properties.content[0]).trim()
+      } else {
+        return post.properties.content[0].html.trim()
+      }
+    } else {
+      return ''
+    }
+  },
+  humanDate: function (dateString) {
+    return new Date(dateString).toLocaleString('en-gb', {
+      day: 'numeric', month: 'short', year: 'numeric'
+    })
   }
-}
-
-function humanDate (dateString) {
-  return new Date(dateString).toLocaleString('en-gb', {
-    day: 'numeric', month: 'short', year: 'numeric'
-  })
 }
 
 async function getIndex () {
@@ -78,22 +88,9 @@ async function getList (url, before = null) {
   const response = await fetch(url,
     { headers: { Authorization: `Bearer ${process.env.MICROPUB_TOKEN}` } }
   )
-  // console.log(JSON.stringify(response))
   if (!response.ok) return
   const json = await response.json()
-  console.log('json', JSON.stringify(json, null, 2))
-  const posts = json.items.map(post => {
-    if ('content' in post.properties) {
-      if (typeof post.properties.content[0] === 'string') {
-        post._contentHtml = md.render(post.properties.content[0])
-      } else {
-        post._contentHtml = post.properties.content[0].html
-      }
-    }
-    post._publishedHuman = humanDate(post.properties.published[0])
-    return post
-  })
-  // console.log('posts', posts)
+  const posts = json.items
   const lastPublishedInt = (posts.length === 20)
     ? new Date(posts.slice(-1)[0].properties.published[0]).valueOf()
     : null
@@ -111,7 +108,6 @@ async function getPost (url) {
     { headers: { Authorization: `Bearer ${process.env.MICROPUB_TOKEN}` } }
   )
   const body = await response.json()
-  // console.log('micropub response', body)
   let template
   switch (response.status) {
     case 200:
@@ -131,16 +127,7 @@ async function getPost (url) {
       }
   }
   const post = { ...body }
-  // TODO: this is duplicated from above so split into function
-  if ('content' in post.properties) {
-    if (typeof post.properties.content[0] === 'string') {
-      post._contentHtml = md.render(post.properties.content[0])
-    } else {
-      post._contentHtml = post.properties.content[0].html
-    }
-  }
   if (!template) template = post['post-type'][0] + '.njk'
-  post._publishedHuman = humanDate(post.properties.published[0])
   const postJSON = JSON.stringify(post, null, 2)
   const html = nunjucks.render(template, {
     post,

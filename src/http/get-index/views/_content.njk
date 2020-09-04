@@ -1,5 +1,5 @@
-{%- if post._contentHtml%}
-  <div class="post-content e-content">
-    {{ post._contentHtml | safe }}
-  </div>
+{%- if post.properties.content %}
+<div class="post-content e-content">
+  {{ content(post) | safe }}
+</div>
 {%- endif %}
