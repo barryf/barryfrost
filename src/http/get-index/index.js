@@ -35,7 +35,8 @@ const paths = {
   rootPath: process.env.ROOT_URL,
   cssUrl: arc.static('/style.css'),
   faviconUrl: arc.static('/barryfrost-favicon.png'),
-  micropubUrl: process.env.MICROPUB_URL
+  micropubUrl: process.env.MICROPUB_URL,
+  webmentionUrl: 'https://webmention.io/barryf/webmention'
 }
 
 const helpers = {

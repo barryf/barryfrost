@@ -1,4 +1,3 @@
-{%- import '_elements.njk' as elements %}
 {%- extends 'layout.njk' %}
 
 {%- block head %}
@@ -7,7 +6,7 @@
   {{ post.properties.name[0] | striptags | truncate(60, false) | escape }}
   &mdash; Barry Frost
 </title>
-{{ elements.linkWebmention() }}
+<link rel="webmention" href="{{ webmentionUrl }}">
 {%- endblock %}
 
 {%- block content %}
@@ -37,7 +36,7 @@
       </footer>
 
     </article>
-    {{ elements.details(postJSON) }}
+    {%- include '_raw.njk' %}
   </div>
 </main>
 {%- endblock %}
