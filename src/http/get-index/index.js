@@ -129,6 +129,7 @@ async function getPost (url) {
       }
   }
   const post = { ...body, url }
+  if (!url.match(/\//)) template = 'page.njk'
   if (!template) template = post['post-type'][0] + '.njk'
   const postJSON = JSON.stringify(post, null, 2)
   const html = nunjucks.render(template, {
