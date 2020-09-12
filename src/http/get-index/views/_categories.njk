@@ -1,7 +1,7 @@
 <ul style="list-style: none; margin: 0 0 30px 0; padding: 0;">
   {%- for cat in post.properties.category %}
     <li style="display: inline; margin-right: 8px;">
-      <a href="/categories/{{ cat }}" rel="nofollow tag">#<span class="u-category h-card">{{ cat }}</span></a>
+      <a href="/categories/{{ cat }}" rel="nofollow tag" class="u-category h-card">{{ cat }}</a>
     </li>
   {%- endfor %}
 </ul>
