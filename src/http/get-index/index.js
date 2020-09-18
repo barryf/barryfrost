@@ -91,8 +91,8 @@ async function getList (url, before = null) {
     { headers: { Authorization: `Bearer ${process.env.MICROPUB_TOKEN}` } }
   )
   if (!response.ok) return
-  const json = await response.json()
-  const posts = json.items
+  const raw = await response.json()
+  const posts = JSON.parse(raw.body).items
   const lastPublishedInt = (posts.length === 20)
     ? new Date(posts.slice(-1)[0].properties.published[0]).valueOf()
     : null
@@ -109,7 +109,8 @@ async function getPost (url) {
     `${micropubSourceUrl}&url=${process.env.ROOT_URL}${url}`,
     { headers: { Authorization: `Bearer ${process.env.MICROPUB_TOKEN}` } }
   )
-  const body = await response.json()
+  const raw = await response.json()
+  const body = JSON.parse(raw.body)
   let template
   switch (response.status) {
     case 200:
@@ -130,7 +131,7 @@ async function getPost (url) {
   }
   const post = { ...body, url }
   if (!url.match(/\//)) template = 'page.njk'
-  if (!template) template = post['post-type'][0] + '.njk'
+  if (!template) template = post['post-type'] + '.njk'
   const postJSON = JSON.stringify(post, null, 2)
   const html = nunjucks.render(template, {
     post,
@@ -147,7 +148,7 @@ async function getPost (url) {
 exports.handler = async function http (req) {
   const { before } = req.queryStringParameters || {}
   // strip initial/ending slash, remove any api gateway stage, clean characters
-  const url = req.path.substr(1).replace(/^staging\//, '')
+  const url = req.rawPath.substr(1).replace(/^staging\//, '')
     .replace(/[^a-z0-9/-]/, '').replace(/\/$/, '')
   const httpHeaders = {
     headers: {
@@ -159,23 +160,43 @@ exports.handler = async function http (req) {
   // category pages, e.g. /categories/indieweb
   if (url.substr(0, 11) === 'categories/') {
     const category = url.substr(11, url.length - 11)
-    return { ...httpHeaders, body: await getCategory(category, before) }
+    return {
+      ...httpHeaders,
+      statusCode: 200,
+      body: await getCategory(category, before)
+    }
   // index pages, e.g. /articles
   } else if (postTypePlurals.includes(url)) {
     // post types e.g. notes (no trailing slash)
     let postType = url.substr(0, url.length - 1)
     if (postType === 'replie') postType = 'reply'
-    return { ...httpHeaders, body: await getPostType(postType, before) }
+    return {
+      ...httpHeaders,
+      statusCode: 200,
+      body: await getPostType(postType, before)
+    }
   // date archive: year, month or day
   } else if (url.match(/^[0-9]{4}(\/[0-9]{2})?(\/[0-9]{2})?$/)) {
     const published = url.replace(/\//g, '-')
-    return { ...httpHeaders, body: await getPublished(published, before) }
+    return {
+      ...httpHeaders,
+      statusCode: 200,
+      body: await getPublished(published, before)
+    }
   // all posts
   } else if (url === 'all') {
-    return { ...httpHeaders, body: await getAll(before) }
+    return {
+      ...httpHeaders,
+      statusCode: 200,
+      body: await getAll(before)
+    }
   // root index page at /
   } else if (url === '') {
-    return { ...httpHeaders, body: await getIndex() }
+    return {
+      ...httpHeaders,
+      statusCode: 200,
+      body: await getIndex()
+    }
   // catch all - assume this is a post
   } else {
     const response = await getPost(url)
