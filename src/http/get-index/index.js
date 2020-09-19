@@ -91,8 +91,8 @@ async function getList (url, before = null) {
     { headers: { Authorization: `Bearer ${process.env.MICROPUB_TOKEN}` } }
   )
   if (!response.ok) return
-  const raw = await response.json()
-  const posts = JSON.parse(raw.body).items
+  const json = await response.json()
+  const posts = json.items
   const lastPublishedInt = (posts.length === 20)
     ? new Date(posts.slice(-1)[0].properties.published[0]).valueOf()
     : null
@@ -109,8 +109,7 @@ async function getPost (url) {
     `${micropubSourceUrl}&url=${process.env.ROOT_URL}${url}`,
     { headers: { Authorization: `Bearer ${process.env.MICROPUB_TOKEN}` } }
   )
-  const raw = await response.json()
-  const body = JSON.parse(raw.body)
+  const body = await response.json()
   let template
   switch (response.status) {
     case 200:
