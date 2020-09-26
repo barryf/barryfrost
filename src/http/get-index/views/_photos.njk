@@ -3,11 +3,11 @@
   <figure>
     {%- if photo.value %}
       <a href="{{ photo.value }}">
-        <img class="u-photo" src="{{ photo.value }}" alt="{{ photo.alt }}">
+        <img class="u-photo" src="{{ imageOptimise(photo.value) }}" alt="{{ photo.alt }}">
       </a>
     {%- else %}
       <a href="{{ photo }}">
-        <img class="u-photo" src="{{ photo }}">
+        <img class="u-photo" src="{{ imageOptimise(photo) }}">
       </a>
     {%- endif %}
   </figure>

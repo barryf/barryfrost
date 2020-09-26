@@ -39,6 +39,7 @@ const paths = {
   webmentionUrl: 'https://webmention.io/barryf/webmention'
 }
 
+// TODO: move this into a separate helpers module
 const helpers = {
   urlHost: function (u) {
     const url = new URL(u)
@@ -59,6 +60,15 @@ const helpers = {
     return new Date(dateString).toLocaleString('en-gb', {
       day: 'numeric', month: 'short', year: 'numeric'
     })
+  },
+  photoOptimise: function (url) {
+    const width = 600
+    const parts = url.match(/https:\/\/res.cloudinary.com\/([a-z0-9]*)\/(.*)/)
+    if (parts) {
+      return `https://res.cloudinary.com/${parts[1]}/w_${width}/${parts[2]}`
+    } else {
+      return url
+    }
   }
 }
 
