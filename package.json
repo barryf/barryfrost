@@ -1,0 +1,21 @@
+{
+  "name": "barryfrost",
+  "version": "0.1.0",
+  "description": "Barry Frost's personal website",
+  "scripts": {
+    "start": "PORT=4444 arc sandbox"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/barryf/barryfrost.git"
+  },
+  "keywords": [
+    "indieweb"
+  ],
+  "author": "Barry Frost",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/barryf/barryfrost/issues"
+  },
+  "homepage": "https://github.com/barryf/barryfrost#readme"
+}
