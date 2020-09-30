@@ -4,3 +4,5 @@ node_modules
 .arc-env
 sam.json
 sam.yaml
+
+assets/minima
