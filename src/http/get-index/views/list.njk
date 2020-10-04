@@ -1,30 +1,26 @@
-{%- extends 'layout.njk' %}
+{%- extends '_layout.njk' %}
 
 {%- block content %}
-<main class="page-content">
-  <div class="wrapper">
-    <div class="home">
+<div class="home">
 
-      <ul class="post-list h-feed">
-      {%- for post in posts %}
-        <li class="post h-entry">
-          <header class="post-header">
-            <p class="post-meta">
-              <a href="{{ post.url }}">
-                {% include '_published.njk' %}
-              </a>
-            </p>
-          </header>
-          {%- include '_content.njk' %}
-        </li>
-      {%- endfor %}
-      </ul>
+  <ul class="post-list h-feed">
+  {%- for post in posts %}
+    <li class="post h-entry">
+      <header class="post-header">
+        <p class="post-meta">
+          <a href="{{ post.url }}">
+            {% include '_published.njk' %}
+          </a>
+        </p>
+      </header>
+      {%- include '_content.njk' %}
+    </li>
+  {%- endfor %}
+  </ul>
 
-      {%- if (lastPublishedInt) %}
-        <p><a href="?before={{ lastPublishedInt }}" rel="nofollow prev">Previous</a></p>
-      {%- endif %}
+  {%- if (lastPublishedInt) %}
+    <p><a href="?before={{ lastPublishedInt }}" rel="nofollow prev">Previous</a></p>
+  {%- endif %}
 
-    </div>
-  </div>
-</main>
+</div>
 {%- endblock %}

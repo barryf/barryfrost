@@ -1,5 +1,3 @@
-{%- if post.properties.content %}
 <div class="post-content e-content">
-  {{ content(post) | safe }}
+  {{ post_content | safe }}
 </div>
-{%- endif %}

@@ -1,39 +1,8 @@
-{%- extends 'layout.njk' %}
+{%- extends '_post.njk' %}
+{%- set post_title = post.properties.name[0] %}
+{%- set post_content = content(post) %}
 
-{%- block head %}
-<title>
-  {{ post.properties.name[0] }}
-  &mdash; Barry Frost
-</title>
-<link rel="webmention" href="{{ webmentionUrl }}">
-{%- endblock %}
-
-{%- block content %}
-<main class="page-content">
-  <div class="wrapper">
-    <article class="post h-entry">
-
-      <header class="post-header">
-        <h1 class="post-title p-name">{{ post.properties.name[0] | escape }}</h1>
-        <p class="post-meta">
-          {%- include '_published.njk' %}
-        </p>
-      </header>
-
-      {%- include '_photos.njk' %}
-      {%- include '_content.njk' %}
-
-      <footer class="post-footer">
-        <div class="post-meta">
-          {%- include '_categories.njk' %}
-          {%- include '_location.njk' %}
-          {%- include '_syndications.njk' %}
-          {%- include '_author.njk' %}
-        </div>
-      </footer>
-
-    </article>
-    {%- include '_raw.njk' %}
-  </div>
-</main>
+{%- block post_header %}
+{%- include '_title.njk' %}
+{%- include '_published.njk' %}
 {%- endblock %}

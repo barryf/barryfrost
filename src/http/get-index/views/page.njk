@@ -1,36 +1,8 @@
-{%- extends 'layout.njk' %}
+{%- extends '_post.njk' %}
 
-{%- block head %}
-<title>
-  {{ post.properties.name[0] }}
-  &mdash; Barry Frost
-</title>
-{%- endblock %}
-
-{%- block content %}
-<main class="page-content">
-  <div class="wrapper">
-    <article class="page h-entry">
-
-      <header class="post-header">
-        <h1 class="post-title p-name">{{ post.properties.name[0] | escape }}</h1>
-        <div style="display: none;">
-          {%- include '_published.njk' %}
-        </div>
-      </header>
-
-      {%- include '_photos.njk' %}
-      {%- include '_content.njk' %}
-
-      <div style="display: none;">
-        {%- include '_categories.njk' %}
-        {%- include '_location.njk' %}
-        {%- include '_syndications.njk' %}
-        {%- include '_author.njk' %}
-      </div>
-
-    </article>
-    {%- include '_raw.njk' %}
-  </div>
-</main>
+{%- block post_header %}
+{%- include '_title.njk' %}
+<div style="display: none;">
+  {%- include '_published.njk' %}
+</div>
 {%- endblock %}

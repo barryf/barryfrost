@@ -1,42 +1,21 @@
-{%- extends 'layout.njk' %}
+{%- extends '_post.njk' %}
+{%- set post_title = post.properties.name[0] | striptags | truncate(60, false) | escape %}
+{%- set page_title = 'Bookmark: ' + post_title %}
+{%- set post_content = content(post) %}
 
-{%- block head %}
-<title>
-  Bookmark of
-  {{ post.properties.name[0] | striptags | truncate(60, false) | escape }}
-  &mdash; Barry Frost
-</title>
-<link rel="webmention" href="{{ webmentionUrl }}">
+{%- block post_header %}
+{%- include '_title.njk' %}
+{%- include '_published.njk' %}
+<p class="post-meta">
+  &rarr;
+  <a href="{{ post.properties['bookmark-of'][0] }}" external noopener>
+    {{ post.properties['bookmark-of'][0] | escape }}
+  </a>
+</p>
 {%- endblock %}
 
-{%- block content %}
-<main class="page-content">
-  <div class="wrapper">
-    <article class="post h-entry">
-
-      <header class="post-header">
-        <h1 class="post-title p-name">
-          <a href="{{ post.properties['bookmark-of'][0] }}" external noopener>
-            {{ post.properties.name[0] | escape }}
-          </a>
-        </h1>
-        <p class="post-meta">
-          {%- include '_published.njk' %}
-        </p>
-      </header>
-
-      {%- include '_content.njk' %}
-
-      <footer class="post-footer">
-        <div class="post-meta">
-          {%- include '_categories.njk' %}
-          {%- include '_syndications.njk' %}
-          {%- include '_author.njk' %}
-        </div>
-      </footer>
-
-    </article>
-    {%- include '_raw.njk' %}
-  </div>
-</main>
+{%- block post_footer %}
+{%- include '_categories.njk' %}
+{%- include '_syndications.njk' %}
+{%- include '_author.njk' %}
 {%- endblock %}

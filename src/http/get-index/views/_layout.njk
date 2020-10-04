@@ -8,21 +8,23 @@
   <link rel="feed alternate" type="application/rss+xml" href="/rss">
   <link rel="icon" href="{{ faviconUrl }}">
   <link rel="apple-touch-icon" href="{{ faviconUrl }}">
-  {% if post %}<link rel="canonical" href="{{ rootPath }}{{ post.url }}">{% endif %}
   {%- block head %}
   <title>Barry Frost</title>
   {%- endblock %}
 </head>
 <body>
 
-{%- block content %}
-{%- endblock %}
+<main class="page-content">
+  <div class="wrapper">
+    {%- block content %}{%- endblock %}
+  </div>
+</main>
 
 <footer class="site-footer">
   <div class="wrapper">
-  <p>
-    <a href="/all">All</a>
-  </p>
+    <p>
+      <a href="/all">All</a>
+    </p>
   </div>
 </footer>
 

@@ -1,0 +1,38 @@
+{%- extends '_layout.njk' %}
+
+{%- block head %}
+<link rel="canonical" href="{{ rootPath }}{{ post.url }}">
+{%- if webmentionUrl %}
+  <link rel="webmention" href="{{ webmentionUrl }}">
+{%- endif %}
+<title>{{ page_title | default(post_title) | escape }} &mdash; Barry Frost</title>
+{%- endblock %}
+
+{%- block content %}
+<article class="post h-entry">
+
+  <header class="post-header">
+    {%- block post_header %}
+    {%- include '_published.njk' %}
+    {%- endblock %}
+  </header>
+
+  {%- block post_content %}
+  {%- include '_photos.njk' %}
+  {%- include '_content.njk' %}
+  {%- endblock %}
+
+  <footer class="post-footer">
+    <div class="post-meta">
+      {%- block post_footer %}
+      {%- include '_categories.njk' %}
+      {%- include '_location.njk' %}
+      {%- include '_syndications.njk' %}
+      {%- include '_author.njk' %}
+      {%- endblock %}
+    </div>
+  </footer>
+
+</article>
+{% include '_raw.njk' %}
+{%- endblock %}
