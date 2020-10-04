@@ -1,3 +1,4 @@
+const arc = require('@architect/functions')
 const RSS = require('rss')
 const fetch = require('node-fetch')
 const md = require('markdown-it')({
@@ -11,7 +12,7 @@ exports.handler = async function http (req) {
     description: "Barry Frost's personal website.",
     feed_url: process.env.ROOT_URL + 'rss',
     site_url: process.env.ROOT_URL,
-    // image_url: process.env.ROOT_URL + 'icon.png', // TODO add image
+    image_url: arc.static('/barryfrost-favicon.png'),
     language: 'en'
   })
 
@@ -24,22 +25,22 @@ exports.handler = async function http (req) {
   const postsMf2 = await response.json()
 
   postsMf2.items.forEach(post => {
-    feed.item({
+    const item = {
       title: ('name' in post.properties) ? post.properties.name[0] : '',
-      description: ('content' in post.properties &&
-        typeof post.properties.content[0] === 'string')
-        ? md.render(post.properties.content[0])
-        : post.properties.content[0].html,
       url: post.url[0],
       date: post.properties.published[0]
-    })
+    }
+    if ('content' in post.properties) {
+      item.description = typeof post.properties.content[0] === 'string'
+        ? md.render(post.properties.content[0])
+        : post.properties.content[0].html || ''
+    }
+    feed.item(item)
   })
 
   return {
-    headers: {
-      // 'cache-control': 'no-cache, no-store, must-revalidate, max-age=0, s-maxage=0',
-      'content-type': 'text/xml; charset=utf8'
-    },
+    statusCode: 200,
+    'Content-Type': 'text/xml; charset=utf-8',
     body: feed.xml({ indent: true })
   }
 }
