@@ -1,26 +1,22 @@
-{%- extends 'layout.njk' %}
+{%- extends '_layout.njk' %}
 
 {%- block head %}
-  <title>Barry Frost</title>
-  <link rel="me" href="mailto:auth@barryfrost.com">
-  <link rel="micropub" href="{{ micropubUrl }}">
-  <link rel="webmention" href="https://webmention.io/barryf/webmention">
-  <link rel="microsub" href="https://aperture.p3k.io/microsub/28">
-  <link rel="authorization_endpoint" href="https://indieauth.com/auth">
-  <link rel="token_endpoint" href="https://tokens.indieauth.com/token">
+<link rel="me" href="mailto:auth@barryfrost.com">
+<link rel="micropub" href="{{ micropubUrl }}">
+<link rel="webmention" href="{{ webmentionUrl }}">
+<link rel="microsub" href="https://aperture.p3k.io/microsub/28">
+<link rel="authorization_endpoint" href="https://indieauth.com/auth">
+<link rel="token_endpoint" href="https://tokens.indieauth.com/token">
+<title>Barry Frost</title>
 {%- endblock %}
 
 {%- block content %}
-<main class="page-content">
-  <div class="wrapper">
-    <div class="index">
+<div class="index">
 
-      <h1 class="author p-author h-card">
-        <img class="u-photo" src="{{ faviconUrl }}" width="50" style="float: left; margin-right: 10px; border-radius: 50px;">
-        <a class="p-name u-url" href="https://barryfrost.com/">Barry Frost</a>
-      </h1>
+  <h1 class="author p-author h-card">
+    <img class="u-photo" src="{{ faviconUrl }}" width="50" style="float: left; margin-right: 10px; border-radius: 50px;">
+    <a class="p-name u-url" href="https://barryfrost.com/">Barry Frost</a>
+  </h1>
 
-    </div>
-  </div>
-</main>
+</div>
 {%- endblock %}
