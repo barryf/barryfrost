@@ -30,11 +30,16 @@ exports.handler = async function http (req) {
       url: post.url[0],
       date: post.properties.published[0]
     }
+    let description = ''
+    if ('photo' in post.properties) {
+      description += `<img src="${post.properties.photo[0]}">\n`
+    }
     if ('content' in post.properties) {
-      item.description = typeof post.properties.content[0] === 'string'
+      description += typeof post.properties.content[0] === 'string'
         ? md.render(post.properties.content[0])
         : post.properties.content[0].html || ''
     }
+    if (description !== '') { item.description = description }
     feed.item(item)
   })
 
