@@ -51,18 +51,21 @@ async function getAll (before) {
 }
 
 async function getList (url, before = null) {
+  const limit = 10
   if (before) url = url + '&before=' + parseInt(before, 10)
+  // return n+1 rows to check if there is another page
+  url += `&limit=${limit + 1}`
   const response = await fetch(url,
     { headers: { Authorization: `Bearer ${process.env.MICROPUB_TOKEN}` } }
   )
   if (!response.ok) return
   const json = await response.json()
   const posts = json.items
-  const lastPublishedInt = (posts.length === 20)
-    ? new Date(posts.slice(-1)[0].properties.published[0]).valueOf()
+  const lastPublishedInt = (posts.length === (limit + 1))
+    ? new Date(posts.slice(-2)[0].properties.published[0]).valueOf()
     : null
   return nunjucks.render('list.njk', {
-    posts,
+    posts: posts.slice(0, limit),
     lastPublishedInt,
     ...helpers,
     ...paths
