@@ -45,7 +45,9 @@ exports.handler = async function http (req) {
 
   return {
     statusCode: 200,
-    'Content-Type': 'text/xml; charset=utf-8',
+    headers: {
+      'Content-Type': 'text/xml; charset=utf-8'
+    },
     body: feed.xml({ indent: true })
   }
 }
