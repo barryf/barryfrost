@@ -5,17 +5,17 @@
     <li style="display: inline; margin-right: 8px;">
       <a class="u-syndication" rel="syndication" href="{{ syndication }}">
         {%- if host === 'twitter.com' %}
-          <img src="/_static/icons/twitter-brands.svg" height="16" alt="Twitter">
+          <img src="{{ static('icons/twitter-brands.svg') }}" height="16" alt="Twitter">
         {%- elif host === 'linkedin.com' or host === 'www.linkedin.com' %}
-          <img src="/_static/icons/linkedin-brands.svg" height="16" alt="LinkedIn">
+          <img src="{{ static('icons/linkedin-brands.svg') }}" height="16" alt="LinkedIn">
         {%- elif host === 'instagram.com' %}
-          <img src="/_static/icons/instagram-brands.svg" height="16" alt="Instagram">
+          <img src="{{ static('icons/instagram-brands.svg') }}" height="16" alt="Instagram">
         {%- elif host === 'medium.com' %}
-          <img src="/_static/icons/medium-brands.svg" height="16" alt="Medium">
+          <img src="{{ static('icons/medium-brands.svg') }}" height="16" alt="Medium">
         {%- elif host === 'www.swarmapp.com' %}
-          <img src="/_static/icons/foursquare-brands.svg" height="16" alt="Foursquare/Swarm">
+          <img src="{{ static('icons/foursquare-brands.svg') }}" height="16" alt="Foursquare/Swarm">
         {%- elif host === 'facebook.com' %}
-          <img src="/_static/icons/facebook-square-brands.svg" height="16" alt="Facebook">
+          <img src="{{ static('icons/facebook-square-brands.svg') }}" height="16" alt="Facebook">
         {%- else %}
           {{ host }}
         {%- endif %}

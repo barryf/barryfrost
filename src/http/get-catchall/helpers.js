@@ -1,3 +1,4 @@
+const arc = require('@architect/functions')
 const hljs = require('highlight.js')
 const md = require('markdown-it')({
   linkify: true,
@@ -49,5 +50,6 @@ module.exports = {
   urlHost,
   content,
   humanDate,
-  imageOptimise
+  imageOptimise,
+  static: arc.static
 }
