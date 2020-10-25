@@ -5,12 +5,18 @@
   "scripts": {
     "start": "PORT=4444 arc sandbox"
   },
+  "devDependencies": {
+    "aws-sdk": "^2.766.0"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/barryf/barryfrost.git"
   },
   "keywords": [
-    "indieweb"
+    "indieweb",
+    "micropub",
+    "architect",
+    "serverless"
   ],
   "author": "Barry Frost",
   "license": "MIT",
