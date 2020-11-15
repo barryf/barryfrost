@@ -98,7 +98,7 @@ async function getPost (url) {
         body: body.error_description
       }
   }
-  const post = { ...body, url }
+  const post = { ...body, url: `${process.env.ROOT_URL}${url}` }
   if (!url.match(/\//)) template = 'page.njk'
   if (!template) template = post['post-type'] + '.njk'
   const postJSON = JSON.stringify(post, null, 2)

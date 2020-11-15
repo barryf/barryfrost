@@ -5,9 +5,7 @@
   <ul class="h-feed">
   {%- for post in posts %}
     <li class="h-entry">
-      <a href="{{ post.url }}">
-        {% include '_published.njk' %}
-      </a>
+      {% include '_published.njk' %}
     </li>
   {%- endfor %}
   </ul>
