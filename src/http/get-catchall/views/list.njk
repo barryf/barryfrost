@@ -1,19 +1,13 @@
 {%- extends '_layout.njk' %}
 
 {%- block content %}
-<div class="home">
 
-  <ul class="post-list h-feed">
+  <ul class="h-feed">
   {%- for post in posts %}
-    <li class="post h-entry">
-      <header class="post-header">
-        <p class="post-meta">
-          <a href="{{ post.url }}">
-            {% include '_published.njk' %}
-          </a>
-        </p>
-      </header>
-      {%- include '_content.njk' %}
+    <li class="h-entry">
+      <a href="{{ post.url }}">
+        {% include '_published.njk' %}
+      </a>
     </li>
   {%- endfor %}
   </ul>
@@ -22,5 +16,4 @@
     <p><a href="?before={{ lastPublishedInt }}" rel="nofollow prev">Previous</a></p>
   {%- endif %}
 
-</div>
 {%- endblock %}

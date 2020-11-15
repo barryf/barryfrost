@@ -9,9 +9,9 @@
 {%- endblock %}
 
 {%- block content %}
-<article class="post h-entry">
+<article class="h-entry">
 
-  <header class="post-header">
+  <header class="">
     {%- block post_header %}
     {%- include '_published.njk' %}
     {%- endblock %}
@@ -22,15 +22,13 @@
   {%- include '_content.njk' %}
   {%- endblock %}
 
-  <footer class="post-footer">
-    <div class="post-meta">
-      {%- block post_footer %}
-      {%- include '_categories.njk' %}
-      {%- include '_location.njk' %}
-      {%- include '_syndications.njk' %}
-      {%- include '_author.njk' %}
-      {%- endblock %}
-    </div>
+  <footer class="">
+    {%- block post_footer %}
+    {%- include '_categories.njk' %}
+    {%- include '_location.njk' %}
+    {%- include '_syndications.njk' %}
+    {%- include '_author.njk' %}
+    {%- endblock %}
   </footer>
 
 </article>

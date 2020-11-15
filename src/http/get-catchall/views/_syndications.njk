@@ -1,21 +1,21 @@
 {%- if post.properties.syndication %}
-<ul style="list-style: none; margin: 0 0 30px 0; padding: 0;">
+<ul class="mb-4">
   {%- for syndication in post.properties.syndication %}
     {%- set host = urlHost(syndication) %}
-    <li style="display: inline; margin-right: 8px;">
-      <a class="u-syndication" rel="syndication" href="{{ syndication }}">
+    <li class="inline-block mr-2">
+      <a rel="syndication" href="{{ syndication }}" class="u-syndication inline-block w-4 h-4">
         {%- if host === 'twitter.com' %}
-          <img src="{{ static('icons/twitter-brands.svg') }}" height="16" alt="Twitter">
+          <img src="{{ static('icons/twitter-brands.svg') }}" alt="Twitter">
         {%- elif host === 'linkedin.com' or host === 'www.linkedin.com' %}
-          <img src="{{ static('icons/linkedin-brands.svg') }}" height="16" alt="LinkedIn">
+          <img src="{{ static('icons/linkedin-brands.svg') }}" alt="LinkedIn">
         {%- elif host === 'instagram.com' %}
-          <img src="{{ static('icons/instagram-brands.svg') }}" height="16" alt="Instagram">
+          <img src="{{ static('icons/instagram-brands.svg') }}" alt="Instagram">
         {%- elif host === 'medium.com' %}
-          <img src="{{ static('icons/medium-brands.svg') }}" height="16" alt="Medium">
+          <img src="{{ static('icons/medium-brands.svg') }}" alt="Medium">
         {%- elif host === 'www.swarmapp.com' %}
-          <img src="{{ static('icons/foursquare-brands.svg') }}" height="16" alt="Foursquare/Swarm">
+          <img src="{{ static('icons/foursquare-brands.svg') }}" alt="Foursquare/Swarm">
         {%- elif host === 'facebook.com' %}
-          <img src="{{ static('icons/facebook-square-brands.svg') }}" height="16" alt="Facebook">
+          <img src="{{ static('icons/facebook-square-brands.svg') }}" alt="Facebook">
         {%- else %}
           {{ host }}
         {%- endif %}

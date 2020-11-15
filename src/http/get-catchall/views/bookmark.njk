@@ -6,11 +6,11 @@
 {%- block post_header %}
 {%- include '_title.njk' %}
 {%- include '_published.njk' %}
-<p class="post-meta">
+<div class="mb-4">
   <a href="{{ post.properties['bookmark-of'][0] }}" external noopener>
     {{ post.properties['bookmark-of'][0] | escape }}
   </a>
-</p>
+</div>
 {%- endblock %}
 
 {%- block post_footer %}

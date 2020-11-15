@@ -1,5 +1,18 @@
-@import "tailwindcss/base";
+@tailwind base;
 
-@import "tailwindcss/components";
+@tailwind components;
 
-@import "tailwindcss/utilities";
+@tailwind utilities;
+
+.markdown p {
+  @apply mb-4;
+}
+.markdown a {
+  @apply text-orange-600 font-bold;
+}
+.markdown a:hover {
+  @apply text-black font-bold;
+}
+.markdown blockquote {
+  @apply ml-4 pl-4 border-l-4 border-gray-400;
+}
