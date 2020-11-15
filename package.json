@@ -3,7 +3,10 @@
   "version": "0.1.0",
   "description": "Barry Frost's personal website",
   "scripts": {
-    "start": "PORT=4444 arc sandbox"
+    "start": "PORT=4444 arc sandbox",
+    "sass": "sass assets/style.scss:public/style.css --load-path ./assets/ --no-source-map",
+    "builddev": "npx tailwindcss build assets/styles.css -o public/styles-dev.css",
+    "build": "NODE_ENV=production npx tailwindcss build assets/styles.css -o public/styles.css"
   },
   "repository": {
     "type": "git",
@@ -13,6 +16,7 @@
     "indieweb",
     "micropub",
     "architect",
+    "arc",
     "serverless"
   ],
   "author": "Barry Frost",
@@ -23,5 +27,8 @@
   "homepage": "https://github.com/barryf/barryfrost#readme",
   "dependencies": {
     "aws-sdk": "^2.782.0"
+  },
+  "devDependencies": {
+    "tailwindcss": "^1.9.6"
   }
 }
