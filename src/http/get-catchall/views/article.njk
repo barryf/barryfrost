@@ -1,5 +1,5 @@
 {%- extends '_post.njk' %}
-{%- set post_title = post.properties.name[0] %}
+{%- set post_title = title(post) %}
 {%- set post_content = content(post) %}
 
 {%- block post_header %}

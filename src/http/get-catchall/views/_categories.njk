@@ -1,7 +1,9 @@
 <ul class="mb-4 text-sm md:text-base text-gray-600">
   {%- for cat in post.properties.category %}
     <li class="inline-block mr-2">
-      <a href="/categories/{{ cat }}" rel="nofollow tag" class="p-category hover:text-black">{{ cat }}</a>
+      <a href="/categories/{{ cat }}" rel="nofollow tag" class="hover:text-black">
+        #<span class="p-category">{{ cat }}</span>
+      </a>
     </li>
   {%- endfor %}
 </ul>

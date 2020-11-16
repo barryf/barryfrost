@@ -3,6 +3,7 @@ const hljs = require('highlight.js')
 const md = require('markdown-it')({
   linkify: true,
   html: true,
+  typographer: true,
   highlight: function (str, lang) {
     if (lang && hljs.getLanguage(lang)) {
       try {
@@ -30,6 +31,10 @@ function content (post) {
   }
 }
 
+function title (post) {
+  return md.renderInline(post.properties.name[0])
+}
+
 function humanDate (dateString) {
   return new Date(dateString).toLocaleString('en-gb', {
     day: 'numeric', month: 'long', year: 'numeric'
@@ -49,6 +54,7 @@ function imageOptimise (url) {
 module.exports = {
   urlHost,
   content,
+  title,
   humanDate,
   imageOptimise,
   static: arc.static
