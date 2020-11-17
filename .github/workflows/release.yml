@@ -19,6 +19,11 @@ jobs:
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: eu-west-2
 
+    - name: Build Tailwind CSS
+      run: |-
+        npm install tailwindcss
+        npx tailwindcss build assets/styles.css -o public/styles.css
+
     - name: Architect production deploy
       run: |-
         npm install @architect/architect
