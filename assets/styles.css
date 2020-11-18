@@ -5,7 +5,7 @@
 @tailwind utilities;
 
 .prose a {
-  @apply no-underline text-orange-600 font-bold;
+  @apply no-underline text-yellow-600 font-bold;
 }
 .prose a:hover {
   @apply text-black font-bold;
