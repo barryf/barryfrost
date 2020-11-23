@@ -12,12 +12,11 @@ exports.handler = async function http (req) {
     description: "Barry Frost's personal website.",
     feed_url: process.env.ROOT_URL + 'rss',
     site_url: process.env.ROOT_URL,
-    image_url: arc.static('/barryfrost-favicon.png'),
+    image_url: new URL(arc.static('/barryfrost-favicon.png'), process.env.ROOT_URL).href,
     language: 'en'
   })
 
-  const url = process.env.MICROPUB_URL +
-    '?q=source&limit=10&post-type[]=note&post-type[]=article&post-type[]=photo'
+  const url = process.env.MICROPUB_URL + '?q=source'
   const response = await fetch(url,
     { headers: { Authorization: `Bearer ${process.env.MICROPUB_TOKEN}` } }
   )
