@@ -10,36 +10,3 @@
 .prose a:hover {
   @apply text-black font-bold;
 }
-
-/*
-.markdown p {
-  @apply mb-4;
-}
-.markdown a {
-  @apply text-orange-600 font-bold;
-}
-.markdown a:hover {
-  @apply text-black font-bold;
-}
-.markdown blockquote {
-  @apply ml-4 pl-4 border-l-4 border-gray-400;
-}
-.markdown h2 {
-  @apply mb-4 mt-8 font-bold text-xl;
-}
-.markdown h3 {
-  @apply mb-4 mt-8 font-bold;
-}
-.markdown ul {
-  @apply ml-1 mb-4 list-disc list-inside;
-}
-.markdown ol {
-  @apply ml-1 mb-4 list-decimal list-inside;
-}
-.markdown pre {
-  @apply p-2 bg-gray-300 overflow-x-scroll;
-}
-.markdown code {
-  @apply p-1 text-sm bg-gray-300;
-}
-*/
