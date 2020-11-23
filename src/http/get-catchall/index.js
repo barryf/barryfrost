@@ -122,6 +122,7 @@ exports.handler = async function http (req) {
   const httpHeaders = {
     headers: {
       'Content-Type': 'text/html; charset=utf8',
+      'Cache-Control': 's-maxage=300',
       'Referrer-Policy': 'no-referrer',
       'Content-Security-Policy': "script-src 'self'"
     }
