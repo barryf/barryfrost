@@ -22,7 +22,7 @@ jobs:
     - name: Build Tailwind CSS
       run: |-
         npm install tailwindcss
-        npx tailwindcss build assets/styles.css -o public/styles.css
+        NODE_ENV=production npx tailwindcss build assets/styles.css -o public/styles.css
 
     - name: Architect production deploy
       run: |-
