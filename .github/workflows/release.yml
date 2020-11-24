@@ -27,7 +27,7 @@ jobs:
     - name: Architect production deploy
       run: |-
         npm install @architect/architect
-        npx arc deploy production
+        npx arc deploy --production
 
     - name: Push Build Status Notifications
       if: ${{ always() }}
