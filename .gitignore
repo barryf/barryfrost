@@ -2,8 +2,9 @@
 node_modules
 
 .arc-env
+.env
+preferences.arc
 sam.json
 sam.yaml
 
-assets/minima
 public/styles-dev.css
