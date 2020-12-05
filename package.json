@@ -26,7 +26,7 @@
   },
   "homepage": "https://github.com/barryf/barryfrost#readme",
   "dependencies": {
-    "aws-sdk": "^2.782.0"
+    "aws-sdk": "^2.799.0"
   },
   "devDependencies": {
     "@tailwindcss/typography": "^0.2.0",
