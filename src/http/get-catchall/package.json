@@ -1,9 +1,0 @@
-{
-  "dependencies": {
-    "@architect/functions": "^3.12.1",
-    "highlight.js": "^10.1.1",
-    "markdown-it": "^11.0.0",
-    "node-fetch": "^2.6.0",
-    "nunjucks": "^3.2.1"
-  }
-}

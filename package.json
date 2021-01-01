@@ -4,7 +4,6 @@
   "description": "Barry Frost's personal website",
   "scripts": {
     "start": "PORT=4444 arc sandbox",
-    "sass": "sass assets/style.scss:public/style.css --load-path ./assets/ --no-source-map",
     "builddev": "npx tailwindcss build assets/styles.css -o public/styles-dev.css",
     "build": "NODE_ENV=production npx tailwindcss build assets/styles.css -o public/styles.css"
   },
@@ -26,11 +25,17 @@
   },
   "homepage": "https://github.com/barryf/barryfrost#readme",
   "dependencies": {
-    "aws-sdk": "^2.799.0"
+    "@architect/functions": "^3.12.1",
+    "highlight.js": "^10.1.1",
+    "markdown-it": "^11.0.0",
+    "node-fetch": "^2.6.0",
+    "nunjucks": "^3.2.1",
+    "rss": "^1.2.2"
   },
   "devDependencies": {
-    "@tailwindcss/typography": "^0.2.0",
+    "@tailwindcss/typography": "^0.3.1",
     "autoprefixer": "^10.0.2",
+    "aws-sdk": "^2.799.0",
     "postcss": "^8.1.7",
     "tailwindcss": "^2.0.1"
   }

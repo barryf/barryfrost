@@ -4,7 +4,6 @@ barryfrost
 @aws
 region eu-west-2
 
-@cdn
 @http
 get /rss
 get /*
@@ -12,5 +11,11 @@ get /*
 @static
 fingerprint true
 folder public
-ignore
-  styles-dev.css
+
+@env
+testing
+  ROOT_URL http://localhost:4444/
+  MICROPUB_URL http://localhost:3333/micropub
+production
+  MICROPUB_URL https://api.barryfrost.com/micropub
+  ROOT_URL https://barryf.co.uk/
