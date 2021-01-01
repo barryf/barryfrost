@@ -1,0 +1,32 @@
+{%- extends 'layout.njk' %}
+
+{%- block head %}
+<link rel="webmention" href="{{ webmentionUrl }}">
+{%- endblock %}
+
+{%- block content %}
+<article class="h-entry">
+
+  <header class="">
+    {%- include 'includes/title.njk' %}
+    {%- include 'includes/published.njk' %}
+  </header>
+
+  {%- include 'includes/in-reply-to.njk' %}
+  {%- include 'includes/repost-of.njk' %}
+  {%- include 'includes/bookmark-of.njk' %}
+  {%- include 'includes/like-of.njk' %}
+  {%- include 'includes/photos.njk' %}
+  {%- include 'includes/content.njk' %}
+
+  <footer class="">
+    {%- include 'includes/categories.njk' %}
+    {%- include 'includes/location.njk' %}
+    {%- include 'includes/syndications.njk' %}
+    {%- include 'includes/author.njk' %}
+  </footer>
+
+  {%- include 'includes/raw.njk' %}
+
+</article>
+{%- endblock %}

@@ -1,6 +1,0 @@
-{%- extends '_post.njk' %}
-{%- set post_title = content(post) | striptags | truncate(60, false) %}
-{%- if (post_title | trim) === '' %}
-  {%- set post_title = 'Photo' %}
-{%- endif %}
-{%- set post_content = content(post) %}

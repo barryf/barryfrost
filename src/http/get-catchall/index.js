@@ -99,8 +99,7 @@ async function getPost (url) {
       }
   }
   const post = { ...body, url: `${process.env.ROOT_URL}${url}` }
-  if (!url.match(/\//)) template = 'page.njk'
-  if (!template) template = post['post-type'] + '.njk'
+  if (!template) template = 'post.njk'
   const postJSON = JSON.stringify(post, null, 2)
   const html = nunjucks.render(template, {
     post,

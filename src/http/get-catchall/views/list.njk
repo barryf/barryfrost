@@ -1,11 +1,11 @@
-{%- extends '_layout.njk' %}
+{%- extends 'layout.njk' %}
 
 {%- block content %}
 
   <ul class="h-feed">
   {%- for post in posts %}
     <li class="h-entry">
-      {% include '_published.njk' %}
+      <a href="{{ post.url }}">{{ post.properties.published[0] }} - {{ post['post-type'] }}</a>
     </li>
   {%- endfor %}
   </ul>

@@ -1,0 +1,14 @@
+{%- if post.properties.photo %}
+{%- import '../macros/photo.njk' as photo %}
+
+<div class="mb-4">
+  <ul>
+    {%- for p in post.properties.photo %}
+      <li>
+        {{ photo.photo(p) }}
+      </li>
+    {%- endfor %}
+  </ul>
+</div>
+
+{%- endif %}
