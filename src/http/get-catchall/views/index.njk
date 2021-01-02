@@ -2,7 +2,7 @@
 
 {%- block head %}
 <link rel="me" href="mailto:auth@barryfrost.com">
-<link rel="micropub" href="{{ micropubUrl }}">
+<link rel="micropub" href="{{ process.env.MICROPUB_URL }}">
 <link rel="webmention" href="{{ webmentionUrl }}">
 <link rel="microsub" href="https://aperture.p3k.io/microsub/28">
 <link rel="authorization_endpoint" href="https://indieauth.com/auth">
@@ -11,13 +11,9 @@
 {%- endblock %}
 
 {%- block content %}
-<div class="h-card">
-  <img src="{{ faviconUrl }}" class="u-photo hidden">
-  <h1 class="text-4xl md:text-5xl mb-2 tracking-tight font-bold text-gray-900 dark:text-gray-100">
-    <span class="p-name">Barry Frost</span>
-  </h1>
-  <a href="/" class="u-url"></a>
-</div>
+<h1 class="text-4xl md:text-5xl mb-2 tracking-tight font-bold text-gray-900 dark:text-gray-100">
+  Barry Frost
+</h1>
 
 <p class="mb-8 md:text-lg">
   The page or post. This is my website and here's some text about me. If you want to read this
