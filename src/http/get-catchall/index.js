@@ -1,5 +1,6 @@
 const arc = require('@architect/functions')
 const fetch = require('node-fetch')
+const sanitizeHtml = require('sanitize-html')
 const nunjucks = require('nunjucks')
 nunjucks.configure('views')
 const helpers = require('./helpers')
@@ -27,6 +28,35 @@ const paths = {
   faviconUrl: arc.static('/barryfrost-favicon.png'),
   micropubUrl: process.env.MICROPUB_URL,
   webmentionUrl: 'https://webmention.io/barryf/webmention'
+}
+
+function getMetadata (post) {
+  let title = ''
+  if (post.properties.name) {
+    title = post.properties.name[0]
+  } else {
+    title = post['post-type'][0].charAt(0).toUpperCase() +
+      post['post-type'][0].slice(1) +
+      ': ' +
+      post.url.split('/').slice(-1)
+  }
+  let description = ''
+  // use post content for the description if it exists
+  if (post.properties.content) {
+    description = helpers.content(post)
+    // remove tags
+    description = sanitizeHtml(
+      description, {
+        allowedTags: [],
+        allowedAttributes: {}
+      }
+    )
+    // replace newlines with a space
+    description = description.replace(/\n/g, ' ')
+    // truncate to first 20 words
+    description = description.split(' ').splice(0, 20).join(' ')
+  }
+  return { title, description }
 }
 
 async function getIndex () {
@@ -114,6 +144,7 @@ async function getPost (url) {
   const html = nunjucks.render(template, {
     post,
     raw: JSON.stringify(post, null, 2),
+    metadata: getMetadata(post),
     ...helpers,
     ...paths
   })

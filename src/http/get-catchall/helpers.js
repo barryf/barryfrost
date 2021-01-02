@@ -31,10 +31,6 @@ function content (post) {
   }
 }
 
-function title (post) {
-  return md.renderInline(post.properties.name[0])
-}
-
 function humanDate (dateString) {
   return new Date(dateString).toLocaleString('en-gb', {
     day: 'numeric', month: 'long', year: 'numeric'
@@ -72,7 +68,6 @@ function iconFromUrl (url) {
 module.exports = {
   urlHost,
   content,
-  title,
   humanDate,
   imageOptimise,
   static: arc.static,

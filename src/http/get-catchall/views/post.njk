@@ -2,6 +2,18 @@
 
 {%- block head %}
 <link rel="webmention" href="{{ webmentionUrl }}">
+<meta name="title" content="{{ metadata.title | escape }}">
+<meta name="description" content="{{ metadata.description | escape }}">
+<meta property="og:type" content="website">
+<meta property="og:url" content="{{ post.url }}">
+<meta property="og:title" content="{{ metadata.title | escape }}">
+<meta property="og:description" content="{{ metadata.description | escape }}">
+<meta property="twitter:card" content="summary">
+<meta property="twitter:site" content="@barryf">
+<meta property="twitter:url" content="{{ post.url }}">
+<meta property="twitter:title" content="{{ metadata.title | escape }}">
+<meta property="twitter:description" content="{{ metadata.description | escape }}">
+<title>{{ metadata.title }}</title>
 {%- endblock %}
 
 {%- block content %}
