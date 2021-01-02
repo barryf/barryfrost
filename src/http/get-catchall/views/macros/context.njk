@@ -1,6 +1,6 @@
 {%- import '../macros/photo.njk' as context %}
 
-{%- macro context(context, name, iconFromUrl) %}
+{%- macro context(context, contextLabel, iconFromUrl) %}
 
 <div class="mb-4">
   {%- if context.properties %}
@@ -33,7 +33,7 @@
       {%- endif %}
     </div>
   {%- else %}
-    <h2>{{ name }}</h2>
+    <h2>{{ contextLabel }}</h2>
     <a href={{ context }} class="font-bold text-yellow-600 hover:text-black" rel="noopener">
         {{ context }}
     </a>

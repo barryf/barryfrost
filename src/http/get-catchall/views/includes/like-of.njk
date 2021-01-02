@@ -1,0 +1,14 @@
+{%- if post.properties['like-of'] %}
+{%- import '../macros/context.njk' as context %}
+
+<div class="mb-4">
+  <ul>
+    {%- for likeOf in post.properties['like-of'] %}
+      <li>
+        {{ context.context(likeOf, 'Like of', iconFromUrl) }}
+      </li>
+    {%- endfor %}
+  </ul>
+</div>
+
+{%- endif %}

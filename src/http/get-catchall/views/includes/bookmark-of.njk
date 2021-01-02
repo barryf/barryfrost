@@ -1,0 +1,14 @@
+{%- if post.properties['bookmark-of'] %}
+{%- import '../macros/context.njk' as context %}
+
+<div class="mb-4">
+  <ul>
+    {%- for bookmarkOf in post.properties['bookmark-of'] %}
+      <li>
+        {{ context.context(bookmarkOf, 'Bookmark of', iconFromUrl) }}
+      </li>
+    {%- endfor %}
+  </ul>
+</div>
+
+{%- endif %}
