@@ -1,7 +1,7 @@
 {%- if post.properties.name %}
 
 <h1 class="p-name text-4xl md:text-5xl mb-2 tracking-tight font-bold text-gray-900 dark:text-gray-100">
-  {{ title(post) | safe }}
+  {{ post.properties.name[0] | safe }}
 </h1>
 
 {%- endif %}
