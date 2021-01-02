@@ -1,8 +1,15 @@
-{%- extends '_post.njk' %}
+{%- extends 'layout.njk' %}
 
-{%- block post_header %}
-{%- include '_title.njk' %}
-<div style="display: none;">
-  {%- include '_published.njk' %}
-</div>
+{%- block content %}
+<article class="h-entry">
+
+  <header>
+    {%- include 'includes/title.njk' %}
+  </header>
+
+  {%- include 'includes/content.njk' %}
+
+  {%- include 'includes/raw.njk' %}
+
+</article>
 {%- endblock %}

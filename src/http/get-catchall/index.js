@@ -79,20 +79,31 @@ async function getPost (url) {
     `${micropubSourceUrl}&url=${process.env.ROOT_URL}${url}`,
     { headers: { Authorization: `Bearer ${process.env.MICROPUB_TOKEN}` } }
   )
-  const body = await response.json()
-  let template
+  let body, template
   switch (response.status) {
     case 200:
+      body = await response.json()
       break
     case 410:
-      template = 'gone.njk'
+      body = {
+        properties: {
+          name: ['410 Gone'],
+          content: ['This post has been deleted and is no longer available.']
+        }
+      }
+      template = 'page.njk'
       break
     case 404:
-      return {
-        statusCode: 404,
-        body: nunjucks.render('not-found.njk', paths)
+      body = {
+        properties: {
+          name: ['404 Not Found'],
+          content: ['The page or post was not found.']
+        }
       }
+      template = 'page.njk'
+      break
     default:
+      body = await response.json()
       return {
         statusCode: response.status,
         body: body.error_description
@@ -100,10 +111,9 @@ async function getPost (url) {
   }
   const post = { ...body, url: `${process.env.ROOT_URL}${url}` }
   if (!template) template = 'post.njk'
-  const postJSON = JSON.stringify(post, null, 2)
   const html = nunjucks.render(template, {
     post,
-    postJSON,
+    raw: JSON.stringify(post, null, 2),
     ...helpers,
     ...paths
   })
@@ -121,7 +131,7 @@ exports.handler = async function http (req) {
   const httpHeaders = {
     headers: {
       'Content-Type': 'text/html; charset=utf8',
-      'Cache-Control': 's-maxage=300',
+      'Cache-Control': 's-maxage=60',
       'Referrer-Policy': 'no-referrer',
       'Content-Security-Policy': "script-src 'self'"
     }
