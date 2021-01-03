@@ -20,14 +20,14 @@ const postTypePlurals = [
 
 const micropubSourceUrl = `${process.env.MICROPUB_URL}?q=source`
 
-const paths = {
-  rootPath: process.env.ROOT_URL,
-  cssUrl: arc.static(`/styles${
+const urls = {
+  root: process.env.ROOT_URL,
+  css: arc.static(`/styles${
     process.env.NODE_ENV !== 'production' ? '-dev' : ''
     }.css`),
-  faviconUrl: arc.static('/barryfrost-favicon.png'),
-  micropubUrl: process.env.MICROPUB_URL,
-  webmentionUrl: 'https://webmention.io/barryf/webmention'
+  favicon: arc.static('/barryfrost-favicon.png'),
+  micropub: process.env.MICROPUB_URL,
+  webmention: 'https://webmention.io/barryf/webmention'
 }
 
 function getMetadata (post) {
@@ -61,8 +61,8 @@ function getMetadata (post) {
 
 async function getIndex () {
   return nunjucks.render('index.njk', {
-    ...helpers,
-    ...paths
+    helpers,
+    urls
   })
 }
 
@@ -99,8 +99,8 @@ async function getList (url, before = null) {
   return nunjucks.render('list.njk', {
     posts: posts.slice(0, limit),
     lastPublishedInt,
-    ...helpers,
-    ...paths
+    helpers,
+    urls
   })
 }
 
@@ -145,8 +145,8 @@ async function getPost (url) {
     post,
     raw: JSON.stringify(post, null, 2),
     metadata: getMetadata(post),
-    ...helpers,
-    ...paths
+    helpers,
+    urls
   })
   return {
     statusCode: response.status,

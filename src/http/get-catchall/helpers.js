@@ -66,7 +66,6 @@ function iconFromUrl (url) {
 }
 
 module.exports = {
-  urlHost,
   content,
   humanDate,
   imageOptimise,

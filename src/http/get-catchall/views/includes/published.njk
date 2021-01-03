@@ -2,7 +2,7 @@
   <time class="dt-published" datetime="{{ post.properties.published[0] }}"
     title="{{ post.properties.published[0] }}">
     <a href="{{ post.url }}" class="hover:text-black">
-      {{ humanDate(post.properties.published[0]) | upper }}
+      {{ helpers.humanDate(post.properties.published[0]) | upper }}
     </a>
   </time>
   {%- if post.properties.updated %}

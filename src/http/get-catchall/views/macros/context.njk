@@ -1,6 +1,5 @@
 {%- import '../macros/photo.njk' as context %}
-
-{%- macro context(context, contextLabel, iconFromUrl) %}
+{%- macro context(context, contextLabel, helpers) %}
 
 <div class="mb-4">
   {%- if context.properties %}
@@ -15,11 +14,11 @@
       's post on
       <a href="{{ context.properties.url[0] }}" class="font-bold text-yellow-600 hover:text-black" rel="noopener">
         <span class="w-3 h-3 inline-block">
-          {{ iconFromUrl(context.properties.url[0]) }}
+          {{ helpers.iconFromUrl(context.properties.url[0]) }}
         </span>
       </a>
     </h2>
-    <div class="mb-4">{{ content(context) }}</div>
+    <div class="mb-4">{{ helpers.content(context) }}</div>
       {%- if context.properties.photo %}
         <div class="mb-4">
           <ul>

@@ -4,7 +4,7 @@
   {%- for syndication in post.properties.syndication %}
     <li class="inline-block mr-2">
       <a rel="syndication" href="{{ syndication }}" class="u-syndication inline-block w-4 h-4 text-gray-600 hover:text-black">
-        {{ iconFromUrl(syndication) | safe }}
+        {{ helpers.iconFromUrl(syndication) | safe }}
       </a>
     </li>
   {%- endfor %}

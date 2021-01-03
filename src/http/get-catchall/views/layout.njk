@@ -3,23 +3,21 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" media="screen" href="{{ cssUrl }}">
+<link rel="stylesheet" media="screen" href="{{ urls.css }}">
 <link rel="feed" type="text/html" href="/all">
 <link rel="feed alternate" type="application/rss+xml" href="/rss">
-<link rel="icon" type="image/png" href="{{ faviconUrl }}">
+<link rel="icon" type="image/png" href="{{ urls.favicon }}">
 {%- block head %}
 <title>Barry Frost</title>
 {%- endblock %}
 </head>
-<body class="bg-gray-100">
-<div class="bg-gray-100 dark:bg-gray-900">
+<body class="bg-gray-100 dark:bg-gray-900">
 <div class="max-w-screen-md mx-auto p-4 sm:p-8">
 {%- block content %}
 {%- endblock %}
-<div class="mt-8">
+<footer class="mt-8">
 <a href='/'>Home</a>
-</div>
-</div>
+</footer>
 </div>
 </body>
 </html>

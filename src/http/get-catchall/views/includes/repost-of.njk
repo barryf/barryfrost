@@ -5,7 +5,7 @@
   <ul>
     {%- for repostOf in post.properties['repost-of'] %}
       <li>
-        {{ context.context(repostOf, 'Repost of', iconFromUrl) }}
+        {{ context.context(repostOf, 'Repost of', helpers) }}
       </li>
     {%- endfor %}
   </ul>

@@ -1,7 +1,7 @@
 {%- if post.properties.content %}
 
 <div class="e-content prose md:prose-lg mb-8 text-gray-800">
-{{ content(post) | safe }}
+{{ helpers.content(post) | safe }}
 </div>
 
 {%- endif %}

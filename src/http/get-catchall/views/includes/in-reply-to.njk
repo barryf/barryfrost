@@ -5,7 +5,7 @@
   <ul>
     {%- for inReplyTo in post.properties['in-reply-to'] %}
       <li>
-        {{ context.context(inReplyTo, 'In Reply To', iconFromUrl) }}
+        {{ context.context(inReplyTo, 'In Reply To', helpers) }}
       </li>
     {%- endfor %}
   </ul>
