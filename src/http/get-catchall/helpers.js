@@ -92,5 +92,6 @@ module.exports = {
   humanDate,
   imageOptimise,
   static: arc.static,
-  iconFromUrl
+  iconFromUrl,
+  urlHost
 }
