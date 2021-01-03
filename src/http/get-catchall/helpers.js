@@ -1,4 +1,5 @@
 const arc = require('@architect/functions')
+const sanitizeHtml = require('sanitize-html')
 const hljs = require('highlight.js')
 const md = require('markdown-it')({
   linkify: true,
@@ -19,7 +20,7 @@ function urlHost (u) {
   return url.host
 }
 
-function content (post) {
+function postContent (post) {
   if ('content' in post.properties) {
     if (typeof post.properties.content[0] === 'string') {
       return md.render(post.properties.content[0]).trim()
@@ -28,6 +29,26 @@ function content (post) {
     }
   } else {
     return ''
+  }
+}
+
+function contextContent (context) {
+  if (!context.properties.content) return ''
+  if (context.properties.content[0].html === undefined) {
+    return context.properties.content[0]
+  } else {
+    const sanitizedHtml = sanitizeHtml(
+      context.properties.content[0].html, {
+        allowedTags: ['a'],
+        allowedAttributes: {
+          a: ['href']
+        }
+      }
+    )
+    let html = sanitizedHtml.split(' ').splice(0, 30).join(' ')
+    if (sanitizedHtml !== html) html += '...'
+    html = `&ldquo;${html}&rdquo;`
+    return html
   }
 }
 
@@ -66,7 +87,8 @@ function iconFromUrl (url) {
 }
 
 module.exports = {
-  content,
+  postContent,
+  contextContent,
   humanDate,
   imageOptimise,
   static: arc.static,

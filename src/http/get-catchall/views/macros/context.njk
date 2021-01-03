@@ -1,10 +1,10 @@
-{%- import '../macros/photo.njk' as context %}
+{%- import '../macros/photo.njk' as photo %}
 {%- macro context(context, contextLabel, helpers) %}
 
 <div class="mb-4">
   {%- if context.properties %}
     <h2>
-      {{ name }}
+      {{ contextLabel }}
       <a href="{{ context.properties.author[0].properties.url[0] }}">
         {%- if context.properties.author[0].properties.photo %}
           <img src="{{ context.properties.author[0].properties.photo[0] }}" class="w-6 h-6 inline-block ml-2 mr-1 rounded-full">
@@ -18,19 +18,20 @@
         </span>
       </a>
     </h2>
-    <div class="mb-4">{{ helpers.content(context) }}</div>
-      {%- if context.properties.photo %}
-        <div class="mb-4">
-          <ul>
-            {%- for p in context.properties.photo %}
-              <li>
-                {{ photo.photo(p) }}
-              </li>
-            {%- endfor %}
-          </ul>
-        </div>
-      {%- endif %}
+    <div class="mb-4 prose prose-sm">
+      {{ helpers.contextContent(context) }}
     </div>
+    {%- if context.properties.photo %}
+      <div class="mb-4">
+        <ul>
+          {%- for p in context.properties.photo %}
+            <li>
+              {{ photo.photo(p) }}
+            </li>
+          {%- endfor %}
+        </ul>
+      </div>
+    {%- endif %}
   {%- else %}
     <h2>{{ contextLabel }}</h2>
     <a href={{ context }} class="font-bold text-yellow-600 hover:text-black" rel="noopener">

@@ -43,7 +43,7 @@ function getMetadata (post) {
   let description = ''
   // use post content for the description if it exists
   if (post.properties.content) {
-    description = helpers.content(post)
+    description = helpers.postContent(post)
     // remove tags
     description = sanitizeHtml(
       description, {
