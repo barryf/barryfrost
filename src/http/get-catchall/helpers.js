@@ -34,9 +34,7 @@ function postContent (post) {
 
 function contextContent (context) {
   if (!context.properties.content) return ''
-  if (context.properties.content[0].html === undefined) {
-    return context.properties.content[0]
-  } else {
+  if (context.properties.content[0].html) {
     const sanitizedHtml = sanitizeHtml(
       context.properties.content[0].html, {
         allowedTags: ['a'],
@@ -46,9 +44,11 @@ function contextContent (context) {
       }
     )
     let html = sanitizedHtml.split(' ').splice(0, 30).join(' ')
-    if (sanitizedHtml !== html) html += '...'
+    if (sanitizedHtml !== html) html += '&hellip;'
     html = `&ldquo;${html}&rdquo;`
     return html
+  } else {
+    return context.properties.content[0]
   }
 }
 
