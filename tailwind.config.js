@@ -4,7 +4,10 @@ module.exports = {
     './src/**/*.njk'
   ],
   theme: {
-    extend: {}
+    extend: {},
+    fontFamily: {
+      sans: ['plex-sans', 'ui-sans-serif', 'system-ui']
+    }
   },
   variants: {},
   plugins: [

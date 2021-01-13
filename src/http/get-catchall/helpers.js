@@ -20,6 +20,10 @@ function urlHost (u) {
   return url.host
 }
 
+function postTitle (post) {
+  return md.render(post.properties.name[0]).trim()
+}
+
 function postContent (post) {
   if ('content' in post.properties) {
     if (typeof post.properties.content[0] === 'string') {
@@ -54,7 +58,7 @@ function contextContent (context) {
 
 function humanDate (dateString) {
   return new Date(dateString).toLocaleString('en-gb', {
-    day: 'numeric', month: 'long', year: 'numeric'
+    day: 'numeric', month: 'short', year: 'numeric'
   })
 }
 
@@ -87,6 +91,7 @@ function iconFromUrl (url) {
 }
 
 module.exports = {
+  postTitle,
   postContent,
   contextContent,
   humanDate,
