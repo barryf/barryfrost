@@ -2,12 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
-@font-face { font-family: 'plex-sans'; src: url("/_static/fonts/IBMPlexSans-Text.woff") format("woff"); }
-@font-face { font-family: 'plex-sans'; font-weight: 800; src: url("/_static/fonts/IBMPlexSans-Bold.woff") format("woff"); }
-
 .prose a {
   @apply no-underline text-yellow-600 font-bold;
 }
 .prose a:hover {
   @apply text-black font-bold;
+}
+.prose blockquote {
+  @apply not-italic;
 }
