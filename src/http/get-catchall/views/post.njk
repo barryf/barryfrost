@@ -34,7 +34,11 @@
   {%- include 'includes/categories.njk' %}
   {%- include 'includes/location.njk' %}
   {%- include 'includes/syndications.njk' %}
-  {%- include 'includes/like.njk' %}
+  <div class="my-8">
+    {%- include 'includes/webmentions/likes.njk' %}
+    {%- include 'includes/webmentions/reposts.njk' %}
+    {%- include 'includes/webmentions/comments.njk' %}
+  </div>
   {%- include 'includes/raw.njk' %}
 </article>
 {%- endblock %}
