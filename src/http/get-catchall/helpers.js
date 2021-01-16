@@ -27,7 +27,10 @@ function postTitle (post) {
 function postContent (post) {
   if ('content' in post.properties) {
     if (typeof post.properties.content[0] === 'string') {
-      return md.render(post.properties.content[0]).trim()
+      let html = md.render(post.properties.content[0]).trim()
+      html = html.replace(/[@]+([A-Za-z0-9-_]+)/g, '<a href="https://twitter.com/$1">@$1</a>')
+      html = html.replace(/[#]+([A-Za-z0-9-_]+)/g, '<a href="https://twitter.com/hashtag/$1">#$1</a>')
+      return html
     } else {
       return post.properties.content[0].html.trim()
     }
