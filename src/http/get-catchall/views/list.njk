@@ -5,7 +5,9 @@
   <ul class="h-feed">
   {%- for post in posts %}
     <li class="h-entry">
-      <a href="{{ post.url }}">{{ post.properties.published[0] }} - {{ post['post-type'] }}</a>
+      <a href="{{ post.url[0] | replace('https://barryf.co.uk/', '/') }}">
+        {{ post.properties.published[0] }} - {{ post['post-type'] }}
+      </a>
     </li>
   {%- endfor %}
   </ul>
