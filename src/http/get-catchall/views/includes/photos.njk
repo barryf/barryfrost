@@ -2,13 +2,14 @@
 {%- import '../macros/photo.njk' as photo %}
 
 <div class="mb-4">
-  <ul>
+  <ul class="flex">
     {%- for p in post.properties.photo %}
-      <li>
+      <li class="mr-2">
         {{ photo.photo(p) }}
       </li>
     {%- endfor %}
   </ul>
 </div>
+<div class="clear-left"></div>
 
 {%- endif %}

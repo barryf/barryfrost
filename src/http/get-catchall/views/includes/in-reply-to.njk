@@ -1,11 +1,11 @@
 {%- if post.properties['in-reply-to'] %}
 {%- import '../macros/context.njk' as context %}
 
-<div class="mb-4">
+<div class="mb-8">
   <ul>
     {%- for inReplyTo in post.properties['in-reply-to'] %}
       <li>
-        {{ context.context(inReplyTo, 'In Reply To', helpers) }}
+        {{ context.context(inReplyTo, 'In reply to', helpers) }}
       </li>
     {%- endfor %}
   </ul>
