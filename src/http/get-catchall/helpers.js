@@ -41,10 +41,8 @@ function contextContent (context) {
   if (context.properties.content[0].html) {
     const sanitizedHtml = sanitizeHtml(
       context.properties.content[0].html, {
-        allowedTags: ['a'],
-        allowedAttributes: {
-          a: ['href']
-        }
+        allowedTags: [],
+        allowedAttributes: {}
       }
     )
     let html = sanitizedHtml.split(' ').splice(0, 30).join(' ')
