@@ -13,7 +13,9 @@
             {%- if comment.properties.author[0].properties.photo %}
               <div class="bg-gray-300 w-10 h-10 md:w-11 md:h-11 mr-1.5 overflow-hidden rounded-full">
                 <a href="{{ comment.properties.url[0] }}">
-                  <img src="{{ comment.properties.author[0].properties.photo[0] }}"
+                  {%- set photoUrl = comment.properties.author[0].properties.photo[0].value if comment.properties.author[0].properties.photo[0].value else comment.properties.author[0].properties.photo[0] %}
+                  {%- set photoUrl = photoUrl | replace('http://pbs.twimg.com/', 'https://pbs.twimg.com/') %}
+                  <img src="{{ photoUrl }}"
                     alt="{{ comment.properties.author[0].properties.name[0] }}"
                     title="{{ comment.properties.author[0].properties.name[0] }}">
                 </a>

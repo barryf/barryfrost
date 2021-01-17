@@ -1,15 +1,10 @@
 {%- macro photo(photo) %}
+{%- set photoUrl = photo.value if photo.value else photo %}
 
- <figure>
-  {%- if photo.value %}
-    <a href="{{ photo.value }}">
-      <img class="u-photo shadow" src="{{ photo.value }}"{%- if photo.alt %} alt="{{ photo.alt }}"{%- endif %}>
-    </a>
-  {%- else %}
-    <a href="{{ photo }}">
-      <img class="u-photo shadow" src="{{ photo }}">
-    </a>
-  {%- endif %}
+<figure>
+  <a href="{{ photoUrl }}">
+    <img class="u-photo shadow rounded" src="{{ photoUrl }}"{%- if photo.alt %} alt="{{ photo.alt }}"{%- endif %}>
+  </a>
 </figure>
 
 {%- endmacro %}
