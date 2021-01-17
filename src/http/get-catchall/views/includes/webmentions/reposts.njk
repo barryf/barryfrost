@@ -2,24 +2,25 @@
 
 <div class="mb-8">
   <h2 class="mb-1 text-gray-600 text-sm md:text-base">REPOSTS</h2>
-  <ul class="flex">
+  <ul class="">
     {%- for repost in post.properties.repost %}
       {%- if repost.properties.author %}
-      <li class="bg-gray-300 w-10 h-10 overflow-hidden rounded-full mr-1">
-        <a href="{{ repost.properties.url[0] }}">
-          {%- if repost.properties.author[0].properties.photo %}
-            <img src="{{ repost.properties.author[0].properties.photo[0] }}"
-              alt="{{ repost.properties.author[0].properties.name[0] }}"
-              title="{{ repost.properties.author[0].properties.name[0] }}"
-              class="w-10 h-10 mr-1 rounded-full">
-          {%- else %}
-            {{ repost.properties.author[0].properties.name[0] }}
-          {%- endif %}
-        </a>
-      </li>
+        <li class="float-left">
+          <a href="{{ repost.properties.url[0] }}" class="block bg-gray-300 w-10 h-10 md:w-11 md:h-11 overflow-hidden rounded-full -mr-1 hover:text-black">
+            {%- if repost.properties.author[0].properties.photo %}
+              <img src="{{ repost.properties.author[0].properties.photo[0] }}"
+                alt="{{ repost.properties.author[0].properties.name[0] }}"
+                title="{{ repost.properties.author[0].properties.name[0] }}"
+                class="w-10 h-10 md:w-11 md:h-11">
+            {%- else %}
+              {{ repost.properties.author[0].properties.name[0] }}
+            {%- endif %}
+          </a>
+        </li>
       {%- endif %}
     {%- endfor %}
   </ul>
+  <div class="clear-left"></div>
 </div>
 
 {%- endif %}

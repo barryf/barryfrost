@@ -8,19 +8,22 @@
         {%- if comment.properties.author %}
           <div class="flex">
             {%- if comment.properties.author[0].properties.photo %}
-              <div class="bg-gray-300 w-10 h-10 md:w-11 md:h-11 mr-1 overflow-hidden rounded-full">
-                <img src="{{ comment.properties.author[0].properties.photo[0] }}"
-                  alt="{{ comment.properties.author[0].properties.name[0] }}"
-                  title="{{ comment.properties.author[0].properties.name[0] }}"
-                  class="w-10 h-10 md:w-11 md:h-11 rounded-full">
+              <div class="bg-gray-300 w-10 h-10 md:w-11 md:h-11 mr-1.5 overflow-hidden rounded-full">
+                <a href="{{ comment.properties.url[0] }}">
+                  <img src="{{ comment.properties.author[0].properties.photo[0] }}"
+                    alt="{{ comment.properties.author[0].properties.name[0] }}"
+                    title="{{ comment.properties.author[0].properties.name[0] }}">
+                </a>
               </div>
             {%- endif %}
-            <div>
-              <a href="{{ comment.properties.author[0].properties.url[0] }}" class="text-gray-600 text-sm md:text-base">
-                {{ comment.properties.author[0].properties.name[0] }}
-              </a>
+            <div class="">
+              <div class="text-gray-600 text-sm md:text-base mb-1">
+                <a href="{{ comment.properties.author[0].properties.url[0] }}" class="hover:text-black">
+                  {{ comment.properties.author[0].properties.name[0] }}
+                </a>
+              </div>
               <div class="text-xs md:text-sm text-gray-500">
-                <a href="{{ comment.properties.url[0] }}">
+                <a href="{{ comment.properties.url[0] }}" class="hover:text-black">
                   {{ helpers.humanDate(comment.properties.published[0]) | upper }}
                 </a>
               </div>
