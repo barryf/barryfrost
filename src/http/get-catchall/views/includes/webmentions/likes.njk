@@ -1,7 +1,10 @@
 {%- if post.properties.like %}
 
 <div class="mb-8">
-  <h2 class="mb-1 text-gray-600 text-sm md:text-base">LIKES</h2>
+  <h2 class="mb-1">
+    <span class="text-gray-600 text-sm md:text-base">LIKES</span>
+    <span class="text-gray-400 text-xs md:text-sm">{{ post.properties.like | length }}</span>
+  </h2>
   <ul class="">
     {%- for like in post.properties.like %}
       {%- if like.properties.author %}

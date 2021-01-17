@@ -56,6 +56,23 @@ function contextContent (context) {
   }
 }
 
+function webmentionContent (webmention) {
+  if (!webmention.properties.content) return ''
+  let html
+  if (webmention.properties.content[0].html) {
+    html = webmention.properties.content[0].html
+  } else {
+    html = webmention.properties.content[0]
+  }
+  const sanitizedHtml = sanitizeHtml(
+    html, {
+      allowedTags: ['a'],
+      allowedAttributes: { a: ['href'] }
+    }
+  )
+  return sanitizedHtml
+}
+
 function humanDate (dateString) {
   return new Date(dateString).toLocaleString('en-gb', {
     day: 'numeric', month: 'short', year: 'numeric'
@@ -94,6 +111,7 @@ module.exports = {
   postTitle,
   postContent,
   contextContent,
+  webmentionContent,
   humanDate,
   imageOptimise,
   static: arc.static,
