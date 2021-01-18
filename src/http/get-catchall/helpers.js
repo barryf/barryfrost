@@ -73,6 +73,23 @@ function webmentionContent (webmention) {
   return sanitizedHtml
 }
 
+function listContent (post) {
+  if (!post.properties.content) return ''
+  let html
+  if (post.properties.content[0].html) {
+    html = post.properties.content[0].html
+  } else {
+    html = md.render(post.properties.content[0]).trim()
+  }
+  const sanitizedHtml = sanitizeHtml(
+    html, {
+      allowedTags: [],
+      allowedAttributes: {}
+    }
+  )
+  return sanitizedHtml
+}
+
 function humanDate (dateString) {
   return new Date(dateString).toLocaleString('en-gb', {
     day: 'numeric', month: 'short', year: 'numeric'
@@ -112,6 +129,7 @@ module.exports = {
   postContent,
   contextContent,
   webmentionContent,
+  listContent,
   humanDate,
   imageOptimise,
   static: arc.static,

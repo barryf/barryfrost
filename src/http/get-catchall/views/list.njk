@@ -2,18 +2,29 @@
 
 {%- block content %}
 
-  <ul class="h-feed">
+<ul class="h-feed">
   {%- for post in posts %}
-    <li class="h-entry">
-      <a href="{{ post.url[0] | replace('https://barryf.co.uk/', '/') }}">
-        {{ post.properties.published[0] }} - {{ post['post-type'] }}
-      </a>
+    <li class="h-entry mb-8">
+
+      <div class="mb-1 text-sm md:text-base text-gray-600 dark:text-gray-400">
+        {%- include 'includes/post-type-icon.njk' %}
+        {%- include 'includes/published.njk' %}
+      </div>
+
+      {%- if post.properties.name %}
+        <h2 class="p-name text-lg md:text-xl tracking-tight font-bold text-gray-900 dark:text-gray-100">
+          {{ helpers.postTitle(post) | safe }}
+        </h2>
+      {%- endif %}
+
+      {%- include 'includes/summary.njk' %}
+
     </li>
   {%- endfor %}
-  </ul>
+</ul>
 
-  {%- if (lastPublishedInt) %}
-    <p><a href="?before={{ lastPublishedInt }}" rel="nofollow prev">Previous</a></p>
-  {%- endif %}
+{%- if lastPublishedInt %}
+  <p><a href="?before={{ lastPublishedInt }}" rel="nofollow prev">Previous</a></p>
+{%- endif %}
 
 {%- endblock %}
