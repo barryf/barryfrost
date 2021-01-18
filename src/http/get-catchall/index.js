@@ -83,7 +83,7 @@ async function getAll (before) {
 }
 
 async function getList (url, before = null) {
-  const limit = 10
+  const limit = 20
   if (before) url = url + '&before=' + parseInt(before, 10)
   // return n+1 rows to check if there is another page
   url += `&limit=${limit + 1}`
