@@ -1,8 +1,6 @@
-<span class="text-gray-400">&middot;</span>
-
 <time class="dt-published" datetime="{{ post.properties.published[0] }}"
   title="{{ post.properties.published[0] }}">
-  <a href="{{ post.url }}" class="hover:text-black">
+  <a href="{{ post.url[0] | replace('https://barryf.co.uk', '') }}" class="hover:text-black">
     {{ helpers.humanDate(post.properties.published[0]) | upper }}
   </a>
 </time>
