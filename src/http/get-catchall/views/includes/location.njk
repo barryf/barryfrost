@@ -1,7 +1,11 @@
-{%- if post.checkin %}
+{%- if post.properties.checkin %}
 
-{%- set location = post.properties.checkin %}
-<p class="location">
+<h2 class="text-gray-600 uppercase">
+  Checked in at
+</h2>
+
+{%- set location = post.properties.checkin[0] %}
+<div class="location mb-8 text-lg md:text-xl text-gray-800">
   <span class="p-checkin h-card">
     <a href="https://maps.google.com/maps?q={{ location.properties.latitude[0] }},{{ location.properties.longitude[0] }}">
       <data class="p-latitude" value="{{ location.properties.latitude[0] }}"></data>
@@ -11,6 +15,6 @@
       <span class="p-region">{{ location.properties.region[0] }}</span>{% endif %}
     </a>
   </span>
-</p>
+</div>
 
 {%- endif %}
