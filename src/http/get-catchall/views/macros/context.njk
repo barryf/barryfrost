@@ -3,8 +3,10 @@
 
 {%- if context.properties %}
   {%- set author = context.properties.author %}
-  <h2 class="text-gray-600">
-    {{ contextLabel }}
+  <div class="text-gray-600">
+    <span class="uppercase">
+      {{ contextLabel }}
+    </span>
     {%- if author and author[0].properties and author[0].properties.name %}
       <a href="{{ author[0].properties.url[0] }}" class="font-bold text-yellow-600 hover:text-black" rel="noopener">
         {%- if author[0].properties.photo %}
@@ -20,7 +22,7 @@
         {{ helpers.iconFromUrl(context.properties.url[0]) | safe }}
       </span>
     </a>
-  </h2>
+  </div>
   {%- if context.properties.content or context.properties.name %}
     <div class="mb-4 mt-1 prose">
       <blockquote>
@@ -49,7 +51,9 @@
     </div>
   {%- endif %}
 {%- else %}
-  <h2>{{ contextLabel }}</h2>
+  <h2 class="text-gray-600 uppercase">
+    {{ contextLabel }}
+  </h2>
   <a href={{ context }} class="font-bold text-yellow-600 hover:text-black" rel="noopener">
       {{ context }}
   </a>
