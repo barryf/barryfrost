@@ -4,7 +4,7 @@
 {%- if context.properties %}
   {%- set author = context.properties.author %}
   <div class="text-gray-600">
-    <span class="uppercase">
+    <span class="uppercase text-sm md:text-base">
       {{ contextLabel }}
     </span>
     {%- if author and author[0].properties and author[0].properties.name %}
@@ -51,7 +51,7 @@
     </div>
   {%- endif %}
 {%- else %}
-  <h2 class="text-gray-600 uppercase">
+  <h2 class="text-gray-600 text-sm md:text-base uppercase">
     {{ contextLabel }}
   </h2>
   <a href={{ context }} class="font-bold text-yellow-600 hover:text-black" rel="noopener">
