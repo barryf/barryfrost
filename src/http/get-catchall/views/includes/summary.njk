@@ -8,5 +8,9 @@
   {%- elif post.properties.checkin %}
     {{ post.properties.checkin[0].properties.name[0] | safe }}
 
+  {%- elif post.properties['like-of'] %}
+    <span class="text-gray-600">Liked a post on</span>
+    {{ helpers.urlHost(post.properties['like-of'][0]) }}
+
   {%- endif %}
 </div>
