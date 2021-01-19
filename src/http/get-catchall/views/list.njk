@@ -12,8 +12,10 @@
       </div>
 
       {%- if post.properties.name %}
-        <h2 class="p-name text-lg md:text-xl tracking-tight text-gray-900 dark:text-gray-100">
-          {{ helpers.postTitle(post) | safe }}
+        <h2 class="p-name text-lg md:text-xl tracking-tight text-gray-800 dark:text-gray-200">
+          <a href="{{ post.url[0] }}" class="{{ 'font-bold text-yellow-600' if post['post-type'] == 'article' }} hover:text-black">
+            {{ post.properties.name[0] }}
+          </a>
         </h2>
       {%- endif %}
 
