@@ -38,7 +38,7 @@ function getMetadata (post) {
     title = post['post-type'][0].charAt(0).toUpperCase() +
       post['post-type'][0].slice(1) +
       ': ' +
-      post.url.split('/').slice(-1)
+      post.url[0].split('/').slice(-1)
   }
   let description = ''
   // use post content for the description if it exists
@@ -139,7 +139,7 @@ async function getPost (url) {
         body: body.error_description
       }
   }
-  const post = { ...body, url: `${process.env.ROOT_URL}${url}` }
+  const post = { ...body, url: [`${process.env.ROOT_URL}${url}`] }
   if (!template) template = 'post.njk'
   const html = nunjucks.render(template, {
     post,
