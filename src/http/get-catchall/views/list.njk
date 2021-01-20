@@ -6,16 +6,14 @@
   {%- for post in posts %}
     <li class="h-entry mb-8">
 
-      <div class="mb-1 text-sm md:text-base text-gray-600 dark:text-gray-400">
+      <div class="mb-0.5 text-sm md:text-base text-gray-600 dark:text-gray-200">
         {%- include 'includes/post-type-icon.njk' %}
         {%- include 'includes/published.njk' %}
       </div>
 
       {%- if post.properties.name %}
-        <h2 class="p-name text-lg md:text-xl tracking-tight text-gray-800 dark:text-gray-200">
-          <a href="{{ post.url[0] }}" class="{{ 'font-bold text-yellow-600' if post['post-type'] == 'article' }} hover:text-black">
-            {{ post.properties.name[0] }}
-          </a>
+        <h2 class="p-name text-lg md:text-xl tracking-tight text-gray-600 dark:text-gray-200 {{ 'font-bold' if post['post-type'] == 'article' }}">
+          {{ post.properties.name[0] }}
         </h2>
       {%- endif %}
 
@@ -26,7 +24,16 @@
 </ul>
 
 {%- if lastPublishedInt %}
-  <p><a href="?before={{ lastPublishedInt }}" rel="nofollow prev">Previous</a></p>
+  <div>
+    <a href="?before={{ lastPublishedInt }}" rel="nofollow prev" class="flex text-gray-600 hover:text-yellow-600">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5 md:w-6 md:h-6">
+        <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd" />
+      </svg>
+      <span class="uppercase text-sm md:text-base">
+        Previous
+      </span>
+    </a>
+  </div>
 {%- endif %}
 
 {%- endblock %}

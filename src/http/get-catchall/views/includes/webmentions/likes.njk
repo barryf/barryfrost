@@ -9,7 +9,7 @@
     {%- for like in post.properties.like %}
       {%- if like.properties.author %}
         <li class="float-left">
-          <a href="{{ like.properties.url[0] }}" class="block bg-gray-300 w-10 h-10 md:w-11 md:h-11 overflow-hidden rounded-full -mr-1 hover:text-black">
+          <a href="{{ like.properties.url[0] }}" class="block bg-gray-300 w-10 h-10 md:w-11 md:h-11 overflow-hidden rounded-full -mr-1 hover:text-yellow-600">
             {%- if like.properties.author[0].properties.photo %}
               {%- set photoUrl = like.properties.author[0].properties.photo[0].value if like.properties.author[0].properties.photo[0].value else like.properties.author[0].properties.photo[0] %}
               {%- set photoUrl = photoUrl | replace('http://pbs.twimg.com/', 'https://pbs.twimg.com/') %}

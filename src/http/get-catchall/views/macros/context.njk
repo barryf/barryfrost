@@ -8,7 +8,7 @@
       {{ contextLabel }}
     </span>
     {%- if author and author[0].properties and author[0].properties.name %}
-      <a href="{{ author[0].properties.url[0] }}" class="font-bold text-yellow-600 hover:text-black" rel="noopener">
+      <a href="{{ author[0].properties.url[0] }}" class="font-bold hover:text-yellow-600" rel="noopener">
         {%- if author[0].properties.photo %}
           <img src="{{ author[0].properties.photo[0].value if author[0].properties.photo[0].value else author[0].properties.photo[0] }}" class="w-6 h-6 inline-block mx-1 rounded-full">
         {%- endif %}
@@ -17,7 +17,7 @@
       a
     {%- endif %}
     post on
-    <a href="{{ context.properties.url[0] }}" class="font-bold text-yellow-600 hover:text-black" rel="noopener">
+    <a href="{{ context.properties.url[0] }}" class="font-bold hover:text-yellow-600" rel="noopener">
       <span class="w-3 h-3 inline-block">
         {{ helpers.iconFromUrl(context.properties.url[0]) | safe }}
       </span>
@@ -54,7 +54,7 @@
   <h2 class="text-gray-600 text-sm md:text-base uppercase">
     {{ contextLabel }}
   </h2>
-  <a href={{ context }} class="font-bold text-yellow-600 hover:text-black" rel="noopener">
+  <a href={{ context }} class="font-bold hover:text-yellow-600" rel="noopener">
       {{ context }}
   </a>
 {%- endif %}
