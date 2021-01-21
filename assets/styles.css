@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 .prose a {
-  @apply no-underline text-black font-bold;
+  @apply text-gray-800 dark:text-gray-200 font-bold;
 }
 .prose a:hover {
   @apply text-yellow-600 font-bold;

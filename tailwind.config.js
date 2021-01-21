@@ -9,8 +9,8 @@ module.exports = {
       sans: ['plex-sans', 'ui-sans-serif', 'system-ui']
     }
   },
-  variants: {},
   plugins: [
     require('@tailwindcss/typography')
-  ]
+  ],
+  darkMode: 'class'
 }
