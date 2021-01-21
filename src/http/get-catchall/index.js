@@ -117,7 +117,7 @@ async function getPost (url) {
     case 410:
       body = {
         properties: {
-          name: ['410 Gone'],
+          name: ['`410` Gone'],
           content: ['This post has been deleted and is no longer available.']
         }
       }
@@ -126,7 +126,7 @@ async function getPost (url) {
     case 404:
       body = {
         properties: {
-          name: ['404 Not Found'],
+          name: ['`404` Not Found'],
           content: ['The page or post was not found.']
         }
       }
