@@ -3,14 +3,16 @@
 
 {%- if context.properties %}
   {%- set author = context.properties.author %}
-  <div class="text-gray-600">
+  <div class="text-gray-600 dark:text-gray-400">
     <span class="uppercase text-sm md:text-base">
       {{ contextLabel }}
     </span>
     {%- if author and author[0].properties and author[0].properties.name %}
       <a href="{{ author[0].properties.url[0] }}" class="font-bold hover:text-yellow-600" rel="noopener">
         {%- if author[0].properties.photo %}
-          <img src="{{ author[0].properties.photo[0].value if author[0].properties.photo[0].value else author[0].properties.photo[0] }}" class="w-6 h-6 inline-block mx-1 rounded-full">
+          <img src="{{ author[0].properties.photo[0].value if author[0].properties.photo[0].value else author[0].properties.photo[0] }}"
+            alt="{{ author[0].properties.name[0] }}"
+            class="w-6 h-6 inline-block mx-1 rounded-full">
         {%- endif %}
         {{ author[0].properties.name[0] }}</a>&rsquo;s
     {%- else %}
@@ -51,11 +53,11 @@
     </div>
   {%- endif %}
 {%- else %}
-  <h2 class="text-gray-600 text-sm md:text-base uppercase">
+  <h2 class="text-gray-600 dark:text-gray-400 text-sm md:text-base uppercase">
     {{ contextLabel }}
   </h2>
-  <a href={{ context }} class="font-bold hover:text-yellow-600" rel="noopener">
-      {{ context }}
+  <a href={{ context }} class="font-bold text-black dark:text-white hover:text-yellow-600" rel="noopener">
+    {{ context }}
   </a>
 {%- endif %}
 

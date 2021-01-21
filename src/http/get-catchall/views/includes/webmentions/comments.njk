@@ -2,8 +2,8 @@
 
 <div class="mb-4">
     <h2 class="mb-1">
-      <span class="text-gray-600 text-sm md:text-base">COMMENTS</span>
-      <span class="text-gray-400 text-xs md:text-sm">{{ post.properties.comment | length }}</span>
+      <span class="text-gray-600 dark:text-gray-400 text-sm md:text-base">COMMENTS</span>
+      <span class="text-gray-400 dark:text-gray-600 text-xs md:text-sm">{{ post.properties.comment | length }}</span>
     </h2>
     <ul>
     {%- for comment in post.properties.comment %}
@@ -11,7 +11,7 @@
         {%- if comment.properties.author %}
           <div class="flex">
             {%- if comment.properties.author[0].properties.photo %}
-              <div class="bg-gray-300 w-10 h-10 md:w-11 md:h-11 mr-1.5 overflow-hidden rounded-full">
+              <div class="bg-gray-400 dark:text-gray-600 w-10 h-10 md:w-11 md:h-11 mr-1.5 overflow-hidden rounded-full">
                 <a href="{{ comment.properties.url[0] }}">
                   {%- set photoUrl = comment.properties.author[0].properties.photo[0].value if comment.properties.author[0].properties.photo[0].value else comment.properties.author[0].properties.photo[0] %}
                   {%- set photoUrl = photoUrl | replace('http://pbs.twimg.com/', 'https://pbs.twimg.com/') %}
@@ -22,12 +22,12 @@
               </div>
             {%- endif %}
             <div>
-              <div class="text-gray-600 text-sm md:text-base mb-0.5">
+              <div class="text-gray-600 dark:text-gray-400 text-sm md:text-base mb-0.5">
                 <a href="{{ comment.properties.author[0].properties.url[0] }}" class="hover:text-yellow-600">
                   {{ comment.properties.author[0].properties.name[0] }}
                 </a>
               </div>
-              <div class="text-xs md:text-sm text-gray-600">
+              <div class="text-xs md:text-sm text-gray-600 dark:text-gray-400">
                 <a href="{{ comment.properties.url[0] }}" class="hover:text-yellow-600">
                   {{ helpers.humanDate(comment.properties.published[0]) | upper }}
                 </a>
@@ -35,13 +35,13 @@
             </div>
           </div>
         {%- else %}
-          <div class="text-xs md:text-sm text-gray-600">
+          <div class="text-xs md:text-sm text-gray-600 dark:text-gray-400">
             <a href="{{ comment.properties.url[0] }}">
               {{ helpers.humanDate(comment.properties.published[0]) | upper }}
             </a>
           </div>
         {%- endif %}
-        <div class="mt-1 text-sm md:text-base text-gray-600 prose">
+        <div class="mt-1 text-sm md:text-base text-gray-600 dark:text-gray-400 prose">
           {{ helpers.webmentionContent(comment) | safe }}
         </div>
       </li>

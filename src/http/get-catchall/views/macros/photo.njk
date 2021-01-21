@@ -3,7 +3,8 @@
 
 <figure>
   <a href="{{ photoUrl }}">
-    <img class="u-photo shadow rounded" src="{{ photoUrl }}"{%- if photo.alt %} alt="{{ photo.alt }}"{%- endif %}>
+    <img class="u-photo shadow rounded" src="{{ photoUrl }}"
+      alt="{%- if photo.alt %}{{ photo.alt }}{%- else %}Photo{%- endif %}">
   </a>
 </figure>
 
