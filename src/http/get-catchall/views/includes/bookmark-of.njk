@@ -5,7 +5,7 @@
   <ul>
     {%- for bookmarkOf in post.properties['bookmark-of'] %}
       <li>
-        {{ context.context(bookmarkOf, 'Bookmark of', helpers) }}
+        {{ context.context(bookmarkOf, 'Bookmarked', helpers) }}
       </li>
     {%- endfor %}
   </ul>
