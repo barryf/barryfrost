@@ -1,4 +1,5 @@
 {%- extends 'layout.njk' %}
+{%- import 'macros/icon.njk' as icon %}
 
 {%- block head %}
 <link rel="me" href="mailto:auth@barryfrost.com">
@@ -23,6 +24,15 @@
 
 <hr class="mb-8 border-gray-400">
 
-<p><a href="/all">All</a></p>
+<p><a href="/all">All</a></p><Br>
+
+{%- set postTypes = ['Article', 'Note', 'Bookmark', 'RSVP'] %}
+<div class="mb-8 text-lg md:text-xl text-gray-800">
+  {%- for type in postTypes %}
+    <a href="/{{ type | lower }}s" class="hover:text-yellow-600 mr-4 md:mr-5">
+      {{ icon.icon(type | lower) }} {{ type }}s
+    </a>
+  {%- endfor %}
+</div>
 
 {%- endblock %}
