@@ -1,4 +1,5 @@
 {%- extends 'layout.njk' %}
+{%- import 'macros/icon.njk' as icon %}
 
 {%- block content %}
 
@@ -6,8 +7,8 @@
   {%- for post in posts %}
     <li class="h-entry mb-8">
 
-      <div class="mb-0.5 text-sm md:text-base">
-        {%- include 'includes/post-type-icon.njk' %}
+      <div class="mb-0.5 text-sm md:text-base text-gray-600 dark:text-gray-400">
+        {{ icon.icon(post['post-type'][0]) }}
         {%- include 'includes/published.njk' %}
       </div>
 
@@ -24,11 +25,9 @@
 </ul>
 
 {%- if lastPublishedInt %}
-  <div>
-    <a href="?before={{ lastPublishedInt }}" rel="nofollow prev" class="text-gray-600 dark:text-gray-400 hover:text-yellow-600">
-      <span class="uppercase text-sm md:text-base">
-        &larr; Previous
-      </span>
+  <div class="text-right uppercase text-sm md:text-base text-gray-600 dark:text-gray-400">
+    <a href="?before={{ lastPublishedInt }}" rel="nofollow prev" class="hover:text-yellow-600">
+      Next &rarr;
     </a>
   </div>
 {%- endif %}
