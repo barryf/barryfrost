@@ -9,8 +9,16 @@
     {{ post.properties.checkin[0].properties.name[0] | safe }}
 
   {%- elif post.properties['like-of'] %}
-    <span class="text-gray-600">Liked a post on</span>
-    {{ helpers.urlHost(post.properties['like-of'][0]) }}
+    <span class="text-gray-600">
+      Liked a post on
+      {{ helpers.iconFromUrl(post.properties['like-of'][0]) | safe }}
+    </span>
+
+  {%- elif post.properties['repost-of'] %}
+    <span class="text-gray-600">
+      Reposted a post on
+      {{ helpers.iconFromUrl(post.properties['repost-of'][0]) | safe }}
+    </span>
 
   {%- endif %}
 </div>
