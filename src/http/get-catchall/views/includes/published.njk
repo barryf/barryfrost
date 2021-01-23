@@ -1,5 +1,5 @@
 <time class="dt-published" datetime="{{ post.properties.published[0] }}"
-  title="{{ post.properties.published[0] }}">
+  title="{{ post.properties.published[0] | replace('T',' ') | replace('Z', ' UTC') }}">
   <a href="{{ post.url[0] | replace('https://barryf.co.uk', '') }}" class="text-gray-600 dark:text-gray-400 hover:text-yellow-600">
     {{ helpers.humanDate(post.properties.published[0]) | upper }}
   </a>
