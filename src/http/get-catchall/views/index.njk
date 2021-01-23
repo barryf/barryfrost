@@ -24,13 +24,22 @@
 
 <hr class="mb-8 border-gray-400">
 
-<p><a href="/all">All</a></p><Br>
-
-{%- set postTypes = ['Article', 'Note', 'Bookmark', 'RSVP'] %}
-<div class="mb-8 text-lg md:text-xl text-gray-800">
+{%- set postTypes = ['Article', 'Note', 'Photo', 'Bookmark', 'Reply', 'Like', 'Repost', 'Checkin', 'RSVP'] %}
+{%- set klass = 'hover:text-yellow-600 inline-block my-1 mr-2 md:mr-3' %}
+<div class="mb-8 text-lg md:text-xl text-gray-600 dark:text-gray-400">
+  <a href="/all" class="{{ klass }}">
+    <span class="whitespace-nowrap">
+      {{ icon.icon('all') }}
+      All
+    </span>
+  </a>
   {%- for type in postTypes %}
-    <a href="/{{ type | lower }}s" class="hover:text-yellow-600 mr-4 md:mr-5">
-      {{ icon.icon(type | lower) }} {{ type }}s
+    {%- set plural = type + 's' if type != 'Reply' else 'Replies' %}
+    <a href="/{{ plural | lower }}" class="{{ klass }}">
+      <span class="whitespace-nowrap">
+        {{ icon.icon(type | lower) }}
+        {{ plural }}
+      </span>
     </a>
   {%- endfor %}
 </div>
