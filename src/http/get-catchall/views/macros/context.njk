@@ -5,7 +5,7 @@
 {%- if context.properties %}
   <div class="h-cite">
     {%- set author = context.properties.author %}
-    <div class="text-gray-600 dark:text-gray-400">
+    <div class="text-base md:text-lg text-gray-600 dark:text-gray-400">
       <span class="uppercase text-sm md:text-base">
         {{ contextLabel }}
       </span>
@@ -31,10 +31,10 @@
     </div>
     {%- if context.properties.content or context.properties.name %}
       {%- set contextContent = helpers.contextContent(context) | safe %}
-      <div class="mb-4 mt-2 ml-4 prose">
+      <div class="mb-4 mt-2 ml-4 prose md:prose-lg">
         <blockquote>
           {%- if context.properties.name and (context.properties.name[0] | safe ) !== contextContent %}
-            <div class="p-name text-gray-600 dark:text-gray-400 {{ '' if context.properties.content }}">{{ context.properties.name[0] | safe }}</div>
+            <a href="{{ context.properties.url[0] }}" class="p-name text-gray-600 dark:text-gray-400 {{ 'font-bold' if context.properties.content }}">{{ context.properties.name[0] | safe }}</a>
           {%- endif %}
           {%- if context.properties.content %}
             &ldquo;<span class="e-content text-gray-600 dark:text-gray-400">{{ contextContent }}</span>&rdquo;
@@ -58,7 +58,7 @@
     </div>
   {%- endif %}
 {%- else %}
-  <h2 class="text-gray-600 dark:text-gray-400 text-sm md:text-base uppercase">
+  <h2 class="text-gray-600 dark:text-gray-400 text-base md:text-lg uppercase">
     {{ contextLabel }}
   </h2>
   <a href={{ context }} class="{{ contextVerb }} text-lg md:text-xl font-bold text-gray-800 dark:text-gray-200 hover:text-yellow-600" rel="noopener">

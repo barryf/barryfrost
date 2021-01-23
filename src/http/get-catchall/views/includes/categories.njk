@@ -1,8 +1,8 @@
 {% if post.properties.category %}
 
-<ul class="mb-4 text-sm md:text-base text-gray-600 dark:text-gray-400">
+<ul class="mb-4 text-base md:text-lg text-gray-600 dark:text-gray-400">
   {%- for cat in post.properties.category %}
-    <li class="inline-block mr-2">
+    <li class="inline-block mr-1">
       <a href="/categories/{{ cat }}" rel="nofollow tag" class="hover:text-yellow-600">
         #<span class="p-category">{{ cat }}</span>
       </a>
