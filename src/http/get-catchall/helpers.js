@@ -28,8 +28,8 @@ function postContent (post) {
   if ('content' in post.properties) {
     if (typeof post.properties.content[0] === 'string') {
       let html = md.render(post.properties.content[0]).trim()
-      html = html.replace(/[\s]*[@]+([A-Za-z0-9-_]+)/g, ' <a href="https://twitter.com/$1">@$1</a>')
-      html = html.replace(/[\s]*[#]+([A-Za-z0-9-_]+)/g, ' <a href="https://twitter.com/hashtag/$1">#$1</a>')
+      html = html.replace(/[@]+([A-Za-z0-9-_]+)/g, ' <a href="https://twitter.com/$1">@$1</a>')
+      html = html.replace(/[\s]+[#]+([A-Za-z0-9-_]+)/g, ' <a href="https://twitter.com/hashtag/$1">#$1</a>')
       return html
     } else {
       return post.properties.content[0].html.trim()
@@ -121,7 +121,7 @@ function iconFromUrl (url, includeServiceName = false) {
   } else if (host === 'medium.com') {
     svg = '<svg class="w-4 h-4 md:w-5 md:h-5 inline" aria-hidden="true" focusable="false" data-prefix="fab" data-icon="medium" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M0 32v448h448V32H0zm372.2 106.1l-24 23c-2.1 1.6-3.1 4.2-2.7 6.7v169.3c-.4 2.6.6 5.2 2.7 6.7l23.5 23v5.1h-118V367l24.3-23.6c2.4-2.4 2.4-3.1 2.4-6.7V199.8l-67.6 171.6h-9.1L125 199.8v115c-.7 4.8 1 9.7 4.4 13.2l31.6 38.3v5.1H71.2v-5.1l31.6-38.3c3.4-3.5 4.9-8.4 4.1-13.2v-133c.4-3.7-1-7.3-3.8-9.8L75 138.1V133h87.3l67.4 148L289 133.1h83.2v5z"></path></svg>'
     name = 'Medium'
-  } else if (host === 'www.swarmapp.com') {
+  } else if (host === 'www.swarmapp.com' || host === 'swarmapp.com') {
     svg = '<svg class="w-4 h-4 md:w-5 md:h-5 inline" aria-hidden="true" focusable="false" data-prefix="fab" data-icon="foursquare" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 368 512"><path fill="currentColor" d="M323.1 3H49.9C12.4 3 0 31.3 0 49.1v433.8c0 20.3 12.1 27.7 18.2 30.1 6.2 2.5 22.8 4.6 32.9-7.1C180 356.5 182.2 354 182.2 354c3.1-3.4 3.4-3.1 6.8-3.1h83.4c35.1 0 40.6-25.2 44.3-39.7l48.6-243C373.8 25.8 363.1 3 323.1 3zm-16.3 73.8l-11.4 59.7c-1.2 6.5-9.5 13.2-16.9 13.2H172.1c-12 0-20.6 8.3-20.6 20.3v13c0 12 8.6 20.6 20.6 20.6h90.4c8.3 0 16.6 9.2 14.8 18.2-1.8 8.9-10.5 53.8-11.4 58.8-.9 4.9-6.8 13.5-16.9 13.5h-73.5c-13.5 0-17.2 1.8-26.5 12.6 0 0-8.9 11.4-89.5 108.3-.9.9-1.8.6-1.8-.3V75.9c0-7.7 6.8-16.6 16.6-16.6h219c8.2 0 15.6 7.7 13.5 17.5z"></path></svg>'
     name = 'Swarm'
   } else if (host === 'facebook.com' || host === 'www.facebook.com') {
