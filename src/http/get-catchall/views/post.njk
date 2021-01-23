@@ -1,4 +1,5 @@
 {%- extends 'layout.njk' %}
+{%- import 'macros/icon.njk' as icon %}
 
 {%- block head %}
 <link rel="webmention" href="{{ urls.webmention }}">
@@ -20,7 +21,7 @@
   <header class="mb-8">
     {%- include 'includes/title.njk' %}
     <div class="text-sm md:text-base text-gray-600 dark:text-gray-400">
-      {%- include 'includes/post-type-icon.njk' %}
+      {{ icon.icon(post['post-type'][0]) }}
       {%- include 'includes/published.njk' %}
       {%- include 'includes/author.njk' %}
     </div>
@@ -30,6 +31,7 @@
   {%- include 'includes/bookmark-of.njk' %}
   {%- include 'includes/like-of.njk' %}
   {%- include 'includes/photos.njk' %}
+  {%- include 'includes/rsvp.njk' %}
   {%- include 'includes/content.njk' %}
   {%- include 'includes/categories.njk' %}
   {%- include 'includes/location.njk' %}
