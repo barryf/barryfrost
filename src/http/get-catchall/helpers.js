@@ -146,6 +146,21 @@ function contextVerb (contextLabel) {
   }
 }
 
+function pluralise (term) {
+  switch (term) {
+    case 'reply':
+      return 'replies'
+    case 'Reply':
+      return 'Replies'
+    case 'rsvp':
+      return 'RSVPs'
+    case 'Rsvp':
+      return 'RSVPs'
+    default:
+      return `${term}s`
+  }
+}
+
 module.exports = {
   postTitle,
   postContent,
@@ -157,5 +172,6 @@ module.exports = {
   static: arc.static,
   iconFromUrl,
   urlHost,
-  contextVerb
+  contextVerb,
+  pluralise
 }
