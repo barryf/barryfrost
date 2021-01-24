@@ -12,7 +12,7 @@
 {%- endblock %}
 
 {%- block content %}
-<h1 class="h-card mb-4 text-lg md:text-xl text-gray-800 dark:text-gray-200">
+<h1 class="h-card mb-8 text-lg md:text-xl text-gray-800 dark:text-gray-200">
   <img src="{{ urls.favicon }}" class="u-photo hidden" alt="Barry Frost">
   <span class="p-name uppercase">Barry Frost</a>
 </h1>
@@ -23,10 +23,8 @@
   few lines of text.
 </p>
 
-<hr class="mb-8 border-gray-400">
-
-{%- set postTypes = ['Article', 'Note', 'Photo', 'Bookmark', 'Reply', 'Like', 'Repost', 'Checkin', 'RSVP'] %}
-{%- set klass = 'hover:text-yellow-600 inline-block my-1 mr-2 md:mr-3' %}
+{%- set postTypes = ['Article', 'Note', 'Photo', 'Bookmark', 'Checkin', 'Reply', 'Like', 'Repost', 'RSVP'] %}
+{%- set klass = 'hover:text-yellow-600 inline-block border-gray-300 dark:border-gray-700 hover:border-yellow-600 border-solid border-2 rounded-lg px-2 md:px-3 pt-2 pb-1.5 leading-none mb-2 md:mb-2.5 mr-1 shadow-sm' %}
 <div class="mb-8 text-lg md:text-xl text-gray-600 dark:text-gray-400">
   <a href="/all" class="{{ klass }}">
     <span class="whitespace-nowrap">
