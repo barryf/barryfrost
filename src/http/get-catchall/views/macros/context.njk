@@ -15,7 +15,7 @@
             {%- if author[0].properties.photo %}
               <img src="{{ author[0].properties.photo[0].value if author[0].properties.photo[0].value else author[0].properties.photo[0] }}"
                 alt="{{ author[0].properties.name[0] }}"
-                class="u-photo w-6 md:w-7 inline-block mx-1 rounded-full">
+                class="u-photo w-6 h6 md:w-7 md:h-7 inline-block mx-1 rounded-full">
             {%- endif %}
             <span class="p-name">{{ author[0].properties.name[0] }}</span></a>&rsquo;s
         </span>

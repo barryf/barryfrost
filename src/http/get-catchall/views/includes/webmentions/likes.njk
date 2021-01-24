@@ -9,7 +9,7 @@
     {%- for like in post.properties.like %}
       {%- if like.properties.author %}
         <li class="h-cite p-like float-left">
-          <a href="{{ like.properties.url[0] }}" class="u-url block bg-gray-300 w-10 h-10 md:w-11 md:h-11 overflow-hidden rounded-full -mr-1 hover:text-yellow-600">
+          <a href="{{ like.properties.url[0] }}" class="u-url block bg-gray-300 w-10 h10 md:w-11 md:h-11 overflow-hidden rounded-full -mr-1 hover:text-yellow-600">
             <span class="h-card p-author">
               {%- if like.properties.author[0].properties.photo %}
                 {%- set photoUrl = like.properties.author[0].properties.photo[0].value if like.properties.author[0].properties.photo[0].value else like.properties.author[0].properties.photo[0] %}
@@ -17,7 +17,7 @@
                 <img src="{{ photoUrl }}"
                   alt="{{ like.properties.author[0].properties.name[0] }}"
                   title="{{ like.properties.author[0].properties.name[0] }}"
-                  class="u-photo w-10 h-10 md:w-11 md:h-11">
+                  class="u-photo w-10 h10 md:w-11 md:h-11">
               {%- else %}
                 <span class="p-name">
                   {{ like.properties.author[0].properties.name[0] }}

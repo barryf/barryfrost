@@ -11,3 +11,14 @@
 .prose blockquote {
   @apply not-italic;
 }
+
+/* mf2 parsers are parsing h-6 */
+.h4  { @apply h-4; }
+.h5  { @apply h-5; }
+.h6  { @apply h-6; }
+.h7  { @apply h-7; }
+.h8  { @apply h-8; }
+.h9  { @apply h-9; }
+.h10 { @apply h-10; }
+.h11 { @apply h-11; }
+.h12 { @apply h-12; }
