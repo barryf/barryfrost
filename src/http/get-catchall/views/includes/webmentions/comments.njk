@@ -11,7 +11,7 @@
         {%- if comment.properties.author %}
           <div class="flex h-card p-author">
             {%- if comment.properties.author[0].properties.photo %}
-              <div class="bg-gray-400 dark:text-gray-600 w-12 h-12 md:w-14 md:h-14 mr-2 overflow-hidden rounded-lg">
+              <div class="bg-gray-400 dark:text-gray-600 w-12 h-12 md:w-14 md:h-14 mr-2 overflow-hidden rounded-full">
                 <a href="{{ comment.properties.url[0] }}" class="u-url">
                   {%- set photoUrl = comment.properties.author[0].properties.photo[0].value if comment.properties.author[0].properties.photo[0].value else comment.properties.author[0].properties.photo[0] %}
                   {%- set photoUrl = photoUrl | replace('http://pbs.twimg.com/', 'https://pbs.twimg.com/') %}
