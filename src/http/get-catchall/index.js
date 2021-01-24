@@ -82,7 +82,7 @@ async function getPostType (postType, before) {
 async function getCategory (category, before) {
   return getList(
     `${micropubSourceUrl}&category=${category}`,
-    category,
+    `#${category}`,
     before
   )
 }
