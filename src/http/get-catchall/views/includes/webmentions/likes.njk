@@ -5,7 +5,7 @@
     <span class="text-gray-600 dark:text-gray-400 text-base md:text-lg">LIKES</span>
     <span class="text-gray-400 dark:text-gray-600 text-sm md:text-base">{{ post.properties.like | length }}</span>
   </h2>
-  <ul class="">
+  <ul>
     {%- for like in post.properties.like %}
       {%- if like.properties.author %}
         <li class="h-cite p-like float-left">
@@ -19,7 +19,9 @@
                   title="{{ like.properties.author[0].properties.name[0] }}"
                   class="u-photo w-10 h-10 md:w-11 md:h-11">
               {%- else %}
-                <span class="p-name">{{ like.properties.author[0].properties.name[0] }}</span>
+                <span class="p-name">
+                  {{ like.properties.author[0].properties.name[0] }}
+                </span>
               {%- endif %}
             </span>
           </a>

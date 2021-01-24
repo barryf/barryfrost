@@ -8,18 +8,22 @@
   <ul>
     {%- for repost in post.properties.repost %}
       {%- if repost.properties.author %}
-        <li class="float-left">
-          <a href="{{ repost.properties.url[0] }}" class="block bg-gray-300 w-10 h-10 md:w-11 md:h-11 overflow-hidden rounded-full -mr-1 hover:text-yellow-600">
-            {%- if repost.properties.author[0].properties.photo %}
-              {%- set photoUrl = repost.properties.author[0].properties.photo[0].value if repost.properties.author[0].properties.photo[0].value else repost.properties.author[0].properties.photo[0] %}
-              {%- set photoUrl = photoUrl | replace('http://pbs.twimg.com/', 'https://pbs.twimg.com/') %}
-              <img src="{{ photoUrl }}"
-                alt="{{ repost.properties.author[0].properties.name[0] }}"
-                title="{{ repost.properties.author[0].properties.name[0] }}"
-                class="w-10 h-10 md:w-11 md:h-11">
-            {%- else %}
-              {{ repost.properties.author[0].properties.name[0] }}
-            {%- endif %}
+        <li class="h-cite p-repost float-left">
+          <a href="{{ repost.properties.url[0] }}" class="u-url block bg-gray-300 w-10 h-10 md:w-11 md:h-11 overflow-hidden rounded-full -mr-1 hover:text-yellow-600">
+            <span class="h-card p-author">
+              {%- if repost.properties.author[0].properties.photo %}
+                {%- set photoUrl = repost.properties.author[0].properties.photo[0].value if repost.properties.author[0].properties.photo[0].value else repost.properties.author[0].properties.photo[0] %}
+                {%- set photoUrl = photoUrl | replace('http://pbs.twimg.com/', 'https://pbs.twimg.com/') %}
+                <img src="{{ photoUrl }}"
+                  alt="{{ repost.properties.author[0].properties.name[0] }}"
+                  title="{{ repost.properties.author[0].properties.name[0] }}"
+                  class="u-photo w-10 h-10 md:w-11 md:h-11">
+              {%- else %}
+                <span class="p-name">
+                  {{ repost.properties.author[0].properties.name[0] }}
+                </span>
+              {%- endif %}
+            </span>
           </a>
         </li>
       {%- endif %}

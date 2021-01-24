@@ -1,21 +1,22 @@
 {%- if post.properties.comment %}
 
 <div class="mb-8">
-    <h2 class="mb-1">
-      <span class="text-gray-600 dark:text-gray-400 text-base md:text-lg">COMMENTS</span>
-      <span class="text-gray-400 dark:text-gray-600 text-sm md:text-base">{{ post.properties.comment | length }}</span>
-    </h2>
-    <ul>
+  <h2 class="mb-1">
+    <span class="text-gray-600 dark:text-gray-400 text-base md:text-lg">COMMENTS</span>
+    <span class="text-gray-400 dark:text-gray-600 text-sm md:text-base">{{ post.properties.comment | length }}</span>
+  </h2>
+  <ul>
     {%- for comment in post.properties.comment %}
-      <li class="mb-4">
+      <li class="mb-4 p-comment h-cite">
         {%- if comment.properties.author %}
-          <div class="flex">
+          <div class="flex h-card p-author">
             {%- if comment.properties.author[0].properties.photo %}
               <div class="bg-gray-400 dark:text-gray-600 w-12 h-12 md:w-14 md:h-14 mr-2 overflow-hidden rounded-lg">
-                <a href="{{ comment.properties.url[0] }}">
+                <a href="{{ comment.properties.url[0] }}" class="u-url">
                   {%- set photoUrl = comment.properties.author[0].properties.photo[0].value if comment.properties.author[0].properties.photo[0].value else comment.properties.author[0].properties.photo[0] %}
                   {%- set photoUrl = photoUrl | replace('http://pbs.twimg.com/', 'https://pbs.twimg.com/') %}
                   <img src="{{ photoUrl }}"
+                    class="u-photo"
                     alt="{{ comment.properties.author[0].properties.name[0] }}"
                     title="{{ comment.properties.author[0].properties.name[0] }}">
                 </a>
@@ -23,13 +24,15 @@
             {%- endif %}
             <div class="mt-0.5">
               <div class="text-gray-600 dark:text-gray-400 text-base md:text-lg">
-                <a href="{{ comment.properties.author[0].properties.url[0] }}" class="hover:text-yellow-600">
+                <a href="{{ comment.properties.author[0].properties.url[0] }}" class="u-url p-name hover:text-yellow-600">
                   {{ comment.properties.author[0].properties.name[0] }}
                 </a>
               </div>
               <div class="text-gray-600 dark:text-gray-400 text-sm md:text-base">
-                <a href="{{ comment.properties.url[0] }}" class="hover:text-yellow-600">
-                  {{ helpers.humanDate(comment.properties.published[0]) | upper }}
+                <a href="{{ comment.properties.url[0] }}" class="u-url hover:text-yellow-600">
+                  <time class="dt-published" datetime="{{ comment.properties.published[0] }}">
+                    {{ helpers.humanDate(comment.properties.published[0]) | upper }}
+                  </time>
                 </a>
               </div>
             </div>
@@ -41,7 +44,7 @@
             </a>
           </div>
         {%- endif %}
-        <div class="mt-1 text-base md:text-lg text-gray-600 dark:text-gray-400 prose">
+        <div class="e-content mt-1 text-base md:text-lg text-gray-600 dark:text-gray-400 prose">
           {{ helpers.webmentionContent(comment) | safe }}
         </div>
       </li>
