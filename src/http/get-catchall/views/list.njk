@@ -2,34 +2,40 @@
 {%- import 'macros/icon.njk' as icon %}
 
 {%- block content %}
+<div class="h-feed">
+  <div class="mb-8 text-lg md:text-xl text-gray-600 dark:text-gray-400">
+    {%- include 'includes/author.njk' %}
+    <span class="text-gray-400 dark:text-gray-600">/</span>
+    <h1 class="inline text-gray-800 dark:text-gray-200">{{ title | upper }}</h1>
+  </div>
 
-<ul class="h-feed">
-  {%- for post in posts %}
-    <li class="h-entry mb-8">
+  <ul>
+    {%- for post in posts %}
+      <li class="h-entry mb-8">
 
-      <div class="mb-0.5 text-sm md:text-base text-gray-600 dark:text-gray-400">
-        {{ icon.icon(post['post-type'][0]) }}
-        {%- include 'includes/published.njk' %}
-      </div>
+        <div class="mb-0.5 text-sm md:text-base text-gray-600 dark:text-gray-400">
+          {{ icon.icon(post['post-type'][0]) }}
+          {%- include 'includes/published.njk' %}
+        </div>
 
-      {%- if post.properties.name %}
-        <h2 class="p-name text-lg md:text-xl tracking-tight text-gray-800 dark:text-gray-200 {{ 'font-bold' if post['post-type'] == 'article' }}">
-          {{ post.properties.name[0] }}
-        </h2>
-      {%- endif %}
+        {%- if post.properties.name %}
+          <h2 class="p-name text-lg md:text-xl tracking-tight text-gray-800 dark:text-gray-200 {{ 'font-bold' if post['post-type'] == 'article' }}">
+            {{ post.properties.name[0] }}
+          </h2>
+        {%- endif %}
 
-      {%- include 'includes/summary.njk' %}
+        {%- include 'includes/summary.njk' %}
 
-    </li>
-  {%- endfor %}
-</ul>
+      </li>
+    {%- endfor %}
+  </ul>
+</div>
 
 {%- if lastPublishedInt %}
-  <div class="text-right uppercase text-sm md:text-base text-gray-600 dark:text-gray-400">
+  <div class="text-right uppercase text-base md:text-lg text-gray-600 dark:text-gray-400">
     <a href="?before={{ lastPublishedInt }}" rel="nofollow prev" class="hover:text-yellow-600">
       Next &rarr;
     </a>
   </div>
 {%- endif %}
-
 {%- endblock %}

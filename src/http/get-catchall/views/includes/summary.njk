@@ -3,22 +3,18 @@
     {{ post.properties.summary[0] | safe }}
 
   {%- elif post.properties.content %}
-    {{ helpers.listContent(post) | safe | truncate(200) }}
+    {{ helpers.listContent(post) | safe | truncate(150) }}
 
   {%- elif post.properties.checkin %}
     {{ post.properties.checkin[0].properties.name[0] | safe }}
 
   {%- elif post.properties['like-of'] %}
-    <span class="text-gray-600">
-      Liked a post on
-      {{ helpers.iconFromUrl(post.properties['like-of'][0]) | safe }}
-    </span>
+    Liked a post on
+    {{ helpers.iconFromUrl(post.properties['like-of'][0]) | safe }}
 
   {%- elif post.properties['repost-of'] %}
-    <span class="text-gray-600">
-      Reposted a post on
-      {{ helpers.iconFromUrl(post.properties['repost-of'][0]) | safe }}
-    </span>
+    Reposted a post on
+    {{ helpers.iconFromUrl(post.properties['repost-of'][0]) | safe }}
 
   {%- endif %}
 </div>

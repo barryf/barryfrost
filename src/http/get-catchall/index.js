@@ -33,9 +33,12 @@ const urls = {
 function getMetadata (post) {
   let title = ''
   if (post.properties.name) {
-    title = post.properties.name[0]
+    if (post['post-type'] && post['post-type'][0] === 'bookmark') {
+      title += 'Bookmark: '
+    }
+    title += post.properties.name[0]
   } else {
-    title = post['post-type'][0].charAt(0).toUpperCase() +
+    title += post['post-type'][0].charAt(0).toUpperCase() +
       post['post-type'][0].slice(1) +
       ': ' +
       post.url[0].split('/').slice(-1)
@@ -67,22 +70,36 @@ async function getIndex () {
 }
 
 async function getPostType (postType, before) {
-  return getList(`${micropubSourceUrl}&post-type=${postType}`, before)
+  let title = helpers.pluralise(postType)
+  title = title.charAt(0).toUpperCase() + title.substr(1) // initial cap
+  return getList(
+    `${micropubSourceUrl}&post-type=${postType}`,
+    title,
+    before
+  )
 }
 
 async function getCategory (category, before) {
-  return getList(`${micropubSourceUrl}&category=${category}`, before)
+  return getList(
+    `${micropubSourceUrl}&category=${category}`,
+    category,
+    before
+  )
 }
 
 async function getPublished (published, before) {
-  return getList(`${micropubSourceUrl}&published=${published}`, before)
+  return getList(
+    `${micropubSourceUrl}&published=${published}`,
+    published,
+    before
+  )
 }
 
 async function getAll (before) {
-  return getList(micropubSourceUrl, before)
+  return getList(micropubSourceUrl, 'All', before)
 }
 
-async function getList (url, before = null) {
+async function getList (url, title, before = null) {
   const limit = 20
   if (before) url = url + '&before=' + parseInt(before, 10)
   // return n+1 rows to check if there is another page
@@ -98,6 +115,7 @@ async function getList (url, before = null) {
     : null
   return nunjucks.render('list.njk', {
     posts: posts.slice(0, limit),
+    title,
     lastPublishedInt,
     helpers,
     urls
