@@ -3,7 +3,7 @@
     {{ post.properties.summary[0] | safe }}
 
   {%- elif post.properties.content %}
-    {{ helpers.listContent(post) | safe | truncate(150) }}
+    {{ helpers.listContent(post) | safe | truncate(100) }}
 
   {%- elif post.properties.checkin %}
     {{ post.properties.checkin[0].properties.name[0] | safe }}
