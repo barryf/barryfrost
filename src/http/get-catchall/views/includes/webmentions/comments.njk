@@ -11,7 +11,7 @@
         {%- if comment.properties.author %}
           <div class="flex">
             {%- if comment.properties.author[0].properties.photo %}
-              <div class="bg-gray-400 dark:text-gray-600 w-12 h-12 md:w-14 md:h-14 mr-2 overflow-hidden rounded-full">
+              <div class="bg-gray-400 dark:text-gray-600 w-12 h-12 md:w-14 md:h-14 mr-2 overflow-hidden rounded-lg">
                 <a href="{{ comment.properties.url[0] }}">
                   {%- set photoUrl = comment.properties.author[0].properties.photo[0].value if comment.properties.author[0].properties.photo[0].value else comment.properties.author[0].properties.photo[0] %}
                   {%- set photoUrl = photoUrl | replace('http://pbs.twimg.com/', 'https://pbs.twimg.com/') %}
@@ -21,7 +21,7 @@
                 </a>
               </div>
             {%- endif %}
-            <div>
+            <div class="mt-0.5">
               <div class="text-gray-600 dark:text-gray-400 text-base md:text-lg">
                 <a href="{{ comment.properties.author[0].properties.url[0] }}" class="hover:text-yellow-600">
                   {{ comment.properties.author[0].properties.name[0] }}
