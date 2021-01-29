@@ -30,6 +30,25 @@ const urls = {
   webmention: 'https://webmention.io/barryf/webmention'
 }
 
+function httpHeaders (cache) {
+  return {
+    headers: {
+      'Content-Type': 'text/html; charset=utf8',
+      'Cache-Control': `s-maxage=${cache}`,
+      'Referrer-Policy': 'no-referrer',
+      'Content-Security-Policy': "script-src 'self'"
+    }
+  }
+}
+
+function dateWithin24Hours (dateString) {
+  const date = new Date(dateString)
+  const timeStamp = Math.round(new Date().getTime() / 1000)
+  const timeStampYesterday = timeStamp - (24 * 3600)
+  const is24 = date >= new Date(timeStampYesterday * 1000).getTime()
+  return is24
+}
+
 function getMetadata (post) {
   let title = ''
   if (post.properties.name) {
@@ -63,9 +82,18 @@ function getMetadata (post) {
 }
 
 async function getIndex () {
+  const response = await fetch(micropubSourceUrl,
+    { headers: { Authorization: `Bearer ${process.env.MICROPUB_TOKEN}` } }
+  )
+  if (!response.ok) return
+  const json = await response.json()
+  const posts = json.items
+  const lastPublishedInt = new Date(posts.slice(-1)[0].properties.published[0]).valueOf()
   return nunjucks.render('index.njk', {
+    posts,
     helpers,
-    urls
+    urls,
+    lastPublishedInt
   })
 }
 
@@ -111,7 +139,7 @@ async function getList (url, title, before = null) {
   const json = await response.json()
   const posts = json.items
   const lastPublishedInt = (posts.length === (limit + 1))
-    ? new Date(posts.slice(-2)[0].properties.published[0]).valueOf()
+    ? new Date(posts.slice(-1)[0].properties.published[0]).valueOf()
     : null
   return nunjucks.render('list.njk', {
     posts: posts.slice(0, limit),
@@ -158,38 +186,34 @@ async function getPost (url) {
       }
   }
   const post = { ...body, url: [`${process.env.ROOT_URL}${url}`] }
+  const raw = JSON.stringify(post, null, 2)
   if (!template) template = 'post.njk'
-  const html = nunjucks.render(template, {
+  body = nunjucks.render(template, {
     post,
-    raw: JSON.stringify(post, null, 2),
+    raw,
     metadata: getMetadata(post),
     helpers,
     urls
   })
+  const cache = dateWithin24Hours(post.properties.published[0]) ? '60' : '3600'
   return {
+    cache,
     statusCode: response.status,
-    body: html
+    body,
+    raw
   }
 }
 
 exports.handler = async function http (req) {
-  const { before } = req.queryStringParameters || {}
+  const { before, mf2json } = req.queryStringParameters || {}
   // strip initial/ending slash, remove any api gateway stage, clean characters
   const url = req.rawPath.substr(1).replace(/^staging\//, '')
     .replace(/[^a-z0-9/-]/, '').replace(/\/$/, '')
-  const httpHeaders = {
-    headers: {
-      'Content-Type': 'text/html; charset=utf8',
-      'Cache-Control': 's-maxage=60',
-      'Referrer-Policy': 'no-referrer',
-      'Content-Security-Policy': "script-src 'self'"
-    }
-  }
   // category pages, e.g. /categories/indieweb
   if (url.substr(0, 11) === 'categories/') {
     const category = url.substr(11, url.length - 11)
     return {
-      ...httpHeaders,
+      ...httpHeaders(3600),
       statusCode: 200,
       body: await getCategory(category, before)
     }
@@ -199,7 +223,7 @@ exports.handler = async function http (req) {
     let postType = url.substr(0, url.length - 1)
     if (postType === 'replie') postType = 'reply'
     return {
-      ...httpHeaders,
+      ...httpHeaders(3600),
       statusCode: 200,
       body: await getPostType(postType, before)
     }
@@ -207,29 +231,32 @@ exports.handler = async function http (req) {
   } else if (url.match(/^[0-9]{4}(\/[0-9]{2})?(\/[0-9]{2})?$/)) {
     const published = url.replace(/\//g, '-')
     return {
-      ...httpHeaders,
+      ...httpHeaders(3600),
       statusCode: 200,
       body: await getPublished(published, before)
     }
   // all posts
   } else if (url === 'all') {
     return {
-      ...httpHeaders,
+      ...httpHeaders(3600),
       statusCode: 200,
       body: await getAll(before)
     }
   // root index page at /
   } else if (url === '') {
     return {
-      ...httpHeaders,
+      ...httpHeaders(60),
       statusCode: 200,
       body: await getIndex()
     }
   // catch all - assume this is a post
   } else {
-    const response = await getPost(url)
+    const response = await getPost(url, mf2json)
+    if (mf2json !== undefined) {
+      return response.raw
+    }
     return {
-      ...httpHeaders,
+      ...httpHeaders(response.cache),
       statusCode: response.statusCode,
       body: response.body
     }

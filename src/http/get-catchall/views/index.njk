@@ -12,39 +12,65 @@
 {%- endblock %}
 
 {%- block content %}
-<h1 class="h-card float-left text-gray-800 dark:text-gray-200">
-  <img src="{{ urls.favicon }}" class="u-photo mb-4 mr-4 h20 w-20 md:w-24 md:h-24 rounded-full">
+<h1 class="h-card float-left">
+  <img src="{{ urls.favicon }}" alt="Barry Frost" class="u-photo mb-4 mr-4 h20 w-20 md:w-24 md:h-24 rounded-full">
   <span class="p-name hidden uppercase text-2xl md:text-3xl text-center">Barry Frost</span>
+  <a rel="me" href="/" class="u-url hidden"></a>
 </h1>
 
-<div class="mb-8 prose md:prose-lg">
+<div class="mb-16 prose md:prose-lg">
   <p><span class="uppercase font-bold">Hello, I’m Barry Frost.</span> I’m a product engineer and leader with experience building teams, websites and apps. I live in a village in Hertfordshire, UK, with my wife and two sons.</p>
   <p>I’m CTO of <a href="https://www.theroom.io">The Room</a>, a space for brands to exchange products and experiences with true brand advocates in return for authentic engagement.</p>
   <p>Previously, I was CTO of <a href="https://www.gumtree.com/">Gumtree</a>, Director at <a href="https://www.ebayinc.com/">eBay</a>, CTO of <a href="https://www.venntro.com/">Venntro Media Group</a> and a software engineer in startups and SMEs.</p>
   <!--
   <p>I hack on side projects in Ruby and Node.js as part of the <a href="https://indieweb.org">IndieWeb</a> community, including <a href="https://github.com/barryf/micropublish">Micropublish</a>, one of the most feature-complete Micropub clients used to publish and update content on your own website. I maintain my own <a href="https://github.com/barryf/promulgate">WebSub hub</a>, an <a href="https://github.com/barryf/acquiescence">IndieAuth server</a> and contribute to the <a href="https://github.com/indieweb/mention-client-ruby">Webmention gem</a>.</p>
   -->
-  <p>I post all my <a href="/articles" class="whitespace-nowrap">{{ icon.icon('article') }}Articles</a>, <a href="/notes" class="whitespace-nowrap">{{ icon.icon('note') }}Notes</a>, <a href="/photos" class="whitespace-nowrap">{{ icon.icon('photo') }}Photos</a>, <a href="/bookmarks" class="whitespace-nowrap">{{ icon.icon('bookmark') }}Bookmarks</a> and <a href="/checkins" class="whitespace-nowrap">{{ icon.icon('checkin') }}Check-ins</a> on this website using <a href="https://github.com/barryf/transformative">my own software</a>, but also syndicate to <a href="https://twitter.com/barryf">Twitter</a>, <a href="https://pinboard.in/barryf">Pinboard</a> and <a href="https://instagram.com/barryf">Instagram</a>. All my code is on <a href="https://github.com/barryf">GitHub</a>.</p>
-  <p>Email me at <a href="mailto:barry@barryfrost.com">barry@barryfrost.com</a> or send me a <a href="https://twitter.com/messages/compose?recipient_id=4677">DM on Twitter</a>.</p>
+  <p>I post all my <a href="/articles" class="whitespace-nowrap">{{ icon.icon('article') }}Articles</a>, <a href="/notes" class="whitespace-nowrap">{{ icon.icon('note') }}Notes</a>, <a href="/photos" class="whitespace-nowrap">{{ icon.icon('photo') }}Photos</a>, <a href="/bookmarks" class="whitespace-nowrap">{{ icon.icon('bookmark') }}Bookmarks</a> and <a href="/checkins" class="whitespace-nowrap">{{ icon.icon('checkin') }}Check-ins</a> on this website using <a href="https://github.com/barryf/vibrancy">my own software</a>, but also syndicate to <a rel="me" href="https://twitter.com/barryf">Twitter</a>, <a rel="me" href="https://pinboard.in/barryf">Pinboard</a> and <a rel="me" href="https://instagram.com/barryf">Instagram</a>. All my code is on <a rel="me" href="https://github.com/barryf">GitHub</a>.</p>
+  <p>Email me at <a rel="me" href="mailto:barry@barryfrost.com">barry@barryfrost.com</a> or send me a <a href="https://twitter.com/messages/compose?recipient_id=4677">DM on Twitter</a>.</p>
 </div>
 
-{%- set postTypes = ['Article', 'Note', 'Photo', 'Bookmark', 'Checkin', 'Reply', 'Like', 'Repost', 'RSVP'] %}
-{%- set klass = 'hover:text-yellow-600 inline-block border-gray-300 dark:border-gray-700 hover:border-yellow-600 dark:hover:border-yellow-600 border-solid border-2 rounded-lg px-2 md:px-3 py-2 leading-none mb-2 md:mb-2.5 mr-1 shadow-sm' %}
-<div class="mb-8 text-lg md:text-xl text-gray-600 dark:text-gray-400">
-  <a href="/all" class="{{ klass }}">
-    <span class="whitespace-nowrap">
-      {{ icon.icon('all') }}
-      All
-    </span>
+<h1 class="mb-8 text-lg md:text-xl text-gray-600 dark:text-gray-400 uppercase">
+  Latest posts
+</h1>
+
+<div class="h-feed">
+  <ul>
+    {%- for post in posts %}
+      <li class="h-entry mb-8">
+
+        <div class="mb-0.5 text-sm md:text-base text-gray-600 dark:text-gray-400">
+          {{ icon.icon(post['post-type'][0]) }}
+          {%- include 'includes/published.njk' %}
+        </div>
+
+        {%- if post.properties.name %}
+          <h2 class="p-name text-lg md:text-xl tracking-tight text-gray-800 dark:text-gray-200 {{ 'font-bold' if post['post-type'] == 'article' }}">
+            {%- if post['post-type'][0] == 'bookmark' %}
+              <a href="{{ post.properties['bookmark-of'][0] }}" class="hover:text-yellow-600">
+                {{ post.properties.name[0] }}
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="inline w-4 h4 md:w-5 md:h-5 -mt-0.5">
+                  <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z" />
+                  <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z" />
+                </svg>
+              </a>
+            {%- else %}
+              <a href="{{ post.url[0] }}" class="hover:text-yellow-600">
+                {{ post.properties.name[0] }}
+              </a>
+            {%- endif %}
+          </h2>
+        {%- endif %}
+
+        {%- include 'includes/summary.njk' %}
+
+      </li>
+    {%- endfor %}
+  </ul>
+</div>
+
+<div class="text-right uppercase text-base md:text-lg text-gray-600 dark:text-gray-400">
+  <a href="/all?before={{ lastPublishedInt }}" rel="nofollow prev" class="hover:text-yellow-600">
+    Next &rarr;
   </a>
-  {%- for type in postTypes %}
-    {%- set plural = type + 's' if type != 'Reply' else 'Replies' %}
-    <a href="/{{ plural | lower }}" class="{{ klass }}">
-      <span class="whitespace-nowrap">
-        {{ icon.icon(type | lower) }}
-        {{ plural }}
-      </span>
-    </a>
-  {%- endfor %}
 </div>
 {%- endblock %}
