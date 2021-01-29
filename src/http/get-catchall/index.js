@@ -190,7 +190,6 @@ async function getPost (url) {
   if (!template) template = 'post.njk'
   body = nunjucks.render(template, {
     post,
-    raw,
     metadata: getMetadata(post),
     helpers,
     urls
