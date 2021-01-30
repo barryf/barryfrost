@@ -1,8 +1,8 @@
 const arc = require('@architect/functions')
-const fetch = require('node-fetch')
 const sanitizeHtml = require('sanitize-html')
 const nunjucks = require('nunjucks')
 nunjucks.configure('views')
+const api = require('./api')
 const helpers = require('./helpers')
 
 const postTypePlurals = [
@@ -17,8 +17,6 @@ const postTypePlurals = [
   'rsvps',
   'events'
 ]
-
-const micropubSourceUrl = `${process.env.MICROPUB_URL}?q=source`
 
 const urls = {
   root: process.env.ROOT_URL,
@@ -49,7 +47,7 @@ function dateWithin24Hours (dateString) {
   return is24
 }
 
-function getMetadata (post) {
+function metadata (post) {
   let title = ''
   if (post.properties.name) {
     if (post['post-type'] && post['post-type'][0] === 'bookmark') {
@@ -81,59 +79,18 @@ function getMetadata (post) {
   return { title, description }
 }
 
-async function getIndex () {
+async function renderIndex () {
   return nunjucks.render('index.njk', {
     helpers,
     urls
   })
 }
 
-async function getPostType (postType, before) {
-  let title = helpers.pluralise(postType)
-  title = title.charAt(0).toUpperCase() + title.substr(1) // initial cap
-  return getList(
-    `${micropubSourceUrl}&post-type=${postType}`,
-    title,
-    before
-  )
-}
-
-async function getCategory (category, before) {
-  return getList(
-    `${micropubSourceUrl}&category=${category}`,
-    `#${category}`,
-    before
-  )
-}
-
-async function getPublished (published, before) {
-  return getList(
-    `${micropubSourceUrl}&published=${published}`,
-    published,
-    before
-  )
-}
-
-async function getAll (before) {
-  return getList(micropubSourceUrl, 'All', before)
-}
-
-async function getList (url, title, before = null) {
-  const limit = 20
-  if (before) url = url + '&before=' + parseInt(before, 10)
-  // return n+1 rows to check if there is another page
-  url += `&limit=${limit + 1}`
-  const response = await fetch(url,
-    { headers: { Authorization: `Bearer ${process.env.MICROPUB_TOKEN}` } }
-  )
-  if (!response.ok) return
-  const json = await response.json()
-  const posts = json.items
-  const lastPublishedInt = (posts.length === (limit + 1))
-    ? new Date(posts.slice(-1)[0].properties.published[0]).valueOf()
-    : null
+async function renderList (posts, title) {
+  const lastPublishedInt = posts.lastPublishedInt
+  delete posts.lastPublishedInt
   return nunjucks.render('list.njk', {
-    posts: posts.slice(0, limit),
+    posts,
     title,
     lastPublishedInt,
     helpers,
@@ -141,114 +98,94 @@ async function getList (url, title, before = null) {
   })
 }
 
-async function getPost (url) {
-  const response = await fetch(
-    `${micropubSourceUrl}&url=${process.env.ROOT_URL}${url}`,
-    { headers: { Authorization: `Bearer ${process.env.MICROPUB_TOKEN}` } }
-  )
-  let body, template
-  switch (response.status) {
-    case 200:
-      body = await response.json()
-      break
-    case 410:
-      body = {
-        properties: {
-          name: ['`410` Gone'],
-          content: ['This post has been deleted and is no longer available.']
-        }
-      }
-      template = 'page.njk'
-      break
-    case 404:
-      body = {
-        properties: {
-          name: ['`404` Not Found'],
-          content: ['The page or post was not found.']
-        }
-      }
-      template = 'page.njk'
-      break
-    default:
-      body = await response.json()
-      return {
-        statusCode: response.status,
-        body: body.error_description
-      }
-  }
-  const post = { ...body, url: [`${process.env.ROOT_URL}${url}`] }
-  const raw = JSON.stringify(post, null, 2)
-  if (!template) template = 'post.njk'
-  body = nunjucks.render(template, {
+function renderPost (post) {
+  const statusCode = post.statusCode || 200
+  delete post.statusCode
+  const template = (post.statusCode && post.statusCode !== 200) ? 'page' : 'post'
+  const body = nunjucks.render(`${template}.njk`, {
     post,
-    metadata: getMetadata(post),
+    metadata: metadata(post),
     helpers,
     urls
   })
   const cache = dateWithin24Hours(post.properties.published[0]) ? 60 : 3600
+  const raw = JSON.stringify(post, null, 2)
   return {
-    cache,
-    statusCode: response.status,
+    statusCode,
     body,
+    cache,
     raw
   }
 }
 
-exports.handler = async function http (req) {
-  const { before, mf2json } = req.queryStringParameters || {}
-  // strip initial/ending slash, remove any api gateway stage, clean characters
-  const url = req.rawPath.substr(1).replace(/^staging\//, '')
-    .replace(/[^a-z0-9/-]/, '').replace(/\/$/, '')
+async function handleUrl (url, params) {
+  const { before, mf2json } = params
   // category pages, e.g. /categories/indieweb
   if (url.substr(0, 11) === 'categories/') {
     const category = url.substr(11, url.length - 11)
+    const posts = await api.getCategory(category, before)
     return {
       ...httpHeaders(3600),
       statusCode: 200,
-      body: await getCategory(category, before)
+      body: await renderList(posts, `#${category}`)
     }
   // index pages, e.g. /articles
   } else if (postTypePlurals.includes(url)) {
     // post types e.g. notes (no trailing slash)
     let postType = url.substr(0, url.length - 1)
     if (postType === 'replie') postType = 'reply'
+    let title = helpers.pluralise(postType)
+    title = title.charAt(0).toUpperCase() + title.substr(1) // initial cap
+    const posts = await api.getPostType(postType, before)
     return {
       ...httpHeaders(3600),
       statusCode: 200,
-      body: await getPostType(postType, before)
+      body: await renderList(posts, title)
     }
   // date archive: year, month or day
   } else if (url.match(/^[0-9]{4}(\/[0-9]{2})?(\/[0-9]{2})?$/)) {
     const published = url.replace(/\//g, '-')
+    const posts = await api.getPublished(published, before)
     return {
       ...httpHeaders(3600),
       statusCode: 200,
-      body: await getPublished(published, before)
+      body: await renderList(posts, published)
     }
   // all posts
   } else if (url === 'all') {
+    const posts = await api.getAll(before)
     return {
       ...httpHeaders(3600),
       statusCode: 200,
-      body: await getAll(before)
+      body: await renderList(posts, 'All')
     }
   // root index page at /
   } else if (url === '') {
     return {
       ...httpHeaders(3600),
       statusCode: 200,
-      body: await getIndex()
+      body: await renderIndex()
     }
   // catch all - assume this is a post
   } else {
-    const response = await getPost(url)
+    const post = await api.getPost(url)
+    post.url = [url]
+    const { statusCode, body, cache, raw } = renderPost(post)
     if (mf2json !== undefined) {
-      return response.raw
+      return raw
     }
     return {
-      ...httpHeaders(response.cache),
-      statusCode: response.statusCode,
-      body: response.body
+      ...httpHeaders(cache),
+      statusCode,
+      body
     }
   }
+}
+
+exports.handler = async function http (req) {
+  // strip initial/ending slash, remove any api gateway stage, clean characters
+  const url = req.rawPath.substr(1).replace(/^staging\//, '')
+    .replace(/[^a-z0-9/-]/, '').replace(/\/$/, '')
+  const params = req.queryStringParameters || {}
+  return handleUrl(url, params)
 }
