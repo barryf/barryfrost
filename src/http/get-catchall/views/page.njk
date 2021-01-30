@@ -1,13 +1,18 @@
 {%- extends 'layout.njk' %}
 
+{%- block head %}
+{%- include 'includes/metadata.njk' %}
+{%- endblock %}
+
 {%- block content %}
 <article class="h-entry">
-
-  {%- include 'includes/title.njk' %}
-
+  <header class="mb-8">
+    <div class="mb-8 text-lg md:text-xl text-gray-600 dark:text-gray-400">
+      {%- include 'includes/author.njk' %}
+    </div>
+    {%- include 'includes/title.njk' %}
+  </header>
   {%- include 'includes/content.njk' %}
-
   {%- include 'includes/footer.njk' %}
-
 </article>
 {%- endblock %}
