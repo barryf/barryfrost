@@ -82,18 +82,9 @@ function getMetadata (post) {
 }
 
 async function getIndex () {
-  const response = await fetch(micropubSourceUrl,
-    { headers: { Authorization: `Bearer ${process.env.MICROPUB_TOKEN}` } }
-  )
-  if (!response.ok) return
-  const json = await response.json()
-  const posts = json.items
-  const lastPublishedInt = new Date(posts.slice(-1)[0].properties.published[0]).valueOf()
   return nunjucks.render('index.njk', {
-    posts,
     helpers,
-    urls,
-    lastPublishedInt
+    urls
   })
 }
 
@@ -194,7 +185,7 @@ async function getPost (url) {
     helpers,
     urls
   })
-  const cache = dateWithin24Hours(post.properties.published[0]) ? '60' : '3600'
+  const cache = dateWithin24Hours(post.properties.published[0]) ? 60 : 3600
   return {
     cache,
     statusCode: response.status,
@@ -244,13 +235,13 @@ exports.handler = async function http (req) {
   // root index page at /
   } else if (url === '') {
     return {
-      ...httpHeaders(60),
+      ...httpHeaders(3600),
       statusCode: 200,
       body: await getIndex()
     }
   // catch all - assume this is a post
   } else {
-    const response = await getPost(url, mf2json)
+    const response = await getPost(url)
     if (mf2json !== undefined) {
       return response.raw
     }
