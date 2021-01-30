@@ -174,7 +174,7 @@ async function handleUrl (url, params) {
   // catch all - assume this is a post or page
   } else {
     const post = await api.getPost(url)
-    post.url = [url]
+    post.url = [process.env.ROOT_URL + url]
     const { statusCode, body, cache, raw } = renderPost(post)
     if (mf2json !== undefined) {
       return raw
