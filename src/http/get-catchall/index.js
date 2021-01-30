@@ -101,14 +101,19 @@ async function renderList (posts, title) {
 function renderPost (post) {
   const statusCode = post.statusCode || 200
   delete post.statusCode
-  const template = (post.statusCode && post.statusCode !== 200) ? 'page' : 'post'
+  const template = (
+    (statusCode !== 200) ||
+    (post.channel && post.channel[0] === 'pages')
+  ) ? 'page' : 'post'
   const body = nunjucks.render(`${template}.njk`, {
     post,
     metadata: metadata(post),
     helpers,
     urls
   })
-  const cache = dateWithin24Hours(post.properties.published[0]) ? 60 : 3600
+  const cache = (post.properties.published &&
+    dateWithin24Hours(post.properties.published[0])
+  ) ? 60 : 3600
   const raw = JSON.stringify(post, null, 2)
   return {
     statusCode,
@@ -166,7 +171,7 @@ async function handleUrl (url, params) {
       statusCode: 200,
       body: await renderIndex()
     }
-  // catch all - assume this is a post
+  // catch all - assume this is a post or page
   } else {
     const post = await api.getPost(url)
     post.url = [url]
