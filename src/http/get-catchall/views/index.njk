@@ -2,7 +2,6 @@
 {%- import 'macros/icon.njk' as icon %}
 
 {%- block head %}
-<link rel="me" href="mailto:auth@barryfrost.com">
 <link rel="micropub" href="{{ process.env.MICROPUB_URL }}">
 <link rel="webmention" href="{{ urls.webmention }}">
 <link rel="microsub" href="https://aperture.p3k.io/microsub/28">
@@ -12,14 +11,14 @@
 {%- endblock %}
 
 {%- block content %}
-<h1 class="h-card float-left">
-  <img src="{{ urls.favicon }}" alt="Barry Frost" class="u-photo mb-4 mr-4 h20 w-20 md:w-24 md:h-24 rounded-full">
-  <span class="p-name hidden uppercase text-2xl md:text-3xl text-center">Barry Frost</span>
+<div class="flex mb-8 text-lg md:text-xl leading-6 md:leading-7 text-gray-800 dark:text-gray-200">
+  <img src="{{ urls.favicon }}" class="u-photo w-6 h6 md:w-7 md:h-7 rounded-full mr-1.5">
+  <span class="p-name uppercase text-lg md:text-xl leading-6 md:leading-7">Barry Frost</span>
   <a rel="me" href="/" class="u-url hidden"></a>
-</h1>
+</div>
 
 <div class="mb-16 prose md:prose-lg">
-  <p><span class="uppercase font-bold">Hello, I’m Barry Frost.</span> I’m a product engineer and leader with experience building teams, websites and apps. I live in a village in Hertfordshire, UK, with my wife and two sons.</p>
+  <p><span class="uppercase font-bold">Hello, I’m Barry.</span> I’m a product engineer and leader with experience building teams, websites and apps. I live in a village in Hertfordshire, UK, with my wife and two sons.</p>
   <p>I’m CTO of <a href="https://www.theroom.io">The Room</a>, a space for brands to exchange products and experiences with true brand advocates in return for authentic engagement.</p>
   <p>Previously, I was CTO of <a href="https://www.gumtree.com/">Gumtree</a>, Director at <a href="https://www.ebayinc.com/">eBay</a>, CTO of <a href="https://www.venntro.com/">Venntro Media Group</a> and a software engineer in startups and SMEs.</p>
   <!--
