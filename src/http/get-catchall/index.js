@@ -114,7 +114,8 @@ function renderPost (post) {
   const cache = (post.properties.published &&
     dateWithin24Hours(post.properties.published[0])
   ) ? 60 : 3600
-  const raw = JSON.stringify(post, null, 2)
+  const raw = JSON.stringify(
+    { type: post.type, properties: post.properties }, null, 2)
   return {
     statusCode,
     body,
