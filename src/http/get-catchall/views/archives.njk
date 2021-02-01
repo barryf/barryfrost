@@ -1,0 +1,42 @@
+{%- extends 'layout.njk' %}
+
+{%- block content %}
+  <div class="flex mb-8 text-lg md:text-xl leading-6 md:leading-7 text-gray-600 dark:text-gray-400">
+  {%- include 'includes/author.njk' %}
+  <span class="text-gray-400 dark:text-gray-600 mx-1">/</span>
+  <h1 class="inline text-gray-800 dark:text-gray-200 uppercase">Archives</h1>
+</div>
+
+<ul class="mb-8">
+  {%- for year, months in yearMonths %}
+    <li class="mb-4 uppercase text-gray-800 text-sm md:text-base">
+      <h2 class="mb-1">{{ year }}</h2>
+      <ul>
+        {%- for month in months %}
+          <li class="inline text-gray-400 text-base md:text-lg">
+            <a href="/{{year}}/{{ month }}" class="text-gray-600 hover:text-yellow-600">
+              {{ month }}
+            </a>
+            {{ '/' if not loop.last }}
+          </li>
+        {%- endfor %}
+      </ul>
+    </li>
+  {%- endfor %}
+</ul>
+
+<h2 class="mb-1 uppercase text-gray-800 text-sm md:text-base">
+  Categories
+</h2>
+<ul>
+  {%- for category in categories %}
+    <li class="inline text-gray-400 md:text-lg">
+      <a href="/categories/{{ category }}" class="text-gray-600 hover:text-yellow-600">
+        {{ category }}
+      </a>
+      {{ '/' if not loop.last }}
+    </li>
+  {%- endfor %}
+</ul>
+
+{%- endblock %}

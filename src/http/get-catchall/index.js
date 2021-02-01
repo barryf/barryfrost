@@ -86,6 +86,19 @@ async function renderIndex () {
   })
 }
 
+async function renderArchives (categories) {
+  const yearMonths = {
+    2021: ['01', '02', '03', '04'],
+    2020: ['11', '12']
+  }
+  return nunjucks.render('archives.njk', {
+    yearMonths,
+    categories,
+    helpers,
+    urls
+  })
+}
+
 async function renderList (posts, title) {
   const lastPublishedInt = posts.lastPublishedInt
   delete posts.lastPublishedInt
@@ -164,6 +177,14 @@ async function handleUrl (url, params) {
       ...httpHeaders(3600),
       statusCode: 200,
       body: await renderList(posts, 'All')
+    }
+  // categories, month archives
+  } else if (url === 'archives') {
+    const categories = await api.getCategories()
+    return {
+      ...httpHeaders(3600),
+      statusCode: 200,
+      body: await renderArchives(categories)
     }
   // root index page at /
   } else if (url === '') {

@@ -82,10 +82,21 @@ async function getPost (url) {
   }
 }
 
+async function getCategories () {
+  const response = await fetch(
+    `${process.env.MICROPUB_URL}?q=category`,
+    { headers: { Authorization: `Bearer ${process.env.MICROPUB_TOKEN}` } }
+  )
+  if (response.status === 200) {
+    return await response.json()
+  }
+}
+
 module.exports = {
   getPost,
   getPostType,
   getCategory,
   getPublished,
-  getAll
+  getAll,
+  getCategories
 }
