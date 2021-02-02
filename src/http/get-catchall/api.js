@@ -36,12 +36,13 @@ async function getList (url, before = null) {
     { headers: { Authorization: `Bearer ${process.env.MICROPUB_TOKEN}` } }
   )
   if (!response.ok) return
-  const json = await response.json()
-  const posts = json.items
-  posts.lastPublishedInt = (posts.length === (limit + 1))
+  let posts = (await response.json()).items
+  const lastPublishedInt = (posts.length === (limit + 1))
     ? new Date(posts.slice(-1)[0].properties.published[0]).valueOf()
     : null
-  return posts.slice(0, limit)
+  posts = posts.slice(0, limit)
+  posts.lastPublishedInt = lastPublishedInt
+  return posts
 }
 
 async function getPost (url) {
