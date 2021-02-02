@@ -89,7 +89,7 @@ async function renderIndex () {
 async function renderArchives (categories) {
   const yearMonths = {
     2000: ['10', '11', '12'],
-    2001: ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'],
+    2001: ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11'],
     2004: ['08', '09', '10', '11', '12']
   }
   const currentYear = new Date().getFullYear()
