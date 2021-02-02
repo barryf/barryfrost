@@ -88,8 +88,19 @@ async function renderIndex () {
 
 async function renderArchives (categories) {
   const yearMonths = {
-    2021: ['01', '02', '03', '04'],
-    2020: ['11', '12']
+    2000: ['10', '11', '12'],
+    2001: ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'],
+    2004: ['08', '09', '10', '11', '12']
+  }
+  const currentYear = new Date().getFullYear()
+  const currentMonth = new Date().getMonth() + 1
+  for (let y = 2005; y <= currentYear; y++) {
+    yearMonths[y] = []
+    const maxMonth = (y === currentYear) ? currentMonth : 12
+    for (let m = 1; m <= maxMonth; m++) {
+      const mm = (m < 10) ? `0${m}` : m
+      yearMonths[y].push(mm)
+    }
   }
   return nunjucks.render('archives.njk', {
     yearMonths,
