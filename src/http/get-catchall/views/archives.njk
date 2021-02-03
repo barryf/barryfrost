@@ -7,12 +7,12 @@
   <h1 class="inline text-gray-800 dark:text-gray-200 uppercase">Archives</h1>
 </div>
 
-<h2 class="leading-loose uppercase text-gray-800 dark:text-gray-200 text-sm md:text-base">
+<h2 class="mb-2 uppercase text-gray-800 dark:text-gray-200 text-sm md:text-base">
   Archives
 </h2>
 <ul class="mb-8">
   {%- for year, months in yearMonths %}
-    <li class="leading-loose text-gray-800 dark:text-gray-200 text-base md:text-lg">
+    <li class="mb-2 text-gray-800 dark:text-gray-200 text-base md:text-lg">
       {{ year }}
       <span class="text-gray-400 dark:text-gray-600">–</span>
       <ul class="inline">
@@ -29,7 +29,7 @@
   {%- endfor %}
 </ul>
 
-<h2 class="leading-loose uppercase text-gray-800 dark:text-gray-200 text-sm md:text-base">
+<h2 class="mb-2 uppercase text-gray-800 dark:text-gray-200 text-sm md:text-base">
   Categories
 </h2>
 <ul>
