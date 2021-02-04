@@ -5,7 +5,7 @@
   <ul class="inline-block">
     {%- for syndication in post.properties.syndication %}
       <li class="inline-block mr-1">
-        <a rel="syndication" href="{{ syndication }}" class="u-syndication inline-block text-gray-600 dark:text-gray-400 hover:text-yellow-600">
+        <a rel="syndication" href="{{ syndication }}" class="u-syndication inline-block text-gray-600 dark:text-gray-400 hover:text-yellow-600 dark:hover:text-yellow-600">
           {{ helpers.iconFromUrl(syndication) | safe }}
         </a>
       </li>

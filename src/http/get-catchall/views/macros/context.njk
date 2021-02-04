@@ -11,7 +11,7 @@
       </span>
       {%- if author and author[0].properties and author[0].properties.name %}
         <span class="h-card p-author">
-          <a href="{{ author[0].properties.url[0] }}" class="u-url font-bold hover:text-yellow-600" rel="noopener">
+          <a href="{{ author[0].properties.url[0] }}" class="u-url font-bold hover:text-yellow-600 dark:hover:text-yellow-600" rel="noopener">
             {%- if author[0].properties.photo %}
               <img src="{{ author[0].properties.photo[0].value if author[0].properties.photo[0].value else author[0].properties.photo[0] }}"
                 alt="{{ author[0].properties.name[0] }}"
@@ -23,7 +23,7 @@
         a
       {%- endif %}
       post on
-      <a href="{{ context.properties.url[0] }}" class="{{ contextVerb }} font-bold hover:text-yellow-600" rel="noopener">
+      <a href="{{ context.properties.url[0] }}" class="{{ contextVerb }} font-bold hover:text-yellow-600 dark:hover:text-yellow-600" rel="noopener">
         <span class="inline-block">
           {{ helpers.iconFromUrl(context.properties.url[0], true) | safe }}
         </span>
@@ -61,7 +61,7 @@
   <h2 class="text-gray-600 dark:text-gray-400 text-base md:text-lg uppercase">
     {{ contextLabel }}
   </h2>
-  <a href="{{ context }}" class="{{ contextVerb }} text-lg md:text-xl font-bold text-gray-800 dark:text-gray-200 hover:text-yellow-600" rel="noopener">
+  <a href="{{ context }}" class="{{ contextVerb }} text-lg md:text-xl font-bold text-gray-800 dark:text-gray-200 hover:text-yellow-600 dark:hover:text-yellow-600" rel="noopener">
     {{ context }}
   </a>
 {%- endif %}

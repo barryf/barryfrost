@@ -24,12 +24,12 @@
             {%- endif %}
             <div class="mt-0.5">
               <div class="text-gray-600 dark:text-gray-400 text-sm md:text-base">
-                <a href="{{ comment.properties.author[0].properties.url[0] }}" class="u-url p-name hover:text-yellow-600">
+                <a href="{{ comment.properties.author[0].properties.url[0] }}" class="u-url p-name hover:text-yellow-600 dark:hover:text-yellow-600">
                   {{ comment.properties.author[0].properties.name[0] }}
                 </a>
               </div>
               <div class="text-gray-600 dark:text-gray-400 text-xs md:text-sm">
-                <a href="{{ comment.properties.url[0] }}" class="u-url hover:text-yellow-600">
+                <a href="{{ comment.properties.url[0] }}" class="u-url hover:text-yellow-600 dark:hover:text-yellow-600">
                   <time datetime="{{ comment.properties.published[0] }}"
                     class="dt-published"
                     title="{{ comment.properties.published[0] | replace('T',' ') | replace('Z', ' UTC') }}">

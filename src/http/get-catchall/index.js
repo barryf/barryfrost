@@ -25,7 +25,7 @@ const urls = {
     }.css`),
   favicon: arc.static('/barryfrost-favicon.png'),
   micropub: process.env.MICROPUB_URL,
-  webmention: 'https://webmention.io/barryf/webmention'
+  webmention: process.env.WEBMENTION_URL
 }
 
 function httpHeaders (cache) {

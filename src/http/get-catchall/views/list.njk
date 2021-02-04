@@ -21,7 +21,7 @@
         {%- if post.properties.name %}
           <h2 class="p-name text-lg md:text-xl tracking-tight text-gray-800 dark:text-gray-200 {{ 'font-bold' if post['post-type'] == 'article' }}">
             {%- if post['post-type'][0] == 'bookmark' %}
-              <a href="{{ post.properties['bookmark-of'][0] }}" class="hover:text-yellow-600">
+              <a href="{{ post.properties['bookmark-of'][0] }}" class="hover:text-yellow-600 dark:hover:text-yellow-600">
                 {{ post.properties.name[0] }}
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="inline w-4 h4 md:w-5 md:h-5 -mt-0.5">
                   <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z" />
@@ -29,7 +29,7 @@
                 </svg>
               </a>
             {%- else %}
-              <a href="{{ post.url[0] }}" class="hover:text-yellow-600">
+              <a href="{{ post.url[0] }}" class="hover:text-yellow-600 dark:hover:text-yellow-600">
                 {{ post.properties.name[0] }}
               </a>
             {%- endif %}
@@ -45,7 +45,7 @@
 
 {%- if lastPublishedInt %}
   <div class="text-right uppercase text-base md:text-lg text-gray-600 dark:text-gray-400">
-    <a href="?before={{ lastPublishedInt }}" rel="nofollow prev" class="hover:text-yellow-600">
+    <a href="?before={{ lastPublishedInt }}" rel="nofollow prev" class="hover:text-yellow-600 dark:hover:text-yellow-600">
       Next &rarr;
     </a>
   </div>
