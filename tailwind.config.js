@@ -34,7 +34,7 @@ module.exports = {
   plugins: [
     require('@tailwindcss/typography')
   ],
-  darkMode: 'class',
+  darkMode: 'media',
   variants: {
     typography: ['dark']
   }
