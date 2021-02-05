@@ -2,17 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-.prose a {
-  @apply text-gray-800 dark:text-gray-200 font-bold;
-}
-.prose a:hover {
-  @apply text-yellow-600 dark:text-yellow-600 font-bold;
-}
-.prose blockquote {
-  @apply not-italic;
-}
-
-/* mf2 parsers are parsing h-6 */
+/* mf2 parsers are incorrectly parsing h- */
 .h4  { @apply h-4; }
 .h5  { @apply h-5; }
 .h6  { @apply h-6; }
