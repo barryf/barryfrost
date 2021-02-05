@@ -1,11 +1,11 @@
 {%- if post.properties.checkin %}
 
-<h2 class="text-gray-600 uppercase text-sm md:text-base">
+<h2 class="text-gray-600 dark:text-gray-400 uppercase text-sm md:text-base">
   Checked in at
 </h2>
 
 {%- set location = post.properties.checkin[0] %}
-<div class="location mb-8 text-base md:text-lg text-gray-800">
+<div class="location mb-8 text-base md:text-lg text-gray-800 dark:text-gray-200">
   <div class="p-checkin h-card">
     <div class="text-lg md:text-xl">
       <a href="https://maps.google.com/maps?q={{ location.properties.latitude[0] }},{{ location.properties.longitude[0] }}"

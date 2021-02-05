@@ -3,7 +3,7 @@
     {{ post.properties.summary[0] | safe }}
 
   {%- elif post.properties.content %}
-    {%- set truncateWords = 250 if post['post-type'][0] == 'note' else 125 %}
+    {%- set truncateWords = 200 if post['post-type'][0] == 'note' else 125 %}
     {{ helpers.listContent(post) | safe | truncate(truncateWords) }}
 
   {%- elif post.properties.checkin %}

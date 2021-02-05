@@ -11,9 +11,12 @@ module.exports = {
       typography: (theme) => ({
         DEFAULT: {
           css: {
-            'h2,h3,h4,code,a,blockquote': {
+            'h2,h3,h4,a': {
               color: theme('colors.gray.800'),
               fontStyle: 'normal'
+            },
+            'code,blockquote': {
+              color: theme('colors.gray.700')
             },
             a: {
               fontWeight: 'bold',
@@ -28,12 +31,15 @@ module.exports = {
         },
         dark: {
           css: {
-            'h2,h3,h4,code,a,blockquote': {
+            'h2,h3,h4,a': {
               color: theme('colors.gray.200')
+            },
+            'code,blockquote': {
+              color: theme('colors.gray.300')
             },
             a: {
               code: {
-                color: theme('colors.gray.200'),
+                color: theme('colors.gray.300'),
                 '&:hover': {
                   color: theme('colors.yellow.600')
                 }
