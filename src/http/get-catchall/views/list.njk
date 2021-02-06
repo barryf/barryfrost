@@ -13,8 +13,10 @@
     {%- for post in posts %}
       <li class="h-entry mb-8">
 
-        <div class="mb-0.5 text-sm md:text-base text-gray-600 dark:text-gray-400">
-          {{ icon.icon(post['post-type'][0]) }}
+        <div class="mb-0.5 text-sm md:text-base">
+          <span class="text-gray-500">
+            {{ icon.icon(post['post-type'][0]) }}
+          </span>
           {%- include 'includes/published.njk' %}
         </div>
 
