@@ -11,5 +11,3 @@ get /*
 @static
 fingerprint true
 folder public
-ignore
-  robots.txt

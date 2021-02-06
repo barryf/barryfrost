@@ -39,6 +39,13 @@ function httpHeaders (cache) {
   }
 }
 
+function robotsTxt () {
+  return 'User-agent: *\n' +
+    'Disallow: /categories/*\n' +
+    'Disallow: /tags/*\n' +
+    'Disallow: /all\n'
+}
+
 function dateWithin24Hours (dateString) {
   const date = new Date(dateString)
   const timeStamp = Math.round(new Date().getTime() / 1000)
@@ -213,6 +220,16 @@ async function handleUrl (url, params) {
         Location: `${process.env.ROOT_URL}categories/${category}`
       }
     }
+  // robots.txt
+  } else if (url === 'robotstxt') {
+    return {
+      headers: {
+        'Content-Type': 'text/plain; charset=utf8',
+        'Cache-Control': 's-maxage=3600'
+      },
+      statusCode: 200,
+      body: robotsTxt()
+    }
   // catch all - assume this is a post or page
   } else {
     const post = await api.getPost(url)
@@ -231,8 +248,7 @@ async function handleUrl (url, params) {
 
 exports.handler = async function http (req) {
   // strip initial/ending slash, remove any api gateway stage, clean characters
-  const url = req.rawPath.substr(1).replace(/^staging\//, '')
-    .replace(/[^a-z0-9/-]/, '').replace(/\/$/, '')
+  const url = req.rawPath.substr(1).replace(/[^a-z0-9/-]/, '').replace(/\/$/, '')
   const params = req.queryStringParameters || {}
   return handleUrl(url, params)
 }
