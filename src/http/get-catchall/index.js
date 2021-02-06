@@ -204,6 +204,15 @@ async function handleUrl (url, params) {
       statusCode: 200,
       body: await renderIndex()
     }
+  // redirect tags/* => categories/*
+  } else if (url.substr(0, 5) === 'tags/') {
+    const category = url.substr(5, url.length - 5)
+    return {
+      statusCode: 301,
+      headers: {
+        Location: `${process.env.ROOT_URL}categories/${category}`
+      }
+    }
   // catch all - assume this is a post or page
   } else {
     const post = await api.getPost(url)
