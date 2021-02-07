@@ -34,12 +34,14 @@
 </h2>
 <ul>
   {%- for category in categories %}
-    <li class="inline leading-loose text-gray-400 dark:text-gray-600 md:text-lg">
-      <a href="/categories/{{ category }}" class="text-gray-600 dark:text-gray-400 dark:hover:text-yellow-600 hover:text-yellow-600">
-        {{ category }}
-      </a>
-      {{ '/' if not loop.last }}
-    </li>
+    {%- if not helpers.isUrl(category) %}
+      <li class="inline leading-loose text-gray-400 dark:text-gray-600 md:text-lg">
+        <a href="/categories/{{ category }}" class="text-gray-600 dark:text-gray-400 dark:hover:text-yellow-600 hover:text-yellow-600">
+          {{ category }}
+        </a>
+        {{ '/' if not loop.last }}
+      </li>
+    {%- endif %}
   {%- endfor %}
 </ul>
 

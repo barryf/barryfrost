@@ -15,6 +15,10 @@ const md = require('markdown-it')({
   }
 })
 
+function isUrl (u) {
+  return (u.indexOf('http://') > -1) || (u.indexOf('https://') > -1)
+}
+
 function urlHost (u) {
   const url = new URL(u)
   return url.host
@@ -173,5 +177,6 @@ module.exports = {
   iconFromUrl,
   urlHost,
   contextVerb,
-  pluralise
+  pluralise,
+  isUrl
 }
