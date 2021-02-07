@@ -45,11 +45,13 @@
   </ul>
 </div>
 
-{%- if lastPublishedInt %}
-  <div class="text-right uppercase text-base md:text-lg text-gray-600 dark:text-gray-400">
-    <a href="?before={{ lastPublishedInt }}" rel="nofollow prev" class="hover:text-yellow-600 dark:hover:text-yellow-600">
-      Next &rarr;
-    </a>
-  </div>
-{%- endif %}
+<div class="flex">
+  {%- if nextInt %}
+    <div class="flex-1 text-right uppercase text-base md:text-lg text-gray-600 dark:text-gray-400">
+      <a href="?before={{ nextInt }}" rel="nofollow next" class="hover:text-yellow-600 dark:hover:text-yellow-600">
+        Next &rarr;
+      </a>
+    </div>
+  {%- endif %}
+</div>
 {%- endblock %}

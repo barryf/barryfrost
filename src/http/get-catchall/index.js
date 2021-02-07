@@ -117,13 +117,10 @@ async function renderArchives (categories) {
   })
 }
 
-async function renderList (posts, title) {
-  const lastPublishedInt = posts.lastPublishedInt
-  delete posts.lastPublishedInt
+async function renderList (data, title) {
   return nunjucks.render('list.njk', {
-    posts,
+    ...data,
     title,
-    lastPublishedInt,
     helpers,
     urls
   })
@@ -160,11 +157,11 @@ async function handleUrl (url, params) {
   // category pages, e.g. /categories/indieweb
   if (url.substr(0, 11) === 'categories/') {
     const category = url.substr(11, url.length - 11)
-    const posts = await api.getCategory(category, before)
+    const data = await api.getCategory(category, before)
     return {
       ...httpHeaders(3600),
       statusCode: 200,
-      body: await renderList(posts, `#${category}`)
+      body: await renderList(data, `#${category}`)
     }
   // index pages, e.g. /articles
   } else if (postTypePlurals.includes(url)) {
@@ -173,28 +170,28 @@ async function handleUrl (url, params) {
     if (postType === 'replie') postType = 'reply'
     let title = helpers.pluralise(postType)
     title = title.charAt(0).toUpperCase() + title.substr(1) // initial cap
-    const posts = await api.getPostType(postType, before)
+    const data = await api.getPostType(postType, before)
     return {
       ...httpHeaders(3600),
       statusCode: 200,
-      body: await renderList(posts, title)
+      body: await renderList(data, title)
     }
   // date archive: year, month or day
   } else if (url.match(/^[0-9]{4}(\/[0-9]{2})?(\/[0-9]{2})?$/)) {
     const published = url.replace(/\//g, '-')
-    const posts = await api.getPublished(published, before)
+    const data = await api.getPublished(published, before)
     return {
       ...httpHeaders(3600),
       statusCode: 200,
-      body: await renderList(posts, published)
+      body: await renderList(data, published)
     }
   // all posts
   } else if (url === 'all') {
-    const posts = await api.getAll(before)
+    const data = await api.getAll(before)
     return {
       ...httpHeaders(3600),
       statusCode: 200,
-      body: await renderList(posts, 'All')
+      body: await renderList(data, 'All')
     }
   // categories, month archives
   } else if (url === 'archives') {
