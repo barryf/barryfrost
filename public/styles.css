@@ -933,6 +933,10 @@ video {
   display: none;
 }
 
+.flex-1 {
+  flex: 1 1 0%;
+}
+
 .float-left {
   float: left;
 }
@@ -981,10 +985,6 @@ video {
 
 .leading-loose {
   line-height: 2;
-}
-
-.m-4 {
-  margin: 1rem;
 }
 
 .mx-1 {
@@ -1077,12 +1077,22 @@ video {
   max-height: 10rem;
 }
 
-.max-w-screen-sm {
-  max-width: 640px;
+.max-w-prose {
+  max-width: 65ch;
 }
 
 .overflow-hidden {
   overflow: hidden;
+}
+
+.py-4 {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+.px-4 {
+  padding-left: 1rem;
+  padding-right: 1rem;
 }
 
 .static {
@@ -1360,8 +1370,9 @@ video {
     line-height: 1.75rem;
   }
 
-  .md\:m-8 {
-    margin: 2rem;
+  .md\:py-8 {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
   }
 
   .md\:w-5 {
