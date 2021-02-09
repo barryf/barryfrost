@@ -34,7 +34,7 @@
       <div class="mb-4 mt-2 ml-4 prose md:prose-lg">
         <blockquote>
           {%- if context.properties.name and (context.properties.name[0] | safe ) !== contextContent %}
-            <a href="{{ context.properties.url[0] }}" class="p-name text-gray-600 dark:text-gray-400 {{ 'font-bold' if context.properties.content }}">{{ context.properties.name[0] | safe }}</a>
+            <div class="p-name text-gray-600 dark:text-gray-400 {{ 'font-bold' if context.properties.content }}">{{ context.properties.name[0] | safe }}</div>
           {%- endif %}
           {%- if context.properties.content %}
             &ldquo;<span class="e-content text-gray-600 dark:text-gray-400">{{ contextContent }}</span>&rdquo;
