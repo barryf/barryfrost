@@ -62,9 +62,9 @@ function metadata (post) {
     }
     title += post.properties.name[0]
   } else {
-    title += post['post-type'][0].charAt(0).toUpperCase() +
-      post['post-type'][0].slice(1) +
-      ': ' +
+    let postType = post['post-type'][0]
+    postType = postType === 'rsvp' ? 'RSVP' : postType
+    title += postType.charAt(0).toUpperCase() + postType.slice(1) + ': ' +
       post.url[0].split('/').slice(-1)
   }
   let description = ''
@@ -112,6 +112,7 @@ async function renderArchives (categories) {
   return nunjucks.render('archives.njk', {
     yearMonths,
     categories,
+    title: 'Archives',
     helpers,
     urls
   })
