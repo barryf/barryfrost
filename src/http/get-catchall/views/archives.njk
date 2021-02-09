@@ -1,4 +1,5 @@
 {%- extends 'layout.njk' %}
+{%- import 'macros/icon.njk' as icon %}
 
 {%- block content %}
   <div class="flex mb-8 text-lg md:text-xl leading-6 md:leading-7 text-gray-600 dark:text-gray-400">
@@ -8,7 +9,22 @@
 </div>
 
 <h2 class="mb-2 uppercase text-gray-800 dark:text-gray-200 text-sm md:text-base">
-  Archives
+  Post Types
+</h2>
+<div class="mb-6 grid grid-cols-3 md:grid-cols-4 md:text-lg text-gray-600 dark:text-gray-400">
+  <div class="mb-2"><a href="/articles" class="hover:text-yellow-600"><span class="mr-1">{{ icon.icon('article') }}</span>Articles</a></div>
+  <div class="mb-2"><a href="/notes" class="hover:text-yellow-600"><span class="mr-1">{{ icon.icon('note') }}</span>Notes</a></div>
+  <div class="mb-2"><a href="/photos" class="hover:text-yellow-600"><span class="mr-1">{{ icon.icon('photo') }}</span>Photos</a></div>
+  <div class="mb-2"><a href="/bookmarks" class="hover:text-yellow-600"><span class="mr-1">{{ icon.icon('bookmark') }}</span>Bookmarks</a></div>
+  <div class="mb-2"><a href="/checkins" class="hover:text-yellow-600"><span class="mr-1">{{ icon.icon('checkin') }}</span>Check-ins</a></div>
+  <div class="mb-2"><a href="/likes" class="hover:text-yellow-600"><span class="mr-1">{{ icon.icon('like') }}</span>Likes</a></div>
+  <div class="mb-2"><a href="/replies" class="hover:text-yellow-600"><span class="mr-1">{{ icon.icon('reply') }}</span>Replies</a></div>
+  <div class="mb-2"><a href="/reposts" class="hover:text-yellow-600"><span class="mr-1">{{ icon.icon('repost') }}</span>Reposts</a></div>
+  <div class="mb-2"><a href="/rsvps" class="hover:text-yellow-600"><span class="mr-1">{{ icon.icon('rsvp') }}</span>RSVPs</a></div>
+</div>
+
+<h2 class="mb-2 uppercase text-gray-800 dark:text-gray-200 text-sm md:text-base">
+  Months
 </h2>
 <ul class="mb-8">
   {%- for year, months in yearMonths %}
