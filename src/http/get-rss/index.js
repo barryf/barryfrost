@@ -16,7 +16,7 @@ exports.handler = async function http (req) {
     language: 'en'
   })
 
-  const url = process.env.MICROPUB_URL + '?q=source'
+  const url = 'http://localhost:3333/micropub?q=source&post-type=article'
   const response = await fetch(url,
     { headers: { Authorization: `Bearer ${process.env.MICROPUB_TOKEN}` } }
   )
@@ -31,12 +31,24 @@ exports.handler = async function http (req) {
     }
     let description = ''
     if ('photo' in post.properties) {
-      description += `<img src="${post.properties.photo[0]}">\n`
+      description += `<img src="${post.properties.photo[0]}">\n\n`
     }
-    if ('content' in post.properties) {
+    if ('like-of' in post.properties) {
+      description += `Liked a post on ${post.properties['like-of'][0]}\n\n`
+    }
+    if ('repost-of' in post.properties) {
+      description += `Reposted a post on ${post.properties['repost-of'][0]}\n\n`
+    }
+    if ('checkin' in post.properties) {
+      description += post.properties.checkin[0].properties.name[0] + '\n\n'
+    }
+    if ('summary' in post.properties) {
+      description += post.properties.summary[0]
+    } else if ('content' in post.properties) {
       description += typeof post.properties.content[0] === 'string'
         ? md.render(post.properties.content[0])
         : post.properties.content[0].html || ''
+      description += '\n'
     }
     if (description !== '') { item.description = description }
     feed.item(item)
