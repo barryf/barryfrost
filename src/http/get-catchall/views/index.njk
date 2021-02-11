@@ -2,7 +2,7 @@
 {%- import 'macros/icon.njk' as icon %}
 
 {%- block head %}
-<link rel="micropub" href="{{ process.env.MICROPUB_URL }}">
+<link rel="micropub" href="{{ urls.micropub }}">
 <link rel="webmention" href="{{ urls.webmention }}">
 <link rel="microsub" href="https://aperture.p3k.io/microsub/28">
 <link rel="authorization_endpoint" href="https://indieauth.com/auth">
@@ -26,8 +26,8 @@
   <p>Previously, I was CTO of <a href="https://www.gumtree.com/">Gumtree</a>, Director at <a href="https://www.ebayinc.com/">eBay</a>, CTO of <a href="https://www.venntro.com/">Venntro Media Group</a> and a software engineer in startups and SMEs.</p>
   <!--
   <p>I hack on side projects in Ruby and Node.js as part of the <a href="https://indieweb.org">IndieWeb</a> community, including <a href="https://github.com/barryf/micropublish">Micropublish</a>, one of the most feature-complete Micropub clients used to publish and update content on your own website. I maintain my own <a href="https://github.com/barryf/promulgate">WebSub hub</a>, an <a href="https://github.com/barryf/acquiescence">IndieAuth server</a> and contribute to the <a href="https://github.com/indieweb/mention-client-ruby">Webmention gem</a>.</p>
-  -->
   <p>I post all my <a href="/articles" class="whitespace-nowrap">{{ icon.icon('article') }}Articles</a>, <a href="/notes" class="whitespace-nowrap">{{ icon.icon('note') }}Notes</a>, <a href="/photos" class="whitespace-nowrap">{{ icon.icon('photo') }}Photos</a>, <a href="/bookmarks" class="whitespace-nowrap">{{ icon.icon('bookmark') }}Bookmarks</a> and <a href="/checkins" class="whitespace-nowrap">{{ icon.icon('checkin') }}Check-ins</a> on this website using <a href="https://github.com/barryf/vibrancy">my own software</a>, but also syndicate to <a rel="me" href="https://twitter.com/barryf">Twitter</a>, <a rel="me" href="https://pinboard.in/barryf">Pinboard</a> and <a rel="me" href="https://instagram.com/barryf">Instagram</a>. All my code is on <a rel="me" href="https://github.com/barryf">GitHub</a>.</p>
   <p>Email me at <a rel="me" href="mailto:barry@barryfrost.com">barry@barryfrost.com</a> or send me a <a href="https://twitter.com/messages/compose?recipient_id=4677">DM on Twitter</a>.</p>
+  -->
 </div>
 {%- endblock %}
