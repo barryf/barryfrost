@@ -18,9 +18,16 @@
 {%- endblock %}
 </head>
 <body class="bg-gray-100 dark:bg-gray-900">
-<main class="max-w-prose mx-auto px-4 py-4 md:py-8">
+<div id="top" class="flex flex-col min-h-screen max-w-prose mx-auto px-4 py-4 md:py-8">
+  <main class="flex-auto">
 {%- block content %}
 {%- endblock %}
-</main>
+  </main>
+  <footer class="flex-none max-w-prose min-w-full mx-auto pt-8 text-sm md:text-base text-gray-400 dark:text-gray-600 uppercase">
+    <a href="#top" class="mr-3 hover:text-yellow-600">⇧ Top</a>
+    <a href="/archives" class="mr-3 hover:text-yellow-600">/Archives</a>
+    <a href="/contact" class="hover:text-yellow-600">/Contact</a>
+  </footer>
+</div>
 </body>
 </html>
