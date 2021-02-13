@@ -11,17 +11,14 @@
 
   <ul>
     {%- for post in posts %}
+      {%- set color = helpers.postTypeColor(post['post-type'][0]) %}
       <li class="h-entry mb-8">
-
-        <div class="mb-0.5 text-sm md:text-base">
-          <span class="text-gray-500">
-            {{ icon.icon(post['post-type'][0]) }}
-          </span>
-          {%- include 'includes/published.njk' %}
-        </div>
 
         {%- if post.properties.name %}
           <h2 class="p-name text-lg md:text-xl tracking-tight text-gray-800 dark:text-gray-200 {{ 'font-bold' if post['post-type'] == 'article' }}">
+            <span class="text-{{ color }}-400 dark:text-{{ color }}-600 md:absolute md:-ml-6">
+              {{ icon.icon(post['post-type'][0]) }}
+            </span>
             {%- if post['post-type'][0] == 'bookmark' %}
               <a href="{{ post.properties['bookmark-of'][0] }}" class="hover:text-yellow-600 dark:hover:text-yellow-600">
                 {{ post.properties.name[0] }}
@@ -36,9 +33,17 @@
               </a>
             {%- endif %}
           </h2>
+        {%- else %}
+          <span class="text-{{ color }}-400 dark:text-{{ color }}-600 md:absolute md:-ml-6 md:mt-0.5">
+            {{ icon.icon(post['post-type'][0]) }}
+          </span>
         {%- endif %}
 
         {%- include 'includes/summary.njk' %}
+
+        <div class="mt-1 text-xs md:text-sm">
+          {%- include 'includes/published.njk' %}
+        </div>
 
       </li>
     {%- endfor %}
