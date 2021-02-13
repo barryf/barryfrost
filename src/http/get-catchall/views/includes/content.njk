@@ -1,6 +1,6 @@
 {%- if post.properties.content %}
 
-<div class="e-content mb-8 prose dark:prose-dark {{ 'md:text-lg' if post['post-type'][0] == 'article' else 'text-lg md:text-xl' }} text-gray-700 dark:text-gray-300">
+<div class="e-content mb-8 prose dark:prose-dark {{ 'md:prose-xl' if post['post-type'][0] == 'article' else 'prose-lg lg:prose-xl' }} text-gray-700 dark:text-gray-300">
 {{ helpers.postContent(post) | safe }}
 </div>
 
