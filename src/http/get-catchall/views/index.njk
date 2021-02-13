@@ -15,7 +15,7 @@
 
 {%- block content %}
 <div class="h-card flex mb-8 text-lg md:text-xl leading-6 md:leading-7 text-gray-800 dark:text-gray-200">
-  <img src="{{ urls.favicon }}" alt="Photo of Barry" width="28" height="28" class="u-photo w-6 h6 md:w-7 md:h-7 rounded-full mr-1.5">
+  <img src="{{ urls.favicon }}" alt="Photo of Barry" width="28" height="28" class="u-photo w-6 h6 md:w-7 md:h-7 rounded-full mr-1.5 md:absolute md:-ml-9"">
   <span class="p-name uppercase text-lg md:text-xl leading-6 md:leading-7">Barry Frost</span>
   <a rel="me" href="/" class="u-url hidden"></a>
 </div>
@@ -29,5 +29,6 @@
   <p>I post all my <a href="/articles" class="whitespace-nowrap">{{ icon.icon('article') }}Articles</a>, <a href="/notes" class="whitespace-nowrap">{{ icon.icon('note') }}Notes</a>, <a href="/photos" class="whitespace-nowrap">{{ icon.icon('photo') }}Photos</a>, <a href="/bookmarks" class="whitespace-nowrap">{{ icon.icon('bookmark') }}Bookmarks</a> and <a href="/checkins" class="whitespace-nowrap">{{ icon.icon('checkin') }}Check-ins</a> on this website using <a href="https://github.com/barryf/vibrancy">my own software</a>, but also syndicate to <a rel="me" href="https://twitter.com/barryf">Twitter</a>, <a rel="me" href="https://pinboard.in/barryf">Pinboard</a> and <a rel="me" href="https://instagram.com/barryf">Instagram</a>. All my code is on <a rel="me" href="https://github.com/barryf">GitHub</a>.</p>
   <p>Email me at <a rel="me" href="mailto:barry@barryfrost.com">barry@barryfrost.com</a> or send me a <a href="https://twitter.com/messages/compose?recipient_id=4677">DM on Twitter</a>.</p>
   -->
+  <p><a href="/archives">Archives</a></p>
 </div>
 {%- endblock %}
