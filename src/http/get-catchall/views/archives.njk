@@ -2,7 +2,7 @@
 {%- import 'macros/icon.njk' as icon %}
 
 {%- block content %}
-  <div class="flex mb-8 text-lg md:text-xl leading-6 md:leading-7 text-gray-600 dark:text-gray-400">
+<div class="flex mb-8 text-lg md:text-xl leading-6 md:leading-7 text-gray-600 dark:text-gray-400">
   {%- include 'includes/author.njk' %}
   <span class="text-gray-400 dark:text-gray-600 mx-1">/</span>
   <h1 class="inline text-gray-800 dark:text-gray-200 uppercase">Archives</h1>
@@ -49,17 +49,53 @@
 <h2 class="mb-2 uppercase text-gray-800 dark:text-gray-200 text-sm md:text-base">
   Categories
 </h2>
-<ul>
-  {%- for category in categories %}
-    {%- if not helpers.isUrl(category) %}
-      <li class="inline leading-loose text-gray-400 dark:text-gray-600 md:text-lg">
-        <a href="/categories/{{ category }}" class="text-gray-600 dark:text-gray-400 dark:hover:text-yellow-600 hover:text-yellow-600">
-          {{ category }}
-        </a>
-        {{ '/' if not loop.last }}
-      </li>
-    {%- endif %}
+{%- set letters = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','0','1','2','3','4','5','6','7','8','9'] %}
+<ul class="mb-2 tracking-wider text-gray-400 dark:text-gray-600 text-xl md:text-2xl">
+  {%- for letter in letters %}
+    <li class="inline">
+      <a href="?c={{ letter | lower }}" id="c-{{ letter | lower }}" onClick="this.focus(); filterCategory('{{ letter }}'); return false;" class="focus:text-gray-900 dark:focus:text-gray-100 text-gray-600 dark:text-gray-400 hover:text-yellow-600 dark:hover:text-yellow-600">
+        <code>{{ letter }}</code>
+      </a>
+    </li>
   {%- endfor %}
 </ul>
+<div id="categories" class="mb-8 text-gray-400 dark:text-gray-600 md:text-lg leading-relaxed">
+{%- if filteredCategories %}
+  {%- for cat in filteredCategories %}
+    <a href="/categories/{{ cat }}" class="text-gray-600 dark:text-gray-400 hover:text-yellow-600 dark:hover:text-yellow-600">
+      {{ cat }}
+    </a>
+    {{ '/' if not loop.last }}
+  {%- endfor %}
+{%- endif %}
+</div>
 
+<script>
+// select the letter passed in as param
+document.getElementById('c-{{ c }}').focus();
+// dump all categories
+var categories = {{ categories | dump | safe }}
+function filterCategory (letter) {
+  // clear any existing results
+  var categoriesContainer = document.getElementById('categories');
+  categoriesContainer.innerHTML = '';
+  // filter list based on initial letter
+  var filteredCategories = Array.prototype.filter.call(categories, function (cat, i) {
+    if (cat.substring(0, 1) === letter.toLowerCase()) {
+      return cat;
+    }
+  });
+  // create a link for each filtered category
+  Array.prototype.forEach.call(filteredCategories, function (cat, i) {
+    var a = document.createElement('a');
+    a.href = "/categories/" + cat;
+    a.className = "text-gray-600 dark:text-gray-400 hover:text-yellow-600 dark:hover:text-yellow-600";
+    a.innerText = cat;
+    categoriesContainer.append(a);
+    if (i < filteredCategories.length - 1) {
+      categoriesContainer.append(" / ");
+    }
+  });
+}
+</script>
 {%- endblock %}

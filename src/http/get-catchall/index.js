@@ -33,8 +33,8 @@ function httpHeaders (cache) {
     headers: {
       'Content-Type': 'text/html; charset=utf8',
       'Cache-Control': `s-maxage=${cache}`,
-      'Referrer-Policy': 'no-referrer',
-      'Content-Security-Policy': "script-src 'self'"
+      'Referrer-Policy': 'no-referrer'
+      // 'Content-Security-Policy': "script-src 'self'"
     }
   }
 }
@@ -93,7 +93,7 @@ async function renderIndex () {
   })
 }
 
-async function renderArchives (categories) {
+async function renderArchives (categories, filteredCategories, c) {
   const yearMonths = {
     2000: ['10', '11', '12'],
     2001: ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11'],
@@ -112,6 +112,8 @@ async function renderArchives (categories) {
   return nunjucks.render('archives.njk', {
     yearMonths,
     categories,
+    filteredCategories,
+    c,
     title: 'Archives',
     helpers,
     urls
@@ -197,10 +199,14 @@ async function handleUrl (url, params) {
   // categories, month archives
   } else if (url === 'archives') {
     const categories = await api.getCategories()
+    const c = (params.c || 'A').toLowerCase()
+    const filteredCategories = categories.map(category => {
+      if (category.startsWith(c)) return category
+    }).filter((el) => el != null) // remove nulls
     return {
       ...httpHeaders(3600),
       statusCode: 200,
-      body: await renderArchives(categories)
+      body: await renderArchives(categories, filteredCategories, c)
     }
   // root index page at /
   } else if (url === '') {
