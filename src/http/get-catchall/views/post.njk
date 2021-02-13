@@ -13,12 +13,8 @@
       {%- include 'includes/author.njk' %}
     </div>
     {%- include 'includes/title.njk' %}
-    <div class="text-sm md:text-base text-gray-600 dark:text-gray-400">
-      {{ icon.icon(post['post-type'][0]) }}
-      {%- include 'includes/published.njk' %}
-    </div>
   </header>
-  <div class="mb-8">
+  <div class="mb-12">
     {%- include 'includes/in-reply-to.njk' %}
     {%- include 'includes/repost-of.njk' %}
     {%- include 'includes/bookmark-of.njk' %}
@@ -26,6 +22,9 @@
     {%- include 'includes/photos.njk' %}
     {%- include 'includes/rsvp.njk' %}
     {%- include 'includes/content.njk' %}
+    <div class="md:test-lg pb-4">
+      {%- include 'includes/published.njk' %}
+    </div>
     {%- include 'includes/categories.njk' %}
     {%- include 'includes/location.njk' %}
     {%- include 'includes/syndications.njk' %}
