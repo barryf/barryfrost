@@ -55,6 +55,6 @@ module.exports = {
   ],
   darkMode: 'media',
   variants: {
-    typography: ['dark']
+    typography: ['dark', 'responsive']
   }
 }
