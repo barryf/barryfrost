@@ -9,18 +9,22 @@
 <link rel="token_endpoint" href="https://tokens.indieauth.com/token">
 <link rel="canonical" href="{{ urls.root }}">
 <meta name="title" content="Barry Frost">
-<meta name="description" content="Barry's personal website.">
+<meta name="description" content="Barry Frost's personal website.">
 <title>Barry Frost</title>
 {%- endblock %}
 
 {%- block content %}
-<div class="h-card flex mb-8 text-lg md:text-xl leading-6 md:leading-7 text-gray-800 dark:text-gray-200">
-  <img src="{{ urls.favicon }}" alt="Photo of Barry" width="28" height="28" class="u-photo w-6 h6 md:w-7 md:h-7 rounded-full mr-1.5 md:absolute md:-ml-9"">
-  <span class="p-name uppercase text-lg md:text-xl leading-6 md:leading-7">Barry Frost</span>
+<div class="h-card flex mb-8 text-lg md:text-xl">
+  <img src="{{ urls.favicon }}" alt="Photo of Barry" width="28" height="28"
+    class="u-photo w-6 h6 md:w-7 md:h-7 rounded-full mr-1.5 md:absolute md:-ml-9">
+  <span class="leading-6 md:leading-7 uppercase text-lg md:text-xl
+   text-gray-800 dark:text-gray-200">
+    <span class="p-name">Barry Frost</span>’s personal website.
+  </span>
   <a rel="me" href="/" class="u-url hidden"></a>
 </div>
 
-<div class="mb-16 prose dark:prose-dark md:text-lg text-gray-700 dark:text-gray-300">
+<div class="mb-16 prose dark:prose-dark md:prose-lg lg:prose-xl text-gray-700 dark:text-gray-300">
   <p><span class="uppercase font-bold">Hello, I’m Barry.</span> I’m a product engineer and leader with experience building teams, websites and apps. I live in a village in Hertfordshire, UK, with my wife and two sons.</p>
   <p>I’m CTO of <a href="https://www.theroom.io">The Room</a>, a space for brands to exchange products and experiences with true brand advocates in return for authentic engagement.</p>
   <p>Previously, I was CTO of <a href="https://www.gumtree.com/">Gumtree</a>, Director at <a href="https://www.ebayinc.com/">eBay</a>, CTO of <a href="https://www.venntro.com/">Venntro Media Group</a> and a software engineer in startups and SMEs.</p>
