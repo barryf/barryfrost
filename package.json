@@ -4,9 +4,10 @@
   "description": "Barry Frost's personal website",
   "scripts": {
     "start": "PORT=4444 arc sandbox",
-    "builddev": "npx tailwindcss build assets/styles.css -o public/styles-dev.css",
-    "build": "NODE_ENV=production npx tailwindcss build assets/styles.css -o public/styles.css",
-    "buildjs": "npx babel assets/scripts --out-dir public/scripts"
+    "build": "npm run build-tw; npm run build-js",
+    "build-tw-dev": "npx tailwindcss build assets/styles.css -o public/styles-dev.css",
+    "build-tw": "NODE_ENV=production npx tailwindcss build assets/styles.css -o public/styles.css",
+    "build-js": "npx babel assets/scripts --out-dir public/scripts"
   },
   "repository": {
     "type": "git",
