@@ -7,5 +7,5 @@ preferences.arc
 sam.json
 sam.yaml
 
-public/static.json
 public/styles-dev.css
+public/static.json
