@@ -199,10 +199,13 @@ async function handleUrl (url, params) {
   // categories, month archives
   } else if (url === 'archives') {
     const categories = await api.getCategories()
-    const c = (params.c || 'A').toLowerCase()
-    const filteredCategories = categories.map(category => {
-      if (category.startsWith(c)) return category
-    }).filter((el) => el != null) // remove nulls
+    const c = (params.c || '').toLowerCase()
+    let filteredCategories
+    if (c) {
+      filteredCategories = categories.map(category => {
+        if (category.startsWith(c)) return category
+      }).filter((el) => el != null) // remove nulls
+    }
     return {
       ...httpHeaders(3600),
       statusCode: 200,
