@@ -20,6 +20,9 @@ const postTypePlurals = [
 
 const urls = {
   root: process.env.ROOT_URL,
+  scripts: {
+    archives: arc.static('/scripts/archives.js')
+  },
   css: arc.static(`/styles${
     process.env.NODE_ENV !== 'production' ? '-dev' : ''
     }.css`),
@@ -33,8 +36,8 @@ function httpHeaders (cache) {
     headers: {
       'Content-Type': 'text/html; charset=utf8',
       'Cache-Control': `s-maxage=${cache}`,
-      'Referrer-Policy': 'no-referrer'
-      // 'Content-Security-Policy': "script-src 'self'"
+      'Referrer-Policy': 'no-referrer',
+      'Content-Security-Policy': "script-src 'self'"
     }
   }
 }
@@ -226,6 +229,17 @@ async function handleUrl (url, params) {
       headers: {
         Location: `${process.env.ROOT_URL}categories/${category}`
       }
+    }
+  // categories as javascript array
+  } else if (url === 'categoriesjs') {
+    const categories = await api.getCategories()
+    return {
+      statusCode: 200,
+      headers: {
+        'Content-Type': 'text/javascript; charset=utf8',
+        'Cache-Control': `s-maxage=${3600}`
+      },
+      body: `var categories = ${JSON.stringify(categories)};`
     }
   // robots.txt
   } else if (url === 'robotstxt') {
