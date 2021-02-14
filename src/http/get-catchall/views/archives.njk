@@ -38,7 +38,7 @@
             <a href="/{{year}}/{{ month }}" class="text-gray-600 dark:text-gray-400 hover:text-yellow-600 dark:hover:text-yellow-600">
               {{ month }}
             </a>
-            {{ '/' if not loop.last }}
+            {{ '&nbsp;' | safe if not loop.last }}
           </li>
         {%- endfor %}
       </ul>
@@ -50,10 +50,12 @@
   Categories
 </h2>
 {%- set letters = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','0','1','2','3','4','5','6','7','8','9'] %}
-<ul class="mb-2 tracking-wider text-gray-400 dark:text-gray-600 text-xl md:text-2xl">
+<ul class="mb-2 tracking-wider text-gray-600 dark:text-gray-400 text-xl md:text-2xl">
   {%- for letter in letters %}
     <li class="inline">
-      <a href="?c={{ letter | lower }}" id="c-{{ letter | lower }}" onClick="this.focus(); filterCategory('{{ letter }}'); return false;" class="outline-none focus:text-gray-900 dark:focus:text-gray-100 hover:text-yellow-600 dark:hover:text-yellow-600">
+      <a href="?c={{ letter | lower }}" id="c-{{ letter | lower }}"
+        onClick="this.focus(); filterCategory('{{ letter }}'); return false;"
+        class="outline-none focus:text-gray-900 dark:focus:text-gray-100 hover:text-yellow-600 dark:hover:text-yellow-600">
         <code>{{ letter }}</code>
       </a>
     </li>
