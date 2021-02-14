@@ -43,27 +43,6 @@ function postContent (post) {
   }
 }
 
-function postTypeColor (postType) {
-  switch (postType) {
-    case 'article':
-      return 'yellow'
-    case 'note':
-      return 'green'
-    case 'photo':
-      return 'red'
-    case 'bookmark':
-      return 'blue'
-    case 'checkin':
-      return 'red'
-    case 'like':
-      return 'pink'
-    case 'reply':
-      return 'purple'
-    default:
-      return 'gray'
-  }
-}
-
 function contextContent (context) {
   if (!context.properties.content) return ''
   if (context.properties.content[0].html) {
@@ -189,7 +168,6 @@ function pluralise (term) {
 module.exports = {
   postTitle,
   postContent,
-  postTypeColor,
   contextContent,
   webmentionContent,
   listContent,

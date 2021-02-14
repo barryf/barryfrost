@@ -12,16 +12,16 @@
   Post Types
 </h2>
 <div class="mb-6 grid grid-cols-3 md:grid-cols-4 md:text-lg text-gray-600 dark:text-gray-400">
-  <div class="mb-2"><a href="/all" class="hover:text-yellow-600"><span class="mr-1">{{ icon.icon('all') }}</span>All</a></div>
-  <div class="mb-2"><a href="/articles" class="hover:text-yellow-600"><span class="mr-1">{{ icon.icon('article') }}</span>Articles</a></div>
-  <div class="mb-2"><a href="/notes" class="hover:text-yellow-600"><span class="mr-1">{{ icon.icon('note') }}</span>Notes</a></div>
-  <div class="mb-2"><a href="/photos" class="hover:text-yellow-600"><span class="mr-1">{{ icon.icon('photo') }}</span>Photos</a></div>
-  <div class="mb-2"><a href="/bookmarks" class="hover:text-yellow-600"><span class="mr-1">{{ icon.icon('bookmark') }}</span>Bookmarks</a></div>
-  <div class="mb-2"><a href="/checkins" class="hover:text-yellow-600"><span class="mr-1">{{ icon.icon('checkin') }}</span>Check-ins</a></div>
-  <div class="mb-2"><a href="/likes" class="hover:text-yellow-600"><span class="mr-1">{{ icon.icon('like') }}</span>Likes</a></div>
-  <div class="mb-2"><a href="/replies" class="hover:text-yellow-600"><span class="mr-1">{{ icon.icon('reply') }}</span>Replies</a></div>
-  <div class="mb-2"><a href="/reposts" class="hover:text-yellow-600"><span class="mr-1">{{ icon.icon('repost') }}</span>Reposts</a></div>
-  <div class="mb-2"><a href="/rsvps" class="hover:text-yellow-600"><span class="mr-1">{{ icon.icon('rsvp') }}</span>RSVPs</a></div>
+  <div class="mb-2"><span class="mr-1">{{ icon.icon('all') }}</span><a href="/all" class="hover:text-yellow-600">All</a></div>
+  <div class="mb-2"><span class="mr-1">{{ icon.icon('article') }}</span><a href="/articles" class="hover:text-yellow-600">Articles</a></div>
+  <div class="mb-2"><span class="mr-1">{{ icon.icon('note') }}</span><a href="/notes" class="hover:text-yellow-600">Notes</a></div>
+  <div class="mb-2"><span class="mr-1">{{ icon.icon('photo') }}</span><a href="/photos" class="hover:text-yellow-600">Photos</a></div>
+  <div class="mb-2"><span class="mr-1">{{ icon.icon('bookmark') }}</span><a href="/bookmarks" class="hover:text-yellow-600">Bookmarks</a></div>
+  <div class="mb-2"><span class="mr-1">{{ icon.icon('checkin') }}</span><a href="/checkins" class="hover:text-yellow-600">Check-ins</a></div>
+  <div class="mb-2"><span class="mr-1">{{ icon.icon('like') }}</span><a href="/likes" class="hover:text-yellow-600">Likes</a></div>
+  <div class="mb-2"><span class="mr-1">{{ icon.icon('reply') }}</span><a href="/replies" class="hover:text-yellow-600">Replies</a></div>
+  <div class="mb-2"><span class="mr-1">{{ icon.icon('repost') }}</span><a href="/reposts" class="hover:text-yellow-600">Reposts</a></div>
+  <div class="mb-2"><span class="mr-1">{{ icon.icon('rsvp') }}</span><a href="/rsvps" class="hover:text-yellow-600">RSVPs</a></div>
 </div>
 
 <h2 class="mb-2 uppercase text-gray-800 dark:text-gray-200 text-sm md:text-base">
@@ -53,7 +53,7 @@
 <ul class="mb-2 tracking-wider text-gray-400 dark:text-gray-600 text-xl md:text-2xl">
   {%- for letter in letters %}
     <li class="inline">
-      <a href="?c={{ letter | lower }}" id="c-{{ letter | lower }}" onClick="this.focus(); filterCategory('{{ letter }}'); return false;" class="focus:text-gray-900 dark:focus:text-gray-100 text-gray-600 dark:text-gray-400 hover:text-yellow-600 dark:hover:text-yellow-600">
+      <a href="?c={{ letter | lower }}" id="c-{{ letter | lower }}" onClick="this.focus(); filterCategory('{{ letter }}'); return false;" class="outline-none focus:text-gray-900 dark:focus:text-gray-100 hover:text-yellow-600 dark:hover:text-yellow-600">
         <code>{{ letter }}</code>
       </a>
     </li>
@@ -72,7 +72,7 @@
 
 <script>
 // select the letter passed in as param
-document.getElementById('c-{{ c }}').focus();
+if ('{{ c }}'.length) { document.getElementById('c-{{ c }}').focus(); }
 // dump all categories
 var categories = {{ categories | dump | safe }}
 function filterCategory (letter) {
