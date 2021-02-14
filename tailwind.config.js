@@ -5,7 +5,8 @@ module.exports = {
   ],
   theme: {
     fontFamily: {
-      sans: ['plex-sans', 'ui-sans-serif', 'system-ui']
+      sans: ['plex-sans', 'ui-sans-serif', 'system-ui'],
+      mono: ['ui-monospace', 'SFMono-Regular', 'Consolas', 'Liberation Mono', 'Menlo', 'monospace']
     },
     extend: {
       typography: (theme) => ({
