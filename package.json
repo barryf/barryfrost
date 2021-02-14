@@ -38,6 +38,6 @@
     "autoprefixer": "^10.0.2",
     "aws-sdk": "^2.799.0",
     "postcss": "^8.2.4",
-    "tailwindcss": "^2.0.2"
+    "tailwindcss": "^2.0.3"
   }
 }
