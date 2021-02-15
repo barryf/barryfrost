@@ -2,7 +2,7 @@
 
 <ul class="mb-4">
   {%- for syndication in post.properties.syndication %}
-    <li class="inline-block mr-1">
+    <li class="inline-block mr-1 md:mr-2">
       <a rel="syndication" href="{{ syndication }}" class="u-syndication inline-block text-gray-600 dark:text-gray-400 hover:text-yellow-600 dark:hover:text-yellow-600">
         {{ helpers.iconFromUrl(syndication) | safe }}
       </a>
