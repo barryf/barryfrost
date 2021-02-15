@@ -25,28 +25,6 @@
 </div>
 
 <h2 class="mb-2 uppercase text-gray-800 dark:text-gray-200 text-sm md:text-base">
-  Months
-</h2>
-<ul class="mb-8">
-  {%- for year, months in yearMonths %}
-    <li class="mb-2 text-gray-800 dark:text-gray-200 text-base md:text-lg">
-      {{ year }}
-      <span class="text-gray-400 dark:text-gray-600">–</span>
-      <ul class="inline">
-        {%- for month in months %}
-          <li class="inline text-gray-400 dark:text-gray-600">
-            <a href="/{{year}}/{{ month }}" class="text-gray-600 dark:text-gray-400 hover:text-yellow-600 dark:hover:text-yellow-600">
-              {{ month }}
-            </a>
-            {{ '&nbsp;' | safe if not loop.last }}
-          </li>
-        {%- endfor %}
-      </ul>
-    </li>
-  {%- endfor %}
-</ul>
-
-<h2 class="mb-2 uppercase text-gray-800 dark:text-gray-200 text-sm md:text-base">
   Categories
 </h2>
 {%- set letters = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','0','1','2','3','4','5','6','7','8','9'] %}
@@ -68,8 +46,34 @@
     </a>
     {{ '/' if not loop.last }}
   {%- endfor %}
+  {%- else %}
+    <p class="text-sm md:text-base">
+      Select an initial character to filter categories.
+    </p>
 {%- endif %}
 </div>
+
+<h2 class="mb-2 uppercase text-gray-800 dark:text-gray-200 text-sm md:text-base">
+  Months
+</h2>
+<ul class="mb-8">
+  {%- for year, months in yearMonths %}
+    <li class="mb-2 text-gray-800 dark:text-gray-200 text-base md:text-lg">
+      {{ year }}
+      <span class="text-gray-400 dark:text-gray-600">–</span>
+      <ul class="inline">
+        {%- for month in months %}
+          <li class="inline text-gray-400 dark:text-gray-600">
+            <a href="/{{year}}/{{ month }}" class="text-gray-600 dark:text-gray-400 hover:text-yellow-600 dark:hover:text-yellow-600">
+              {{ month }}
+            </a>
+            {{ '&nbsp;' | safe if not loop.last }}
+          </li>
+        {%- endfor %}
+      </ul>
+    </li>
+  {%- endfor %}
+</ul>
 
 <script src="/categories.js"></script>
 <script src="{{ urls.scripts.archives }}"></script>

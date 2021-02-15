@@ -19,12 +19,12 @@
     class="u-photo w-6 h6 md:w-7 md:h-7 rounded-full mr-1.5 md:absolute md:-ml-9">
   <span class="leading-6 md:leading-7 uppercase text-lg md:text-xl
    text-gray-800 dark:text-gray-200">
-    <span class="p-name">Barry Frost</span>’s personal website.
+    <span class="p-name">Barry Frost</span>
   </span>
   <a rel="me" href="/" class="u-url hidden"></a>
 </div>
 
-<div class="mb-16 prose dark:prose-dark md:prose-lg lg:prose-xl text-gray-700 dark:text-gray-300">
+<div class="mb-12 prose dark:prose-dark md:prose-lg lg:prose-xl text-gray-700 dark:text-gray-300">
   <p><span class="uppercase font-bold">Hello, I’m Barry.</span> I’m a product engineer and leader with experience building teams, websites and apps. I live in a village in Hertfordshire, UK, with my wife and two sons.</p>
   <p>I’m CTO of <a href="https://www.theroom.io">The Room</a>, a space for brands to exchange products and experiences with true brand advocates in return for authentic engagement.</p>
   <p>Previously, I was CTO of <a href="https://www.gumtree.com/">Gumtree</a>, Director at <a href="https://www.ebayinc.com/">eBay</a>, CTO of <a href="https://www.venntro.com/">Venntro Media Group</a> and a software engineer in startups and SMEs.</p>
@@ -33,6 +33,21 @@
   <p>I post all my <a href="/articles" class="whitespace-nowrap">{{ icon.icon('article') }}Articles</a>, <a href="/notes" class="whitespace-nowrap">{{ icon.icon('note') }}Notes</a>, <a href="/photos" class="whitespace-nowrap">{{ icon.icon('photo') }}Photos</a>, <a href="/bookmarks" class="whitespace-nowrap">{{ icon.icon('bookmark') }}Bookmarks</a> and <a href="/checkins" class="whitespace-nowrap">{{ icon.icon('checkin') }}Check-ins</a> on this website using <a href="https://github.com/barryf/vibrancy">my own software</a>, but also syndicate to <a rel="me" href="https://twitter.com/barryf">Twitter</a>, <a rel="me" href="https://pinboard.in/barryf">Pinboard</a> and <a rel="me" href="https://instagram.com/barryf">Instagram</a>. All my code is on <a rel="me" href="https://github.com/barryf">GitHub</a>.</p>
   <p>Email me at <a rel="me" href="mailto:barry@barryfrost.com">barry@barryfrost.com</a> or send me a <a href="https://twitter.com/messages/compose?recipient_id=4677">DM on Twitter</a>.</p>
   -->
-  <p><a href="/archives">Archives</a></p>
+</div>
+
+<div class="h-feed">
+  <div class="flex w-full mb-8 text-base md:text-lg">
+    <h1 class="flex-auto text-gray-800 dark:text-gray-200 uppercase">
+      Selected recent posts
+    </h1>
+    <div class="flex-auto text-right uppercase text-gray-600 dark:text-gray-400">
+      <a href="/all" class="underline hover:text-yellow-600 dark:hover:text-yellow-600">All</a>
+      <span class="text-gray-400 dark:text-gray-600">/</span>
+      <a href="/archives" class="underline hover:text-yellow-600 dark:hover:text-yellow-600">
+        Archives &rarr;
+      </a>
+    </div>
+  </div>
+  {%- include 'includes/list-posts.njk' %}
 </div>
 {%- endblock %}

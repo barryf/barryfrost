@@ -27,6 +27,10 @@ async function getAll (before) {
   return getList(micropubSourceUrl, before)
 }
 
+async function getHomepage () {
+  return getList(`${micropubSourceUrl}&homepage`)
+}
+
 async function getList (url, before = null) {
   const limit = 20
   if (before) url = url + '&before=' + parseInt(before, 10)
@@ -100,5 +104,6 @@ module.exports = {
   getCategory,
   getPublished,
   getAll,
-  getCategories
+  getCategories,
+  getHomepage
 }

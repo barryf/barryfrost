@@ -16,7 +16,7 @@ exports.handler = async function http (req) {
     language: 'en'
   })
 
-  const url = 'http://localhost:3333/micropub?q=source&post-type=article'
+  const url = 'http://localhost:3333/micropub?q=source&homepage'
   const response = await fetch(url,
     { headers: { Authorization: `Bearer ${process.env.MICROPUB_TOKEN}` } }
   )
@@ -32,15 +32,6 @@ exports.handler = async function http (req) {
     let description = ''
     if ('photo' in post.properties) {
       description += `<img src="${post.properties.photo[0]}">\n\n`
-    }
-    if ('like-of' in post.properties) {
-      description += `Liked a post on ${post.properties['like-of'][0]}\n\n`
-    }
-    if ('repost-of' in post.properties) {
-      description += `Reposted a post on ${post.properties['repost-of'][0]}\n\n`
-    }
-    if ('checkin' in post.properties) {
-      description += post.properties.checkin[0].properties.name[0] + '\n\n'
     }
     if ('summary' in post.properties) {
       description += post.properties.summary[0]

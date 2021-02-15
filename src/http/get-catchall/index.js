@@ -89,8 +89,9 @@ function metadata (post) {
   return { title, description }
 }
 
-async function renderIndex () {
+async function renderIndex (data) {
   return nunjucks.render('index.njk', {
+    ...data,
     helpers,
     urls
   })
@@ -216,10 +217,11 @@ async function handleUrl (url, params) {
     }
   // root index page at /
   } else if (url === '') {
+    const data = await api.getHomepage()
     return {
       ...httpHeaders(3600),
       statusCode: 200,
-      body: await renderIndex()
+      body: await renderIndex(data)
     }
   // redirect tags/* => categories/*
   } else if (url.substr(0, 5) === 'tags/') {
