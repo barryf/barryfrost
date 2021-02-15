@@ -70,8 +70,8 @@ function webmentionContent (webmention) {
   }
   const sanitizedHtml = sanitizeHtml(
     html, {
-      allowedTags: ['a'],
-      allowedAttributes: { a: ['href'] }
+      allowedTags: [],
+      allowedAttributes: {}
     }
   )
   return sanitizedHtml
