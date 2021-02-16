@@ -14,11 +14,9 @@
 {%- endblock %}
 
 {%- block content %}
-<div class="h-card flex mb-8 text-lg md:text-xl">
-  <img src="{{ urls.favicon }}" alt="Photo of Barry" width="28" height="28"
-    class="u-photo w-6 h6 md:w-7 md:h-7 rounded-full mr-1.5 md:absolute md:-ml-9">
-  <span class="leading-6 md:leading-7 uppercase text-lg md:text-xl
-   text-gray-800 dark:text-gray-200">
+<div class="h-card flex items-center mb-8 text-lg md:text-xl">
+  <img src="{{ urls.favicon }}" alt="Photo of Barry" width="28" height="28" class="u-photo w-6 h6 md:w-7 md:h-7 rounded-full mr-1.5 md:absolute md:-ml-9">
+  <span class="uppercase text-lg md:text-xl text-gray-800 dark:text-gray-200">
     <span class="p-name">Barry Frost</span>
   </span>
   <a rel="me" href="/" class="u-url hidden"></a>
@@ -38,11 +36,13 @@
 <div class="h-feed">
   <div class="flex w-full mb-8 text-base md:text-lg">
     <h1 class="flex-auto text-gray-800 dark:text-gray-200 uppercase">
-      Selected recent posts
+      Recently
     </h1>
     <div class="flex-auto text-right uppercase text-gray-600 dark:text-gray-400">
-      <a href="/all" class="hover:text-yellow-600 dark:hover:text-yellow-600">All</a>
-      <span class="text-gray-400 dark:text-gray-600">/</span>
+      <!--<a href="/all" class="hover:text-yellow-600 dark:hover:text-yellow-600">
+        All
+      </a>
+      <span class="text-gray-400 dark:text-gray-600">/</span>-->
       <a href="/archives" class="hover:text-yellow-600 dark:hover:text-yellow-600">
         Archives &rarr;
       </a>
