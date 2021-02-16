@@ -1,13 +1,14 @@
 {%- if post.properties.syndication %}
 
-<ul class="mb-4">
+<div class="mb-4 flex">
+  <span class="flex-none uppercase text-xs md:text-sm leading-6 md:leading-7 text-gray-600 dark:text-gray-400">Also on</span>
   {%- for syndication in post.properties.syndication %}
-    <li class="inline-block mr-1 md:mr-2">
-      <a rel="syndication" href="{{ syndication }}" class="u-syndication inline-block text-gray-600 dark:text-gray-400 hover:text-yellow-600 dark:hover:text-yellow-600">
+    <span class="flex ml-2 md:ml-3">
+      <a rel="syndication" href="{{ syndication }}" class="u-syndication flex-none text-gray-600 dark:text-gray-400 hover:text-yellow-600 dark:hover:text-yellow-600">
         {{ helpers.iconFromUrl(syndication) | safe }}
       </a>
-    </li>
+    </span>
   {%- endfor %}
-</ul>
+</div>
 
 {%- endif %}
