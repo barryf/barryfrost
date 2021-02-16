@@ -16,7 +16,7 @@ exports.handler = async function http (req) {
     language: 'en'
   })
 
-  const url = 'http://localhost:3333/micropub?q=source&homepage'
+  const url = `${process.env.MICROPUB_URL}?q=source&homepage`
   const response = await fetch(url,
     { headers: { Authorization: `Bearer ${process.env.MICROPUB_TOKEN}` } }
   )
