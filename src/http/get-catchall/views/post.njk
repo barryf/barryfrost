@@ -37,3 +37,9 @@
   {%- include 'includes/webmentions/comments.njk' %}
 </article>
 {%- endblock %}
+
+{%- block scripts %}
+{%- if helpers.containsTweet(post) %}
+<script src="https://platform.twitter.com/widgets.js"></script>
+{%- endif %}
+{%- endblock %}

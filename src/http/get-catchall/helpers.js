@@ -24,6 +24,14 @@ function urlHost (u) {
   return url.host
 }
 
+function containsTweet (post) {
+  return (
+    'content' in post.properties &&
+    typeof post.properties.content[0] === 'string' &&
+    post.properties.content[0].match(/https?:\/\/twitter\.com\/\w+\/status\/\d+/)
+  )
+}
+
 function postTitle (post) {
   return md.render(post.properties.name[0]).trim()
 }
@@ -31,10 +39,12 @@ function postTitle (post) {
 function postContent (post) {
   if ('content' in post.properties) {
     if (typeof post.properties.content[0] === 'string') {
-      let html = md.render(post.properties.content[0]).trim()
-      html = html.replace(/[@]+([A-Za-z0-9-_]+)/g, ' <a href="https://twitter.com/$1">@$1</a>')
-      html = html.replace(/[\s]+[#]+([A-Za-z0-9-_]+)/g, ' <a href="https://twitter.com/hashtag/$1">#$1</a>')
-      return html
+      let content = post.properties.content[0]
+      content = content.replace(/(https?:\/\/twitter\.com\/\w+\/status\/\d+)/g,
+        '<blockquote class="twitter-tweet"><a href="$1">$1</a></blockquote>')
+      content = content.replace(/[@]+([A-Za-z0-9-_]+)/g, ' <a href="https://twitter.com/$1">@$1</a>')
+      content = content.replace(/[\s]+[#]+([A-Za-z0-9-_]+)/g, ' <a href="https://twitter.com/hashtag/$1">#$1</a>')
+      return md.render(content)
     } else {
       return post.properties.content[0].html.trim()
     }
@@ -178,5 +188,6 @@ module.exports = {
   urlHost,
   contextVerb,
   pluralise,
-  isUrl
+  isUrl,
+  containsTweet
 }
