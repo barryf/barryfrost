@@ -52,7 +52,7 @@ function postContent (post) {
         '<details class="mb-4"><summary class="cursor-pointer hover:text-yellow-600 text-sm md:text-base">$1</summary><a href="$1"><img src="$1" alt=""></a></details>')
       // auto-embed youtube
       content = content.replace(/((?:https?:)?\/\/)?((?:www|m)\.)?((?:youtube\.com|youtu.be))(\/(?:[\w\-]+\?v=|embed\/|v\/)?)([\w\-]+)(\S+)?/g,
-        '<details class="mb-4"><summary class="cursor-pointer hover:text-yellow-600 text-sm md:text-base">$1$2$3$4$5</summary><iframe class="mt-4" type="text/html" width="640" height="360" src="https://www.youtube.com/embed/$5" frameborder="0"></iframe></details>')
+        '<details class="mb-4"><summary class="cursor-pointer hover:text-yellow-600 text-sm md:text-base">$1$2$3$4$5</summary><iframe class="mt-4 w-full" type="text/html" width="640" height="360" src="https://www.youtube.com/embed/$5" frameborder="0"></iframe></details>')
       // auto-embed tweets
       content = content.replace(/(https?:\/\/twitter\.com\/\w+\/status\/\d+)/g,
         '<details class="mb-4"><summary class="cursor-pointer hover:text-yellow-600 text-sm md:text-base">$1</summary><blockquote class="twitter-tweet"><a href="$1">$1</a></blockquote></details>')
