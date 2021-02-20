@@ -39,9 +39,9 @@ function postTitle (post) {
 function postContent (post) {
   if ('content' in post.properties) {
     if (typeof post.properties.content[0] === 'string') {
-      let content = post.properties.content[0]
+      let content = post.properties.content[0].trim()
       content = content.replace(/(https?:\/\/twitter\.com\/\w+\/status\/\d+)/g,
-        '<blockquote class="twitter-tweet"><a href="$1">$1</a></blockquote>')
+        '<details><summary class="cursor-pointer hover:text-yellow-600 text-sm md:text-base">$1</summary><blockquote class="twitter-tweet"><a href="$1">$1</a></blockquote></details>')
       content = content.replace(/[@]+([A-Za-z0-9-_]+)/g, ' <a href="https://twitter.com/$1">@$1</a>')
       content = content.replace(/[\s]+[#]+([A-Za-z0-9-_]+)/g, ' <a href="https://twitter.com/hashtag/$1">#$1</a>')
       return md.render(content)
