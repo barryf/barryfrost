@@ -40,9 +40,18 @@ function postContent (post) {
   if ('content' in post.properties) {
     if (typeof post.properties.content[0] === 'string') {
       let content = post.properties.content[0].trim()
+      // auto-embed images
+      content = content.replace(/(https?:\/\/.*\.(?:gif|png|jpg|jpeg))/g,
+        '<details><summary class="cursor-pointer hover:text-yellow-600 text-sm md:text-base">$1</summary><p><a href="$1"><img src="$1"></a></p></details>')
+      // auto-embed youtube
+      content = content.replace(/((?:https?:)?\/\/)?((?:www|m)\.)?((?:youtube\.com|youtu.be))(\/(?:[\w\-]+\?v=|embed\/|v\/)?)([\w\-]+)(\S+)?/g,
+        '<details><summary class="cursor-pointer hover:text-yellow-600 text-sm md:text-base">$1$2$3$4$5</summary><p><iframe id="ytplayer" type="text/html" width="640" height="360" src="https://www.youtube.com/embed/$5" frameborder="0"></iframe></p></details>')
+      // auto-embed tweets
       content = content.replace(/(https?:\/\/twitter\.com\/\w+\/status\/\d+)/g,
         '<details><summary class="cursor-pointer hover:text-yellow-600 text-sm md:text-base">$1</summary><blockquote class="twitter-tweet"><a href="$1">$1</a></blockquote></details>')
+      // auto-link twitter handles
       content = content.replace(/[@]+([A-Za-z0-9-_]+)/g, ' <a href="https://twitter.com/$1">@$1</a>')
+      // auto-link twitter hashtags
       content = content.replace(/[\s]+[#]+([A-Za-z0-9-_]+)/g, ' <a href="https://twitter.com/hashtag/$1">#$1</a>')
       return md.render(content)
     } else {
