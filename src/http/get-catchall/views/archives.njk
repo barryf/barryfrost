@@ -58,8 +58,10 @@
 </h2>
 <ul class="mb-8">
   {%- for year, months in yearMonths %}
-    <li class="mb-2 text-gray-800 dark:text-gray-200 text-base md:text-lg">
-      {{ year }}
+    <li class="mb-2 text-base md:text-lg">
+      <a href="/{{ year }}" class="text-gray-600 dark:text-gray-400 hover:text-yellow-600 dark:hover:text-yellow-600">
+        {{ year }}
+      </a>
       <span class="text-gray-400 dark:text-gray-600">–</span>
       <ul class="inline">
         {%- for month in months %}
