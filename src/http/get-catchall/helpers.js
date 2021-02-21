@@ -128,7 +128,7 @@ function humanDate (dateString) {
 
 function humanDateFull (dateString) {
   return new Date(dateString).toLocaleString('en-gb', {
-    day: 'numeric', month: 'long', year: 'numeric', hour: 'numeric', minute: 'numeric'
+    day: 'numeric', month: 'short', year: 'numeric', hour: 'numeric', minute: 'numeric'
   })
 }
 
