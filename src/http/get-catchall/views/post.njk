@@ -20,6 +20,7 @@
       <a href="/{{ year }}" class="text-gray-600 dark:text-gray-400 hover:text-yellow-600 dark:hover:text-yellow-600">{{ year }}</a>
       <span class="mx-1">/</span>
       <a href="/{{ year }}/{{ month }}" class="text-gray-600 dark:text-gray-400 hover:text-yellow-600 dark:hover:text-yellow-600">{{ month }}</a>
+      <span class="mx-1">/</span>
     </div>
   </header>
   <div class="mb-8">
@@ -30,10 +31,10 @@
     {%- include 'includes/photos.njk' %}
     {%- include 'includes/rsvp.njk' %}
     {%- include 'includes/content.njk' %}
-    {%- set format = 'full' %}{%- include 'includes/published.njk' %}
     {%- include 'includes/categories.njk' %}
     {%- include 'includes/location.njk' %}
     {%- include 'includes/syndications.njk' %}
+    {%- set format = 'full' %}{%- include 'includes/published.njk' %}
   </div>
   {%- include 'includes/webmentions/likes.njk' %}
   {%- include 'includes/webmentions/reposts.njk' %}

@@ -1,11 +1,11 @@
 {%- if post.properties.syndication %}
 
-<div class="mb-4 flex items-center text-xs md:text-sm">
+<div class="mb-4 flex items-center text-sm md:text-base">
   <span class="uppercase text-gray-600 dark:text-gray-400">
     Also on
   </span>
   {%- for syndication in post.properties.syndication %}
-    <span class="ml-3">
+    <span class="ml-2">
       <a rel="syndication" href="{{ syndication }}" class="u-syndication flex-none text-gray-600 dark:text-gray-400 hover:text-yellow-600 dark:hover:text-yellow-600">
         {{ helpers.iconFromUrl(syndication) | safe }}
       </a>
