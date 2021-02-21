@@ -1,5 +1,7 @@
 {%- extends 'layout.njk' %}
 {%- import 'macros/icon.njk' as icon %}
+{%- set year = helpers.yearFromDateString(post.properties.published[0]) %}
+{%- set month = helpers.monthFromDateString(post.properties.published[0]) %}
 
 {%- block head %}
 <link rel="webmention" href="{{ urls.webmention }}">
@@ -8,16 +10,16 @@
 
 {%- block content %}
 <article class="h-entry">
+
   <header class="mb-8">
-    <div class="mb-8 text-lg md:text-xl text-gray-600 dark:text-gray-400">
-      {%- include 'includes/author.njk' %}
-    </div>
-    {%- include 'includes/title.njk' %}
-    <div class="text-sm md:text-base">
-      <span class="hidden md:absolute md:-ml-6">
-        {{ icon.icon(post['post-type'][0]) }}
+    <div class="flex items-center mb-8 text-lg md:text-xl text-gray-400 dark:text-gray-600">
+      <span class="text-gray-600 dark:text-gray-400">
+        {%- include 'includes/author.njk' %}
       </span>
-      {%- include 'includes/published.njk' %}
+      <span class="mx-1">/</span>
+      <a href="/{{ year }}" class="text-gray-600 dark:text-gray-400 hover:text-yellow-600 dark:hover:text-yellow-600">{{ year }}</a>
+      <span class="mx-1">/</span>
+      <a href="/{{ year }}/{{ month }}" class="text-gray-600 dark:text-gray-400 hover:text-yellow-600 dark:hover:text-yellow-600">{{ month }}</a>
     </div>
   </header>
   <div class="mb-8">
@@ -28,6 +30,7 @@
     {%- include 'includes/photos.njk' %}
     {%- include 'includes/rsvp.njk' %}
     {%- include 'includes/content.njk' %}
+    {%- set format = 'full' %}{%- include 'includes/published.njk' %}
     {%- include 'includes/categories.njk' %}
     {%- include 'includes/location.njk' %}
     {%- include 'includes/syndications.njk' %}

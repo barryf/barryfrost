@@ -124,10 +124,13 @@ async function renderArchives (categories, filteredCategories, c) {
   })
 }
 
-async function renderList (data, title) {
+async function renderList (data, title, year = null, month = null, day = null) {
   return nunjucks.render('list.njk', {
     ...data,
     title,
+    year,
+    month,
+    day,
     helpers,
     urls
   })
@@ -185,12 +188,16 @@ async function handleUrl (url, params) {
     }
   // date archive: year, month or day
   } else if (url.match(/^[0-9]{4}(\/[0-9]{2})?(\/[0-9]{2})?$/)) {
+    const dateParts = url.split('/')
+    const year = dateParts[0]
+    const month = dateParts[1] || null
+    const day = dateParts[2] || null
     const published = url.replace(/\//g, '-')
     const data = await api.getPublished(published, before)
     return {
       ...httpHeaders(3600),
       statusCode: 200,
-      body: await renderList(data, published)
+      body: await renderList(data, 'date', year, month, day)
     }
   // all posts
   } else if (url === 'all') {
