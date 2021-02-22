@@ -14,16 +14,22 @@
 {%- endblock %}
 
 {%- block content %}
-<div class="h-card flex items-center mb-8 text-lg md:text-xl">
+<div class="h-card flex w-full items-center mb-12 uppercase">
   <img src="{{ urls.favicon }}" alt="Photo of Barry" width="28" height="28" class="u-photo w-6 h6 md:w-7 md:h-7 rounded-full mr-1.5 md:absolute md:-ml-9">
-  <span class="uppercase text-lg md:text-xl text-gray-800 dark:text-gray-200">
-    <span class="p-name">Barry Frost</span>
+  <span class="flex-auto text-lg md:text-xl text-gray-800 dark:text-gray-200">
+    <h1 class="p-name">Barry Frost</h1>
   </span>
   <a rel="me" href="/" class="u-url hidden"></a>
+  <div class="flex space-x-3 text-sm md:text-base">
+    <a href="/about" class="text-gray-600 dark:text-gray-400 hover:text-yellow-600 dark:hover:text-yellow-600">About</a>
+    <a href="/now" class="text-gray-600 dark:text-gray-400 hover:text-yellow-600 dark:hover:text-yellow-600">Now</a>
+    <a href="/using" class="text-gray-600 dark:text-gray-400 hover:text-yellow-600 dark:hover:text-yellow-600">Using</a>
+    <a href="/archives" class="text-gray-600 dark:text-gray-400 hover:text-yellow-600 dark:hover:text-yellow-600">Archives</a>
+  </div>
 </div>
 
 <div class="mb-12 prose dark:prose-dark md:prose-lg lg:prose-xl text-gray-700 dark:text-gray-300">
-  <p><span class="uppercase font-bold">Hello, I’m Barry.</span> I’m a product engineer and leader with experience building teams, websites and apps. I live in a village in Hertfordshire, UK, with my wife and two sons.</p>
+  <p><span class="uppercase font-bold text-xl md:text-2xl">Hello, I’m Barry.</span> I’m a product engineer and leader with experience building teams, websites and apps. I live in a village in Hertfordshire, UK, with my wife and two sons.</p>
   <p>I’m CTO of <a href="https://www.theroom.io">The Room</a>, a space for brands to exchange products and experiences with true brand advocates in return for authentic engagement.</p>
   <p>Previously, I was CTO of <a href="https://www.gumtree.com/">Gumtree</a>, Director at <a href="https://www.ebayinc.com/">eBay</a>, CTO of <a href="https://www.venntro.com/">Venntro Media Group</a> and a software engineer in startups and SMEs.</p>
   <!--
@@ -34,17 +40,13 @@
 </div>
 
 <div class="h-feed">
-  <div class="flex w-full mb-8 text-base md:text-lg">
-    <h1 class="flex-auto text-gray-800 dark:text-gray-200 uppercase">
+  <div class="flex w-full items-center mb-12 text-base md:text-lg">
+    <h2 class="flex-auto text-base md:text-lg text-gray-800 dark:text-gray-200 uppercase">
       Recently
-    </h1>
-    <div class="flex-auto text-right uppercase text-gray-600 dark:text-gray-400">
-      <!--<a href="/all" class="hover:text-yellow-600 dark:hover:text-yellow-600">
-        All
-      </a>
-      <span class="text-gray-400 dark:text-gray-600">/</span>-->
-      <a href="/archives" class="hover:text-yellow-600 dark:hover:text-yellow-600">
-        Archives &rarr;
+    </h2>
+    <div class="flex-auto text-right text-sm md:text-base uppercase text-gray-600 dark:text-gray-400">
+      <a href="/all" class="hover:text-yellow-600 dark:hover:text-yellow-600">
+        All posts &rarr;
       </a>
     </div>
   </div>

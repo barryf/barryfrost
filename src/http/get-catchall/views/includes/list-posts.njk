@@ -1,6 +1,6 @@
 <ul>
   {%- for post in posts %}
-    <li class="h-entry mb-8">
+    <li class="h-entry mb-12">
 
       {%- if post.properties.name %}
         <h2 class="p-name text-lg md:text-xl tracking-tight text-gray-800 dark:text-gray-200 {{ 'font-bold' if post['post-type'] == 'article' }}">
@@ -29,7 +29,7 @@
 
       {%- include 'includes/summary.njk' %}
 
-      <div class="mt-1 text-xs md:text-sm">
+      <div class="mt-1.5 text-xs md:text-sm">
         {%- include 'includes/published.njk' %}
       </div>
 

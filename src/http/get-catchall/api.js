@@ -51,8 +51,9 @@ async function getList (url, before = null) {
 }
 
 async function getPost (url) {
+  const absoluteUrl = process.env.ROOT_URL + url
   const response = await fetch(
-    `${micropubSourceUrl}&url=${process.env.ROOT_URL}${url}`,
+    `${micropubSourceUrl}&url=${absoluteUrl}`,
     { headers: { Authorization: `Bearer ${process.env.MICROPUB_TOKEN}` } }
   )
   switch (response.status) {
@@ -63,8 +64,11 @@ async function getPost (url) {
         statusCode: response.status,
         type: ['h-entry'],
         properties: {
-          name: ['`410` Gone'],
-          content: ['This post has been deleted and is no longer available.']
+          name: ['410'],
+          content: [
+            absoluteUrl +
+            '\n\nThis post has been deleted and is no longer available.'
+          ]
         }
       }
     case 404:
@@ -72,8 +76,11 @@ async function getPost (url) {
         statusCode: response.status,
         type: ['h-entry'],
         properties: {
-          name: ['`404` Not Found'],
-          content: ['The page or post was not found.']
+          name: ['404'],
+          content: [
+            absoluteUrl +
+            '\n\nThe page or post could not be found. Check that you entered the URL correctly.'
+          ]
         }
       }
   }

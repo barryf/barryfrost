@@ -12,7 +12,7 @@ module.exports = {
       typography: (theme) => ({
         DEFAULT: {
           css: {
-            'h2,h3,h4,a': {
+            'h1,h2,h3,h4,a': {
               color: theme('colors.gray.800'),
               fontStyle: 'normal'
             },
@@ -32,7 +32,7 @@ module.exports = {
         },
         dark: {
           css: {
-            'h2,h3,h4,a': {
+            'h1,h2,h3,h4,a': {
               color: theme('colors.gray.200')
             },
             'code,blockquote': {

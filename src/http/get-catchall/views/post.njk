@@ -11,8 +11,8 @@
 {%- block content %}
 <article class="h-entry">
 
-  <header class="mb-8">
-    <div class="flex items-center mb-8 text-lg md:text-xl text-gray-400 dark:text-gray-600">
+  <header class="mb-12">
+    <div class="flex items-center mb-12 text-lg md:text-xl text-gray-400 dark:text-gray-600">
       <span class="text-gray-600 dark:text-gray-400">
         {%- include 'includes/author.njk' %}
       </span>
@@ -20,10 +20,13 @@
       <a href="/{{ year }}" class="text-gray-600 dark:text-gray-400 hover:text-yellow-600 dark:hover:text-yellow-600">{{ year }}</a>
       <span class="mx-1">/</span>
       <a href="/{{ year }}/{{ month }}" class="text-gray-600 dark:text-gray-400 hover:text-yellow-600 dark:hover:text-yellow-600">{{ month }}</a>
-      <span class="mx-1">/</span>
     </div>
+    {%- if post['post-type'] == 'article' %}
+      {%- include 'includes/title.njk' %}
+    {%- endif %}
   </header>
-  <div class="mb-8">
+
+  <div class="mb-12">
     {%- include 'includes/in-reply-to.njk' %}
     {%- include 'includes/repost-of.njk' %}
     {%- include 'includes/bookmark-of.njk' %}
@@ -36,9 +39,11 @@
     {%- include 'includes/syndications.njk' %}
     {%- set format = 'full' %}{%- include 'includes/published.njk' %}
   </div>
+
   {%- include 'includes/webmentions/likes.njk' %}
   {%- include 'includes/webmentions/reposts.njk' %}
   {%- include 'includes/webmentions/comments.njk' %}
+
 </article>
 {%- endblock %}
 

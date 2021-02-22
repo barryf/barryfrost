@@ -2,16 +2,19 @@
 {%- import 'macros/icon.njk' as icon %}
 
 {%- block content %}
-<div class="flex items-center mb-8 text-lg md:text-xl text-gray-600 dark:text-gray-400">
-  {%- include 'includes/author.njk' %}
-  <span class="text-gray-400 dark:text-gray-600 mx-1">/</span>
-  <h1 class="text-gray-800 dark:text-gray-200 uppercase">Archives</h1>
-</div>
+ <header class="mb-12">
+  <div class="flex items-center mb-12 text-lg md:text-xl text-gray-600 dark:text-gray-400">
+    {%- include 'includes/author.njk' %}
+  </div>
+  <h1 class="p-name text-4xl md:text-5xl tracking-tight font-bold text-gray-800 dark:text-gray-200">
+    Archives
+  </h1>
+</header>
 
-<h2 class="mb-2 uppercase text-gray-800 dark:text-gray-200 text-sm md:text-base">
+<h2 class="mb-4 uppercase text-gray-800 dark:text-gray-200 text-sm md:text-base">
   Post Types
 </h2>
-<div class="mb-6 grid grid-cols-3 md:grid-cols-4 md:text-lg text-gray-600 dark:text-gray-400">
+<div class="mb-12 grid grid-cols-3 md:grid-cols-4 md:text-lg text-gray-600 dark:text-gray-400">
   <div class="mb-2"><span class="mr-1">{{ icon.icon('all') }}</span><a href="/all" class="hover:text-yellow-600">All</a></div>
   <div class="mb-2"><span class="mr-1">{{ icon.icon('article') }}</span><a href="/articles" class="hover:text-yellow-600">Articles</a></div>
   <div class="mb-2"><span class="mr-1">{{ icon.icon('note') }}</span><a href="/notes" class="hover:text-yellow-600">Notes</a></div>
@@ -24,21 +27,21 @@
   <div class="mb-2"><span class="mr-1">{{ icon.icon('rsvp') }}</span><a href="/rsvps" class="hover:text-yellow-600">RSVPs</a></div>
 </div>
 
-<h2 class="mb-2 uppercase text-gray-800 dark:text-gray-200 text-sm md:text-base">
+<h2 id="c" class="mb-4 uppercase text-gray-800 dark:text-gray-200 text-sm md:text-base">
   Categories
 </h2>
 {%- set letters = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','0','1','2','3','4','5','6','7','8','9'] %}
-<ul class="mb-2 tracking-wider text-gray-600 dark:text-gray-400 text-xl md:text-2xl">
+<ul class="mb-4 tracking-wider text-gray-600 dark:text-gray-400 text-xl md:text-2xl">
   {%- for letter in letters %}
     <li class="inline">
-      <a href="?c={{ letter | lower }}" id="c-{{ letter | lower }}"
+      <a href="?c={{ letter | lower }}#c" id="c-{{ letter | lower }}"
         class="letter font-mono outline-none focus:text-gray-900 dark:focus:text-gray-100 hover:text-yellow-600 dark:hover:text-yellow-600">
         {{ letter }}
       </a>
     </li>
   {%- endfor %}
 </ul>
-<div id="categories" class="mb-8 text-gray-400 dark:text-gray-600 md:text-lg leading-relaxed">
+<div id="categories" class="mb-12 text-gray-400 dark:text-gray-600 md:text-lg leading-relaxed">
 {%- if filteredCategories %}
   {%- for cat in filteredCategories %}
     <a href="/categories/{{ cat }}" class="text-gray-600 dark:text-gray-400 hover:text-yellow-600 dark:hover:text-yellow-600">
@@ -53,16 +56,16 @@
 {%- endif %}
 </div>
 
-<h2 class="mb-2 uppercase text-gray-800 dark:text-gray-200 text-sm md:text-base">
+<h2 class="mb-4 uppercase text-gray-800 dark:text-gray-200 text-sm md:text-base">
   Months
 </h2>
-<ul class="mb-8">
+<ul class="mb-12">
   {%- for year, months in yearMonths %}
     <li class="mb-2 text-base md:text-lg">
       <a href="/{{ year }}" class="text-gray-600 dark:text-gray-400 hover:text-yellow-600 dark:hover:text-yellow-600">
         {{ year }}
       </a>
-      <span class="text-gray-400 dark:text-gray-600">–</span>
+      <span class="text-gray-400 dark:text-gray-600 mx-1">/</span>
       <ul class="inline">
         {%- for month in months %}
           <li class="inline text-gray-400 dark:text-gray-600">
