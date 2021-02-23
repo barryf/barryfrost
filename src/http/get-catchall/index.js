@@ -197,7 +197,7 @@ async function handleUrl (url, params) {
     return {
       ...httpHeaders(3600),
       statusCode: 200,
-      body: await renderList(data, 'date', year, month, day)
+      body: await renderList(data, published, year, month, day)
     }
   // all posts
   } else if (url === 'all') {
