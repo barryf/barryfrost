@@ -39,7 +39,7 @@
             <div class="p-name text-gray-600 dark:text-gray-400 {{ 'font-bold' if context.properties.content }}">{{ context.properties.name[0] | safe }}</div>
           {%- endif %}
           {%- if context.properties.content %}
-            &ldquo;<span class="e-content text-gray-600 dark:text-gray-400">{{ contextContent }}</span>&rdquo;
+            &ldquo;<span class="p-content text-gray-600 dark:text-gray-400">{{ contextContent }}</span>&rdquo;
           {%- endif %}
         </blockquote>
       </div>
