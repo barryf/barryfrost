@@ -29,7 +29,7 @@
 </div>
 
 <div class="mb-12 prose dark:prose-dark md:prose-lg lg:prose-xl text-gray-700 dark:text-gray-300">
-  <p><span class="uppercase font-bold text-xl md:text-2xl">Hello, I’m Barry.</span> I’m a product engineer and leader with experience building teams, websites and apps. I live in a village in Hertfordshire, UK, with my wife and two sons.</p>
+  <p><span class="uppercase font-bold">Hello, I’m Barry.</span> I’m a product engineer and leader with experience building teams, websites and apps. I live in a village in Hertfordshire, UK, with my wife and two sons.</p>
   <p>I’m CTO of <a href="https://www.theroom.io">The Room</a>, a space for brands to exchange products and experiences with true brand advocates in return for authentic engagement.</p>
   <p>Previously, I was CTO of <a href="https://www.gumtree.com/">Gumtree</a>, Director at <a href="https://www.ebayinc.com/">eBay</a>, CTO of <a href="https://www.venntro.com/">Venntro Media Group</a> and a software engineer in startups and SMEs.</p>
   <!--
@@ -50,6 +50,11 @@
       </a>
     </div>
   </div>
-  {%- include 'includes/list-posts.njk' %}
+  {% include 'includes/list-posts.njk' %}
+  <div class="text-right text-sm md:text-base uppercase text-gray-600 dark:text-gray-400">
+    <a href="/all" class="hover:text-yellow-600 dark:hover:text-yellow-600">
+      All posts &rarr;
+    </a>
+  </div>
 </div>
 {%- endblock %}
