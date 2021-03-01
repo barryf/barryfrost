@@ -14,47 +14,64 @@
 {%- endblock %}
 
 {%- block content %}
-<div class="h-card flex w-full items-center mb-12 uppercase">
+<!--
+<div class="h-card flex items-center mb-12 mx-auto uppercase max-w-prose">
   <img src="{{ urls.favicon }}" alt="Photo of Barry" width="28" height="28" class="u-photo w-6 h6 md:w-7 md:h-7 rounded-full mr-1.5 md:absolute md:-ml-9">
-  <span class="flex-auto text-lg md:text-xl text-gray-800 dark:text-gray-200">
-    <h1 class="p-name">Barry Frost</h1>
-  </span>
+  <h1 class="p-name flex-auto text-lg md:text-xl text-gray-800 dark:text-gray-200">Barry Frost</h1>
   <a rel="me" href="/" class="u-url hidden"></a>
-  <div class="flex space-x-3 text-sm md:text-base">
-    <a href="/about" class="text-gray-600 dark:text-gray-400 hover:text-yellow-600 dark:hover:text-yellow-600">About</a>
-    <a href="/now" class="text-gray-600 dark:text-gray-400 hover:text-yellow-600 dark:hover:text-yellow-600">Now</a>
-    <a href="/using" class="text-gray-600 dark:text-gray-400 hover:text-yellow-600 dark:hover:text-yellow-600">Using</a>
-    <a href="/archives" class="text-gray-600 dark:text-gray-400 hover:text-yellow-600 dark:hover:text-yellow-600">Archives</a>
+</div>
+-->
+<header class="mb-12 max-w-screen-md mx-auto">
+  <div class="flex items-center mb-8 md:mb-12 text-lg md:text-xl text-gray-400 dark:text-gray-600">
+    <div class="flex-none mx-auto md:flex-auto md:mx-0">
+      <div class="h-card flex items-center">
+        <img src="{{ urls.favicon }}" alt="Photo of Barry" width="28" height="28" class="u-photo w-6 h6 md:w-7 md:h-7 rounded-full mr-1.5">
+        <h1 class="p-name u-url uppercase text-lg md:text-xl text-gray-800 dark:text-gray-200">Barry Frost</h1>
+        <a rel="me" href="/" class="u-url hidden"></a>
+      </div>
+    </div>
+    <nav class="space-x-3 text-xs md:text-sm uppercase hidden md:block">
+      {{ nav | safe }}
+    </nav>
   </div>
-</div>
+</header>
 
-<div class="mb-12 prose dark:prose-dark md:prose-lg lg:prose-xl text-gray-700 dark:text-gray-300">
-  <p><span class="uppercase font-bold">Hello, I’m Barry.</span> I’m a product engineer and leader with experience building teams, websites and apps. I live in a village in Hertfordshire, UK, with my wife and two sons.</p>
-  <p>I’m CTO of <a href="https://www.theroom.io">The Room</a>, a space for brands to exchange products and experiences with true brand advocates in return for authentic engagement.</p>
-  <p>Previously, I was CTO of <a href="https://www.gumtree.com/">Gumtree</a>, Director at <a href="https://www.ebayinc.com/">eBay</a>, CTO of <a href="https://www.venntro.com/">Venntro Media Group</a> and a software engineer in startups and SMEs.</p>
-  <!--
-  <p>I hack on side projects in Ruby and Node.js as part of the <a href="https://indieweb.org">IndieWeb</a> community, including <a href="https://github.com/barryf/micropublish">Micropublish</a>, one of the most feature-complete Micropub clients used to publish and update content on your own website. I maintain my own <a href="https://github.com/barryf/promulgate">WebSub hub</a>, an <a href="https://github.com/barryf/acquiescence">IndieAuth server</a> and contribute to the <a href="https://github.com/indieweb/mention-client-ruby">Webmention gem</a>.</p>
-  <p>I post all my <a href="/articles" class="whitespace-nowrap">{{ icon.icon('article') }}Articles</a>, <a href="/notes" class="whitespace-nowrap">{{ icon.icon('note') }}Notes</a>, <a href="/photos" class="whitespace-nowrap">{{ icon.icon('photo') }}Photos</a>, <a href="/bookmarks" class="whitespace-nowrap">{{ icon.icon('bookmark') }}Bookmarks</a> and <a href="/checkins" class="whitespace-nowrap">{{ icon.icon('checkin') }}Check-ins</a> on this website using <a href="https://github.com/barryf/vibrancy">my own software</a>, but also syndicate to <a rel="me" href="https://twitter.com/barryf">Twitter</a>, <a rel="me" href="https://pinboard.in/barryf">Pinboard</a> and <a rel="me" href="https://instagram.com/barryf">Instagram</a>. All my code is on <a rel="me" href="https://github.com/barryf">GitHub</a>.</p>
-  <p>Email me at <a rel="me" href="mailto:barry@barryfrost.com">barry@barryfrost.com</a> or send me a <a href="https://twitter.com/messages/compose?recipient_id=4677">DM on Twitter</a>.</p>
-  -->
-</div>
+<div class="mb-12 max-w-prose mx-auto">
+  <div class="mb-12 prose dark:prose-dark md:prose-lg lg:prose-xl text-gray-700 dark:text-gray-300">
+    <p><span class="uppercase font-bold">Hello, I’m Barry.</span> I’m a product engineer and leader with experience building teams, websites and apps. I live in a village in Hertfordshire, UK, with my wife and two sons.</p>
+    <p>I’m CTO of <a href="https://www.theroom.io">The Room</a>, a space for brands to exchange products and experiences with true brand advocates in return for authentic engagement.</p>
+    <p>Previously, I was CTO of <a href="https://www.gumtree.com/">Gumtree</a>, Director at <a href="https://www.ebayinc.com/">eBay</a>, CTO of <a href="https://www.venntro.com/">Venntro Media Group</a> and a software engineer in startups and SMEs.</p>
+    <!--
+    <p>I hack on side projects in Ruby and Node.js as part of the <a href="https://indieweb.org">IndieWeb</a> community, including <a href="https://github.com/barryf/micropublish">Micropublish</a>, one of the most feature-complete Micropub clients used to publish and update content on your own website. I maintain my own <a href="https://github.com/barryf/promulgate">WebSub hub</a>, an <a href="https://github.com/barryf/acquiescence">IndieAuth server</a> and contribute to the <a href="https://github.com/indieweb/mention-client-ruby">Webmention gem</a>.</p>
+    <p>I post all my <a href="/articles" class="whitespace-nowrap">{{ icon.icon('article') }}Articles</a>, <a href="/notes" class="whitespace-nowrap">{{ icon.icon('note') }}Notes</a>, <a href="/photos" class="whitespace-nowrap">{{ icon.icon('photo') }}Photos</a>, <a href="/bookmarks" class="whitespace-nowrap">{{ icon.icon('bookmark') }}Bookmarks</a> and <a href="/checkins" class="whitespace-nowrap">{{ icon.icon('checkin') }}Check-ins</a> on this website using <a href="https://github.com/barryf/vibrancy">my own software</a>, but also syndicate to <a rel="me" href="https://twitter.com/barryf">Twitter</a>, <a rel="me" href="https://pinboard.in/barryf">Pinboard</a> and <a rel="me" href="https://instagram.com/barryf">Instagram</a>. All my code is on <a rel="me" href="https://github.com/barryf">GitHub</a>.</p>
+    <p>Email me at <a rel="me" href="mailto:barry@barryfrost.com">barry@barryfrost.com</a> or send me a <a href="https://twitter.com/messages/compose?recipient_id=4677">DM on Twitter</a>.</p>
+    -->
+  </div>
 
-<div class="h-feed">
-  <div class="flex w-full items-center mb-12 text-base md:text-lg">
-    <h2 class="flex-auto text-base md:text-lg text-gray-800 dark:text-gray-200 uppercase">
-      Recently
-    </h2>
-    <div class="flex-auto text-right text-sm md:text-base uppercase text-gray-600 dark:text-gray-400">
-      <a href="/all" class="hover:text-yellow-600 dark:hover:text-yellow-600">
+  <div class="text-center space-x-8 mb-12 text-gray-800 dark:text-gray-200">
+    <span>*</span>
+    <span>*</span>
+    <span>*</span>
+  </div>
+
+  <div class="h-feed">
+    <div class="flex w-full items-center mb-12 text-base md:text-lg">
+      <h2 class="flex-auto text-base md:text-lg text-gray-800 dark:text-gray-200 uppercase">
+        Recently
+      </h2>
+      <div class="flex-auto text-right text-sm md:text-base uppercase text-gray-600 dark:text-gray-400">
+        <a href="/all" class="text-yellow-600 hover:text-gray-800 dark:hover:text-gray-200">
+          All posts &rarr;
+        </a>
+      </div>
+    </div>
+    {% include 'includes/list-posts.njk' %}
+    <div class="text-right text-sm md:text-base uppercase text-gray-600 dark:text-gray-400">
+      <a href="/all" class="text-yellow-600 hover:text-gray-800 dark:hover:text-gray-200">
         All posts &rarr;
       </a>
     </div>
   </div>
-  {% include 'includes/list-posts.njk' %}
-  <div class="text-right text-sm md:text-base uppercase text-gray-600 dark:text-gray-400">
-    <a href="/all" class="hover:text-yellow-600 dark:hover:text-yellow-600">
-      All posts &rarr;
-    </a>
-  </div>
+
 </div>
 {%- endblock %}

@@ -1,17 +1,21 @@
 {%- set url = post.url[0] | replace('https://barryf.co.uk', '') %}
 
-<time class="dt-published mb-4 block" datetime="{{ post.properties.published[0] }}"
-  title="{{ post.properties.published[0] | replace('T',' ') | replace('Z', ' UTC') }}">
-  <a href="{{ url }}" class="uppercase text-gray-600 dark:text-gray-400 hover:text-yellow-600 dark:hover:text-yellow-600">
-    {%- if format and format == 'full' %}
-      {{ helpers.humanDateFull(post.properties.published[0]) }}
-      <small>UTC</small>
-    {%- else %}
-      {{ helpers.humanDate(post.properties.published[0]) }}
-    {%- endif %}
-  </a>
-</time>
+<div class="">
+  {%- if format and format == 'full' %}
+    <h3 class="text-sm md:text-base text-gray-500 uppercase">Published</h3>
+  {%- endif %}
+  <time class="dt-published inline" datetime="{{ post.properties.published[0] }}"
+    title="{{ post.properties.published[0] | replace('T',' ') | replace('Z', ' UTC') }}">
+    <a href="{{ url }}" class="text-yellow-600 hover:text-gray-800 dark:hover:text-gray-200">
+      {%- if format and format == 'full' %}
+        {{ helpers.humanDateFull(post.properties.published[0]) }}&nbsp;<small>UTC</small>
+      {%- else %}
+        {{ helpers.humanDate(post.properties.published[0]) }}
+      {%- endif %}
+    </a>
+  </time>
+</div>
 
 {%- if post.properties.updated %}
-  <time class="dt-updated" datetime="{{ post.properties.updated[0] }}"></time>
+  <time class="dt-updated hidden" datetime="{{ post.properties.updated[0] }}"></time>
 {%- endif %}

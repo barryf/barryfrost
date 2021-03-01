@@ -21,7 +21,7 @@ function filterCategory (letter) {
   filteredCategories.forEach((cat, i) => {
     const a = document.createElement('a')
     a.href = '/categories/' + cat
-    a.className = 'text-gray-600 dark:text-gray-400 hover:text-yellow-600 dark:hover:text-yellow-600'
+    a.className = 'text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200'
     a.innerText = cat
     categoriesContainer.append(a)
     if (i < filteredCategories.length - 1) {

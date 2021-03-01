@@ -33,7 +33,7 @@ function containsTweet (post) {
 }
 
 function postTitle (post) {
-  return md.render(post.properties.name[0]).trim()
+  return md.render(post.properties.name[0] + ' and some more text on another line').trim()
 }
 
 function postContent (post) {
@@ -125,7 +125,7 @@ function humanDate (dateString) {
 
 function humanDateFull (dateString) {
   return new Date(dateString).toLocaleString('en-gb', {
-    day: 'numeric', month: 'short', year: 'numeric', hour: 'numeric', minute: 'numeric'
+    day: 'numeric', month: 'long', year: 'numeric', hour: 'numeric', minute: 'numeric'
   })
 }
 

@@ -6,12 +6,20 @@
 
 {%- block content %}
 <article class="h-entry">
-  <header class="mb-12">
-    <div class="flex items-center mb-12 text-lg md:text-xl text-gray-600 dark:text-gray-400">
-      {%- include 'includes/author.njk' %}
+  <header class="mb-12 max-w-screen-md mx-auto">
+    <div class="flex items-center mb-8 md:mb-12 text-lg md:text-xl text-gray-400 dark:text-gray-600">
+      <div class="flex-none mx-auto md:flex-auto md:mx-0 text-gray-600 dark:text-gray-400">
+        {%- include 'includes/author.njk' %}
+      </div>
+      <nav class="space-x-3 text-xs md:text-sm uppercase hidden md:block">
+        {{ nav | safe }}
+      </nav>
     </div>
     {%- include 'includes/title.njk' %}
   </header>
-  {%- include 'includes/content.njk' %}
+
+  <div class="mb-12 max-w-prose mx-auto">
+    {%- include 'includes/content.njk' %}
+  </div>
 </article>
 {%- endblock %}

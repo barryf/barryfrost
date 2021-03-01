@@ -1,26 +1,27 @@
 {%- if post.properties.checkin %}
 
-<h2 class="text-gray-600 dark:text-gray-400 uppercase text-sm md:text-base">
-  Checked in at
-</h2>
-
-{%- set location = post.properties.checkin[0] %}
-<div class="location mb-8 text-base md:text-lg text-gray-800 dark:text-gray-200">
-  <div class="p-checkin h-card">
-    <div class="text-lg md:text-xl">
-      <a href="https://maps.google.com/maps?q={{ location.properties.latitude[0] }},{{ location.properties.longitude[0] }}"
-        class="font-bold hover:text-yellow-600 dark:hover:text-yellow-600" title="View on map">
-        <span class="p-name">{{ location.properties.name[0] }}</span>
-      </a>
+<div class="">
+  <h2 class="text-gray-500 uppercase text-sm md:text-base">
+    Location
+  </h2>
+  {%- set location = post.properties.checkin[0] %}
+  <div class="md:text-lg text-gray-800 dark:text-gray-200">
+    <div class="p-checkin h-card">
+      <div class="text-lg md:text-xl">
+        <a href="https://maps.google.com/maps?q={{ location.properties.latitude[0] }},{{ location.properties.longitude[0] }}"
+          class="font-bold text-yellow-600 hover:text-gray-800 dark:hover:text-gray-200" title="View on map">
+          <span class="p-name">{{ location.properties.name[0] }}</span>
+        </a>
+      </div>
+      <data class="p-latitude" value="{{ location.properties.latitude[0] }}"></data>
+      <data class="p-longitude" value="{{ location.properties.longitude[0] }}"></data>
+      {%- if location.properties.locality %}
+        <div class="p-locality">{{ location.properties.locality[0] }}</div>
+      {%- endif %}
+      {%- if location.properties.region %}
+        <div class="p-region">{{ location.properties.region[0] }}</div>
+      {% endif %}
     </div>
-    <data class="p-latitude" value="{{ location.properties.latitude[0] }}"></data>
-    <data class="p-longitude" value="{{ location.properties.longitude[0] }}"></data>
-    {%- if location.properties.locality %}
-      <div class="p-locality">{{ location.properties.locality[0] }}</div>
-    {%- endif %}
-    {%- if location.properties.region %}
-      <div class="p-region">{{ location.properties.region[0] }}</div>
-    {% endif %}
   </div>
 </div>
 

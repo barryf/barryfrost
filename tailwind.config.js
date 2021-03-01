@@ -12,7 +12,7 @@ module.exports = {
       typography: (theme) => ({
         DEFAULT: {
           css: {
-            'h1,h2,h3,h4,a': {
+            'h1,h2,h3,h4': {
               color: theme('colors.gray.800'),
               fontStyle: 'normal'
             },
@@ -21,8 +21,10 @@ module.exports = {
             },
             a: {
               fontWeight: 'bold',
+              textDecoration: 'no-underline',
+              color: theme('colors.yellow.600'),
               '&:hover': {
-                color: theme('colors.yellow.600')
+                color: theme('colors.gray.800')
               }
             },
             blockquote: {
@@ -32,17 +34,21 @@ module.exports = {
         },
         dark: {
           css: {
-            'h1,h2,h3,h4,a': {
+            'h1,h2,h3,h4': {
               color: theme('colors.gray.200')
             },
             'code,blockquote': {
               color: theme('colors.gray.300')
             },
             a: {
+              color: theme('colors.yellow.600'),
+              '&:hover': {
+                color: theme('colors.gray.200')
+              },
               code: {
-                color: theme('colors.gray.300'),
+                color: theme('colors.yellow.600'),
                 '&:hover': {
-                  color: theme('colors.yellow.600')
+                  color: theme('colors.gray.800')
                 }
               }
             }

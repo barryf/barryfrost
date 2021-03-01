@@ -3,26 +3,42 @@
 
 {%- block content %}
 <div class="h-feed">
-  <div class="flex items-center mb-12 text-lg md:text-xl text-gray-600 dark:text-gray-400">
-    {%- include 'includes/author.njk' %}
-    <span class="text-gray-400 dark:text-gray-600 mx-1">/</span>
-    {%- if not year %}
-      <h1 class="text-gray-800 dark:text-gray-200 uppercase">{{ title }}</h1>
-    {%- elif year and not month %}
-      <span class="text-gray-800 dark:text-gray-200">{{ year }}</span>
-    {%- else %}
-      <a href="/{{ year }}" class="text-gray-600 dark:text-gray-400 hover:text-yellow-600 dark:hover:text-yellow-600">{{ year }}</a>
-      <span class="text-gray-400 dark:text-gray-600 mx-1">/</span>
-      {%- if not day %}
-        <span class="text-gray-800 dark:text-gray-200">{{ month }}</span>
+  <header class="mb-12 max-w-screen-md mx-auto">
+    <div class="flex items-center mb-8 md:mb-12 text-lg md:text-xl text-gray-400 dark:text-gray-600">
+      <div class="flex-none mx-auto md:flex-auto md:mx-0 text-gray-600 dark:text-gray-400">
+        {%- include 'includes/author.njk' %}
+      </div>
+      <nav class="space-x-3 text-xs md:text-sm uppercase hidden md:block">
+        {{ nav | safe }}
+      </nav>
+    </div>
+    <h1 class="p-name text-center text-4xl md:text-5xl tracking-tight font-bold text-gray-800 dark:text-gray-200">
+      {%- if not year %}
+        {{ title }}
+      {%- elif year and not month %}
+        {{ year }}</span
       {%- else %}
-        <a href="/{{ year }}/{{ month }}" class="text-gray-600 dark:text-gray-400 hover:text-yellow-600 dark:hover:text-yellow-600">{{ month }}</a>
+        <a href="/{{ year }}" class="text-yellow-600 hover:text-gray-800 dark:hover:text-gray-200">
+          {{ year }}
+        </a>
         <span class="text-gray-400 dark:text-gray-600 mx-1">/</span>
-        <span class="text-gray-800 dark:text-gray-200">{{ day }}</span>
+        {%- if not day %}
+          <span class="text-gray-800 dark:text-gray-200">{{ month }}</span>
+        {%- else %}
+          <a href="/{{ year }}/{{ month }}" class="text-yellow-600 hover:text-gray-800 dark:hover:text-gray-200">
+            {{ month }}
+          </a>
+          <span class="text-gray-400 dark:text-gray-600 mx-1">/</span>
+          <span class="text-gray-800 dark:text-gray-200">
+            {{ day }}
+          </span>
+        {%- endif %}
       {%- endif %}
-    {%- endif %}
+    </h1>
+  </header>
+  <div class="mb-12 max-w-prose mx-auto">
+    {%- include 'includes/list-posts.njk' %}
   </div>
-  {%- include 'includes/list-posts.njk' %}
 </div>
 
 {%- if nextInt %}
