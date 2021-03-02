@@ -32,22 +32,19 @@
     {%- include 'includes/photos.njk' %}
     {%- include 'includes/rsvp.njk' %}
     {%- include 'includes/content.njk' %}
+    {%- include 'includes/webmentions/likes.njk' %}
+    {%- include 'includes/webmentions/reposts.njk' %}
+    {%- include 'includes/webmentions/comments.njk' %}
   </div>
 
-  <div class="mb-12 max-w-screen-md mx-auto">
-    <div class="grid grid-cols-2 md:grid-cols-3 gap-4 text-center">
+  <div class="mb-12 max-w-screen-md mx-auto pt-8 border-t-4 border-solid border-gray-400 dark:border-gray-600">
+    <div class="grid grid-cols-2 md:grid-cols-3 gap-8 text-center">
       {%- set format = 'full' %}{%- include 'includes/published.njk' %}
       {%- include 'includes/syndications.njk' %}
       {%- include 'includes/categories.njk' %}
       {%- include 'includes/location.njk' %}
       {%- include 'includes/alternatives.njk' %}
     </div>
-  </div>
-
-  <div class="mb-12 max-w-screen-md mx-auto">
-    {%- include 'includes/webmentions/likes.njk' %}
-    {%- include 'includes/webmentions/reposts.njk' %}
-    {%- include 'includes/webmentions/comments.njk' %}
   </div>
 </article>
 {%- endblock %}
