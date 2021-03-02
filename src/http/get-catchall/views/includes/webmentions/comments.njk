@@ -25,7 +25,7 @@
           {%- endif %}
           <div class="flex-auto">
             <div>
-              {%- if comment.properties.author %}
+              {%- if comment.properties.author and comment.properties.author[0].properties.name %}
                 <span class="mr-1 font-bold text-sm md:text-base text-gray-600 dark:text-gray-400">
                   <a href="{{ comment.properties.author[0].properties.url[0] }}" class="u-url p-name hover:text-yellow-600 dark:hover:text-yellow-600">
                     {{ comment.properties.author[0].properties.name[0] }}
