@@ -37,7 +37,7 @@
                   <time datetime="{{ comment.properties.published[0] }}"
                     class="dt-published"
                     title="{{ comment.properties.published[0] | replace('T',' ') | replace('Z', ' UTC') }}">
-                    {{ helpers.humanDate(comment.properties.published[0]) | upper }}
+                    {{ helpers.humanDate(comment.properties.published[0]) }}
                   </time>
                 </a>
               </span>
