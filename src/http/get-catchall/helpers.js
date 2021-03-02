@@ -33,7 +33,7 @@ function containsTweet (post) {
 }
 
 function postTitle (post) {
-  return md.render(post.properties.name[0] + ' and some more text on another line').trim()
+  return md.render(post.properties.name[0]).trim()
 }
 
 function postContent (post) {
