@@ -14,13 +14,6 @@
 {%- endblock %}
 
 {%- block content %}
-<!--
-<div class="h-card flex items-center mb-12 mx-auto uppercase max-w-prose">
-  <img src="{{ urls.favicon }}" alt="Photo of Barry" width="28" height="28" class="u-photo w-6 h6 md:w-7 md:h-7 rounded-full mr-1.5 md:absolute md:-ml-9">
-  <h1 class="p-name flex-auto text-lg md:text-xl text-gray-800 dark:text-gray-200">Barry Frost</h1>
-  <a rel="me" href="/" class="u-url hidden"></a>
-</div>
--->
 <header class="mb-12 max-w-screen-md mx-auto">
   <div class="flex items-center mb-8 md:mb-12 text-lg md:text-xl text-gray-400 dark:text-gray-600">
     <div class="flex-none mx-auto md:flex-auto md:mx-0">
@@ -59,14 +52,14 @@
       <h2 class="flex-auto text-base md:text-lg text-gray-800 dark:text-gray-200 uppercase">
         Recently
       </h2>
-      <div class="flex-auto text-right text-sm md:text-base uppercase text-gray-600 dark:text-gray-400">
+      <div class="flex-auto text-right text-sm md:text-base uppercase">
         <a href="/all" class="text-yellow-600 hover:text-gray-800 dark:hover:text-gray-200">
           All posts &rarr;
         </a>
       </div>
     </div>
     {% include 'includes/list-posts.njk' %}
-    <div class="text-right text-sm md:text-base uppercase text-gray-600 dark:text-gray-400">
+    <div class="text-right text-sm md:text-base uppercase">
       <a href="/all" class="text-yellow-600 hover:text-gray-800 dark:hover:text-gray-200">
         All posts &rarr;
       </a>
