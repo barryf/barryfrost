@@ -1,11 +1,3 @@
-{%- set navLinks = ['about', 'now', 'projects', 'archives'] %}
-{%- set nav %}
-  {%- for link in navLinks %}
-    <a href="/{{ link }}" class="text-yellow-600 hover:text-gray-800 dark:hover:text-gray-200">
-      {{ link }}
-    </a>
-  {%- endfor %}
-{%- endset %}
 <!DOCTYPE html>
 <html lang="en-GB">
 <head>
@@ -27,6 +19,14 @@
 </head>
 <body class="bg-white dark:bg-gray-900">
 <main class="pb-8 px-4 pt-4 md:pt-8">
+{%- set navLinks = ['about', 'now', 'projects', 'archives'] %}
+{%- set nav %}
+  {%- for link in navLinks %}
+    <a href="/{{ link }}" class="text-yellow-600 hover:text-gray-800 dark:hover:text-gray-200">
+      {{ link }}
+    </a>
+  {%- endfor %}
+{%- endset %}
 {%- block content %}
 {%- endblock %}
 <footer class="text-center uppercase">
