@@ -43,16 +43,16 @@ function postContent (post) {
       // auto-embed images
       // image: ![alt](url)
       content = content.replace(/!\[(.*)\]\((https?:\/\/.*\.(?:gif|png|jpg|jpeg))\)/g,
-        '<details class="mt-4"><summary class="cursor-pointer hover:text-yellow-600 text-sm md:text-base"><span class="text-xs md:text-sm">IMAGE:</span> $1</summary><img src="$2" alt="$1"></details>')
+        '<img src="$2" alt="$1">')
       // image: url
       content = content.replace(/\s(https?:\/\/.*\.(?:gif|png|jpg|jpeg))/g,
-        '<details class="mt-4"><summary class="cursor-pointer hover:text-yellow-600 text-sm md:text-base"><span class="text-xs md:text-sm">IMAGE:</span> $1</summary><img src="$1" alt=""></details>')
+        '<img src="$1" alt="">')
       // auto-embed youtube
       content = content.replace(/((?:https?:)?\/\/)?((?:www|m)\.)?((?:youtube\.com|youtu.be))(\/(?:[\w\-]+\?v=|embed\/|v\/)?)([\w\-]+)(\S+)?/g,
-        '<details class="mt-4"><summary class="cursor-pointer hover:text-yellow-600 text-sm md:text-base"><span class="text-xs md:text-sm">VIDEO:</span> $1$2$3$4$5</summary><iframe class="mt-4 w-full" type="text/html" width="640" height="360" src="https://www.youtube.com/embed/$5" frameborder="0"></iframe></details>')
+        '<iframe class="mt-4 w-full" type="text/html" width="640" height="360" src="https://www.youtube.com/embed/$5" frameborder="0"></iframe>')
       // auto-embed tweets
       content = content.replace(/(https?:\/\/twitter\.com\/\w+\/status\/\d+)/g,
-        '<details class="mt-4"><summary class="cursor-pointer hover:text-yellow-600 text-sm md:text-base"><span class="text-xs md:text-sm">TWEET:</span> $1</summary><blockquote class="twitter-tweet"><a href="$1">$1</a></blockquote></details>')
+        '<blockquote class="twitter-tweet"><a href="$1">$1</a></blockquote>')
       // auto-link twitter handles
       content = content.replace(/[@]+([A-Za-z0-9-_]+)/g, ' <a href="https://twitter.com/$1">@$1</a>')
       // auto-link twitter hashtags
