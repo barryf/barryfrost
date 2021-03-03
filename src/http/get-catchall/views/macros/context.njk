@@ -12,7 +12,7 @@
       </span>
       {%- if author and author[0].properties and author[0].properties.name %}
         <span class="h-card p-author">
-          <a href="{{ author[0].properties.url[0] }}" class="u-url font-bold hover:text-yellow-600 dark:hover:text-yellow-600" rel="noopener">
+          <a href="{{ author[0].properties.url[0] }}" class="u-url font-bold text-yellow-600 hover:text-gray-800 dark:hover:text-gray-200" rel="noopener">
             {%- if author[0].properties.photo %}
               <img src="{{ author[0].properties.photo[0].value if author[0].properties.photo[0].value else author[0].properties.photo[0] }}"
                 alt="{{ author[0].properties.name[0] }}"
@@ -24,7 +24,7 @@
         a
       {%- endif %}
       post on
-      <a href="{{ context.properties.url[0] }}" class="{{ contextVerb }} font-bold hover:text-yellow-600 dark:hover:text-yellow-600" rel="noopener">
+      <a href="{{ context.properties.url[0] }}" class="{{ contextVerb }} font-bold text-yellow-600 hover:text-gray-800 dark:hover:text-gray-200" rel="noopener">
         <span class="inline-block">
           {{ helpers.iconFromUrl(context.properties.url[0], true) | safe }}
           {{ icon.icon('external') }}
