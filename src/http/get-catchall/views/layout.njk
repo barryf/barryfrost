@@ -19,19 +19,11 @@
 </head>
 <body class="bg-white dark:bg-gray-900">
 <main class="pb-8 px-4 pt-4 md:pt-8">
-{%- set navLinks = ['about', 'now', 'projects', 'archives'] %}
-{%- set nav %}
-  {%- for link in navLinks %}
-    <a href="/{{ link }}" class="text-yellow-600 hover:text-gray-800 dark:hover:text-gray-200">
-      {{ link }}
-    </a>
-  {%- endfor %}
-{%- endset %}
 {%- block content %}
 {%- endblock %}
 <footer class="text-center uppercase">
   <nav class="mb-4 space-x-3 text-xs md:text-sm text-gray-600 dark:text-gray-400 uppercase md:hidden">
-    {{ nav | safe }}
+    {%- include 'includes/nav.njk' %}
   </nav>
   <p class="text-sm md:text-base text-gray-400 dark:text-gray-600">
     Barry Frost

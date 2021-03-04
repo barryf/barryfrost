@@ -24,7 +24,7 @@
       </div>
     </div>
     <nav class="space-x-3 text-xs md:text-sm uppercase hidden md:block">
-      {{ nav | safe }}
+      {%- include 'includes/nav.njk' %}
     </nav>
   </div>
 </header>
@@ -58,11 +58,6 @@
   </div>
   <div class="h-feed">
     {% include 'includes/list-posts.njk' %}
-    <div class="text-right text-sm md:text-base uppercase">
-      <a href="/all" class="text-yellow-600 hover:text-gray-800 dark:hover:text-gray-200">
-        All posts &rarr;
-      </a>
-    </div>
   </div>
 
 </div>

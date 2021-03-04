@@ -16,7 +16,7 @@
         {%- include 'includes/author.njk' %}
       </div>
       <nav class="space-x-3 text-xs md:text-sm uppercase hidden md:block">
-        {{ nav | safe }}
+        {%- include 'includes/nav.njk' %}
       </nav>
     </div>
     {%- if post['post-type'] == 'article' %}
@@ -31,6 +31,7 @@
     {%- include 'includes/like-of.njk' %}
     {%- include 'includes/photos.njk' %}
     {%- include 'includes/rsvp.njk' %}
+    {%- include 'includes/checkin.njk' %}
     {%- include 'includes/content.njk' %}
     {%- include 'includes/webmentions/likes.njk' %}
     {%- include 'includes/webmentions/reposts.njk' %}
