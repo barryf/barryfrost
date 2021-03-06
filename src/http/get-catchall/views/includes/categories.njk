@@ -5,9 +5,7 @@
   <ul class="inline text-base md:text-lg text-yellow-600">
     {%- for cat in post.properties.category %}
       <li class="inline mr-1">
-        <a href="/categories/{{ cat }}" rel="nofollow tag" class="hover:text-gray-800 dark:hover:text-gray-200">
-          #<span class="p-category">{{ cat }}</span>
-        </a>
+        <a href="/categories/{{ cat }}" rel="nofollow tag" class="hover:text-gray-800 dark:hover:text-gray-200">#<span class="p-category">{{ cat }}</span></a>
       </li>
     {%- endfor %}
   </ul>
