@@ -207,6 +207,10 @@ function pluralise (term) {
   }
 }
 
+function shortUrl (post) {
+  return '/' + post.url[0].replace(process.env.ROOT_URL, '')
+}
+
 module.exports = {
   postTitle,
   postContent,
@@ -224,5 +228,6 @@ module.exports = {
   contextVerb,
   pluralise,
   isUrl,
-  containsTweet
+  containsTweet,
+  shortUrl
 }

@@ -5,6 +5,7 @@ barryfrost
 region eu-west-2
 
 @http
+get /map/*
 get /rss
 get /*
 
