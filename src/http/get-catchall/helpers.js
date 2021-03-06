@@ -43,12 +43,12 @@ function postContent (post) {
       // auto-embed images
       // image: ![alt](url)
       content = content.replace(/!\[(.*)\]\((https?:\/\/.*\.(?:gif|png|jpg|jpeg))\)/g,
-        '<img src="$2" alt="$1">')
+        '<img src="$2" alt="$1" class="shadow rounded">')
       // image: url
       content = content.replace(/\s(https?:\/\/.*\.(?:gif|png|jpg|jpeg))/g,
-        '<img src="$1" alt="">')
+        '<img src="$1" alt="" class="shadow rounded">')
       // auto-embed youtube
-      content = content.replace(/((?:https?:)?\/\/)?((?:www|m)\.)?((?:youtube\.com|youtu.be))(\/(?:[\w\-]+\?v=|embed\/|v\/)?)([\w\-]+)(\S+)?/g,
+      content = content.replace(/((?:https?:)?\/\/)?((?:www|m)\.)?((?:youtube\.com|youtu.be))(\/(?:[\w-]+\?v=|embed\/|v\/)?)([\w-]+)(\S+)?/g,
         '<iframe class="mt-4 w-full" type="text/html" width="640" height="360" src="https://www.youtube.com/embed/$5" frameborder="0"></iframe>')
       // auto-embed tweets
       content = content.replace(/(https?:\/\/twitter\.com\/\w+\/status\/\d+)/g,
