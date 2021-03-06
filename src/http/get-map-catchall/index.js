@@ -1,6 +1,6 @@
 const fetch = require('node-fetch')
 
-async function fetchImage (lat = 0, lng = 0, zoom = 14) {
+async function fetchImage (lat = 0, lng = 0, zoom = 15) {
   const token = process.env.MAPBOX_ACCESS_TOKEN
   const url = 'https://api.mapbox.com/styles/v1/mapbox/outdoors-v11/static/' +
     `pin-l-embassy+f59e0b(${lng},${lat})/` +
