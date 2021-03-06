@@ -139,19 +139,18 @@ async function renderList (data, title, year = null, month = null, day = null) {
 function renderPost (post) {
   const statusCode = post.statusCode || 200
   delete post.statusCode
-  const template = (
-    (statusCode !== 200) ||
-    (post.channel && post.channel[0] === 'pages')
-  ) ? 'page' : 'post'
+  const template = ((statusCode !== 200) || (post.channel && post.channel[0] === 'pages'))
+    ? 'page'
+    : 'post'
   const body = nunjucks.render(`${template}.njk`, {
     post,
     metadata: metadata(post),
     helpers,
     urls
   })
-  const cache = (post.properties.published &&
-    dateWithin24Hours(post.properties.published[0])
-  ) ? 60 : 3600
+  const cache = (post.properties.published && dateWithin24Hours(post.properties.published[0]))
+    ? 60
+    : 3600
   const raw = JSON.stringify(
     { type: post.type, properties: post.properties }, null, 2)
   return {
@@ -213,9 +212,7 @@ async function handleUrl (url, params) {
     const c = (params.c || '').toLowerCase()
     let filteredCategories
     if (c) {
-      filteredCategories = categories.map(category => {
-        if (category.startsWith(c)) return category
-      }).filter((el) => el != null) // remove nulls
+      filteredCategories = categories.filter(category => category.startsWith(c))
     }
     return {
       ...httpHeaders(3600),
@@ -246,7 +243,7 @@ async function handleUrl (url, params) {
       statusCode: 200,
       headers: {
         'Content-Type': 'text/javascript; charset=utf8',
-        'Cache-Control': `s-maxage=${3600}`
+        'Cache-Control': 's-maxage=3600'
       },
       body: `var categories = ${JSON.stringify(categories)};`
     }
