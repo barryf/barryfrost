@@ -211,6 +211,25 @@ function shortUrl (post) {
   return '/' + post.url[0].replace(process.env.ROOT_URL, '')
 }
 
+function contextNameEqualsContent (context) {
+  if (!('name' in context.properties) || !('content' in context.properties)) {
+    return false
+  }
+  const name = context.properties.name[0]
+  let content
+  if (context.properties.content[0].html) {
+    content = sanitizeHtml(
+      context.properties.content[0].html, {
+        allowedTags: [],
+        allowedAttributes: {}
+      }
+    )
+  } else {
+    content = context.properties.content[0]
+  }
+  return (content === name)
+}
+
 module.exports = {
   postTitle,
   postContent,
@@ -229,5 +248,6 @@ module.exports = {
   pluralise,
   isUrl,
   containsTweet,
-  shortUrl
+  shortUrl,
+  contextNameEqualsContent
 }
