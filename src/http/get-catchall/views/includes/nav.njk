@@ -3,4 +3,7 @@
   <a href="/{{ link }}" class="text-yellow-600 hover:text-gray-800 dark:hover:text-gray-200">
     {{ link }}
   </a>
+  {%- if not loop.last %}
+    <span class="text-gray-400 dark:text-gray-600">/</span>
+  {%- endif %}
 {%- endfor %}
