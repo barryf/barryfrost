@@ -8,7 +8,7 @@
     {%- set author = context.properties.author %}
     <div class="text-base md:text-lg text-gray-500">
       <span class="uppercase text-sm md:text-base">
-        {{ contextLabel }}:
+        {{ contextLabel }}
       </span>
       {%- if author and author[0].properties and author[0].properties.name %}
         <span class="h-card p-author">
@@ -39,7 +39,7 @@
             <div class="p-name text-gray-600 dark:text-gray-400 {{ 'font-bold' if context.properties.content }}">{{ context.properties.name[0] | safe }}</div>
           {%- endif %}
           {%- if context.properties.content %}
-            &ldquo;<span class="p-content text-gray-600 dark:text-gray-400">{{ contextContent }}</span>&rdquo;
+            <div class="p-content text-gray-600 dark:text-gray-400">{{ contextContent }}</div>
           {%- endif %}
         </blockquote>
       </div>
@@ -61,12 +61,14 @@
   {%- endif %}
 {%- else %}
   <h2 class="text-gray-500 text-base md:text-lg uppercase">
-    {{ contextLabel }}:
+    {{ contextLabel }}
   </h2>
-  <a href="{{ context }}" class="{{ contextVerb }} text-lg md:text-xl text-yellow-600 hover:text-gray-800 dark:hover:text-gray-200" rel="noopener">
-    {{ context }}
-    {{ icon.icon('external') }}
-  </a>
+  <p>
+    <a href="{{ context }}" class="{{ contextVerb }} text-lg md:text-xl text-yellow-600 hover:text-gray-800 dark:hover:text-gray-200" rel="noopener">
+      {{ context }}
+      {{ icon.icon('external') }}
+    </a>
+  </p>
 {%- endif %}
 
 {%- endmacro %}

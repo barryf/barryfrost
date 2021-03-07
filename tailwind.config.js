@@ -17,7 +17,7 @@ module.exports = {
               fontStyle: 'normal'
             },
             'code,blockquote': {
-              color: theme('colors.gray.700')
+              color: theme('colors.gray.600')
             },
             a: {
               fontWeight: 'bold',
@@ -28,7 +28,9 @@ module.exports = {
               }
             },
             blockquote: {
-              fontStyle: 'normal'
+              fontStyle: 'normal',
+              quotes: 'none',
+              borderColor: theme('colors.gray.400')
             }
           }
         },
@@ -38,7 +40,7 @@ module.exports = {
               color: theme('colors.gray.200')
             },
             'code,blockquote': {
-              color: theme('colors.gray.300')
+              color: theme('colors.gray.400')
             },
             a: {
               color: theme('colors.yellow.600'),
@@ -51,6 +53,9 @@ module.exports = {
                   color: theme('colors.gray.800')
                 }
               }
+            },
+            blockquote: {
+              borderColor: theme('colors.red.600')
             }
           }
         }
