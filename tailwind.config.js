@@ -55,7 +55,7 @@ module.exports = {
               }
             },
             blockquote: {
-              borderColor: theme('colors.red.600')
+              borderColor: theme('colors.gray.600')
             }
           }
         }
