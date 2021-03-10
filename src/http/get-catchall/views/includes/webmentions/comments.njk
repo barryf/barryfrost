@@ -16,6 +16,7 @@
                   {%- set photoUrl = comment.properties.author[0].properties.photo[0].value if comment.properties.author[0].properties.photo[0].value else comment.properties.author[0].properties.photo[0] %}
                   {%- set photoUrl = photoUrl | replace('http://pbs.twimg.com/', 'https://pbs.twimg.com/') %}
                   <img src="{{ photoUrl }}"
+                    loading="lazy"
                     class="u-photo"
                     alt="{{ comment.properties.author[0].properties.name[0] }}"
                     title="{{ comment.properties.author[0].properties.name[0] }}">

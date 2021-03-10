@@ -15,6 +15,7 @@
                 {%- set photoUrl = repost.properties.author[0].properties.photo[0].value if repost.properties.author[0].properties.photo[0].value else repost.properties.author[0].properties.photo[0] %}
                 {%- set photoUrl = photoUrl | replace('http://pbs.twimg.com/', 'https://pbs.twimg.com/') %}
                 <img src="{{ photoUrl }}"
+                  loading="lazy"
                   alt="{{ repost.properties.author[0].properties.name[0] }}"
                   title="{{ repost.properties.author[0].properties.name[0] }}"
                   class="u-photo w-8 h8 md:w-9 md:h-9">
