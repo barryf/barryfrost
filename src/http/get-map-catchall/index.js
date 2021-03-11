@@ -24,10 +24,17 @@ async function getPostLocation (url) {
   )
   if (response.status === 200) {
     const post = await response.json()
-    if (post && post.properties && post.properties.location) {
-      return {
-        lat: post.properties.location[0].properties.latitude[0],
-        lng: post.properties.location[0].properties.longitude[0]
+    if (post && post.properties) {
+      if (post.properties.location) {
+        return {
+          lat: post.properties.location[0].properties.latitude[0],
+          lng: post.properties.location[0].properties.longitude[0]
+        }
+      } else if (post.properties.checkin) {
+        return {
+          lat: post.properties.checkin[0].properties.latitude[0],
+          lng: post.properties.checkin[0].properties.longitude[0]
+        }
       }
     }
   }
