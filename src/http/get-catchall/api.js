@@ -101,7 +101,9 @@ async function getCategories () {
     { headers: { Authorization: `Bearer ${process.env.MICROPUB_TOKEN}` } }
   )
   if (response.status === 200) {
-    return await response.json()
+    const categories = await response.json()
+    // remove urls
+    return categories.filter(c => !c.match(/^https?:/))
   }
 }
 
