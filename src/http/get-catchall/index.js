@@ -237,7 +237,7 @@ async function handleUrl (url, params) {
       }
     }
   // categories as javascript array
-  } else if (url === 'categoriesjs') {
+  } else if (url === 'categories.js') {
     const categories = await api.getCategories()
     return {
       statusCode: 200,
@@ -248,7 +248,7 @@ async function handleUrl (url, params) {
       body: `var categories = ${JSON.stringify(categories)};`
     }
   // robots.txt
-  } else if (url === 'robotstxt') {
+  } else if (url === 'robots.txt') {
     return {
       headers: {
         'Content-Type': 'text/plain; charset=utf8',
@@ -275,7 +275,7 @@ async function handleUrl (url, params) {
 
 exports.handler = async function http (req) {
   // strip initial/ending slash, remove any api gateway stage, clean characters
-  const url = req.rawPath.substr(1).replace(/[^a-z0-9/-]/, '').replace(/\/$/, '')
+  const url = req.rawPath.substr(1).replace(/[^a-z0-9./-]/, '').replace(/\/$/, '')
   const params = req.queryStringParameters || {}
   return handleUrl(url, params)
 }
