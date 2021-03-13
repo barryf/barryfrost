@@ -6,23 +6,30 @@ const md = require('markdown-it')({
   html: true
 })
 
-exports.handler = async function http (req) {
+async function getPosts (params) {
+  let url = `${process.env.MICROPUB_URL}?q=source&`
+  if ('post-type' in params &&
+    ['article', 'note', 'photo'].includes(params['post-type'])) {
+    url += `post-type=${params['post-type']}`
+  } else {
+    url += 'homepage'
+  }
+  const response = await fetch(url,
+    { headers: { Authorization: `Bearer ${process.env.MICROPUB_TOKEN}` } }
+  )
+  if (!response.ok) return { statusCode: 400 }
+  return await response.json()
+}
+
+function createFeed (postsMf2) {
   const feed = new RSS({
     title: 'Barry Frost',
     description: "Barry Frost's personal website.",
     feed_url: process.env.ROOT_URL + 'rss',
     site_url: process.env.ROOT_URL,
     image_url: new URL(arc.static('/barryfrost-favicon.png'), process.env.ROOT_URL).href,
-    language: 'en'
+    language: 'en-GB'
   })
-
-  const url = `${process.env.MICROPUB_URL}?q=source&homepage`
-  const response = await fetch(url,
-    { headers: { Authorization: `Bearer ${process.env.MICROPUB_TOKEN}` } }
-  )
-  if (!response.ok) return { statusCode: 400 }
-  const postsMf2 = await response.json()
-
   postsMf2.items.forEach(post => {
     const item = {
       title: ('name' in post.properties) ? post.properties.name[0] : '',
@@ -31,7 +38,7 @@ exports.handler = async function http (req) {
     }
     let description = ''
     if ('photo' in post.properties) {
-      description += `<img src="${post.properties.photo[0]}">\n\n`
+      description += `<p><img src="${post.properties.photo[0]}"></p>\n`
     }
     if ('summary' in post.properties) {
       description += post.properties.summary[0]
@@ -41,10 +48,16 @@ exports.handler = async function http (req) {
         : post.properties.content[0].html || ''
       description += '\n'
     }
-    if (description !== '') { item.description = description }
+    if (description !== '') { item.description = description.trim() }
     feed.item(item)
   })
+  return feed
+}
 
+exports.handler = async function http (req) {
+  const params = req.queryStringParameters || {}
+  const postsMf2 = await getPosts(params)
+  const feed = createFeed(postsMf2)
   return {
     statusCode: 200,
     headers: {
