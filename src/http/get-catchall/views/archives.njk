@@ -38,7 +38,7 @@
     Categories
   </h2>
   {%- set letters = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','0','1','2','3','4','5','6','7','8','9'] %}
-  <ul class="mb-4 space-x-2 md:space-x-3 text-gray-600 dark:text-gray-400 text-xl md:text-2xl">
+  <ul class="mb-4 tracking-widest text-gray-600 dark:text-gray-400 text-xl md:text-2xl">
     {%- for letter in letters %}
       <li class="inline">
         <a href="?c={{ letter | lower }}#c" id="c-{{ letter | lower }}"
