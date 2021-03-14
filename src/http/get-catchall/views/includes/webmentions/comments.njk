@@ -28,13 +28,13 @@
             <div>
               {%- if comment.properties.author and comment.properties.author[0].properties.name %}
                 <span class="mr-1 font-bold text-sm md:text-base text-gray-600 dark:text-gray-400">
-                  <a href="{{ comment.properties.author[0].properties.url[0] }}" class="u-url p-name hover:text-yellow-600 dark:hover:text-yellow-600">
+                  <a href="{{ comment.properties.author[0].properties.url[0] }}" class="u-url p-name text-yellow-600 hover:text-gray-800 dark:hover:text-gray-200">
                     {{ comment.properties.author[0].properties.name[0] }}
                   </a>
                 </span>
               {%- endif %}
-              <span class="text-xs md:text-sm text-gray-500 dark:text-gray-500">
-                <a href="{{ comment.properties.url[0] }}" class="u-url hover:text-yellow-600 dark:hover:text-yellow-600">
+              <span class="text-xs md:text-sm">
+                <a href="{{ comment.properties.url[0] }}" class="u-url text-yellow-600 hover:text-gray-800 dark:hover:text-gray-200">
                   <time datetime="{{ comment.properties.published[0] }}"
                     class="dt-published"
                     title="{{ comment.properties.published[0] | replace('T',' ') | replace('Z', ' UTC') }}">
