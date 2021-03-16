@@ -27,7 +27,7 @@
   },
   "homepage": "https://github.com/barryf/barryfrost#readme",
   "dependencies": {
-    "@architect/functions": "^3.12.1",
+    "@architect/functions": "^3.13.9",
     "highlight.js": "^10.1.1",
     "markdown-it": "^11.0.0",
     "node-fetch": "^2.6.0",
