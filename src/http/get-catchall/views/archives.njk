@@ -21,18 +21,18 @@
   <h2 class="mb-4 uppercase text-gray-800 dark:text-gray-200 text-sm md:text-base">
     Post Types
   </h2>
-  <div class="mb-12 grid grid-cols-3 md:grid-cols-5 md:text-lg text-gray-600 dark:text-gray-400">
-    <div class="mb-2"><span class="mr-1">{{ icon.icon('all') }}</span><a href="/all" class="hover:text-gray-800 dark:hover:text-gray-200">All</a></div>
-    <div class="mb-2"><span class="mr-1">{{ icon.icon('article') }}</span><a href="/articles" class="hover:text-gray-800 dark:hover:text-gray-200">Articles</a></div>
-    <div class="mb-2"><span class="mr-1">{{ icon.icon('note') }}</span><a href="/notes" class="hover:text-gray-800 dark:hover:text-gray-200">Notes</a></div>
-    <div class="mb-2"><span class="mr-1">{{ icon.icon('photo') }}</span><a href="/photos" class="hover:text-gray-800 dark:hover:text-gray-200">Photos</a></div>
-    <div class="mb-2"><span class="mr-1">{{ icon.icon('bookmark') }}</span><a href="/bookmarks" class="hover:text-gray-800 dark:hover:text-gray-200">Bookmarks</a></div>
-    <div class="mb-2"><span class="mr-1">{{ icon.icon('checkin') }}</span><a href="/checkins" class="hover:text-gray-800 dark:hover:text-gray-200">Checkins</a></div>
-    <div class="mb-2"><span class="mr-1">{{ icon.icon('like') }}</span><a href="/likes" class="hover:text-gray-800 dark:hover:text-gray-200">Likes</a></div>
-    <div class="mb-2"><span class="mr-1">{{ icon.icon('reply') }}</span><a href="/replies" class="hover:text-gray-800 dark:hover:text-gray-200">Replies</a></div>
-    <div class="mb-2"><span class="mr-1">{{ icon.icon('repost') }}</span><a href="/reposts" class="hover:text-gray-800 dark:hover:text-gray-200">Reposts</a></div>
-    <div class="mb-2"><span class="mr-1">{{ icon.icon('rsvp') }}</span><a href="/rsvps" class="hover:text-gray-800 dark:hover:text-gray-200">RSVPs</a></div>
-  </div>
+  <ul class="mb-12 grid grid-cols-3 md:grid-cols-5 leading-loose md:text-lg text-gray-600 dark:text-gray-400">
+    <li>{{ icon.icon('all') }}<a href="/all" class="ml-1 hover:text-gray-800 dark:hover:text-gray-200">All</a></li>
+    <li>{{ icon.icon('article') }}<a href="/articles" class="ml-1 hover:text-gray-800 dark:hover:text-gray-200">Articles</a></li>
+    <li>{{ icon.icon('note') }}<a href="/notes" class="ml-1 hover:text-gray-800 dark:hover:text-gray-200">Notes</a></li>
+    <li>{{ icon.icon('photo') }}<a href="/photos" class="ml-1 hover:text-gray-800 dark:hover:text-gray-200">Photos</a></li>
+    <li>{{ icon.icon('bookmark') }}<a href="/bookmarks" class="ml-1 hover:text-gray-800 dark:hover:text-gray-200">Bookmarks</a></li>
+    <li>{{ icon.icon('checkin') }}<a href="/checkins" class="ml-1 hover:text-gray-800 dark:hover:text-gray-200">Checkins</a></li>
+    <li>{{ icon.icon('like') }}<a href="/likes" class="ml-1 hover:text-gray-800 dark:hover:text-gray-200">Likes</a></li>
+    <li>{{ icon.icon('reply') }}<a href="/replies" class="ml-1 hover:text-gray-800 dark:hover:text-gray-200">Replies</a></li>
+    <li>{{ icon.icon('repost') }}<a href="/reposts" class="ml-1 hover:text-gray-800 dark:hover:text-gray-200">Reposts</a></li>
+    <li>{{ icon.icon('rsvp') }}<a href="/rsvps" class="ml-1 hover:text-gray-800 dark:hover:text-gray-200">RSVPs</a></li>
+  </ul>
 
   <h2 id="c" class="mb-4 uppercase text-gray-800 dark:text-gray-200 text-sm md:text-base">
     Categories
@@ -68,7 +68,7 @@
   </h2>
   <ul class="mb-12">
     {%- for year, months in yearMonths %}
-      <li class="mb-2 text-base md:text-lg">
+      <li class="leading-loose text-base md:text-lg">
         <a href="/{{ year }}" class="text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200">
           {{ year }}
         </a>
