@@ -21,7 +21,7 @@
   <h2 class="mb-4 uppercase text-gray-800 dark:text-gray-200 text-sm md:text-base">
     Post Types
   </h2>
-  <ul class="mb-12 grid grid-cols-3 md:grid-cols-5 leading-loose md:text-lg text-gray-600 dark:text-gray-400">
+  <ul class="mb-12 gap-2 grid grid-cols-3 md:grid-cols-5 md:text-lg text-gray-600 dark:text-gray-400">
     <li>{{ icon.icon('all') }}<a href="/all" class="ml-1 hover:text-gray-800 dark:hover:text-gray-200">All</a></li>
     <li>{{ icon.icon('article') }}<a href="/articles" class="ml-1 hover:text-gray-800 dark:hover:text-gray-200">Articles</a></li>
     <li>{{ icon.icon('note') }}<a href="/notes" class="ml-1 hover:text-gray-800 dark:hover:text-gray-200">Notes</a></li>
@@ -48,10 +48,10 @@
       </li>
     {%- endfor %}
   </ul>
-  <div id="categories" class="mb-12 text-gray-400 dark:text-gray-600 md:text-lg leading-loose">
+  <div id="categories" class="mb-12 text-gray-400 dark:text-gray-600 md:text-lg">
   {%- if filteredCategories %}
     {%- for cat in filteredCategories %}
-      <a href="/categories/{{ cat }}" class="text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200">
+      <a href="/categories/{{ cat }}" class="mb-1 text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200">
         {{ cat }}
       </a>
       {{ '/' if not loop.last }}
@@ -68,18 +68,17 @@
   </h2>
   <ul class="mb-12">
     {%- for year, months in yearMonths %}
-      <li class="leading-loose text-base md:text-lg">
+      <li class="mb-1 text-base md:text-xl">
         <a href="/{{ year }}" class="text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200">
           {{ year }}
         </a>
         <span class="text-gray-400 dark:text-gray-600 mx-1">/</span>
         <ul class="inline">
           {%- for month in months %}
-            <li class="inline text-gray-400 dark:text-gray-600">
+            <li class="inline mr-1 md:mr-3 text-gray-400 dark:text-gray-600">
               <a href="/{{year}}/{{ month }}" class="text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200">
                 {{ month }}
               </a>
-              {{ '&nbsp;' | safe if not loop.last }}
             </li>
           {%- endfor %}
         </ul>
