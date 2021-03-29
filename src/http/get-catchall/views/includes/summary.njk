@@ -1,4 +1,4 @@
-<span class="p-content prose md:text-lg {{ 'text-gray-800 dark:text-gray-200' if post['post-type'][0] == 'note' else 'text-gray-600 dark:text-gray-400' }}">
+<span class="p-content prose md:text-lg text-gray-600 dark:text-gray-400">
   {%- if post.properties.summary %}
     {{ post.properties.summary[0] | safe }}
 
