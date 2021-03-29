@@ -4,7 +4,7 @@ const fetch = require('node-fetch')
 const arc = require('@architect/functions')
 
 async function fetchImage () {
-  const url = new URL(arc.static('/barryfrost.jpg'), process.env.ROOT_URL)
+  const url = new URL(arc.static('/barryfrost.jpg'), process.env.ROOT_URL).href
   const response = await fetch(url)
   const buffer = await response.buffer()
   const image = Buffer.from(buffer).toString('base64')
