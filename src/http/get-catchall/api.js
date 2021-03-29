@@ -54,9 +54,12 @@ async function getList (url, before = null) {
 }
 
 async function getPost (url) {
-  const absoluteUrl = process.env.ROOT_URL + url
-  const response = await fetch(
-    `${micropubSourceUrl}&url=${absoluteUrl}`,
+  const absoluteUrl = new URL(url, process.env.ROOT_URL).href
+  const queryString = new URLSearchParams({
+    url: absoluteUrl,
+    'include-contexts': 1
+  }).toString()
+  const response = await fetch(`${micropubSourceUrl}&${queryString}`,
     { headers: { Authorization: `Bearer ${process.env.MICROPUB_TOKEN}` } }
   )
   switch (response.status) {
