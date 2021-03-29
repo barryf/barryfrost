@@ -97,6 +97,15 @@ async function renderIndex (data) {
   })
 }
 
+function redirect301 (url) {
+  return {
+    statusCode: 301,
+    headers: {
+      Location: `${process.env.ROOT_URL}${url}`
+    }
+  }
+}
+
 async function renderArchives (categories, filteredCategories, c) {
   const yearMonths = {
     2000: ['10', '11', '12'],
@@ -229,21 +238,14 @@ async function handleUrl (url, params) {
     }
   // redirect legacy *.json paths to *?mf2json
   } else if (url.slice(-5) === '.json') {
-    return {
-      statusCode: 301,
-      headers: {
-        Location: `${process.env.ROOT_URL}${url.slice(0, -5)}?mf2json`
-      }
-    }
+    return redirect301(`${url.slice(0, -5)}?mf2json`)
   // redirect tags/* => categories/*
-  } else if (url.substr(0, 5) === 'tags/') {
-    const category = url.substr(5, url.length - 5)
-    return {
-      statusCode: 301,
-      headers: {
-        Location: `${process.env.ROOT_URL}categories/${category}`
-      }
-    }
+  } else if (url.slice(0, 5) === 'tags/') {
+    const category = url.slice(5)
+    return redirect301(`categories/${category}`)
+  // redirect index.xml => rss
+  } else if (url === 'index.xml') {
+    return redirect301('rss')
   // categories as javascript array
   } else if (url === 'categories.js') {
     const categories = await api.getCategories()
