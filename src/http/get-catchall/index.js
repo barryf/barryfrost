@@ -227,6 +227,14 @@ async function handleUrl (url, params) {
       statusCode: 200,
       body: await renderIndex(data)
     }
+  // redirect legacy *.json paths to *?mf2json
+  } else if (url.slice(-5) === '.json') {
+    return {
+      statusCode: 301,
+      headers: {
+        Location: `${process.env.ROOT_URL}${url.slice(0, -5)}?mf2json`
+      }
+    }
   // redirect tags/* => categories/*
   } else if (url.substr(0, 5) === 'tags/') {
     const category = url.substr(5, url.length - 5)
