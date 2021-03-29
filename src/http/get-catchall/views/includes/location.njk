@@ -5,11 +5,11 @@
     Location
   </h2>
   {%- set location = post.properties.checkin[0] %}
-  <div class="md:text-lg text-gray-800 dark:text-gray-200">
+  <div class="md:text-lg text-gray-600 dark:text-gray-400">
     <div class="p-checkin h-card">
-      <div class="text-lg md:text-xl">
+      <div>
         <a href="https://maps.google.com/maps?q={{ location.properties.latitude[0] }},{{ location.properties.longitude[0] }}"
-          class="font-bold text-yellow-600 hover:text-gray-800 dark:hover:text-gray-200" title="View on map">
+          class="text-yellow-600 hover:text-gray-800 dark:hover:text-gray-200" title="View on map">
           <span class="p-name">{{ location.properties.name[0] }}</span>
         </a>
       </div>
