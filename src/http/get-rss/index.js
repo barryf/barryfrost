@@ -6,14 +6,8 @@ const md = require('markdown-it')({
   html: true
 })
 
-async function getPosts (params) {
-  let url = `${process.env.MICROPUB_URL}?q=source&`
-  if ('post-type' in params &&
-    ['article', 'note', 'photo'].includes(params['post-type'])) {
-    url += `post-type=${params['post-type']}`
-  } else {
-    url += 'homepage'
-  }
+async function getPosts (qs = 'homepage') {
+  const url = `${process.env.MICROPUB_URL}?q=source&${qs}`
   const response = await fetch(url,
     { headers: { Authorization: `Bearer ${process.env.MICROPUB_TOKEN}` } }
   )
@@ -21,9 +15,9 @@ async function getPosts (params) {
   return await response.json()
 }
 
-function createFeed (postsMf2) {
+function createFeed (postsMf2, title = null) {
   const feed = new RSS({
-    title: 'Barry Frost',
+    title: `Barry Frost${title ? ' – ' + title : ''}`,
     description: "Barry Frost's personal website.",
     feed_url: process.env.ROOT_URL + 'rss',
     site_url: process.env.ROOT_URL,
@@ -56,8 +50,15 @@ function createFeed (postsMf2) {
 
 exports.handler = async function http (req) {
   const params = req.queryStringParameters || {}
-  const postsMf2 = await getPosts(params)
-  const feed = createFeed(postsMf2)
+  let qs
+  let title
+  if ('post-type' in params &&
+    ['article', 'note', 'photo'].includes(params['post-type'])) {
+    qs = `post-type=${params['post-type']}`
+    title = params['post-type'] + 's'
+  }
+  const postsMf2 = await getPosts(qs)
+  const feed = createFeed(postsMf2, title)
   return {
     statusCode: 200,
     headers: {
