@@ -27,7 +27,6 @@
       <a href="{{ context.properties.url[0] }}" class="{{ contextVerb }} font-bold text-yellow-600 hover:text-gray-800 dark:hover:text-gray-200" rel="noopener">
         <span class="inline-block">
           {{ helpers.iconFromUrl(context.properties.url[0], true) | safe }}
-          {{ icon.icon('external') }}
         </span>
       </a>
     </div>
@@ -66,7 +65,6 @@
   <p>
     <a href="{{ context }}" class="{{ contextVerb }} text-lg md:text-xl text-yellow-600 hover:text-gray-800 dark:hover:text-gray-200" rel="noopener">
       {{ context }}
-      {{ icon.icon('external') }}
     </a>
   </p>
 {%- endif %}
