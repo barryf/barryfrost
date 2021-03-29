@@ -1,18 +1,9 @@
 const arc = require('@architect/functions')
 const sanitizeHtml = require('sanitize-html')
-const hljs = require('highlight.js')
 const md = require('markdown-it')({
   linkify: true,
   html: true,
-  typographer: true,
-  highlight: function (str, lang) {
-    if (lang && hljs.getLanguage(lang)) {
-      try {
-        return hljs.highlight(lang, str).value
-      } catch (__) {}
-    }
-    return ''
-  }
+  typographer: true
 })
 
 function isUrl (u) {
