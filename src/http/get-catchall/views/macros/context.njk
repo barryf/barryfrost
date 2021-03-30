@@ -4,7 +4,7 @@
 {%- set contextVerb = helpers.contextVerb(contextLabel) %}
 
 {%- if context.properties %}
-  <div class="h-cite">
+  <div class="h-cite {{ contextVerb }}">
     {%- set author = context.properties.author %}
     <div class="text-base md:text-lg text-gray-500">
       <span class="uppercase text-sm md:text-base">
@@ -24,7 +24,7 @@
         a
       {%- endif %}
       post on
-      <a href="{{ context.properties.url[0] }}" class="{{ contextVerb }} font-bold text-yellow-600 hover:text-gray-800 dark:hover:text-gray-200" rel="noopener">
+      <a href="{{ context.properties.url[0] }}" class="u-url font-bold text-yellow-600 hover:text-gray-800 dark:hover:text-gray-200" rel="noopener">
         <span class="inline-block">
           {{ helpers.iconFromUrl(context.properties.url[0], true) | safe }}
         </span>
