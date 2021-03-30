@@ -1,7 +1,4 @@
 {%- extends 'layout.njk' %}
-{%- import 'macros/icon.njk' as icon %}
-{%- set year = helpers.yearFromDateString(post.properties.published[0]) %}
-{%- set month = helpers.monthFromDateString(post.properties.published[0]) %}
 
 {%- block head %}
 <link rel="webmention" href="{{ urls.webmention }}">
