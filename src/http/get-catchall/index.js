@@ -243,8 +243,12 @@ async function handleUrl (url, params) {
   } else if (url.slice(0, 5) === 'tags/') {
     const category = url.slice(5)
     return redirect301(`categories/${category}`)
+  // redirect tag/* => categories/*
+  } else if (url.slice(0, 4) === 'tag/') {
+    const category = url.slice(4)
+    return redirect301(`categories/${category}`)
   // redirect index.xml and feed => rss
-  } else if (url === 'index.xml' || url === 'feed') {
+  } else if (url === 'index.xml' || url === 'rss.xml' || url === 'feed') {
     return redirect301('rss')
   // categories as javascript array
   } else if (url === 'categories.js') {
