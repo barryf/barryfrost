@@ -4,7 +4,7 @@
   {%- endif %}
   <time class="dt-published inline" datetime="{{ post.properties.published[0] }}"
     title="{{ post.properties.published[0] | replace('T',' ') | replace('Z', ' UTC') }}">
-    <a href="{{ helpers.shortUrl(post) }}" class="text-yellow-600 hover:text-gray-800 dark:hover:text-gray-200">
+    <a href="{{ helpers.shortUrl(post) }}" class="u-url text-yellow-600 hover:text-gray-800 dark:hover:text-gray-200">
       {%- if format and format == 'full' %}
         {{ helpers.humanDateFull(post.properties.published[0]) }}&nbsp;<small>UTC</small>
       {%- else %}
