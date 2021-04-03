@@ -9,7 +9,7 @@
     {%- for repost in post.properties.repost %}
       {%- if repost.properties.author %}
         <li class="h-cite p-repost float-left">
-          <a href="{{ repost.properties.url[0] }}" class="u-url block bg-gray-300 w-8 h8 md:w-9 md:h-9 overflow-hidden rounded-full -mr-1 hover:text-yellow-600 dark:hover:text-yellow-600">
+          <a href="{{ repost.properties.url[0] }}" class="u-url block bg-gray-300 w-8 h8 md:w-9 md:h-9 overflow-hidden rounded-full mr-1 hover:text-yellow-600 dark:hover:text-yellow-600">
             <span class="h-card p-author">
               {%- if repost.properties.author[0].properties.photo %}
                 {%- set photoUrl = repost.properties.author[0].properties.photo[0].value if repost.properties.author[0].properties.photo[0].value else repost.properties.author[0].properties.photo[0] %}
