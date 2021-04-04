@@ -40,9 +40,9 @@ function createFeed (postsMf2) {
       item.title = post.properties.name[0]
     }
     if ('summary' in post.properties) {
-      item.content = post.properties.summary[0]
+      item.content_html = post.properties.summary[0]
     } else if ('content' in post.properties) {
-      item.content = typeof post.properties.content[0] === 'string'
+      item.content_html = typeof post.properties.content[0] === 'string'
         ? md.render(post.properties.content[0])
         : post.properties.content[0].html || ''
     }
