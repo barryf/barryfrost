@@ -19,18 +19,18 @@ function createFeed (postsMf2) {
     version: 'https://jsonfeed.org/version/1',
     title: 'Barry Frost',
     home_page_url: process.env.ROOT_URL,
-    feed_url: new URL('feed.json', process.env.ROOT_URL),
+    feed_url: new URL('feed.json', process.env.ROOT_URL).href,
     author: {
       name: 'Barry Frost',
       url: process.env.ROOT_URL,
-      avatar: new URL(arc.static('/barryfrost.jpg'), process.env.ROOT_URL)
+      avatar: new URL(arc.static('/barryfrost-favicon.png'), process.env.ROOT_URL).href
     },
     items: []
   }
   for (const post of postsMf2.items) {
     const item = {
       id: post.url[0],
-      url: new URL(post.url, process.env.ROOT_URL),
+      url: new URL(post.url, process.env.ROOT_URL).href,
       date_published: post.published
     }
     if ('updated' in post.properties) {
