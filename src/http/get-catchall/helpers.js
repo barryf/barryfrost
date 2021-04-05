@@ -225,6 +225,19 @@ function contextNameEqualsContent (context) {
   return (content === name)
 }
 
+function listPhotos (post, width = 240, height = 240) {
+  let html = ''
+  const starts = 'https://res.cloudinary.com/barryf/image/upload/'
+  for (const photo of post.properties.photo) {
+    const url = photo.value ? photo.value : photo
+    if (url.startsWith(starts)) {
+      const newUrl = url.replace(starts, `${starts}w_${width},h_${height},c_thumb,g_face/`)
+      html += `<img src="${newUrl}" width="${width / 4}" height="${height / 4}" class="u-photo inline rounded ml-1">`
+    }
+  }
+  return `<div class="float-right ml-2">${html}</div>`
+}
+
 module.exports = {
   postTitle,
   postContent,
@@ -244,5 +257,6 @@ module.exports = {
   isUrl,
   containsTweet,
   shortUrl,
-  contextNameEqualsContent
+  contextNameEqualsContent,
+  listPhotos
 }
