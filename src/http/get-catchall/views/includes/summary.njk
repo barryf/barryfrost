@@ -11,11 +11,11 @@
 
   {%- elif post.properties['like-of'] %}
     Liked a post on
-    {{ helpers.iconFromUrl(post.properties['like-of'][0]) | safe }}
+    {{ helpers.iconFromUrl(post.properties['like-of'][0], true) | safe }}
 
   {%- elif post.properties['repost-of'] %}
     Reposted a post on
-    {{ helpers.iconFromUrl(post.properties['repost-of'][0]) | safe }}
+    {{ helpers.iconFromUrl(post.properties['repost-of'][0], true) | safe }}
 
   {%- endif %}
 </span>

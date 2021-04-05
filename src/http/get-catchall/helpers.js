@@ -167,7 +167,11 @@ function iconFromUrl (url, includeServiceName = false) {
   } else {
     return host
   }
-  return svg + (includeServiceName ? ' ' + name : '')
+  return svg + (
+    includeServiceName
+      ? '&nbsp;' + name
+      : `<span class="hidden">${name}</span>`
+  )
 }
 
 function contextVerb (contextLabel) {
