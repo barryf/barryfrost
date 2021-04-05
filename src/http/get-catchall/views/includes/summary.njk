@@ -1,13 +1,14 @@
 <span class="p-content prose md:text-lg text-gray-600 dark:text-gray-400">
+  {%- if post.properties.rsvp %}
+    {{ post.properties.rsvp[0] | string | title }} &mdash;
+  {%- endif %}
+
   {%- if post.properties.summary %}
     {{ post.properties.summary[0] | safe }}
 
   {%- elif post.properties.content %}
     {%- set truncateWords = 200 if post['post-type'][0] == 'note' else 125 %}
     {{ helpers.listContent(post) | safe | truncate(truncateWords) }}
-
-  {%- elif post.properties.checkin %}
-    {{ post.properties.checkin[0].properties.name[0] | safe }}
 
   {%- elif post.properties['like-of'] %}
     Liked a post on
@@ -17,5 +18,10 @@
     Reposted a post on
     {{ helpers.iconFromUrl(post.properties['repost-of'][0], true) | safe }}
 
+  {%- endif %}
+
+  {%- if post.properties.checkin %}
+    {%- if post.properties.content %}&nbsp;&mdash;{%- endif %}
+    {{ post.properties.checkin[0].properties.name[0] | safe }}
   {%- endif %}
 </span>
