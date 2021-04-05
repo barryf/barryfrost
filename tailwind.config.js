@@ -1,7 +1,8 @@
 module.exports = {
   future: {},
   purge: [
-    './src/**/*.njk'
+    './src/**/*.njk',
+    './src/http/get-catchall/helpers.js'
   ],
   theme: {
     fontFamily: {

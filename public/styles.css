@@ -423,7 +423,8 @@ textarea::placeholder {
   color: #9ca3af;
 }
 
-button {
+button,
+[role="button"] {
   cursor: pointer;
 }
 
@@ -1221,6 +1222,10 @@ video {
   flex: none;
 }
 
+.float-right {
+  float: right;
+}
+
 .float-left {
   float: left;
 }
@@ -1311,6 +1316,14 @@ video {
   margin-right: 0.5rem;
 }
 
+.ml-2 {
+  margin-left: 0.5rem;
+}
+
+.mt-4 {
+  margin-top: 1rem;
+}
+
 .mb-4 {
   margin-bottom: 1rem;
 }
@@ -1341,10 +1354,6 @@ video {
 
 .-mt-1 {
   margin-top: -0.25rem;
-}
-
-.-mr-1 {
-  margin-right: -0.25rem;
 }
 
 .-mt-0\.5 {
