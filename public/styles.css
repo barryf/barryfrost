@@ -1093,7 +1093,7 @@ video {
 }
 
 @media (prefers-color-scheme: dark) {
-  .dark\:prose-dark h1,.dark\:prose-dark h2,.dark\:prose-dark h3,.dark\:prose-dark h4 {
+  .dark\:prose-dark h1,.dark\:prose-dark h2,.dark\:prose-dark h3,.dark\:prose-dark h4,.dark\:prose-dark strong {
     color: #e5e7eb;
   }
 

@@ -37,7 +37,7 @@ module.exports = {
         },
         dark: {
           css: {
-            'h1,h2,h3,h4': {
+            'h1,h2,h3,h4,strong': {
               color: theme('colors.gray.200')
             },
             'code,blockquote': {
