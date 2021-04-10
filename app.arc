@@ -9,6 +9,7 @@ get /barryfrost.jpg
 get /feed.json
 get /map/*
 get /rss
+get /posts/:id
 get /*
 
 @static
