@@ -43,13 +43,6 @@ function httpHeaders (cache) {
   }
 }
 
-function robotsTxt () {
-  return 'User-agent: *\n' +
-    'Disallow: /categories/*\n' +
-    'Disallow: /tags/*\n' +
-    'Disallow: /all\n'
-}
-
 function dateWithin24Hours (dateString) {
   const date = new Date(dateString)
   const timeStamp = Math.round(new Date().getTime() / 1000)
@@ -261,16 +254,6 @@ async function handleUrl (url, params) {
         'Cache-Control': 's-maxage=3600'
       },
       body: `var categories = ${JSON.stringify(categories)};`
-    }
-  // robots.txt
-  } else if (url === 'robots.txt') {
-    return {
-      headers: {
-        'Content-Type': 'text/plain; charset=utf8',
-        'Cache-Control': 's-maxage=3600'
-      },
-      statusCode: 200,
-      body: robotsTxt()
     }
   // catch all - assume this is a post or page
   } else {
