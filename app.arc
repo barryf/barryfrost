@@ -10,6 +10,7 @@ get /feed.json
 get /map/*
 get /rss
 get /posts/:id
+get /articles/:slug
 get /*
 
 @static
