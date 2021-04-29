@@ -30,8 +30,8 @@ function createFeed (postsMf2) {
   for (const post of postsMf2.items) {
     const item = {
       id: post.url[0],
-      url: new URL(post.url, process.env.ROOT_URL).href,
-      date_published: post.published
+      url: post.url[0],
+      date_published: post.properties.published[0]
     }
     if ('updated' in post.properties) {
       item.date_modified = post.properties.updated[0]
