@@ -35,6 +35,7 @@
     "sanitize-html": "^2.3.0"
   },
   "devDependencies": {
+    "@architect/architect": "^8.5.10",
     "@babel/cli": "^7.12.16",
     "@babel/core": "^7.12.16",
     "@babel/preset-env": "^7.12.16",
