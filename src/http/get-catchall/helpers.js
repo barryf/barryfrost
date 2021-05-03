@@ -99,12 +99,13 @@ function listContent (post) {
   } else {
     html = md.render(post.properties.content[0]).trim()
   }
-  const sanitizedHtml = sanitizeHtml(
+  let sanitizedHtml = sanitizeHtml(
     html, {
       allowedTags: [],
       allowedAttributes: {}
     }
   )
+  sanitizedHtml = sanitizedHtml.replace(/\s?(\?:https?):\/\/[\n\S]+/g, '')
   return sanitizedHtml
 }
 
