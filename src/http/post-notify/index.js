@@ -20,11 +20,12 @@ exports.handler = async function http (req) {
 
   // purge cloudflare cache for url
   const zone = process.env.CLOUDFLARE_ZONE
-  const cfUrl = `https://api.cloudflare.com/client/v4/${zone}/purge_cache`
+  const cfUrl = `https://api.cloudflare.com/client/v4/zones/${zone}/purge_cache`
   const url = new URL(body.url, process.env.ROOT_URL).href
   const response = await fetch(cfUrl, {
     method: 'post',
     headers: {
+      Authorization: 'Bearer ' + process.env.CLOUDFLARE_TOKEN,
       'X-Auth-Email': process.env.CLOUDFLARE_EMAIL,
       'X-Auth-Key': process.env.CLOUDFLARE_KEY,
       'Content-Type': 'application/json'
