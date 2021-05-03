@@ -5,6 +5,7 @@ barryfrost
 region eu-west-2
 
 @http
+post /notify
 get /barryfrost.jpg
 get /feed.json
 get /map/*
