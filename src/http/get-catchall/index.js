@@ -31,7 +31,11 @@ const urls = {
   webmention: process.env.WEBMENTION_URL
 }
 
-function httpHeaders (cache) {
+const oneYearInSeconds = 60 * 60 * 24 * 365
+const oneDayInSeconds = 60 * 60 * 24
+const oneHourInSeconds = 60 * 60
+
+function httpHeaders (cache = oneHourInSeconds) {
   return {
     headers: {
       'Content-Type': 'text/html; charset=utf8',
@@ -41,14 +45,6 @@ function httpHeaders (cache) {
       'X-Frame-Options': 'DENY'
     }
   }
-}
-
-function dateWithin24Hours (dateString) {
-  const date = new Date(dateString)
-  const timeStamp = Math.round(new Date().getTime() / 1000)
-  const timeStampYesterday = timeStamp - (24 * 3600)
-  const is24 = date >= new Date(timeStampYesterday * 1000).getTime()
-  return is24
 }
 
 function metadata (post) {
@@ -151,15 +147,11 @@ function renderPost (post) {
     helpers,
     urls
   })
-  const cache = (post.properties.published && dateWithin24Hours(post.properties.published[0]))
-    ? 60
-    : 3600
   const raw = JSON.stringify(
     { type: post.type, properties: post.properties }, null, 2)
   return {
     statusCode,
     body,
-    cache,
     raw
   }
 }
@@ -171,7 +163,7 @@ async function handleUrl (url, params) {
     const category = url.substr(11, url.length - 11)
     const data = await api.getCategory(category, before)
     return {
-      ...httpHeaders(3600),
+      ...httpHeaders(oneHourInSeconds),
       statusCode: 200,
       body: await renderList(data, `#${category}`)
     }
@@ -184,7 +176,7 @@ async function handleUrl (url, params) {
     title = title.charAt(0).toUpperCase() + title.substr(1) // initial cap
     const data = await api.getPostType(postType, before)
     return {
-      ...httpHeaders(3600),
+      ...httpHeaders(oneHourInSeconds),
       statusCode: 200,
       body: await renderList(data, title)
     }
@@ -197,7 +189,7 @@ async function handleUrl (url, params) {
     const published = url.replace(/\//g, '-')
     const data = await api.getPublished(published, before)
     return {
-      ...httpHeaders(3600),
+      ...httpHeaders(oneHourInSeconds),
       statusCode: 200,
       body: await renderList(data, published, year, month, day)
     }
@@ -205,7 +197,7 @@ async function handleUrl (url, params) {
   } else if (url === 'all') {
     const data = await api.getAll(before)
     return {
-      ...httpHeaders(3600),
+      ...httpHeaders(oneYearInSeconds),
       statusCode: 200,
       body: await renderList(data, 'All')
     }
@@ -218,7 +210,7 @@ async function handleUrl (url, params) {
       filteredCategories = categories.filter(category => category.startsWith(c))
     }
     return {
-      ...httpHeaders(3600),
+      ...httpHeaders(oneDayInSeconds),
       statusCode: 200,
       body: await renderArchives(categories, filteredCategories, c)
     }
@@ -226,7 +218,7 @@ async function handleUrl (url, params) {
   } else if (url === '') {
     const data = await api.getHomepage()
     return {
-      ...httpHeaders(3600),
+      ...httpHeaders(oneDayInSeconds),
       statusCode: 200,
       body: await renderIndex(data)
     }
@@ -251,7 +243,7 @@ async function handleUrl (url, params) {
       statusCode: 200,
       headers: {
         'Content-Type': 'text/javascript; charset=utf8',
-        'Cache-Control': 's-maxage=3600'
+        'Cache-Control': `s-maxage=${oneDayInSeconds}`
       },
       body: `var categories = ${JSON.stringify(categories)};`
     }
@@ -259,12 +251,12 @@ async function handleUrl (url, params) {
   } else {
     const post = await api.getPost(url)
     post.url = [process.env.ROOT_URL + url]
-    const { statusCode, body, cache, raw } = renderPost(post)
+    const { statusCode, body, raw } = renderPost(post)
     if (mf2json !== undefined) {
       return raw
     }
     return {
-      ...httpHeaders(cache),
+      ...httpHeaders(oneYearInSeconds),
       statusCode,
       body
     }
