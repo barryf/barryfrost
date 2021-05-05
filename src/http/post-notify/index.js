@@ -21,7 +21,11 @@ exports.handler = async function http (req) {
   // purge cloudflare cache for url
   const zone = process.env.CLOUDFLARE_ZONE
   const cfUrl = `https://api.cloudflare.com/client/v4/zones/${zone}/purge_cache`
-  const url = new URL(body.url, process.env.ROOT_URL).href
+  const files = [
+    new URL(body.url, process.env.ROOT_URL).href,
+    `${process.env.ROOT_URL}`,
+    `${process.env.ROOT_URL}all`
+  ]
   const response = await fetch(cfUrl, {
     method: 'post',
     headers: {
@@ -30,7 +34,7 @@ exports.handler = async function http (req) {
       'X-Auth-Key': process.env.CLOUDFLARE_KEY,
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({ files: [url] })
+    body: JSON.stringify({ files })
   })
   const result = await response.json()
   return {
@@ -40,7 +44,7 @@ exports.handler = async function http (req) {
       message: result.success
         ? 'Cloudflare purge of URL was successful'
         : 'Cloudflare returned an error from purge request',
-      url,
+      url: body.url,
       result
     })
   }
