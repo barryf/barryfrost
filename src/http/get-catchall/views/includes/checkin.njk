@@ -26,6 +26,6 @@
   </div>
 </div>
 
-<img src="/map{{ helpers.shortUrl(post) }}.png" class="max-h-80 mb-8 rounded" alt="[Map of {{ location.properties.name[0] }}]">
+<img src="/map{{ helpers.shortUrl(post) }}.png" width="624" height="312" class="mb-8 rounded" alt="Map of {{ location.properties.name[0] | escape }}">
 
 {%- endif %}
