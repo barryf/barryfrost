@@ -135,10 +135,10 @@ function monthFromDateString (dateString) {
 }
 
 function imageOptimise (url) {
-  const width = 740
-  const parts = url.match(/https:\/\/res.cloudinary.com\/([a-z0-9]*)\/(.*)/)
-  if (parts) {
-    return `https://res.cloudinary.com/${parts[1]}/w_${width}/${parts[2]}`
+  const height = 768
+  const starts = 'https://res.cloudinary.com/barryf/image/upload/'
+  if (url.startsWith(starts)) {
+    return url.replace(starts, `${starts}h_${height},fl_progressive/`)
   } else {
     return url
   }

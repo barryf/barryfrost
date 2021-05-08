@@ -2,10 +2,10 @@
 {%- import '../macros/photo.njk' as photo %}
 
 <div class="mb-4">
-  <ul class="flex">
+  <ul class="grid grid-cols-2 gap-2">
     {%- for p in post.properties.photo %}
-      <li class="mr-2">
-        {{ photo.photo(p) }}
+      <li>
+        {{ photo.photo(p, helpers.imageOptimise) }}
       </li>
     {%- endfor %}
   </ul>
