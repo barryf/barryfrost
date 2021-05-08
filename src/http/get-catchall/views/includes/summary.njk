@@ -1,4 +1,4 @@
-<span class="p-content prose md:text-lg text-gray-600 dark:text-gray-400">
+<span class="e-content leading-relaxed md:text-lg text-gray-600 dark:text-gray-400">
   {%- if post.properties.rsvp %}
     {{ post.properties.rsvp[0] | string | title }} &mdash;
   {%- endif %}
@@ -7,16 +7,22 @@
     {{ post.properties.summary[0] | safe }}
 
   {%- elif post.properties.content %}
-    {%- set truncateWords = 200 if post['post-type'][0] == 'note' else 125 %}
+    {%- set truncateWords = 500 if post['post-type'][0] == 'note' else 125 %}
     {{ helpers.listContent(post) | safe | truncate(truncateWords) }}
 
   {%- elif post.properties['like-of'] %}
     Liked a post on
-    {{ helpers.iconFromUrl(post.properties['like-of'][0], true) | safe }}
+    <a href="{{ post.properties['like-of'][0] }}"
+      class="u-like-of text-yellow-600 hover:text-gray-800 dark:hover:text-gray-200">
+      {{ helpers.iconFromUrl(post.properties['like-of'][0], true) | safe }}
+    </a>
 
   {%- elif post.properties['repost-of'] %}
     Reposted a post on
-    {{ helpers.iconFromUrl(post.properties['repost-of'][0], true) | safe }}
+    <a href="{{ post.properties['repost-of'][0] }}"
+      class="u-repost-of text-yellow-600 hover:text-gray-800 dark:hover:text-gray-200">
+      {{ helpers.iconFromUrl(post.properties['repost-of'][0], true) | safe }}
+    </a>
 
   {%- endif %}
 
