@@ -105,7 +105,11 @@ function listContent (post) {
       allowedAttributes: {}
     }
   )
-  sanitizedHtml = sanitizedHtml.replace(/\s?(\?:https?):\/\/[\n\S]+/g, '')
+  sanitizedHtml = sanitizedHtml.replace(
+    /\shttps?:\/\/([\S]+)/g,
+    (_, u) => {
+      return ' ' + u.split('/')[0] + '&hellip;'
+    })
   return sanitizedHtml
 }
 
