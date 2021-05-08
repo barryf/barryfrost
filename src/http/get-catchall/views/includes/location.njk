@@ -1,4 +1,4 @@
-{%- if post.properties.checkin and post['post-type'] != 'checkin' %}
+{%- if post.properties.checkin and (posts or post['post-type'] != 'checkin') %}
 
 <div class="">
   <h2 class="text-gray-500 uppercase text-sm md:text-base">
