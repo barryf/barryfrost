@@ -32,7 +32,13 @@ function createFeed (postsMf2, title = null) {
     }
     let description = ''
     if ('photo' in post.properties) {
-      description += `<p><img src="${post.properties.photo[0]}"></p>\n`
+      for (const photo of post.properties.photo) {
+        if (photo.value) {
+          description += `<p><img src="${photo.value}" alt="${photo.alt || ''}"></p>\n`
+        } else {
+          description += `<p><img src="${photo}"></p>\n`
+        }
+      }
     }
     if ('summary' in post.properties) {
       description += post.properties.summary[0]
