@@ -18,3 +18,5 @@ get /*
 @static
 fingerprint true
 folder public
+ignore
+  styles-dev.css

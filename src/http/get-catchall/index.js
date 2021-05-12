@@ -24,7 +24,7 @@ const urls = {
     archives: arc.static('/scripts/archives.js')
   },
   css: arc.static(`/styles${
-    process.env.NODE_ENV !== 'production' ? '-dev' : ''
+    process.env.NODE_ENV === 'testing' ? '-dev' : ''
     }.css`),
   favicon: arc.static('/barryfrost-favicon.png'),
   micropub: process.env.MICROPUB_URL,
