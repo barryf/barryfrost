@@ -30,8 +30,10 @@
     {%- include 'includes/rsvp.njk' %}
     {%- include 'includes/checkin.njk' %}
     {%- include 'includes/content.njk' %}
-    {%- include 'includes/webmentions/likes.njk' %}
-    {%- include 'includes/webmentions/reposts.njk' %}
+    <div class="{{ 'grid grid-cols-2' if post.properties.like and post.properties.repost }}">
+      {%- include 'includes/webmentions/likes.njk' %}
+      {%- include 'includes/webmentions/reposts.njk' %}
+    </div
     {%- include 'includes/webmentions/comments.njk' %}
   </div>
 
