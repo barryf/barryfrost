@@ -119,7 +119,8 @@ async function renderArchives (categories, filteredCategories, c) {
     c,
     title: 'Archives',
     helpers,
-    urls
+    urls,
+    url: 'archives'
   })
 }
 
@@ -135,7 +136,7 @@ async function renderList (data, title, year = null, month = null, day = null) {
   })
 }
 
-function renderPost (post) {
+function renderPost (post, url) {
   const statusCode = post.statusCode || 200
   delete post.statusCode
   const template = ((statusCode !== 200) || (post.channel && post.channel[0] === 'pages'))
@@ -145,7 +146,8 @@ function renderPost (post) {
     post,
     metadata: metadata(post),
     helpers,
-    urls
+    urls,
+    url
   })
   const raw = JSON.stringify(
     { type: post.type, properties: post.properties }, null, 2)
@@ -251,7 +253,7 @@ async function handleUrl (url, params) {
   } else {
     const post = await api.getPost(url)
     post.url = [process.env.ROOT_URL + url]
-    const { statusCode, body, raw } = renderPost(post)
+    const { statusCode, body, raw } = renderPost(post, url)
     if (mf2json !== undefined) {
       return raw
     }
