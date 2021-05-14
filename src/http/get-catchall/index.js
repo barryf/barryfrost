@@ -41,7 +41,7 @@ function httpHeaders (cache = oneHourInSeconds) {
       'Content-Type': 'text/html; charset=utf8',
       'Cache-Control': `s-maxage=${cache}`,
       'Referrer-Policy': 'no-referrer',
-      'Content-Security-Policy': "script-src 'self' https://platform.twitter.com/",
+      'Content-Security-Policy': "script-src 'self' https://platform.twitter.com/ https://plausible.io/",
       'X-Frame-Options': 'DENY'
     }
   }
