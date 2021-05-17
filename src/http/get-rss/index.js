@@ -1,4 +1,3 @@
-const arc = require('@architect/functions')
 const RSS = require('rss')
 const fetch = require('node-fetch')
 const md = require('markdown-it')({
@@ -21,7 +20,7 @@ function createFeed (postsMf2, title = null) {
     description: "Barry Frost's personal website.",
     feed_url: process.env.ROOT_URL + 'rss',
     site_url: process.env.ROOT_URL,
-    image_url: new URL(arc.static('/barryfrost-favicon.png'), process.env.ROOT_URL).href,
+    image_url: new URL('/barryfrost.jpg', process.env.ROOT_URL).href,
     language: 'en-GB'
   })
   postsMf2.items.forEach(post => {

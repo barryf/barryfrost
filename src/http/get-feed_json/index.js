@@ -1,4 +1,3 @@
-const arc = require('@architect/functions')
 const fetch = require('node-fetch')
 const md = require('markdown-it')({
   linkify: true,
@@ -23,7 +22,7 @@ function createFeed (postsMf2) {
     author: {
       name: 'Barry Frost',
       url: process.env.ROOT_URL,
-      avatar: new URL(arc.static('/barryfrost-favicon.png'), process.env.ROOT_URL).href
+      avatar: new URL('/barryfrost.jpg', process.env.ROOT_URL).href
     },
     items: []
   }
