@@ -1,7 +1,7 @@
 <span class="e-content leading-relaxed md:text-lg text-gray-600 dark:text-gray-400">
   {%- if post.properties.rsvp %}
     {{ post.properties.rsvp[0] | string | title }}
-    {{ '&mdash;' if post.properties.content or post.properties.summary }}
+    {{ '—' if post.properties.content or post.properties.summary }}
   {%- endif %}
 
   {%- if post.properties.summary %}
