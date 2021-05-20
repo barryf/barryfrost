@@ -17,7 +17,7 @@ exports.handler = async function http (req) {
     statusCode: 200,
     headers: {
       'Content-Type': 'image/jpeg',
-      'Cache-Control': 's-maxage=86400' // 1 day
+      'Cache-Control': `max-age=${60 * 60}, s-maxage=${60 * 60 * 24 * 365}`
     },
     body: image.toString('base64'),
     isBase64Encoded: true
