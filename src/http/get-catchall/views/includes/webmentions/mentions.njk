@@ -1,0 +1,36 @@
+{%- if post.properties.mention %}
+
+<div class="mb-8">
+  <h2 class="mb-1">
+    <span class="text-gray-600 dark:text-gray-400 text-base md:text-lg">MENTIONS</span>
+    <span class="text-gray-400 dark:text-gray-600 text-sm md:text-base">{{ post.properties.mention | length }}</span>
+  </h2>
+  <ul>
+    {%- for mention in post.properties.mention %}
+      {%- if mention.properties.author %}
+        <li class="h-cite p-mention float-left">
+          <a href="{{ mention.properties.url[0] }}" class="u-url block bg-gray-300 w-8 h8 md:w-9 md:h-9 overflow-hidden rounded-full mr-1 hover:text-yellow-600 dark:hover:text-yellow-600">
+            <span class="h-card p-author">
+              {%- if mention.properties.author[0].properties.photo %}
+                {%- set photoUrl = mention.properties.author[0].properties.photo[0].value if mention.properties.author[0].properties.photo[0].value else mention.properties.author[0].properties.photo[0] %}
+                {%- set photoUrl = photoUrl | replace('http://pbs.twimg.com/', 'https://pbs.twimg.com/') %}
+                <img src="{{ photoUrl }}"
+                  loading="lazy"
+                  alt="{{ mention.properties.author[0].properties.name[0] }}"
+                  title="{{ mention.properties.author[0].properties.name[0] }}"
+                  class="u-photo w-8 h8 md:w-9 md:h-9">
+              {%- else %}
+                <span class="p-name">
+                  {{ mention.properties.author[0].properties.name[0] }}
+                </span>
+              {%- endif %}
+            </span>
+          </a>
+        </li>
+      {%- endif %}
+    {%- endfor %}
+  </ul>
+  <div class="clear-left"></div>
+</div>
+
+{%- endif %}
