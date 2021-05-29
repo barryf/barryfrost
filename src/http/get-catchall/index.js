@@ -76,7 +76,13 @@ function metadata (post) {
     // truncate to first 20 words
     description = description.split(' ').splice(0, 20).join(' ')
   }
-  return { title, description }
+  let image
+  if (post.properties.photo) {
+    const photo = post.properties.photo[0]
+    const photoUrl = photo.value ? photo.value : photo
+    image = helpers.imageOptimise(photoUrl, 627) // 627 is og:image max height
+  }
+  return { title, description, image }
 }
 
 async function renderIndex (data) {

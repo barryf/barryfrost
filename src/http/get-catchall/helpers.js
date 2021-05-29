@@ -138,8 +138,7 @@ function monthFromDateString (dateString) {
   return month < 10 ? `0${month}` : month
 }
 
-function imageOptimise (url) {
-  const height = 768
+function imageOptimise (url, height = 768) {
   const starts = 'https://res.cloudinary.com/barryf/image/upload/'
   if (url.startsWith(starts)) {
     return url.replace(starts, `${starts}h_${height},fl_progressive/`)
