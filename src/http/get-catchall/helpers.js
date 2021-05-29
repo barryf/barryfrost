@@ -45,7 +45,7 @@ function postContent (post) {
       content = content.replace(/(https?:\/\/twitter\.com\/\w+\/status\/\d+)/g,
         '<blockquote class="twitter-tweet"><a href="$1">$1</a></blockquote>')
       // auto-link twitter handles
-      content = content.replace(/[@]+([A-Za-z0-9-_]+)/g, ' <a href="https://twitter.com/$1">@$1</a>')
+      content = content.replace(/(^|[^{]\s)[@]+([A-Za-z0-9-_]+)/g, '$1<a href="https://twitter.com/$2">@$2</a>')
       // auto-link twitter hashtags
       content = content.replace(/[\s]+[#]+([A-Za-z0-9-_]+)/g, ' <a href="https://twitter.com/hashtag/$1">#$1</a>')
       return md.render(content)
