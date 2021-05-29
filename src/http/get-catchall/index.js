@@ -255,7 +255,14 @@ async function handleUrl (url, params) {
     post.url = [process.env.ROOT_URL + url]
     const { statusCode, body, raw } = renderPost(post, url)
     if (mf2json !== undefined) {
-      return raw
+      return {
+        statusCode: 200,
+        headers: {
+          'Content-Type': 'text/javascript; charset=utf8',
+          'Cache-Control': `s-maxage=${oneHourInSeconds}`
+        },
+        body: raw
+      }
     }
     return {
       ...httpHeaders(oneYearInSeconds),
