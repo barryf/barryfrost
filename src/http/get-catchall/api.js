@@ -72,8 +72,7 @@ async function getPost (url) {
         properties: {
           name: ['410'],
           content: [
-            absoluteUrl +
-            '\n\nThis post has been deleted and is no longer available.'
+            'This post has been deleted and is no longer available.'
           ]
         }
       }
@@ -84,8 +83,7 @@ async function getPost (url) {
         properties: {
           name: ['404'],
           content: [
-            absoluteUrl +
-            '\n\nThe page or post could not be found. Check that you entered the URL correctly.'
+            'The page or post could not be found. Check that you entered the URL correctly.'
           ]
         }
       }
