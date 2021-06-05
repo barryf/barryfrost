@@ -1,6 +1,6 @@
 {%- import '../macros/photo.njk' as photo %}
 {%- import '../macros/icon.njk' as icon %}
-{%- macro context(context, contextLabel, helpers) %}
+{%- macro context(context, contextLabel, helpers, contextNoun = 'post') %}
 {%- set contextVerb = helpers.contextVerb(contextLabel) %}
 
 {%- if context.properties %}
@@ -12,24 +12,40 @@
       </span>
       {%- if author and author[0].properties and author[0].properties.name %}
         <span class="h-card p-author">
-          <a href="{{ author[0].properties.url[0] }}" class="u-url font-bold text-yellow-600 hover:text-gray-800 dark:hover:text-gray-200" rel="noopener">
-            {%- if author[0].properties.photo %}
-              <img src="{{ author[0].properties.photo[0].value if author[0].properties.photo[0].value else author[0].properties.photo[0] }}"
-                alt="{{ author[0].properties.name[0] }}"
-                class="u-photo w-6 h6 md:w-7 md:h-7 inline-block mx-1 rounded-full">
-            {%- endif %}
-            <span class="p-name">{{ author[0].properties.name[0] }}</span></a>&rsquo;s
+          {%- if author[0].properties.url %}
+            <a href="{{ author[0].properties.url[0] }}" class="u-url font-bold text-yellow-600 hover:text-gray-800 dark:hover:text-gray-200" rel="noopener">
+          {%- endif %}
+          {%- if author[0].properties.photo %}
+            <img src="{{ author[0].properties.photo[0].value if author[0].properties.photo[0].value else author[0].properties.photo[0] }}"
+              alt="{{ author[0].properties.name[0] }}"
+              class="u-photo w-6 h6 md:w-7 md:h-7 inline-block mx-1 rounded-full">
+          {%- endif %}
+          {%- set authorS = '' if (author[0].properties.name[0] | last | lower) == 's' else 's' %}
+          <span class="p-name">{{ author[0].properties.name[0] }}</span>{%- if author[0].properties.url %}</a>{%- endif %}&rsquo;{{ authorS }}
         </span>
       {%- else %}
         a
       {%- endif %}
-      post on
+      {{ contextNoun }}
+      on
       <a href="{{ context.properties.url[0] }}" class="u-url font-bold text-yellow-600 hover:text-gray-800 dark:hover:text-gray-200" rel="noopener">
         <span class="inline-block">
           {{ helpers.iconFromUrl(context.properties.url[0], true) | safe }}
         </span>
       </a>
     </div>
+    {%- if context.properties.photo %}
+      <ul>
+        {%- for p in context.properties.photo %}
+          {#- don't show photo if it's the author photo #}
+          {%- if not author or not author[0].photo or not (author[0].photo[0].value and author[0].photo[0].value == p) or not (author[0].photo[0] == p) %}
+            <li class="mb-4">
+              {{ photo.photo(p, null, 40) | safe }}
+            </li>
+          {%- endif %}
+        {%- endfor %}
+      </ul>
+    {%- endif %}
     {%- if context.properties.content or context.properties.name %}
       {%- set contextContent = helpers.contextContent(context) | safe %}
       <div class="mb-4 mt-2 ml-4 prose md:prose-lg">
@@ -38,26 +54,23 @@
             <div class="p-name text-gray-600 dark:text-gray-400 {{ 'font-bold' if context.properties.content }}">{{ context.properties.name[0] | safe }}</div>
           {%- endif %}
           {%- if context.properties.content %}
-            <div class="p-content text-gray-600 dark:text-gray-400">{{ contextContent }}</div>
+            <div class="p-content text-gray-600 dark:text-gray-400">{{ contextContent | truncate(200) }}</div>
           {%- endif %}
         </blockquote>
       </div>
     {%- endif %}
-    {%- if context.properties.photo %}
+    {%- if context.properties.audio %}
       <div class="mb-4">
         <ul>
-          {%- for p in context.properties.photo %}
-            {#- don't show photo if it's the author photo #}
-            {%- if author and author[0].photo and ((author[0].photo[0].value and author[0].photo[0].value != p) or (author[0].photo[0] != p)) %}
-              <li class="max-h-40">
-                {{ photo.photo(p) | safe }}
-              </li>
-            {%- endif %}
+          {%- for url in context.properties.audio %}
+            <li>
+              <audio controls src="{{ url }}"></audio>
+            </li>
           {%- endfor %}
         </ul>
       </div>
-    </div>
-  {%- endif %}
+    {%- endif %}
+  </div>
 {%- else %}
   <h2 class="text-gray-500 text-base md:text-lg uppercase">
     {{ contextLabel }}

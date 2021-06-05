@@ -7,6 +7,13 @@
   {%- if post.properties.summary %}
     {{ post.properties.summary[0] | safe }}
 
+  {%- elif post.properties['listen-of'] %}
+    Listened to a podcast on
+    <a href="{{ post.properties['listen-of'][0] }}"
+      class="u-listen-of text-yellow-600 hover:text-gray-800 dark:hover:text-gray-200">
+      {{ helpers.iconFromUrl(post.properties['listen-of'][0], true) | safe }}
+    </a>
+
   {%- elif post.properties.content %}
     {%- set truncateWords = 500 if post['post-type'][0] == 'note' else 125 %}
     {{ helpers.listContent(post) | safe | truncate(truncateWords) }}
