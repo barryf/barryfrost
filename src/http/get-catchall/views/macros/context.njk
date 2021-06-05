@@ -40,7 +40,7 @@
           {#- don't show photo if it's the author photo #}
           {%- if not author or not author[0].photo or not (author[0].photo[0].value and author[0].photo[0].value == p) or not (author[0].photo[0] == p) %}
             <li class="mb-4">
-              {{ photo.photo(p, null, 40) | safe }}
+              {{ photo.photo(p, null, 'max-h-40') | safe }}
             </li>
           {%- endif %}
         {%- endfor %}
