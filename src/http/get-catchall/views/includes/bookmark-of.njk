@@ -4,7 +4,7 @@
 <div class="mb-8">
   <ul>
     {%- for bookmarkOf in post.properties['bookmark-of'] %}
-      {%- set contextNoun = 'repo' if (helpers.urlHost(bookmarkOf.properties.url[0]) | lower) == 'github.com' else 'page' %}
+      {%- set contextNoun = 'repo' if (bookmarkOf.properties and (helpers.urlHost(bookmarkOf.properties.url[0]) | lower) == 'github.com') else 'page' %}
       <li>
         {{ context.context(bookmarkOf, 'Bookmarked', helpers, contextNoun) }}
       </li>
