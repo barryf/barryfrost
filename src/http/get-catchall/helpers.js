@@ -243,6 +243,10 @@ function listPhotos (post, width = 240, height = 240) {
   return `<div class="float-right ml-2">${html}</div>`
 }
 
+function isProduction () {
+  return process.env.NODE_ENV === 'production'
+}
+
 module.exports = {
   postTitle,
   postContent,
@@ -263,5 +267,6 @@ module.exports = {
   containsTweet,
   shortUrl,
   contextNameEqualsContent,
-  listPhotos
+  listPhotos,
+  isProduction
 }
