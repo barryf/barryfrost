@@ -42,7 +42,7 @@ function httpHeaders (cache = oneHourInSeconds) {
       'Content-Type': 'text/html; charset=utf8',
       'Cache-Control': `s-maxage=${cache}`,
       'Referrer-Policy': 'no-referrer',
-      'Content-Security-Policy': "script-src 'self' https://platform.twitter.com/ https://plausible.io/",
+      'Content-Security-Policy': "script-src 'self' https://platform.twitter.com/ https://static.cloudflareinsights.com/",
       'X-Frame-Options': 'DENY'
     }
   }
