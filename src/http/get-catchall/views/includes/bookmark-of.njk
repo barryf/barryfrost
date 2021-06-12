@@ -1,5 +1,6 @@
 {%- if post.properties['bookmark-of'] %}
 {%- import '../macros/context.njk' as context %}
+{%- set url = post.properties['bookmark-of'][0].properties.url[0] if post.properties['bookmark-of'][0].properties else post.properties['bookmark-of'][0] %}
 
 <div class="mb-8">
   <ul>
@@ -13,7 +14,7 @@
 </div>
 
 <h1 class="p-name mb-4 text-2xl md:text-3xl font-bold">
-  <a href="{{ post.properties['bookmark-of'][0] }}" class="text-yellow-600 hover:text-gray-800 dark:hover:text-gray-200">
+  <a href="{{ url }}" class="text-yellow-600 hover:text-gray-800 dark:hover:text-gray-200">
     {{ post.properties.name[0] | safe }}
   </a>
 </h1>
