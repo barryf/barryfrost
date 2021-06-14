@@ -1,10 +1,10 @@
-{%- macro photo(photo, imageOptimise = null, heightClass = 'max-h-96') %}
+{%- macro photo(photo, imageOptimise = null, heightClass = 'max-h-100') %}
 {%- set photoUrl = photo.value if photo.value else photo %}
 {%- set optimisedPhotoUrl = imageOptimise(photoUrl) if imageOptimise else photoUrl %}
 
 <figure>
   <a href="{{ photoUrl }}">
-    <img class="u-photo rounded {{ heightClass }}" src="{{ optimisedPhotoUrl }}" height="768"
+    <img class="u-photo rounded {{ heightClass }}" src="{{ optimisedPhotoUrl }}" height="410"
       alt="{%- if photo.alt %}{{ photo.alt }}{%- else %}Photo{%- endif %}">
   </a>
 </figure>
