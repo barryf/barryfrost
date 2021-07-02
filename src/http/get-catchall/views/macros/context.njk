@@ -1,12 +1,13 @@
 {%- import '../macros/photo.njk' as photo %}
 {%- import '../macros/icon.njk' as icon %}
-{%- macro context(context, contextLabel, helpers, contextNoun = 'post') %}
+{%- macro context(context, contextLabel, helpers, contextNoun = 'post', open = true) %}
 {%- set contextVerb = helpers.contextVerb(contextLabel) %}
 
 {%- if context.properties %}
-  <div class="h-cite {{ contextVerb }}">
+  {%- set isRoot = helpers.urlIsRoot(context.properties.url[0]) %}
+  <details class="h-cite {{ contextVerb }}" {%- if open %}open{%- endif %}>
     {%- set author = context.properties.author %}
-    <div class="text-base md:text-lg text-gray-500">
+    <summary class="text-base md:text-lg text-gray-500">
       <span class="uppercase text-sm md:text-base">
         {{ contextLabel }}
       </span>
@@ -24,33 +25,32 @@
           <span class="p-name">{{ author[0].properties.name[0] }}</span>{%- if author[0].properties.url %}</a>{%- endif %}&rsquo;{{ authorS }}
         </span>
       {%- else %}
-        a
+        {%- if not isRoot %}a{%- endif %}
       {%- endif %}
-      {{ contextNoun }}
-      on
+      {%- if not isRoot %}
+        {{ contextNoun }} on
+      {%- endif %}
       <a href="{{ context.properties.url[0] }}" class="u-url font-bold text-yellow-600 hover:text-gray-800 dark:hover:text-gray-200" rel="noopener">
         <span class="inline-block">
           {{ helpers.iconFromUrl(context.properties.url[0], true) | safe }}
         </span>
       </a>
-    </div>
-    {%- if context.properties.photo %}
-      <ul>
-        {%- for p in context.properties.photo %}
-          {#- don't show photo if it's the author photo #}
-          {%- if not author or not author[0].photo or not (author[0].photo[0].value and author[0].photo[0].value == p) or not (author[0].photo[0] == p) %}
-            <li class="mb-4">
-              {{ photo.photo(p, null, 'max-h-40') | safe }}
-            </li>
-          {%- endif %}
-        {%- endfor %}
-      </ul>
-    {%- endif %}
-    {%- if context.properties.content or context.properties.name %}
+    </summary>
+    {%- if context.properties.content or context.properties.name or context.properties.photo %}
       {%- set contextContent = helpers.contextContent(context) | safe %}
       <div class="mb-4 mt-2 ml-4 prose md:prose-lg">
         <blockquote>
-          {%- if not helpers.contextNameEqualsContent(context) %}
+          {%- if context.properties.photo %}
+            {%- for p in context.properties.photo %}
+              {#- don't show photo if it's the author photo #}
+              {%- if not author or not author[0].photo or not (author[0].photo[0].value and author[0].photo[0].value == p) or not (author[0].photo[0] == p) %}
+                <div class="-mt-6 -mb-6">
+                  {{ photo.photo(p, null, 'max-h-20') | safe }}
+                </div>
+              {%- endif %}
+            {%- endfor %}
+          {%- endif %}
+          {%- if context.properties.name and not helpers.contextNameEqualsContent(context) %}
             <div class="p-name text-gray-600 dark:text-gray-400 {{ 'font-bold' if context.properties.content }}">{{ context.properties.name[0] | safe }}</div>
           {%- endif %}
           {%- if context.properties.content %}
@@ -70,7 +70,7 @@
         </ul>
       </div>
     {%- endif %}
-  </div>
+  </details>
 {%- else %}
   <h2 class="text-gray-500 text-base md:text-lg uppercase">
     {{ contextLabel }}

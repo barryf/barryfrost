@@ -15,6 +15,11 @@ function urlHost (u) {
   return url.host
 }
 
+function urlIsRoot (u) {
+  const url = new URL(u)
+  return url.pathname === '/' || url.pathname === '/index.html'
+}
+
 function containsTweet (post) {
   return (
     'content' in post.properties &&
@@ -268,5 +273,6 @@ module.exports = {
   shortUrl,
   contextNameEqualsContent,
   listPhotos,
-  isProduction
+  isProduction,
+  urlIsRoot
 }

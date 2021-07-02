@@ -5,7 +5,7 @@
   <ul>
     {%- for likeOf in post.properties['like-of'] %}
       <li>
-        {{ context.context(likeOf, 'Liked', helpers) }}
+        {{ context.context(likeOf, 'Liked', helpers, 'post', loop.first) }}
       </li>
     {%- endfor %}
   </ul>

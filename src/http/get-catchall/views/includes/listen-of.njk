@@ -5,7 +5,7 @@
   <ul>
     {%- for listenOf in post.properties['listen-of'] %}
       <li>
-        {{ context.context(listenOf, 'Listened to', helpers, 'podcast') }}
+        {{ context.context(listenOf, 'Listened to', helpers, 'podcast', loop.first) }}
       </li>
     {%- endfor %}
   </ul>
