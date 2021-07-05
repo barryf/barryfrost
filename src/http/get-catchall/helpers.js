@@ -241,7 +241,7 @@ function listPhotos (post, width = 240, height = 240) {
     const url = photo.value || photo
     const alt = photo.alt || 'Photo'
     if (url.startsWith(starts)) {
-      const newUrl = url.replace(starts, `${starts}w_${width},h_${height},c_thumb,g_face,fl_progressive/`)
+      const newUrl = url.replace(starts, `${starts}w_${width},h_${height},c_thumb,fl_progressive/`)
       html += `<img src="${newUrl}" width="${width / 4}" height="${height / 4}" class="u-photo inline rounded ml-1" alt="${alt}">`
     }
   }
