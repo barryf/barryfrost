@@ -32,7 +32,7 @@
     "node-fetch": "^2.6.0",
     "nunjucks": "^3.2.1",
     "rss": "^1.2.2",
-    "sanitize-html": "^2.3.0"
+    "sanitize-html": "^2.3.2"
   },
   "devDependencies": {
     "@architect/architect": "^8.5.10",
