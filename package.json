@@ -27,22 +27,22 @@
   },
   "homepage": "https://github.com/barryf/barryfrost#readme",
   "dependencies": {
-    "@architect/functions": "^3.13.9",
+    "@architect/functions": "^3.14.2",
     "markdown-it": "^11.0.0",
-    "node-fetch": "^2.6.0",
-    "nunjucks": "^3.2.1",
+    "node-fetch": "^2.6.2",
+    "nunjucks": "^3.2.3",
     "rss": "^1.2.2",
-    "sanitize-html": "^2.3.0"
+    "sanitize-html": "^2.5.0"
   },
   "devDependencies": {
-    "@architect/architect": "^8.5.10",
-    "@babel/cli": "^7.12.16",
-    "@babel/core": "^7.12.16",
-    "@babel/preset-env": "^7.12.16",
+    "@architect/architect": "^8.7.4",
+    "@babel/cli": "^7.15.4",
+    "@babel/core": "^7.15.5",
+    "@babel/preset-env": "^7.15.6",
     "@tailwindcss/typography": "^0.3.1",
-    "autoprefixer": "^10.0.2",
-    "aws-sdk": "^2.799.0",
-    "postcss": "^8.2.4",
-    "tailwindcss": "^2.0.3"
+    "autoprefixer": "^10.3.4",
+    "aws-sdk": "^2.987.0",
+    "postcss": "^8.3.6",
+    "tailwindcss": "^2.2.15"
   }
 }
