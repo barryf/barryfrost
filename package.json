@@ -32,7 +32,8 @@
     "node-fetch": "^2.6.2",
     "nunjucks": "^3.2.3",
     "rss": "^1.2.2",
-    "sanitize-html": "^2.5.0"
+    "sanitize-html": "^2.5.1",
+    "set-value": "^4.1.0"
   },
   "devDependencies": {
     "@architect/architect": "^8.7.4",
@@ -41,7 +42,7 @@
     "@babel/preset-env": "^7.15.6",
     "@tailwindcss/typography": "^0.3.1",
     "autoprefixer": "^10.3.4",
-    "aws-sdk": "^2.987.0",
+    "aws-sdk": "^2.991.0",
     "postcss": "^8.3.6",
     "tailwindcss": "^2.2.15"
   }
