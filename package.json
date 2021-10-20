@@ -29,21 +29,21 @@
   "dependencies": {
     "@architect/functions": "^3.14.2",
     "markdown-it": "^11.0.0",
-    "node-fetch": "^2.6.2",
+    "node-fetch": "^2.6.5",
     "nunjucks": "^3.2.3",
     "rss": "^1.2.2",
-    "sanitize-html": "^2.5.1",
+    "sanitize-html": "^2.5.2",
     "set-value": "^4.1.0"
   },
   "devDependencies": {
     "@architect/architect": "^8.7.4",
-    "@babel/cli": "^7.15.4",
-    "@babel/core": "^7.15.5",
-    "@babel/preset-env": "^7.15.6",
+    "@babel/cli": "^7.15.7",
+    "@babel/core": "^7.15.8",
+    "@babel/preset-env": "^7.15.8",
     "@tailwindcss/typography": "^0.3.1",
-    "autoprefixer": "^10.3.4",
-    "aws-sdk": "^2.991.0",
-    "postcss": "^8.3.6",
-    "tailwindcss": "^2.2.15"
+    "autoprefixer": "^10.3.7",
+    "aws-sdk": "^2.1012.0",
+    "postcss": "^8.3.10",
+    "tailwindcss": "^2.2.17"
   }
 }
