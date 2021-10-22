@@ -82,6 +82,11 @@ function metadata (post) {
     const photo = post.properties.photo[0]
     const photoUrl = photo.value ? photo.value : photo
     image = helpers.imageOptimise(photoUrl, 627) // 627 is og:image max height
+  } else {
+    const emoji = post.properties.category.filter(c => c.startsWith('emoji-'))[0]
+    if (emoji) {
+      image = 'https://emojicdn.elk.sh/' + emoji.split('-')[1]
+    }
   }
   return { title, description, image }
 }
