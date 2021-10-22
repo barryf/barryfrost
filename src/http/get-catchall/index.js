@@ -84,7 +84,7 @@ function metadata (post) {
     const photoUrl = photo.value ? photo.value : photo
     image = helpers.imageOptimise(photoUrl, 627) // 627 is og:image max height
     twitterCardType = 'summary_large_image'
-  } else {
+  } else if (post.properties.category) {
     const emoji = post.properties.category.filter(c => c.startsWith('emoji-'))[0]
     if (emoji) {
       image = 'https://emojicdn.elk.sh/' + emoji.split('-')[1]
