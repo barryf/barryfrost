@@ -7,7 +7,7 @@
 <meta property="og:description" content="{{ metadata.description | escape }}">
 {%- if metadata.image %}<meta property="og:image" content="{{ metadata.image }}">
 <meta property="twitter:image" content="{{ metadata.image }}">{%- endif %}
-<meta property="twitter:card" content="{{ 'summary_large_image' if metadata.image else 'summary' }}">
+<meta property="twitter:card" content="{{ metadata.twitterCardType }}">
 <meta property="twitter:site" content="@barryf">
 <meta property="twitter:url" content="{{ post.url }}">
 <meta property="twitter:title" content="{{ metadata.title | escape }}">
