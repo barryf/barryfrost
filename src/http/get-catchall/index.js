@@ -16,7 +16,8 @@ const postTypePlurals = [
   'replies',
   'rsvps',
   'events',
-  'listens'
+  'listens',
+  'reviews'
 ]
 
 const urls = {

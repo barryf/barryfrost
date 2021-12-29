@@ -6,7 +6,7 @@
 {%- endblock %}
 
 {%- block content %}
-<article class="h-entry">
+<article class="{{ post.type[0] }}">
   <header class="mb-12 max-w-screen-md mx-auto">
     <div class="flex items-center mb-8 md:mb-12 text-lg md:text-xl text-gray-400 dark:text-gray-600">
       <div class="flex-none mx-auto md:flex-auto md:mx-0 text-gray-600 dark:text-gray-400">
@@ -30,6 +30,7 @@
     {%- include 'includes/photos.njk' %}
     {%- include 'includes/rsvp.njk' %}
     {%- include 'includes/checkin.njk' %}
+    {%- include 'includes/review.njk' %}
     {%- include 'includes/content.njk' %}
     <div class="{{ 'grid grid-cols-2' if post.properties.like and post.properties.repost }}">
       {%- include 'includes/webmentions/likes.njk' %}
