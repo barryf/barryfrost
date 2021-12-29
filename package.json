@@ -44,6 +44,7 @@
     "autoprefixer": "^10.3.7",
     "aws-sdk": "^2.1012.0",
     "postcss": "^8.3.10",
+    "standard": "^16.0.4",
     "tailwindcss": "^2.2.17"
   }
 }
