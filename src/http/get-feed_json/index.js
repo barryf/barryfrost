@@ -63,7 +63,7 @@ exports.handler = async function http (req) {
   return {
     statusCode: 200,
     headers: {
-      'Content-Type': 'application/json; charset=utf-8',
+      'Content-Type': 'application/feed+json; charset=utf-8',
       'Cache-Control': 's-maxage=600'
     },
     body: JSON.stringify(feed, null, 2)
