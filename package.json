@@ -36,7 +36,7 @@
     "set-value": "^4.1.0"
   },
   "devDependencies": {
-    "@architect/architect": "^8.7.4",
+    "@architect/architect": "^10.10.1",
     "@babel/cli": "^7.15.7",
     "@babel/core": "^7.15.8",
     "@babel/preset-env": "^7.15.8",
