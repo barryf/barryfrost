@@ -18,9 +18,6 @@
 <link rel="me" href="https://github.com/barryf">
 <link rel="me" href="https://mastodon.social/@barryf">
 <meta name="theme-color" content="#d97706">
-{%- if helpers.isProduction() %}
-<script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "edb63f30c118464c846c20e722a7d82c"}'></script>
-{%- endif %}
 {%- block head %}
 <title>{{ (title | safe) + ' — Barry Frost' if title else 'Barry Frost' }}</title>
 {%- endblock %}
