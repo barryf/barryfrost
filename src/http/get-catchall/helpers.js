@@ -83,7 +83,11 @@ function webmentionContent (webmention) {
   if (!webmention.properties.content) return ''
   let html
   if (webmention.properties.content[0].html) {
-    html = webmention.properties.content[0].html
+    if (typeof webmention.properties.content[0].html === 'string') {
+      html = webmention.properties.content[0].html
+    } else {
+      html = webmention.properties.content[0].html[0]
+    }
   } else {
     html = webmention.properties.content[0]
   }
