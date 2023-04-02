@@ -29,6 +29,7 @@
   "dependencies": {
     "@architect/functions": "^5.4.0",
     "markdown-it": "^11.0.0",
+    "markdown-it-handle": "^0.1.0",
     "node-fetch": "^2.6.5",
     "nunjucks": "^3.2.3",
     "rss": "^1.2.2",

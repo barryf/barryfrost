@@ -5,6 +5,7 @@ const md = require('markdown-it')({
   html: true,
   typographer: true
 })
+md.use(require('markdown-it-handle'))
 
 function isUrl (u) {
   return (u.indexOf('http://') > -1) || (u.indexOf('https://') > -1)
@@ -49,10 +50,8 @@ function postContent (post) {
       // auto-embed tweets
       content = content.replace(/(https?:\/\/twitter\.com\/\w+\/status\/\d+)/g,
         '<blockquote class="twitter-tweet"><a href="$1">$1</a></blockquote>')
-      // auto-link twitter handles
-      content = content.replace(/(^|[^{]\s)[@]+([A-Za-z0-9-_]+)/g, '$1<a href="https://twitter.com/$2">@$2</a>')
-      // auto-link twitter hashtags
-      content = content.replace(/[\s]+[#]+([A-Za-z0-9-_]+)/g, ' <a href="https://twitter.com/hashtag/$1">#$1</a>')
+      // auto-link hashtags
+      content = content.replace(/[\s]+[#]+([A-Za-z0-9-_]+)/g, ' <a href="/categories/$1">#$1</a>')
       return md.render(content)
     } else {
       return post.properties.content[0].html.trim()
