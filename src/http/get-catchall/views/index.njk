@@ -44,6 +44,27 @@
 </div>
 
 <div class="mb-12 max-w-prose mx-auto">
+  <h2 class="mb-4 uppercase text-gray-800 dark:text-gray-200 text-sm md:text-base">
+    Weeknotes
+  </h2>
+  <ul class="md:text-lg text-gray-400 dark:text-gray-600">
+    {%- for post in weeknotes.posts %}
+      <li class="inline-block">
+        <a href="{{ post.url[0] }}" title="{{ post.properties.name[0] }}" class="text-yellow-600 hover:text-gray-800 dark:hover:text-gray-200">
+          {{ helpers.getWeeknoteTitle(post) }}
+        </a>
+      </li>
+      <li class="inline-block">/</li>
+    {%- endfor %}
+    <li class="inline-block text-sm md:text-base uppercase">
+      <a href="/categories/weeknotes?before={{ weeknotes.nextInt + 1 }}" class="text-yellow-600 hover:text-gray-800 dark:hover:text-gray-200">
+        More &rarr;
+      </a>
+    </li>
+  </ul>
+</div>
+
+<div class="mb-12 max-w-prose mx-auto">
   <div class="flex w-full items-center mb-12 text-base md:text-lg">
     <h2 class="flex-auto text-lg md:text-xl text-gray-800 dark:text-gray-200">
       Recently
@@ -57,6 +78,5 @@
   <div class="h-feed">
     {% include 'includes/list-posts.njk' %}
   </div>
-
 </div>
 {%- endblock %}

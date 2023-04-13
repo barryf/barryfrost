@@ -258,6 +258,18 @@ function isProduction () {
   return process.env.NODE_ENV === 'production'
 }
 
+function getWeeknoteTitle (post) {
+  const weekNum = post.properties.name[0].split(' ')[1]
+  if ('category' in post.properties) {
+    for (const cat of post.properties.category) {
+      if (cat.startsWith('emoji-')) {
+        return `${cat.split('-')[1]} ${weekNum}`
+      }
+    }
+  }
+  return weekNum
+}
+
 module.exports = {
   postTitle,
   postContent,
@@ -280,5 +292,6 @@ module.exports = {
   contextNameEqualsContent,
   listPhotos,
   isProduction,
-  urlIsRoot
+  urlIsRoot,
+  getWeeknoteTitle
 }

@@ -29,9 +29,10 @@ async function getAll (before) {
 
 async function getHomepage () {
   const posts = await getList(`${micropubSourceUrl}&homepage`)
+  const weeknotes = await getList(`${micropubSourceUrl}&category=weeknotes&post-type=article`)
   const homepagePost = await getPost('homepage')
   const content = homepagePost.properties.content[0].html
-  return { content, ...posts }
+  return { content, ...posts, weeknotes }
 }
 
 async function getList (url, before = null) {
