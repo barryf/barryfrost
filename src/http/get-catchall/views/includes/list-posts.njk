@@ -1,6 +1,10 @@
+{%- set count = 0 %}
 <ul>
   {%- for post in posts %}
-    <li class="h-entry mb-12 overflow-hidden">
+  {%- set isWeeknote = homepage and post.properties.category and post.properties.category.includes('weeknotes') %}
+  {%- if not isWeeknote %}{%- set count = count + 1 %}{%- endif %}
+  {%- if count <= 20 %}
+    <li class="h-entry mb-12 overflow-hidden {%- if isWeeknote %} hidden{%- endif %}">
 
       <span class="md:absolute md:-ml-6 md:mt-0.5">
         {{ icon.icon(post['post-type'][0]) }}
@@ -59,5 +63,6 @@
       </div>
 
     </li>
+  {%- endif %}
   {%- endfor %}
 </ul>

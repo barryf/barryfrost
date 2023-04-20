@@ -234,6 +234,7 @@ async function handleUrl (url, params) {
   // root index page at /
   } else if (url === '') {
     const data = await api.getHomepage()
+    data.homepage = true
     return {
       ...httpHeaders(oneDayInSeconds),
       statusCode: 200,

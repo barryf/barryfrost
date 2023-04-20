@@ -28,15 +28,14 @@ async function getAll (before) {
 }
 
 async function getHomepage () {
-  const posts = await getList(`${micropubSourceUrl}&homepage`)
-  const weeknotes = await getList(`${micropubSourceUrl}&category=weeknotes`)
+  const posts = await getList(`${micropubSourceUrl}&homepage`, null, 50)
+  const weeknotes = await getList(`${micropubSourceUrl}&category=weeknotes`, null, 15)
   const homepagePost = await getPost('homepage')
   const content = homepagePost.properties.content[0].html
   return { content, ...posts, weeknotes }
 }
 
-async function getList (url, before = null) {
-  const limit = 20
+async function getList (url, before = null, limit = 20) {
   if (before) url = url + '&before=' + parseInt(before, 10)
   // return n+1 rows to check if there is another page
   url += `&limit=${limit + 1}`
