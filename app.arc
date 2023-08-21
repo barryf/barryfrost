@@ -13,6 +13,8 @@ get /rss
 get /posts/:id
 get /articles/:slug
 get /robots.txt
+get /.well-known/host-meta/:slug
+get /.well-known/webfinger
 get /*
 
 @static

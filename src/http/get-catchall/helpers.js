@@ -273,6 +273,13 @@ function getWeeknoteTitle (post) {
   return weekNum
 }
 
+function bridgyFedTag (post) {
+  const federatedTypes = ['article', 'note', 'photo', 'like', 'reply', 'repost']
+  if (federatedTypes.includes(post['post-type'][0])) {
+    return '<a class="u-bridgy-fed" href="https://fed.brid.gy/"></a>'
+  }
+}
+
 module.exports = {
   postTitle,
   postContent,
@@ -296,5 +303,6 @@ module.exports = {
   listPhotos,
   isProduction,
   urlIsRoot,
-  getWeeknoteTitle
+  getWeeknoteTitle,
+  bridgyFedTag
 }

@@ -48,6 +48,7 @@
       {%- include 'includes/location.njk' %}
     </div>
   </div>
+  {{ helpers.bridgyFedTag(post) | safe }}
 </article>
 {%- endblock %}
 
