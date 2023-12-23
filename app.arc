@@ -3,6 +3,7 @@ barryfrost
 
 @aws
 region eu-west-2
+runtime nodejs18.x
 
 @http
 post /notify

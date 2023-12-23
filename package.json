@@ -2,6 +2,9 @@
   "name": "barryfrost",
   "version": "0.1.0",
   "description": "Barry Frost's personal website",
+  "engines": {
+    "node": ">=18"
+  },
   "scripts": {
     "start": "PORT=4444 npx arc sandbox",
     "build": "npm run build-tw; npm run build-js",
