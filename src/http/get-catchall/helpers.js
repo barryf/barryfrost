@@ -30,7 +30,7 @@ function containsTweet (post) {
 }
 
 function postTitle (post) {
-  return md.render(post.properties.name[0]).trim()
+  return post.properties.name[0].trim()
 }
 
 function postContent (post) {
