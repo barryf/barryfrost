@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "description": "Barry Frost's personal website",
   "engines": {
-    "node": ">=18"
+    "node": ">=20"
   },
   "scripts": {
     "start": "PORT=4444 npx arc sandbox",
@@ -30,25 +30,25 @@
   },
   "homepage": "https://github.com/barryf/barryfrost#readme",
   "dependencies": {
-    "@architect/functions": "^5.4.0",
-    "markdown-it": "^11.0.0",
+    "@architect/functions": "^8.1.9",
+    "markdown-it": "^14.1.0",
     "markdown-it-handle": "^0.1.0",
     "node-fetch": "^2.6.5",
     "nunjucks": "^3.2.3",
     "rss": "^1.2.2",
-    "sanitize-html": "^2.5.2",
+    "sanitize-html": "^2.17.0",
     "set-value": "^4.1.0"
   },
   "devDependencies": {
-    "@architect/architect": "^10.10.3",
-    "@babel/cli": "^7.15.7",
-    "@babel/core": "^7.15.8",
-    "@babel/preset-env": "^7.15.8",
-    "@tailwindcss/typography": "^0.3.1",
-    "autoprefixer": "^10.3.7",
-    "aws-sdk": "^2.1012.0",
-    "postcss": "^8.3.10",
-    "standard": "^16.0.4",
-    "tailwindcss": "^2.2.17"
+    "@architect/architect": "^11.3.0",
+    "@babel/cli": "^7.28.3",
+    "@babel/core": "^7.28.4",
+    "@babel/preset-env": "^7.28.3",
+    "@tailwindcss/typography": "^0.4.1",
+    "autoprefixer": "^10.4.21",
+    "aws-sdk": "^2.1692.0",
+    "postcss": "^8.5.6",
+    "standard": "^17.1.2",
+    "tailwindcss": "^2.2.19"
   }
 }
