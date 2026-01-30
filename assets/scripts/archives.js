@@ -1,3 +1,4 @@
+/* global categories */
 // select the letter passed in as param
 const url = new URL(window.location.href)
 const c = url.searchParams.get('c')
@@ -11,10 +12,8 @@ function filterCategory (letter) {
   categoriesContainer.innerHTML = ''
 
   // filter list based on initial letter
-  const filteredCategories = categories.filter((cat, i) => {
-    if (cat.substring(0, 1) === letter.toLowerCase()) {
-      return cat
-    }
+  const filteredCategories = categories.filter((cat) => {
+    return cat.substring(0, 1) === letter.toLowerCase()
   })
 
   // create a link for each filtered category
