@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "description": "Barry Frost's personal website",
   "engines": {
-    "node": ">=20"
+    "node": ">=22"
   },
   "scripts": {
     "start": "PORT=4444 npx arc sandbox",
@@ -46,7 +46,6 @@
     "@babel/preset-env": "^7.28.3",
     "@tailwindcss/typography": "^0.4.1",
     "autoprefixer": "^10.4.21",
-    "aws-sdk": "^2.1692.0",
     "postcss": "^8.5.6",
     "standard": "^17.1.2",
     "tailwindcss": "^2.2.19"
