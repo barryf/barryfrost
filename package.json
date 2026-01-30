@@ -10,7 +10,9 @@
     "build": "npm run build-tw; npm run build-js",
     "build-tw-dev": "npx tailwindcss build assets/styles.css -o public/styles-dev.css",
     "build-tw": "NODE_ENV=production npx tailwindcss build assets/styles.css -o public/styles.css",
-    "build-js": "npx babel assets/scripts --out-dir public/scripts"
+    "build-js": "npx babel assets/scripts --out-dir public/scripts",
+    "lint": "standard",
+    "lint:fix": "standard --fix"
   },
   "repository": {
     "type": "git",
@@ -49,5 +51,10 @@
     "postcss": "^8.5.6",
     "standard": "^17.1.2",
     "tailwindcss": "^2.2.19"
+  },
+  "standard": {
+    "ignore": [
+      "public/scripts/"
+    ]
   }
 }
