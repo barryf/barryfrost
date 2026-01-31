@@ -1,5 +1,3 @@
-const fetch = require('node-fetch')
-
 const micropubSourceUrl = `${process.env.MICROPUB_URL}?q=source`
 
 async function getPostType (postType, before) {

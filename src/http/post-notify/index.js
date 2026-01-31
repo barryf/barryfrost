@@ -1,5 +1,4 @@
 const arc = require('@architect/functions')
-const fetch = require('node-fetch')
 
 exports.handler = async function http (req) {
   const body = arc.http.helpers.bodyParser(req)
