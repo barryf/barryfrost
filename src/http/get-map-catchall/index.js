@@ -1,5 +1,3 @@
-const fetch = require('node-fetch')
-
 async function fetchImage (lat = 0, lng = 0, zoom = 15) {
   const token = process.env.MAPBOX_ACCESS_TOKEN
   const url = 'https://api.mapbox.com/styles/v1/mapbox/outdoors-v11/static/' +
@@ -10,8 +8,8 @@ async function fetchImage (lat = 0, lng = 0, zoom = 15) {
     const text = await response.text()
     console.error('Error from Mapbox', text)
   } else {
-    const buffer = await response.buffer()
-    const image = Buffer.from(buffer).toString('base64')
+    const arrayBuffer = await response.arrayBuffer()
+    const image = Buffer.from(arrayBuffer).toString('base64')
     return image
   }
 }

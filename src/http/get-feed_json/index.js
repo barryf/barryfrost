@@ -1,4 +1,3 @@
-const fetch = require('node-fetch')
 const md = require('markdown-it')({
   linkify: true,
   html: true
