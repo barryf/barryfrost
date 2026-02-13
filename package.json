@@ -33,7 +33,7 @@
   "homepage": "https://github.com/barryf/barryfrost#readme",
   "dependencies": {
     "@architect/functions": "^8.1.9",
-    "markdown-it": "^14.1.0",
+    "markdown-it": "^14.1.1",
     "markdown-it-handle": "^0.1.0",
     "nunjucks": "^3.2.3",
     "rss": "^1.2.2",
