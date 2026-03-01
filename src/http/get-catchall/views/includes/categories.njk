@@ -2,20 +2,18 @@
 
 <div>
   <h3 class="text-sm md:text-base text-gray-500 uppercase">Categories</h3>
-  <ul class="inline text-base md:text-lg text-yellow-600">
+  <ul class="inline text-base md:text-lg text-gray-700 dark:text-gray-300">
     {%- for cat in post.properties.category %}
       <li class="inline mr-1">
         {%- if helpers.isUrl(cat) %}
-          <a href="{{ cat }}" rel="nofollow tag" class="u-category h-card whitespace-nowrap	hover:text-gray-800 dark:hover:text-gray-200">
+          <span class="whitespace-nowrap">
             <svg xmlns="http://www.w3.org/2000/svg" class="-mt-0.5 h3 w-3 md:h4 md:w-4 inline" viewBox="0 0 20 20" fill="currentColor">
               <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd" />
             </svg>
-            <span class="p-name">{{ helpers.urlHost(cat) }}</span>
-          </a>
+            <span>{{ helpers.urlHost(cat) }}</span>
+          </span>
         {%- else %}
-          <a href="/categories/{{ cat }}" rel="nofollow tag" class="hover:text-gray-800 dark:hover:text-gray-200">
-            #<span class="p-category">{{ cat }}</span>
-          </a>
+          <span>#{{ cat }}</span>
         {%- endif %}
       </li>
     {%- endfor %}

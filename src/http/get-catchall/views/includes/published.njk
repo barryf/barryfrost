@@ -14,10 +14,8 @@
   </time>
   {%- if format and format == 'full' %}
     <h3 class="text-sm md:text-base text-gray-500 uppercase mt-1">In</h3>
-    <p>
-      <a href="/{{ helpers.pluralise(post['post-type'][0]) | lower }}" class="capitalize text-yellow-600 hover:text-gray-800 dark:hover:text-gray-200">
-        {{ helpers.pluralise(post['post-type'][0]) }}
-      </a>
+    <p class="capitalize text-gray-700 dark:text-gray-300">
+      {{ helpers.pluralise(post['post-type'][0]) }}
     </p>
   {%- endif %}
 </div>

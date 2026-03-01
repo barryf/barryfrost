@@ -10,21 +10,20 @@
 @font-face { font-family: 'plex-sans'; font-weight: 700; src: url('{{ helpers.static('fonts/IBMPlexSans-Bold.woff') }}') format('woff'); font-display: swap; }
 </style>
 <link rel="stylesheet" media="screen" href="{{ urls.css }}" as="style">
-<link rel="feed" type="text/html" href="/all">
-<link rel="alternate" type="application/rss+xml" href="/rss" title="RSS feed">
-<link rel="alternate" type="application/json" href="/feed.json" title="JSON feed">
 <link rel="shortcut icon" type="image/png" href="{{ urls.favicon }}">
 <link rel="apple-touch-icon" type="image/png" href="{{ urls.favicon }}">
 <link rel="me" href="https://github.com/barryf">
 <link rel="me" href="https://mastodon.social/@barryf">
-<link rel="me" href="https://fed.brid.gy/r/https://barryfrost.com/">
-<link rel="me atproto" href="https://barryfrost.com">
 <meta name="theme-color" content="#d97706">
 {%- block head %}
 <title>{{ (title | safe) + ' — Barry Frost' if title else 'Barry Frost' }}</title>
 {%- endblock %}
 </head>
 <body class="bg-white dark:bg-black">
+<div style="background-color: #d97706; color: white; text-align: center; padding: 0.5rem; font-size: 0.875rem;">
+  This is an archived version of barryfrost.com -
+  <a href="https://barryfrost.com/" style="color: white; text-decoration: underline; font-weight: bold;">visit my new site</a>
+</div>
 <main class="pb-8 px-4 pt-4 md:pt-8">
 {%- block content %}
 {%- endblock %}

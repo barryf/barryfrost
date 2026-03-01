@@ -1,9 +1,9 @@
-{%- set navLinks = ['about', 'archives', 'follow', 'contact'] %}
+{%- set navLinks = ['about', 'follow', 'contact'] %}
 {%- for link in navLinks %}
   {%- if url and link == url %}
     <span class="text-gray-800 dark:text-gray-200">{{ link }}</span>
   {%- else %}
-    <a href="/{{ link }}" class="text-yellow-600 hover:text-gray-800 dark:hover:text-gray-200">
+    <a href="https://barryfrost.com/{{ link }}" class="text-yellow-600 hover:text-gray-800 dark:hover:text-gray-200">
       {{ link }}
     </a>
   {%- endif %}

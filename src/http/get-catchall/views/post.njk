@@ -1,7 +1,7 @@
 {%- extends 'layout.njk' %}
 
 {%- block head %}
-<link rel="webmention" href="{{ urls.webmention }}">
+
 {% include 'includes/metadata.njk' %}
 {%- endblock %}
 
@@ -48,7 +48,7 @@
       {%- include 'includes/location.njk' %}
     </div>
   </div>
-  {{ helpers.bridgyFedTag(post) | safe }}
+
 </article>
 {%- endblock %}
 
