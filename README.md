@@ -1,6 +1,6 @@
 # barryfrost
 
-My personal website, hosted at [barryfrost.com](https://barryfrost.com/).
+~~My personal website, hosted at [barryfrost.com](https://barryfrost.com/).~~ Retired.
 
 Built using the [Architect](https://arc.codes/) serverless framework in Node.js and deployed to AWS Lambda.
 
